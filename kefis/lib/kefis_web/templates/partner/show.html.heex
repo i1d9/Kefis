@@ -1,0 +1,48 @@
+<h1>Show Partner</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @partner.name %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @partner.location %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @partner.phone %>
+  </li>
+
+  <li>
+    <strong>Contact email:</strong>
+    <%= @partner.contact_email %>
+  </li>
+
+  <li>
+    <strong>Contact phone:</strong>
+    <%= @partner.contact_phone %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @partner.lng %>
+  </li>
+
+  <li>
+    <strong>Lat:</strong>
+    <%= @partner.lat %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @partner.type %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.partner_path(@conn, :edit, @partner) %></span> |
+<span><%= link "Back", to: Routes.partner_path(@conn, :index) %></span>
