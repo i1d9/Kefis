@@ -1,0 +1,38 @@
+<h1>Listing Suppliers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Phone</th>
+      <th>Contact email</th>
+      <th>Contact phone</th>
+      <th>Lng</th>
+      <th>Lat</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for supplier <- @suppliers do %>
+    <tr>
+      <td><%= supplier.name %></td>
+      <td><%= supplier.location %></td>
+      <td><%= supplier.phone %></td>
+      <td><%= supplier.contact_email %></td>
+      <td><%= supplier.contact_phone %></td>
+      <td><%= supplier.lng %></td>
+      <td><%= supplier.lat %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.supplier_path(@conn, :show, supplier) %></span>
+        <span><%= link "Edit", to: Routes.supplier_path(@conn, :edit, supplier) %></span>
+        <span><%= link "Delete", to: Routes.supplier_path(@conn, :delete, supplier), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Supplier", to: Routes.supplier_path(@conn, :new) %></span>
