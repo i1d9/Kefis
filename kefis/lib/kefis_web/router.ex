@@ -1,5 +1,6 @@
 defmodule KefisWeb.Router do
   use KefisWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,10 +15,34 @@ defmodule KefisWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  pipeline :not_authenticated do
+    plug Pow.Plug.RequireNotAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/" do
+    pipe_through [:browser, :not_authenticated]
+
+    pow_routes()
+  end
+
   scope "/", KefisWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/", KefisWeb do
+    pipe_through [:browser, :protected]
+
+    resources "/products", ProductController
+    resources "/partners", PartnerController
+    resources "/suppliers", SupplierController
   end
 
   # Other scopes may use custom stacks.
