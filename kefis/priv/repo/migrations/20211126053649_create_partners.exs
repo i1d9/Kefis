@@ -11,6 +11,7 @@ defmodule Kefis.Repo.Migrations.CreatePartners do
       add :lng, :float
       add :lat, :float
       add :type, :string
+      add :user_id, references(:users)
 
       timestamps()
     end

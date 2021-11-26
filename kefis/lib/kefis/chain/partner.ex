@@ -11,7 +11,8 @@ defmodule Kefis.Chain.Partner do
     field :name, :string
     field :phone, :string
     field :type, :string
-
+    belongs_to :user, Kefis.Users.User
+    has_many :products, Kefis.Chain.Product
     timestamps()
   end
 
@@ -20,5 +21,6 @@ defmodule Kefis.Chain.Partner do
     partner
     |> cast(attrs, [:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat, :type])
     |> validate_required([:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat, :type])
+    |> validate_inclusion(:type, ~w(supplier retailer))
   end
 end
