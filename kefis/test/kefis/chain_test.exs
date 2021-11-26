@@ -136,4 +136,66 @@ defmodule Kefis.ChainTest do
       assert %Ecto.Changeset{} = Chain.change_partner(partner)
     end
   end
+
+  describe "products" do
+    alias Kefis.Chain.Product
+
+    import Kefis.ChainFixtures
+
+    @invalid_attrs %{category: nil, image: nil, name: nil, price: nil, sku: nil}
+
+    test "list_products/0 returns all products" do
+      product = product_fixture()
+      assert Chain.list_products() == [product]
+    end
+
+    test "get_product!/1 returns the product with given id" do
+      product = product_fixture()
+      assert Chain.get_product!(product.id) == product
+    end
+
+    test "create_product/1 with valid data creates a product" do
+      valid_attrs = %{category: "some category", image: "some image", name: "some name", price: 42, sku: "some sku"}
+
+      assert {:ok, %Product{} = product} = Chain.create_product(valid_attrs)
+      assert product.category == "some category"
+      assert product.image == "some image"
+      assert product.name == "some name"
+      assert product.price == 42
+      assert product.sku == "some sku"
+    end
+
+    test "create_product/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Chain.create_product(@invalid_attrs)
+    end
+
+    test "update_product/2 with valid data updates the product" do
+      product = product_fixture()
+      update_attrs = %{category: "some updated category", image: "some updated image", name: "some updated name", price: 43, sku: "some updated sku"}
+
+      assert {:ok, %Product{} = product} = Chain.update_product(product, update_attrs)
+      assert product.category == "some updated category"
+      assert product.image == "some updated image"
+      assert product.name == "some updated name"
+      assert product.price == 43
+      assert product.sku == "some updated sku"
+    end
+
+    test "update_product/2 with invalid data returns error changeset" do
+      product = product_fixture()
+      assert {:error, %Ecto.Changeset{}} = Chain.update_product(product, @invalid_attrs)
+      assert product == Chain.get_product!(product.id)
+    end
+
+    test "delete_product/1 deletes the product" do
+      product = product_fixture()
+      assert {:ok, %Product{}} = Chain.delete_product(product)
+      assert_raise Ecto.NoResultsError, fn -> Chain.get_product!(product.id) end
+    end
+
+    test "change_product/1 returns a product changeset" do
+      product = product_fixture()
+      assert %Ecto.Changeset{} = Chain.change_product(product)
+    end
+  end
 end

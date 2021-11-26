@@ -44,4 +44,22 @@ defmodule Kefis.ChainFixtures do
 
     partner
   end
+
+  @doc """
+  Generate a product.
+  """
+  def product_fixture(attrs \\ %{}) do
+    {:ok, product} =
+      attrs
+      |> Enum.into(%{
+        category: "some category",
+        image: "some image",
+        name: "some name",
+        price: 42,
+        sku: "some sku"
+      })
+      |> Kefis.Chain.create_product()
+
+    product
+  end
 end
