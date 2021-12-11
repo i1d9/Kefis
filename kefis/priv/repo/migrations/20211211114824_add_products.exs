@@ -1,4 +1,4 @@
-defmodule Kefis.Repo.Migrations.CreateProducts do
+defmodule Kefis.Repo.Migrations.AddProducts do
   use Ecto.Migration
 
   def change do

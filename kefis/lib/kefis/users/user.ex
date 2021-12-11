@@ -10,7 +10,7 @@ defmodule Kefis.Users.User do
     field :first_name, :string
     field :second_name, :string
     field :phone, :string
-    has_one :avatar, Kefis.Chain.Partner
+    has_one :partner, Kefis.Chain.Partner
     timestamps()
   end
 

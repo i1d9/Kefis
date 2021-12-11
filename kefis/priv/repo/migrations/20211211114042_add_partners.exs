@@ -1,4 +1,4 @@
-defmodule Kefis.Repo.Migrations.CreatePartners do
+defmodule Kefis.Repo.Migrations.AddPartners do
   use Ecto.Migration
 
   def change do
