@@ -3,12 +3,12 @@ defmodule Kefis.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :first_name, :string, null: false
-      add :second_name, :string, null: false
+      add :first_name, :string
+      add :second_name, :string
       add :phone, :string
       add :email, :string, null: false
       add :password_hash, :string, redact: true
-      add :role, :string, null: false
+      add :role, :string
 
       timestamps()
     end

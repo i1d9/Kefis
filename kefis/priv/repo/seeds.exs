@@ -9,3 +9,19 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias Kefis.{Users.User, Repo, Users}
+
+
+user = %{
+  first_name: "Ian",
+  second_name: "Nalyanya",
+  phone: "+254712386596",
+  email: "ian@gmail.com",
+  password: "Brachiosaurus2020",
+  password_confirmation: "Brachiosaurus2020"}
+
+user = User.registration_changeset(%User{}, user)
+IO.inspect(user)
+
+user = Repo.insert!(user)
+IO.inspect(user)
