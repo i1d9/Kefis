@@ -35,23 +35,23 @@ retailer_user = User.registration_changeset(%User{}, retailer_user)
 retailer_user = Repo.insert!(retailer_user)
 
 
-supplier = %{
+supplier_details = %{
   contact_email: "user@supplier.com",
   contact_phone: "+254709370049",
   lat: -1.337517,
-  lng:36.808900,
+  lng: 36.808900,
   location: "Mugumoini",
   phone: "254712387654",
   type: "supplier",
   name: "Blue Band"
 }
 supplier = supplier_user
-|> Ecto.build_assoc(:partners)
-|> Partner.changeset(supplier)
-|> Repo.insert!(supplier)
+  |> Ecto.build_assoc(:partner)
+  |> Partner.changeset(supplier_details)
+  |> Repo.insert!()
 
 
-retailer = %{
+retailer_details = %{
   contact_email: "user@retailer.com",
   contact_phone: "+25409709370049",
   lat: -1.268870,
@@ -62,14 +62,14 @@ retailer = %{
   name: "Sanford and Sons WholeSalers"
 }
 retailer = retailer_user
-|> Ecto.build_assoc(:partners)
-|> Partner.changeset(retailer)
-|> Repo.insert!(retailer)
+  |> Ecto.build_assoc(:partner)
+  |> Partner.changeset(retailer_details)
+  |> Repo.insert!()
 
 
 for i <- 1..10 do
   product_detail = %{
-  name: "Product #{i}",
+  name: "Product",
   category: "shoes",
   price: 5,
   sku: "HJABJHbjhbsdh&(@&*7w48",
@@ -82,3 +82,9 @@ for i <- 1..10 do
   |> Repo.insert!()
 
 end
+
+supplier = Repo.get(Partner, 1)
+product_details = supplier
+  |> Ecto.build_assoc(:products)
+  |> Product.changeset(product_detail)
+  |> Repo.insert!()
