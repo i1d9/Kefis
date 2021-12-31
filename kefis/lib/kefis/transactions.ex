@@ -9,6 +9,7 @@ defmodule Kefis.Transactions do
     transactions
   end
 
+  
   def get_transaction!(id), do: Repo.get!(Transaction, id)
 
   def all(_module), do: []

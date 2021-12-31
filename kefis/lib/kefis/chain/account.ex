@@ -12,4 +12,12 @@ defmodule Kefis.Chain.Account do
     timestamps()
   end
 
+  def changeset(account, attrs) do
+    account
+    |> cast(attrs, [:balance, :status])
+    |> validate_required([:balance, :status])
+    |> validate_inclusion(:status, @statuses)
+  end
+
+
 end

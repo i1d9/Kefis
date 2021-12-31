@@ -11,8 +11,13 @@ defmodule Kefis.Chain.Partner do
     field :name, :string
     field :phone, :string
     field :type, :string
+
     belongs_to :user, Kefis.Users.User
+    
     has_many :products, Kefis.Chain.Product
+    has_many :order_details, Kefis.Chain.OrderDetail
+    has_many :orders, Kefis.Chain.Order
+    has_many :collections, Kefis.Chain.Collection
     timestamps()
   end
 

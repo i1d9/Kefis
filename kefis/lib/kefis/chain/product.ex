@@ -9,6 +9,8 @@ defmodule Kefis.Chain.Product do
     field :price, :integer
     field :sku, :string
     belongs_to :partner, Kefis.Chain.Partner
+    has_many :order_details, Kefis.Chain.OrderDetail
+    
     timestamps()
   end
 
