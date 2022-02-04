@@ -13,4 +13,6 @@ defmodule Kefis.Products do
   def update(%Product{} = product, details) do
     details
   end
+
+  
 end

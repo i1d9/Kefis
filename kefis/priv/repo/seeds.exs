@@ -18,7 +18,7 @@ supplier_user = %{
   second_name: "One",
   phone: "+254712345678",
   email: "userone@gmail.com",
-  role: "supplier_user",
+  role: "supplier_admin",
   password: "userone@gmail.com",
   password_confirmation: "userone@gmail.com"}
 supplier_user = User.registration_changeset(%User{}, supplier_user)
@@ -39,7 +39,7 @@ retailer_user = %{
   first_name: "User",
   second_name: "Two",
   phone: "+254712387654",
-  role: "retailer_user",
+  role: "retailer_admin",
   email: "usertwo@gmail.com",
   password: "usertwo@gmail.com",
   password_confirmation: "usertwo@gmail.com"}

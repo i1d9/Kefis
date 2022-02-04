@@ -53,18 +53,6 @@ defmodule Kefis.Authorization do
     |> all(User)
   end
 
-
-  def can("supplier_admin" = role) do
-    grant(role)
-    |> read(Account)
-    |> read(Warehouse)
-    |> read(Collection)
-    |> read(Order)
-    |> read(OrderDetail)
-    |> all(Product)
-    |> all(User)
-  end
-
   def can("supplier_user" = role) do
     grant(role)
     |> read(Account)

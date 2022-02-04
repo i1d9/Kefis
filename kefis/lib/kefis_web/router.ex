@@ -17,12 +17,12 @@ defmodule KefisWeb.Router do
 
   pipeline :protected do
     plug Pow.Plug.RequireAuthenticated,
-      error_handler: Pow.Phoenix.PlugErrorHandler
+      error_handler: KefisWeb.AuthErrorHandler
   end
 
   pipeline :not_authenticated do
     plug Pow.Plug.RequireNotAuthenticated,
-      error_handler: Pow.Phoenix.PlugErrorHandler
+      error_handler: KefisWeb.AuthErrorHandler
   end
 
   scope "/" do
@@ -43,6 +43,22 @@ defmodule KefisWeb.Router do
     resources "/products", ProductController
     resources "/partners", PartnerController
     resources "/suppliers", SupplierController
+  end
+
+
+  scope "/", KefisWeb do
+    pipe_through [:browser, :not_authenticated]
+
+    #get "/signup", RegistrationController, :new, as: :signup
+    #post "/signup", RegistrationController, :create, as: :signup
+    get "/login", SessionController, :new, as: :login
+    post "/login", SessionController, :create, as: :login
+  end
+
+  scope "/", KefisWeb do
+    pipe_through [:browser, :protected]
+
+    delete "/logout", SessionController, :delete, as: :logout
   end
 
   # Other scopes may use custom stacks.

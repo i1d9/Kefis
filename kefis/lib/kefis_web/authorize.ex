@@ -3,6 +3,8 @@ defmodule KefisWeb.Authorize do
   import Plug.Conn
   import Phoenix.Controller
   import Kefis.Authorization
+  alias Kefis.Repo
+  alias Kefis.Users.User
   alias KefisWeb.Router.Helpers, as: Routes
 
   def init(opts), do: opts
@@ -12,9 +14,13 @@ defmodule KefisWeb.Authorize do
     resource = Keyword.get(opts, :resource)
     action = action_name(conn)
 
+    IO.inspect(conn.assigns.current_user)
+    IO.inspect(conn.assigns)
+
     check(action, role, resource)
     |> maybe_continue(conn)
   end
+
 
   defp maybe_continue(true, conn), do: conn
 
