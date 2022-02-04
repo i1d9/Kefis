@@ -12,6 +12,19 @@
 alias Kefis.{Users.User, Repo, Users, Products}
 alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, DispatchDetails, Order, OrderDetail, Transaction, Warehouse}
 
+#Create a Super User Account
+super_user = %{
+  first_name: "User",
+  second_name: "Zero",
+  phone: "+254712345418",
+  email: "userzero@gmail.com",
+  role: "supplier_admin",
+  password: "userzero@gmail.com",
+  password_confirmation: "userzero@gmail.com"}
+
+super_user = User.registration_changeset(%User{}, super_user)
+super_user = Repo.insert!(super_user)
+
 #Create a Supplier account
 supplier_user = %{
   first_name: "User",
