@@ -25,7 +25,7 @@ defmodule Kefis.Users.User do
     |> Ecto.Changeset.validate_required([:first_name, :second_name, :phone])
   end
 
-  def registration_changeset(user_or_changeset, attrs) do
+  def admin_changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> pow_changeset(attrs)
     |> Ecto.Changeset.cast(attrs, [:role, :first_name, :second_name, :phone])

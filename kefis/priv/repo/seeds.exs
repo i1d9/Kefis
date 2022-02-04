@@ -22,7 +22,7 @@ super_user = %{
   password: "userzero@gmail.com",
   password_confirmation: "userzero@gmail.com"}
 
-super_user = User.registration_changeset(%User{}, super_user)
+super_user = User.admin_changeset(%User{}, super_user)
 super_user = Repo.insert!(super_user)
 
 #Create a Supplier account
@@ -34,7 +34,7 @@ supplier_user = %{
   role: "supplier_admin",
   password: "userone@gmail.com",
   password_confirmation: "userone@gmail.com"}
-supplier_user = User.registration_changeset(%User{}, supplier_user)
+supplier_user = User.admin_changeset(%User{}, supplier_user)
 supplier_user = Repo.insert!(supplier_user)
 
 #Create a monetary account for the supplier
@@ -56,7 +56,7 @@ retailer_user = %{
   email: "usertwo@gmail.com",
   password: "usertwo@gmail.com",
   password_confirmation: "usertwo@gmail.com"}
-retailer_user = User.registration_changeset(%User{}, retailer_user)
+retailer_user = User.admin_changeset(%User{}, retailer_user)
 retailer_user = Repo.insert!(retailer_user)
 
 #Create a monetary account for the retailer

@@ -17,4 +17,22 @@ defmodule Kefis.Users do
     |> User.role_changeset(%{role: "admin"})
     |> Repo.update()
   end
+
+
+  def add(details)do
+    %User{}
+    |> User.admin_changeset(details)
+    |> Repo.insert()
+  end
+
+  def update(%User{} = user, attrs) do
+    user
+    |> User.admin_changeset(attrs)
+    |> Repo.update()
+  end
+
+
+  def delete(%User{} = user) do
+    Repo.delete(user)
+  end
 end
