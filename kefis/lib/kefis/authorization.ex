@@ -1,9 +1,19 @@
-defmodule AuthTasks.Authorization do
+defmodule Kefis.Authorization do
 
 
   alias __MODULE__
 
-  alias AuthTasks.Tasks.Todo
+  alias Kefis.Users.User
+  alias Kefis.Chain.Account
+  alias Kefis.Chain.Order
+  alias Kefis.Chain.Partner
+  alias Kefis.Chain.Product
+  alias Kefis.Chain.Transaction
+  alias Kefis.Chain.Driver
+  alias Kefis.Chain.OrderDetail
+  alias Kefis.Chain.Collection
+  alias Kefis.Chain.Warehouse
+
 
   @doc """
   Create an Authorization struct
@@ -18,15 +28,78 @@ defmodule AuthTasks.Authorization do
   defstruct role: nil, create: %{}, read: %{}, update: %{}, delete: %{}
 
 
-  def can("admin" = role) do
+  def can("super" = role) do
     grant(role)
-    |> all(Todo)
+    |> all(Account)
+    |> all(Warehouse)
+    |> all(Collection)
+    |> all(Order)
+    |> all(OrderDetail)
+    |> all(Partner)
+    |> all(Transaction)
+    |> all(Product)
+    |> all(User)
   end
 
-  def can("programmer" = role) do
+
+  def can("supplier_admin" = role) do
     grant(role)
-    |> read(Todo)
+    |> read(Account)
+    |> read(Warehouse)
+    |> read(Collection)
+    |> read(Order)
+    |> read(OrderDetail)
+    |> all(Product)
+    |> all(User)
   end
+
+
+  def can("supplier_admin" = role) do
+    grant(role)
+    |> read(Account)
+    |> read(Warehouse)
+    |> read(Collection)
+    |> read(Order)
+    |> read(OrderDetail)
+    |> all(Product)
+    |> all(User)
+  end
+
+  def can("supplier_user" = role) do
+    grant(role)
+    |> read(Account)
+    |> read(Warehouse)
+    |> read(Collection)
+    |> read(Order)
+    |> read(OrderDetail)
+    |> read(Product)
+    |> all(User)
+  end
+
+
+  def can("retailer_admin" = role) do
+    grant(role)
+    |> read(Account)
+    |> read(Warehouse)
+    |> read(Collection)
+    |> all(Order)
+    |> all(OrderDetail)
+    |> read(Product)
+    |> all(User)
+  end
+
+  def can("retailer_user" = role) do
+    grant(role)
+    |> read(Account)
+    |> read(Warehouse)
+    |> read(Collection)
+    |> read(Order)
+    |> read(OrderDetail)
+    |> read(Product)
+    |> all(User)
+  end
+
+
 
   def all(authorization, resource) do
     authorization

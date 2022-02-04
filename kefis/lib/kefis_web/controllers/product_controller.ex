@@ -4,6 +4,8 @@ defmodule KefisWeb.ProductController do
   alias Kefis.Chain
   alias Kefis.Chain.Product
 
+  plug KefisWeb.Authorize, resource: Kefis.Chain.Product
+
   def index(conn, _params) do
     products = Chain.list_products()
     render(conn, "index.html", products: products)
