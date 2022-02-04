@@ -9,7 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Kefis.{Users.User, Repo, Users}
+alias Kefis.{Users.User, Repo, Users, Products}
 alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, DispatchDetails, Order, OrderDetail, Transaction, Warehouse}
 
 #Create a Supplier account
@@ -110,10 +110,7 @@ for i <- 1..10 do
   image: "image.jpg"
   }
 
-  supplier
-  |> Ecto.build_assoc(:products)
-  |> Product.changeset(product_detail)
-  |> Repo.insert!()
+  Products.create(supplier, product_detail)
 
 end
 

@@ -39,7 +39,7 @@ defmodule KefisWeb.Router do
 
   scope "/", KefisWeb do
     pipe_through [:browser, :protected]
-
+    resources "/users", UserController
     resources "/products", ProductController
     resources "/partners", PartnerController
     resources "/suppliers", SupplierController
