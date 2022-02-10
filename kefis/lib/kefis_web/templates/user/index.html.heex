@@ -1,0 +1,44 @@
+
+<table>
+<tr>
+<th>First Name</th>
+<th>Second Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Role</th>
+</tr>
+
+
+<tbody>
+<%= for user <- @users do %>
+<tr>
+<td>
+<%= user.first_name %>
+</td>
+<td>
+<%= user.second_name %>
+</td>
+<td>
+<%= user.email %>
+</td>
+
+<td>
+<%= user.phone %>
+</td>
+
+
+
+<td>
+
+<%= user_role(user.role) %>
+</td>
+
+
+</tr>
+<% end %>
+</tbody>
+
+
+
+</table>
+

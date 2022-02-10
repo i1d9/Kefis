@@ -15,10 +15,9 @@ defmodule KefisWeb.SessionController do
     |> case do
       {:ok, conn} ->
 
-        # reloaded_user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload([:driver, :partner, :account])
-        #Pow.Plug.assign_current_user(conn, user, otp_app: :kefis)
-        # assign(conn, :current_user, user)
 
+
+        path = get_session(conn, :auth_redirect_url) || Routes.page_path(conn, :index)
 
 
         config        = Pow.Plug.fetch_config(conn)
@@ -29,7 +28,7 @@ defmodule KefisWeb.SessionController do
         conn
         |> Pow.Plug.assign_current_user(reloaded_user, config)
         |> put_flash(:info, "Welcome back!")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: path)
 
 
 

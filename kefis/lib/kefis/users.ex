@@ -35,4 +35,13 @@ defmodule Kefis.Users do
   def delete(%User{} = user) do
     Repo.delete(user)
   end
+
+
+  def list() do
+    Repo.all(User)
+  end
+
+  def get_user!(id) do
+    Repo.get!(User, id)
+  end
 end

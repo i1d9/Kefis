@@ -18,7 +18,7 @@ super_user = %{
   second_name: "Zero",
   phone: "+254712345418",
   email: "userzero@gmail.com",
-  role: "supplier_admin",
+  role: "super",
   password: "userzero@gmail.com",
   password_confirmation: "userzero@gmail.com"}
 

@@ -1,0 +1,41 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :first_name %>
+  <%= text_input f, :first_name %>
+  <%= error_tag f, :first_name %>
+
+  <%= label f, :second_name %>
+  <%= text_input f, :second_name %>
+  <%= error_tag f, :second_name %>
+
+  <%= label f, :phone %>
+  <%= text_input f, :phone %>
+  <%= error_tag f, :phone %>
+
+  <%= label f, :email %>
+  <%= email_input f, :email %>
+  <%= error_tag f, :email %>
+
+    <%= label f, :password %>
+  <%= password_input f, :password %>
+  <%= error_tag f, :password %>
+
+    <%= label f, :password_confirmation %>
+  <%= password_input f, :password_confirmation %>
+  <%= error_tag f, :password_confirmation %>
+
+
+  <%= label f, :role %>
+  <%= select(f, :role, [
+                     [key: "Admin", value: "super"],[key: "Driver", value: "driver"]]) %>
+  <%= error_tag f, :role %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+</.form>

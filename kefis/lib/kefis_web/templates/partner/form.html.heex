@@ -34,8 +34,11 @@
   <%= error_tag f, :lat %>
 
   <%= label f, :type %>
-  <%= text_input f, :type %>
+  <%= select(f, :type, [[key: "Retailer", value: "retailer", ],
+                     [key: "Supplier", value: "supplier"]]) %>
   <%= error_tag f, :type %>
+
+
 
   <div>
     <%= submit "Save" %>

@@ -1,6 +1,7 @@
 defmodule Kefis.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
+  import Ecto.Changeset
 
   @roles ~w(user super supplier_admin supplier_user retailer_admin retailer_user driver)
 
@@ -20,23 +21,25 @@ defmodule Kefis.Users.User do
   def changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> pow_changeset(attrs)
-    |> Ecto.Changeset.cast(attrs, [:role, :first_name, :second_name, :phone])
-    |> Ecto.Changeset.validate_inclusion(:role, @roles)
-    |> Ecto.Changeset.validate_required([:first_name, :second_name, :phone])
+    |> cast(attrs, [:role, :first_name, :second_name, :phone])
+    |> validate_inclusion(:role, @roles)
+    |> validate_required([:first_name, :second_name, :phone])
+    |> validate_length(:phone, min: 10, max: 12)
   end
 
   def admin_changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> pow_changeset(attrs)
-    |> Ecto.Changeset.cast(attrs, [:role, :first_name, :second_name, :phone])
-    |> Ecto.Changeset.validate_inclusion(:role, @roles)
-    |> Ecto.Changeset.validate_required([:first_name, :second_name, :phone])
+    |> cast(attrs, [:role, :first_name, :second_name, :phone])
+    |> validate_inclusion(:role, @roles)
+    |> validate_required([:first_name, :second_name, :phone])
+    |> validate_length(:phone, min: 10, max: 12)
   end
 
   def role_changeset(user_or_changeset, attrs) do
     user_or_changeset
-    |> Ecto.Changeset.cast(attrs, [:role])
-    |> Ecto.Changeset.validate_inclusion(:role, @roles)
+    |> cast(attrs, [:role])
+    |> validate_inclusion(:role, @roles)
   end
 
 end

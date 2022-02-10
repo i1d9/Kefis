@@ -59,4 +59,22 @@ defmodule KefisWeb.PartnerController do
     |> put_flash(:info, "Partner deleted successfully.")
     |> redirect(to: Routes.partner_path(conn, :index))
   end
+
+
+
+  def new_partner_user(conn, _opts) do
+
+  end
+
+  def create_partner_user(%{"user_params" => user_params}) do
+
+    if pa do
+      
+    end
+
+  end
+
+  def show_partner_user(conn, %{"id" => id}) do
+
+  end
 end
