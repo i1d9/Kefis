@@ -43,8 +43,8 @@ defmodule KefisWeb.Router do
     resources "/products", ProductController
     resources "/partners", PartnerController
 
-    get "/partners/user", PartnerController, :new_partner_user
-    post "/partners/user", PartnerController, :create_partner_user
+    get "/partners/user/new", PartnerController, :new_partner_user
+    post "/partners/user/new", PartnerController, :create_partner_user
     get "/partners/user/:id", PartnerController, :show_partner_user
 
     resources "/suppliers", SupplierController

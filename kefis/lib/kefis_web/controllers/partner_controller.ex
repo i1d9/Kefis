@@ -3,8 +3,11 @@ defmodule KefisWeb.PartnerController do
 
   alias Kefis.Chain
   alias Kefis.Chain.Partner
+  alias Kefis.Users.User
+  alias Kefis.Partners
 
   def index(conn, _params) do
+
     partners = Chain.list_partners()
     render(conn, "index.html", partners: partners)
   end
@@ -15,15 +18,20 @@ defmodule KefisWeb.PartnerController do
   end
 
   def create(conn, %{"partner" => partner_params}) do
-    case Chain.create_partner(partner_params) do
+
+    case Partners.create_partner(partner_params) do
       {:ok, partner} ->
         conn
         |> put_flash(:info, "Partner created successfully.")
-        |> redirect(to: Routes.partner_path(conn, :show, partner))
+        |> put_session(:partner, partner)
+        |> redirect(to: Routes.partner_path(conn, :new_partner_user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+
+
+
   end
 
   def show(conn, %{"id" => id}) do
@@ -63,14 +71,44 @@ defmodule KefisWeb.PartnerController do
 
 
   def new_partner_user(conn, _opts) do
+    partner = get_session(conn, :partner)
+    IO.inspect(partner)
+
+    empty_new = %{}
+
+    if partner["type"] == "retailer" do
+      empty_new = Map.put(empty_new, :role, "retailer_admin")
+      IO.inspect(empty_new)
+    else
+      empty_new = Map.put(empty_new, :role, "supplier_admin")
+      IO.inspect(empty_new)
+    end
+
+
+    partner_user_changeset = User.admin_changeset(%User{}, %{})
+    render(conn, "new_user.html", changeset: partner_user_changeset, partner: partner)
 
   end
 
-  def create_partner_user(%{"user_params" => user_params}) do
 
-    if pa do
-      
+  def create_partner_user(conn, %{"user" => user_params}) do
+
+    partner = get_session(conn, :partner)
+
+
+    case Partners.create_partner_user(partner, user_params) do
+      {:ok, _user} ->
+        conn
+        |> put_flash(:info, "User Account added successfully.")
+        |> redirect(to: Routes.partner_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new_user.html", changeset: changeset)
     end
+
+
+
+    #partner_user_changeset = User.admin_changeset(%User{}, %{})
+    #render(conn, "new_user.html", changeset: partner_user_changeset)
 
   end
 

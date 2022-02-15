@@ -155,3 +155,11 @@ order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
 |> Ecto.Changeset.put_assoc( :partner, order_detail_supplier)
 |> Ecto.Changeset.put_assoc( :order, order)
 |> Repo.insert!()
+
+
+supplier_details = %{
+  contact_email: "contact_user@supplier.com",  contact_phone: "+254709271149",
+  lat: -1.337517,  lng: 36.808900,
+  location: "Muguini",   phone: "124712387654",
+  type: "supplier",  name: "Blue Band"
+}
