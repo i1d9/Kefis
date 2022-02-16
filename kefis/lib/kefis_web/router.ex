@@ -66,6 +66,12 @@ defmodule KefisWeb.Router do
     delete "/logout", SessionController, :delete, as: :logout
   end
 
+  scope "/admin", KefisWeb do
+    pipe_through [:browser, :protected]
+
+    get "/", AdminController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", KefisWeb do
   #   pipe_through :api

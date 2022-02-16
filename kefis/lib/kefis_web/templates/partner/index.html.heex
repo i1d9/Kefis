@@ -1,16 +1,16 @@
-<h1>Listing Partners</h1>
 
-<table>
+<%= render(KefisWeb.PageView, "nav.html") %>
+
+<h1>Partners</h1>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Phone</th>
-      <th>Contact email</th>
-      <th>Contact phone</th>
-      <th>Lng</th>
-      <th>Lat</th>
-      <th>Type</th>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Contact email</th>
+      <th scope="col">Contact phone</th>
+      <th scope="col">Type</th>
 
       <th></th>
     </tr>
@@ -23,8 +23,6 @@
       <td><%= partner.phone %></td>
       <td><%= partner.contact_email %></td>
       <td><%= partner.contact_phone %></td>
-      <td><%= partner.lng %></td>
-      <td><%= partner.lat %></td>
       <td><%= partner.type %></td>
 
       <td>
@@ -36,5 +34,7 @@
 <% end %>
   </tbody>
 </table>
+
+
 
 <span><%= link "New Partner", to: Routes.partner_path(@conn, :new) %></span>
