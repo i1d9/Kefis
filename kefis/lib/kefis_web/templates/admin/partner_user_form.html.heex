@@ -1,0 +1,63 @@
+
+
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-lg-4 col-sm-6">
+                <!-- Form -->
+                <div class="mb-4">
+                  
+                  
+                  <.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :first_name, for: "first_name" %>
+  <%= text_input f, :first_name, class: "form-control", id: "first_name" %>
+  <%= error_tag f, :first_name %>
+
+
+  <%= label f, :second_name, for: "second_name" %>
+  <%= text_input f, :second_name, class: "form-control", id: "second_name" %>
+  <%= error_tag f, :second_name %>
+
+  <%= label f, :phone, for: "phone" %>
+  <%= text_input f, :phone, class: "form-control", id: "phone" %>
+  <%= error_tag f, :phone %>
+
+  <%= label f, :email, for: "email" %>
+  <%= text_input f, :email, class: "form-control", id: "email" %>
+  <%= error_tag f, :email %>
+
+    <%= label f, :password, for: "email" %>
+  <%= text_input f, :password, class: "form-control", id: "password" %>
+  <%= error_tag f, :password %>
+
+      <%= label f, :password_confirmation, for: "password_confirmation" %>
+  <%= text_input f, :password_confirmation, class: "form-control", id: "password_confirmation" %>
+  <%= error_tag f, :password_confirmation %>
+
+
+  <div>
+    <%= submit "Create Account", class: "btn btn-success" %>
+  </div>
+</.form>
+                </div>
+                <!-- End of Form -->
+                
+
+              </div>
+              
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    

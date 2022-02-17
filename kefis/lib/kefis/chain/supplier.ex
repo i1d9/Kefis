@@ -4,7 +4,6 @@ defmodule Kefis.Chain.Supplier do
 
   schema "suppliers" do
     field :contact_email, :string
-    field :contact_phone, :string
     field :lat, :float
     field :lng, :float
     field :location, :string
@@ -17,7 +16,7 @@ defmodule Kefis.Chain.Supplier do
   @doc false
   def changeset(supplier, attrs) do
     supplier
-    |> cast(attrs, [:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat])
-    |> validate_required([:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat])
+    |> cast(attrs, [:name, :location, :phone, :contact_email,  :lng, :lat])
+    |> validate_required([:name, :location, :phone, :contact_email,  :lng, :lat])
   end
 end

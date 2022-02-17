@@ -1,0 +1,70 @@
+
+
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-lg-4 col-sm-6">
+                <!-- Form -->
+                <div class="mb-4">
+                  
+                  
+                  <.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :name, for: "name" %>
+  <%= text_input f, :name, class: "form-control", id: "name" %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :location, for: "name" %>
+  <%= text_input f, :location, class: "form-control", id: "location" %>
+  <%= error_tag f, :location %>
+
+  <%= label f, :phone %>
+  <%= text_input f, :phone, class: "form-control", id: "phone" %>
+  <%= error_tag f, :phone %>
+
+  <%= label f, :contact_email, for: "email" %>
+  <%= text_input f, :contact_email, class: "form-control", id: "email" %>
+  <%= error_tag f, :contact_email %>
+
+  <%= label f, :lng, for: "lng" %>
+  <%= number_input f, :lng, class: "form-control", id: "lng", step: "any" %>
+  <%= error_tag f, :lng %>
+
+
+  <%= label f, :lat, for: "lat" %>
+  <%= number_input f, :lat, class: "form-control", id: "lng", step: "any" %>
+  <%= error_tag f, :lat %>
+
+
+  <%= label f, :type, class: "my-1 me-2", for: "country"%>
+
+  <%= select(f, :type,  [[key: "Retailer", value: "retailer", ],
+                     [key: "Supplier", value: "supplier"]], class: "form-select") %>
+  <%= error_tag f, :type %>
+
+
+  <div>
+    <%= submit "Save", class: "btn btn-success" %>
+  </div>
+</.form>
+                </div>
+                <!-- End of Form -->
+                
+
+              </div>
+              
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    

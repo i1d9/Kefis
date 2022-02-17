@@ -67,9 +67,14 @@ defmodule KefisWeb.Router do
   end
 
   scope "/admin", KefisWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :protected]
 
     get "/", AdminController, :index
+    get "/new/partner", AdminController, :new_partner
+    post "/new/partner", AdminController, :create_new_partner
+
+    get "/new/partner/user", AdminController, :new_partner_user
+    post "/new/partner/user", AdminController, :create_partner_user
   end
 
   # Other scopes may use custom stacks.

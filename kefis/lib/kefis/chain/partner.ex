@@ -4,7 +4,6 @@ defmodule Kefis.Chain.Partner do
 
   schema "partners" do
     field :contact_email, :string
-    field :contact_phone, :string
     field :lat, :float
     field :lng, :float
     field :location, :string
@@ -24,8 +23,8 @@ defmodule Kefis.Chain.Partner do
   @doc false
   def changeset(partner, attrs) do
     partner
-    |> cast(attrs, [:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat, :type])
-    |> validate_required([:name, :location, :phone, :contact_email, :contact_phone, :lng, :lat, :type])
+    |> cast(attrs, [:name, :location, :phone, :contact_email,  :lng, :lat, :type])
+    |> validate_required([:name, :location, :phone, :contact_email,  :lng, :lat, :type])
     |> unique_constraint(:contact_email)
     |> validate_length(:phone, min: 10, max: 12)
     |> validate_format(:contact_email, ~r/@/)

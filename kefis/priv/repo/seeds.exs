@@ -71,7 +71,7 @@ retailer_money_account = Account.changeset(%Account{}, retailer_account_details)
 #Create a Supplier record
 supplier_details = %{
   contact_email: "user@supplier.com",
-  contact_phone: "+254709370049",
+
   lat: -1.337517,
   lng: 36.808900,
   location: "Mugumoini",
@@ -87,7 +87,7 @@ supplier = supplier_user
 #Create a Retailer record
 retailer_details = %{
   contact_email: "user@retailer.com",
-  contact_phone: "+25409709370049",
+
   lat: -1.268870,
   lng: 36.785554,
   location: "Mugumoini",
@@ -157,9 +157,4 @@ order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
 |> Repo.insert!()
 
 
-supplier_details = %{
-  contact_email: "contact_user@supplier.com",  contact_phone: "+254709271149",
-  lat: -1.337517,  lng: 36.808900,
-  location: "Muguini",   phone: "124712387654",
-  type: "supplier",  name: "Blue Band"
-}
+

@@ -7,7 +7,6 @@ defmodule Kefis.Repo.Migrations.AddPartners do
       add :location, :string
       add :phone, :string
       add :contact_email, :string
-      add :contact_phone, :string
       add :lng, :float
       add :lat, :float
       add :type, :string

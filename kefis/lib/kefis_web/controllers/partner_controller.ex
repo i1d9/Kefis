@@ -84,7 +84,6 @@ defmodule KefisWeb.PartnerController do
       IO.inspect(empty_new)
     end
 
-
     partner_user_changeset = User.admin_changeset(%User{}, %{})
     render(conn, "new_user.html", changeset: partner_user_changeset, partner: partner)
 
