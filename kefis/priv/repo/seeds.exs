@@ -16,7 +16,7 @@ alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, Disp
 super_user = %{
   first_name: "User",
   second_name: "Zero",
-  phone: "+254712345418",
+  phone: "254712345418",
   email: "userzero@gmail.com",
   role: "super",
   password: "userzero@gmail.com",
@@ -29,7 +29,7 @@ super_user = Repo.insert!(super_user)
 supplier_user = %{
   first_name: "User",
   second_name: "One",
-  phone: "+254712345678",
+  phone: "254712345678",
   email: "userone@gmail.com",
   role: "supplier_admin",
   password: "userone@gmail.com",
@@ -51,7 +51,7 @@ supplier_money_account = Account.changeset(%Account{}, supplier_account_details)
 retailer_user = %{
   first_name: "User",
   second_name: "Two",
-  phone: "+254712387654",
+  phone: "254712387654",
   role: "retailer_admin",
   email: "usertwo@gmail.com",
   password: "usertwo@gmail.com",
@@ -91,7 +91,7 @@ retailer_details = %{
   lat: -1.268870,
   lng: 36.785554,
   location: "Mugumoini",
-  phone: "25471298387654",
+  phone: "254712983876",
   type: "retailer",
   name: "Sanford and Sons WholeSalers"
 }
@@ -155,6 +155,3 @@ order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
 |> Ecto.Changeset.put_assoc( :partner, order_detail_supplier)
 |> Ecto.Changeset.put_assoc( :order, order)
 |> Repo.insert!()
-
-
-
