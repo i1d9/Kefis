@@ -23,6 +23,10 @@ import "phoenix_html"
 
 import 'bootstrap'; // Bootstrap support
 import "jquery";
+
+import "./custom";
+
+
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"

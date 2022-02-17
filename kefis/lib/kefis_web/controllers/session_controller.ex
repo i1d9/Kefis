@@ -2,6 +2,7 @@ defmodule KefisWeb.SessionController do
   use KefisWeb, :controller
   alias Kefis.Repo
   alias Kefis.Users.User
+  alias KefisWeb.Auth
 
   def new(conn, _params) do
     changeset = Pow.Plug.change_user(conn)
@@ -15,11 +16,6 @@ defmodule KefisWeb.SessionController do
     |> case do
       {:ok, conn} ->
 
-
-
-        path = get_session(conn, :auth_redirect_url) || Routes.page_path(conn, :index)
-
-
         config        = Pow.Plug.fetch_config(conn)
         user          = Pow.Plug.current_user(conn, config)
         reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :account])
@@ -28,7 +24,7 @@ defmodule KefisWeb.SessionController do
         conn
         |> Pow.Plug.assign_current_user(reloaded_user, config)
         |> put_flash(:info, "Welcome back!")
-        |> redirect(to: path)
+        |> Auth.landing_page(reloaded_user)
 
 
 

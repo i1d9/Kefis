@@ -1,5 +1,22 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+
+
+@import "./custom.scss";
+@import "variables";
+//@import "@fortawesome/fontawesome-free/scss/brands";
+//@import "@fortawesome/fontawesome-free/scss/regular";
+//@import "@fortawesome/fontawesome-free/scss/solid";
+//@import "@fortawesome/fontawesome-free/scss/fontawesome";
+
+
+
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -87,238 +104,13 @@
   }
 
 
-  body{
-    margin: 0px;
-    padding: 0px;
-}
 
-.nav{
-    display: flex;
-
-    justify-content: flex-end ;
-}
-.nav ul{
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
+  .home-head{
+    
     position: relative;
-    right: 30px;
-    color: white;
-    
-}
-
-.nav ul li{
-    margin: 5px;
-
-}
-
-
-.home{
-    
-
-	scroll-snap-type: mandatory;
-	scroll-snap-points-y: repeat(100vh);
-	scroll-snap-type: y mandatory;
-    color: white;
-    
-}
-
-.contact-us{
-    display: grid;
-    grid-template-columns: 1fr 1fr;    
-}
-
-
-.contact-us form{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    padding: 10px;
-
-}
-
-#supplier{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    
-}
-#supplier .media{
-    background-image: url("supplier.jpg");
-
-
-  
-  /* Create the parallax scrolling effect */
-  background-position: 50% 10%;
-  background-size: cover;
-  
-  background-repeat: no-repeat;
-  
-  
-}
-#supplier .media img{
-
-display: none;
-    max-width: 100%;
-    height: auto;
-
-    
-}
-
-#retailer{
-    display: grid;
-
-}
-
-#retailer{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    
-}
-#retailer .media{
-    background-image: url("retailer.jpg");
-
-
-  
-  /* Create the parallax scrolling effect */
-  background-position: 20% 0%;
-  background-size: cover;
-  
-  background-repeat: no-repeat;
-  
-  
-}
-#retailer .media img{
-
-display: none;
-    max-width: 100%;
-    height: auto;
-
-    
-}
-
-/*
-Mobile
-*/
-@media only screen and (max-width: 600px) {
-    
-    .home .content{
-        position: absolute;
-        opacity: 0.5;
-        bottom: 50%;
-        left: 0;
-        right: 0;
-        
-        text-align: center;
-    }
-    #supplier, #retailer{
-        grid-template-columns: 1fr;
-        
-    }
-}
-
-
-/* setup */
-html, body, .holster {
-    height: 100vh;
-
-  scroll-behavior: smooth;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("../img/h.jpg");
   }
-  .holster {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-flow: column nowrap;
-    font-family: monospace;
-  }
-  
-  .container {
-    display: flex;
-    overflow: auto;
-    outline: 1px dashed lightgray;
-    flex: none;
-  }
-  
- 
-  .container.y {
-    width: 100vw;
-    height: 100vh;
-    flex-flow: column nowrap;
-  }
-  /* scroll-snap */
-  
-  .y.mandatory-scroll-snapping {
-    scroll-snap-type: y mandatory;
-  }
-  
-  
-  
-  
-  .container > div {
-      
-    scroll-snap-align: center;
-    flex: none;
-    height: 100vh;
-    
-  }
-  
-  
-  .y.container > div {
-    font-size: 1em;
-    width: 100vw;
-    height: 100vh;
-  }
-  /* appearance fixes */
-  .y.container > div:first-child {
-   
-    
-  }
-  /* coloration */
-  .container > div:nth-child(even) {
-    background-color: #e7f3e7;
-  }
-  
-  .container > div:nth-child(odd) {
-    background-color: #72c4e7;
-  }
-
-  #home{
-        /* The image used */
-  background-image: url("h.jpg");
-
-
-  
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  
-  }
-
-
-  .home {
-      position: relative;
-  }
-
-  .home .content{
-    position: absolute;
-    opacity: 0.5;
-    bottom: 150px;
-    left: 0;
-    right: 0;
-    
-    text-align: center;
-}
-
-
-  .testimonials{
-      display: flex;
-      
-    
-  }
-
-  .testimonials .content{
-       position: relative;
-       top: 20px;
-  }
-  

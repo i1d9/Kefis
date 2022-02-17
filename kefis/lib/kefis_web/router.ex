@@ -67,7 +67,7 @@ defmodule KefisWeb.Router do
   end
 
   scope "/admin", KefisWeb do
-    pipe_through [:browser, :protected]
+    pipe_through [:browser]
 
     get "/", AdminController, :index
   end

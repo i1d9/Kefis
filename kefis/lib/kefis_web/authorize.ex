@@ -14,9 +14,6 @@ defmodule KefisWeb.Authorize do
     resource = Keyword.get(opts, :resource)
     action = action_name(conn)
 
-    IO.inspect(conn.assigns.current_user)
-    IO.inspect(conn.assigns)
-
     check(action, role, resource)
     |> maybe_continue(conn)
   end
