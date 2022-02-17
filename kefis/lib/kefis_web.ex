@@ -90,6 +90,9 @@ defmodule KefisWeb do
       import KefisWeb.ErrorHelpers
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
+
+
+      import KefisWeb.ViewHelper
     end
   end
 

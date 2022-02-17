@@ -26,8 +26,6 @@ defmodule KefisWeb.SessionController do
         |> put_flash(:info, "Welcome back!")
         |> Auth.landing_page(reloaded_user)
 
-
-
       {:error, conn} ->
         changeset = Pow.Plug.change_user(conn, conn.params["user"])
 

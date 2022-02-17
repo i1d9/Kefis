@@ -11,7 +11,58 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
-  
+
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark navbar-theme-primary mb-4" style={display(@conn)}>
+    <div class="container position-relative">
+        <a class="navbar-brand me-lg-3" href="#">
+            <img class="navbar-brand-dark" src="../../assets/brand/light.svg" alt="Kefis">
+            <img class="navbar-brand-light" src="../../assets/brand/dark.svg" alt="Kefis">
+        </a>
+        <div class="navbar-collapse collapse w-100" id="navbar-default-primary">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="#">
+                            <img src="../../assets/img/brand/dark.svg" alt="Kefis">
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <i class="fas fa-times" data-toggle="collapse" role="button"
+                            data-target="#navbar-default-primary" aria-controls="navbar-default-primary"
+                            aria-expanded="false" aria-label="Toggle navigation"></i>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                
+
+                    <%= if @current_user do %>
+                    
+      <li class="nav-item"><%= link "Sign out", to: Routes.logout_path(@conn, :delete), method: :delete, class: "nav-link" %></li>     
+    <% else %>
+    <li class="nav-item">
+                <%= link("Home", to: "/", class: "nav-link") %>
+                </li>
+                <li class="nav-item">
+                <%= link("About", to: "/", class: "nav-link") %>
+                </li>
+                <li class="nav-item">
+                <%= link("Contact", to: "/", class: "nav-link") %>
+                </li>
+      <li class="nav-item"><%= link "Sign in", to: Routes.login_path(@conn, :new), class: "nav-link" %></li>
+    <% end %>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="navbar-toggler ms-2" type="button" data-toggle="collapse"
+                data-target="#navbar-default-primary" aria-controls="navbar-default-primary"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
 
     <%= @inner_content %>
   </body>

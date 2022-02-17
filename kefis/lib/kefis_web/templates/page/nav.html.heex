@@ -1,22 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Kefis</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-        
-        <li class="nav-item">
-          <a class="nav-link" href="#">Supplier</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="#">Retailer</a>
-        </li>
-        
-      </ul>
+ <%= if assigns[:current_user] do %>
+   <h1>Example</h1>
+
+ <% end %>
+ 
+
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark navbar-theme-primary mb-4">
+    <div class="container position-relative">
+        <a class="navbar-brand me-lg-3" href="#">
+            <img class="navbar-brand-dark" src="../../assets/brand/light.svg" alt="Kefis">
+            <img class="navbar-brand-light" src="../../assets/brand/dark.svg" alt="Kefis">
+        </a>
+        <div class="navbar-collapse collapse w-100" id="navbar-default-primary">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="#">
+                            <img src="../../assets/img/brand/dark.svg" alt="Kefis">
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <i class="fas fa-times" data-toggle="collapse" role="button"
+                            data-target="#navbar-default-primary" aria-controls="navbar-default-primary"
+                            aria-expanded="false" aria-label="Toggle navigation"></i>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                <li class="nav-item">
+                
+
+                <%= link("Home", to: "/", class: "nav-link") %>
+                </li>
+                <li class="nav-item">
+                <%= link("About", to: "/", class: "nav-link") %>
+                </li>
+                <li class="nav-item">
+                <%= link("Contact", to: "/", class: "nav-link") %>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="navbar-toggler ms-2" type="button" data-toggle="collapse"
+                data-target="#navbar-default-primary" aria-controls="navbar-default-primary"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
     </div>
-  </div>
 </nav>

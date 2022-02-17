@@ -12,6 +12,9 @@ defmodule KefisWeb.AuthErrorHandler do
 
   @spec call(Conn.t(), atom()) :: Conn.t()
   def call(conn, :already_authenticated) do
+
+    IO.inspect(conn)
+    
     conn
     |> put_flash(:error, "You're already authenticated")
     |> redirect(to: Routes.page_path(conn, :index))
