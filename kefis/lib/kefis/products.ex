@@ -3,6 +3,10 @@ defmodule Kefis.Products do
   alias Kefis.Repo
 
 
+  def list_partner_products(supplier) do
+    Repo.all(Product)
+  end
+  
   def create(supplier, details) do
     supplier
     |> Ecto.build_assoc(:products)
@@ -14,5 +18,5 @@ defmodule Kefis.Products do
     details
   end
 
-  
+
 end

@@ -79,6 +79,11 @@ defmodule KefisWeb.Router do
     get "/partners", AdminController, :list_partners
   end
 
+
+  scope "/partner", KefisWeb do
+    get "/", PartnerController, :list_partner_products
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", KefisWeb do
   #   pipe_through :api

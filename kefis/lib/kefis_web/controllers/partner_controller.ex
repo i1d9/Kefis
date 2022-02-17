@@ -5,6 +5,7 @@ defmodule KefisWeb.PartnerController do
   alias Kefis.Chain.Partner
   alias Kefis.Users.User
   alias Kefis.Partners
+  alias Kefis.Products
 
   def index(conn, _params) do
 
@@ -113,5 +114,11 @@ defmodule KefisWeb.PartnerController do
 
   def show_partner_user(conn, %{"id" => id}) do
 
+  end
+
+
+  def list_partner_products(conn, _opts) do
+    products = Products.list_partner_products("asas")
+    render(conn, "product_list.html", products: products)
   end
 end
