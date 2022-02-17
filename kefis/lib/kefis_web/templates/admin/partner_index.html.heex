@@ -1,0 +1,93 @@
+<%= render( "dashboard_nav.html", conn: @conn) %>
+
+
+<main class="content">
+
+            
+<%= render( "dashboard_upper_nav.html", conn: @conn)  %>
+<%= render( "dashboard_description.html", dashboard_page_title: "Available Partners", dashboard_page_description: "A list of all partners on the platform") %>
+ 
+
+
+
+    <div class="py-4">
+    
+    <%= link "New Partner", to: Routes.admin_path(@conn, :new_partner), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+              
+        <div class="dropdown">
+            <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                New
+            </button>
+            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+
+
+                <%= link "Add Partner", to: Routes.admin_path(@conn, :new_partner), class: "dropdown-item d-flex align-items-center" %>
+                
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    
+                                        Add User
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+            <div class="card border-0 shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-centered table-nowrap mb-0 rounded">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="border-0 rounded-start">Name</th>
+                                    <th class="border-0">Location</th>
+                                    <th class="border-0">Email</th>
+                                    <th class="border-0">Phone</th>
+                                    <th class="border-0">Type</th>
+                                    <th class="border-0">Users</th>
+                                    <th class="border-0">Products</th>
+                                    <th class="border-0 rounded-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+<%= for partner <- @partners do %>
+    <tr>
+      <td><%= partner.name %></td>
+      <td><%= partner.location %></td>
+            <td><%= partner.contact_email %></td>
+      <td><%= partner.phone %></td>
+
+      <td><%= partner.type %></td>
+            <td>0</td>
+             <td>0</td>
+
+      <td>
+        <span><%= link "Show", to: Routes.partner_path(@conn, :show, partner) %></span>
+        <span><%= link "Edit", to: Routes.partner_path(@conn, :edit, partner) %></span>
+        <span><%= link "Delete", to: Routes.partner_path(@conn, :delete, partner), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+                   </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+      
+      
+
+
+
+
+        </main>

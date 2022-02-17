@@ -75,6 +75,8 @@ defmodule KefisWeb.Router do
 
     get "/new/partner/user", AdminController, :new_partner_user
     post "/new/partner/user", AdminController, :create_partner_user
+
+    get "/partners", AdminController, :list_partners
   end
 
   # Other scopes may use custom stacks.

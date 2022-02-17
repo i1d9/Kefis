@@ -1,13 +1,12 @@
 
 
-<%= render(KefisWeb.PageView, "dashboard_nav.html") %>
+<%= render("dashboard_nav.html", conn: @conn) %>
 
 
 <main class="content">
 
-
-<%= render(KefisWeb.PageView, "dashboard_upper_nav.html") %>
-<%= render(KefisWeb.PageView, "dashboard_description.html", dashboard_page_title: "New Partner", dashboard_page_description: "Add a new supplier or retailer") %>
+<%= render( "dashboard_upper_nav.html", conn: @conn)  %>
+<%= render( "dashboard_description.html", dashboard_page_title: "New Partner", dashboard_page_description: "Add a new supplier or retailer") %>
  
 <%= render "partner_form.html", Map.put(assigns, :action, Routes.admin_path(@conn, :create_new_partner)) %>
 

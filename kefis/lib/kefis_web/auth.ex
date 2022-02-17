@@ -12,11 +12,11 @@ defmodule KefisWeb.Auth do
   def landing_page(conn, user) do
     cond do
       user.role == "super" ->
-        IO.puts("Render Admin Page")
+        redirect(conn, to: Routes.admin_path(conn, :index))
       user.role == "supplier_admin" ->
-        IO.puts("Supplier Dashboard")
+        redirect(conn, to: Routes.partner_path(conn, :index))
       user.role == "retailer_admin" ->
-          IO.puts("Retailer Dashboard")
+        redirect(conn, to: Routes.partner_path(conn, :index))
       true ->
         IO.puts("Homepage")
     end

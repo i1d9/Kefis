@@ -57,7 +57,7 @@ defmodule KefisWeb.AdminController do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "User Account added successfully.")
-        |> redirect(to: Routes.partner_path(conn, :index))
+        |> redirect(to: Routes.admin_path(conn, :list_partners))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new_partner_user.html", changeset: changeset)
     end
@@ -66,5 +66,41 @@ defmodule KefisWeb.AdminController do
 
   end
 
+
+  def edit_partner(conn, %{"id" => id}) do
+    partner = Chain.get_partner!(id)
+    changeset = Chain.change_partner(partner)
+    render(conn, "edit.html", partner: partner, changeset: changeset)
+  end
+
+  def update_partner(conn, %{"id" => id, "partner" => partner_params}) do
+    partner = Chain.get_partner!(id)
+
+    case Chain.update_partner(partner, partner_params) do
+      {:ok, partner} ->
+        conn
+        |> put_flash(:info, "Partner updated successfully.")
+        |> redirect(to: Routes.partner_path(conn, :show, partner))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", partner: partner, changeset: changeset)
+    end
+  end
+
+  def list_partners(conn, _opts) do
+
+    partners = Chain.list_partners()
+    render(conn, "partner_index.html", partners: partners)
+  end
+
+
+  def delete_partner(conn, %{"id" => id}) do
+    partner = Chain.get_partner!(id)
+    {:ok, _partner} = Chain.delete_partner(partner)
+
+    conn
+    |> put_flash(:info, "Partner deleted successfully.")
+    |> redirect(to: Routes.admin_path(conn, :list_partners))
+  end
 
 end
