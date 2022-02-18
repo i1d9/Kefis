@@ -6,12 +6,12 @@ defmodule Kefis.Products do
   def list_partner_products(supplier) do
     Repo.all(Product)
   end
-  
+
   def create(supplier, details) do
     supplier
     |> Ecto.build_assoc(:products)
     |> Product.changeset(details)
-    |> Repo.insert!()
+    |> Repo.insert()
   end
 
   def update(%Product{} = product, details) do

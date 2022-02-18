@@ -41,13 +41,13 @@ defmodule KefisWeb.Router do
     pipe_through [:browser, :protected]
     resources "/users", UserController
     resources "/products", ProductController
-    resources "/partners", PartnerController
+    #resources "/partners", PartnerController
 
     get "/partners/user/new", PartnerController, :new_partner_user
     post "/partners/user/new", PartnerController, :create_partner_user
     get "/partners/user/:id", PartnerController, :show_partner_user
 
-    resources "/suppliers", SupplierController
+
   end
 
 
@@ -80,8 +80,23 @@ defmodule KefisWeb.Router do
   end
 
 
-  scope "/partner", KefisWeb do
-    get "/", PartnerController, :list_partner_products
+  scope "/partners", KefisWeb do
+    pipe_through [:browser, :protected]
+
+    get "/", PartnerController, :index
+    get "/products", PartnerController, :list_partner_products
+
+    get "/products/new", PartnerController, :new_product
+    post "/products/new", PartnerController, :create_product
+
+    get "/partners/products/:id", PartnerController, :show_product
+    get "/partners/products/:id/edit", PartnerController, :edit_product
+    delete "/partners/products/:id/delete", PartnerController, :delete_product
+
+
+
+
+
   end
 
   # Other scopes may use custom stacks.

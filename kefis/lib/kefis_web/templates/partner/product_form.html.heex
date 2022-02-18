@@ -1,0 +1,59 @@
+
+
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-lg-4 col-sm-6">
+                <!-- Form -->
+                <div class="mb-4">
+                  
+                  
+                  <.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :name, for: "name" %>
+  <%= text_input f, :name, class: "form-control", id: "name" %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :price, for: "name" %>
+  <%= number_input f, :price, class: "form-control", id: "price" %>
+  <%= error_tag f, :price %>
+
+  <%= label f, :sku %>
+  <%= text_input f, :sku, class: "form-control", id: "sku" %>
+  <%= error_tag f, :sku %>
+
+  <%= label f, :category, for: "category" %>
+  <%= text_input f, :category, class: "form-control", id: "category" %>
+  <%= error_tag f, :category %>
+
+  <%= label f, :image, for: "image" %>
+  <%= text_input f, :image, class: "form-control", id: "image" %>
+  <%= error_tag f, :image %>
+
+
+
+  <div>
+    <%= submit "Save", class: "btn btn-success" %>
+  </div>
+</.form>
+                </div>
+                <!-- End of Form -->
+                
+
+              </div>
+              
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    

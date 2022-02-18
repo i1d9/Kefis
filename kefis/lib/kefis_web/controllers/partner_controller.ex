@@ -7,6 +7,12 @@ defmodule KefisWeb.PartnerController do
   alias Kefis.Partners
   alias Kefis.Products
 
+  alias Kefis.Chain.Product
+  alias Kefis.Repo
+  alias Kefis.Products
+
+
+
   def index(conn, _params) do
 
     partners = Chain.list_partners()
@@ -118,7 +124,62 @@ defmodule KefisWeb.PartnerController do
 
 
   def list_partner_products(conn, _opts) do
-    products = Products.list_partner_products("asas")
+    products = Products.list_partner_products(conn.assigns.current_user.partner)
     render(conn, "product_list.html", products: products)
   end
+
+  def new_product(conn, _opts) do
+    IO.inspect(conn.assigns.current_user.partner)
+    changeset = Chain.change_product(%Product{})
+    render(conn, "new_product.html", changeset: changeset)
+  end
+
+
+
+  def create_product(conn, %{"product" => product_params}) do
+    case  Products.create(conn.assigns.current_user.partner, product_params) do
+      {:ok, _product} ->
+        conn
+        |> put_flash(:info, "Product created successfully.")
+        |> redirect(to: Routes.partner_path(conn, :list_partner_products))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new_product.html", changeset: changeset)
+    end
+  end
+
+  def show_product(conn, %{"id" => id}) do
+    product = Chain.get_product!(id)
+    render(conn, "show.html", product: product)
+  end
+
+  def edit_product(conn, %{"id" => id}) do
+    product = Chain.get_product!(id)
+    changeset = Chain.change_product(product)
+    render(conn, "edit.html", product: product, changeset: changeset)
+  end
+
+  def update_product(conn, %{"id" => id, "product" => product_params}) do
+    product = Chain.get_product!(id)
+
+    case Chain.update_product(product, product_params) do
+      {:ok, product} ->
+        conn
+        |> put_flash(:info, "Product updated successfully.")
+        |> redirect(to: Routes.product_path(conn, :show, product))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", product: product, changeset: changeset)
+    end
+  end
+
+  def delete_product(conn, %{"id" => id}) do
+    product = Chain.get_product!(id)
+    {:ok, _product} = Chain.delete_product(product)
+
+    conn
+    |> put_flash(:info, "Product deleted successfully.")
+    |> redirect(to: Routes.product_path(conn, :index))
+  end
+
 end
