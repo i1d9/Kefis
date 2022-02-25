@@ -1,0 +1,15 @@
+
+<%= render("dashboard_nav.html", conn: @conn) %>
+
+
+<main class="content">
+
+
+<%= render( "dashboard_upper_nav.html", conn: @conn)  %>
+<%= render( "dashboard_description.html", dashboard_page_title: "New Warehouse", dashboard_page_description: "Add a new warehouse") %>
+ 
+
+<%= render "warehouse_form.html", Map.put(assigns, :action, Routes.admin_path(@conn, :create_warehouse)) %>
+
+
+</main>

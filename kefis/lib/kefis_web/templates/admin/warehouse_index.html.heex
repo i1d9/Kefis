@@ -9,7 +9,7 @@
 
     <div class="py-4">
     
-    <%= link "New Warehouse", to: Routes.admin_path(@conn, :new_partner), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>    
+    <%= link "New Warehouse", to: Routes.admin_path(@conn, :new_warehouse), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>    
     </div>
 
             <div class="card border-0 shadow mb-4">
@@ -28,7 +28,15 @@
                                     <th class="border-0 rounded-end">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody></table>
+                            <tbody>
+                            
+                            <%= for warehouse <- @warehouses do%>
+                            <tr>
+                            <td><%= warehouse.id %></td>
+                            </tr>
+                            <% end %>
+                            
+                            </tbody></table>
                     </div>
                 </div>
             </div>

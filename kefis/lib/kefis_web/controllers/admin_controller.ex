@@ -115,12 +115,22 @@ defmodule KefisWeb.AdminController do
 
   def new_warehouse(conn, _opts) do
     warehouse_changeset = Warehouse.changeset(%Warehouse{}, %{})
-    render(conn, "index.html", changeset: warehouse_changeset)
+    render(conn, "warehouse_new.html", changeset: warehouse_changeset)
   end
 
-  @spec create_warehouse(Plug.Conn.t(), any) :: Plug.Conn.t()
-  def create_warehouse(conn, _opts) do
-    render(conn, "index.html")
+
+  def create_warehouse(conn, %{"warehouse" => warehouse}) do
+    case Warehouses.create(warehouse) do
+      {:ok, _warehouse} ->
+        redirect(conn, to: Routes.admin_path(conn, :list_warehouse))
+      {:error, %Ecto.Changeset{} = warehouse_changeset} ->
+        render(conn, "warehouse_new.html", changeset: warehouse_changeset)
+    end
+  end
+
+  def delete_warehouse(conn, _opts) do
+    warehouses = Warehouses.list()
+    render(conn, "warehouse_index.html", warehouses: warehouses)
   end
 
 end

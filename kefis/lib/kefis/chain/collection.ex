@@ -8,9 +8,10 @@ defmodule Kefis.Chain.Collection do
     field :status, :string
 
     has_many :dispatch_details, Kefis.Chain.DispatchDetails
-    has_one :order_details, Kefis.Chain.OrderDetail
+
 
     belongs_to :driver, Kefis.Chain.Driver
+    belongs_to :order_detail, Kefis.Chain.OrderDetail
     belongs_to :partner, Kefis.Chain.Partner
     belongs_to :warehouse, Kefis.Chain.Warehouse
 

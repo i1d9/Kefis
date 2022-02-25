@@ -9,20 +9,24 @@ defmodule Kefis.Warehouses do
   end
 
   def create(details) do
-
+    %Warehouse{}
+    |> Warehouse.changeset(details)
+    |> Repo.insert()
   end
 
 
-  def delete(details) do
-
+  def delete(%Warehouse{} = warehouse) do
+    Repo.delete(warehouse)
   end
 
 
-  def update(details) do
-
+  def update(%Warehouse{} = warehouse, details) do
+    warehouse
+    |> Warehouse.changeset(details)
+    |> Repo.update()
   end
 
   def show(id) do
-    
+
   end
 end

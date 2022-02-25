@@ -4,10 +4,11 @@ defmodule Kefis.Chain.Driver do
 
   schema "drivers" do
     field :vehicle, :string
-    field :trips, :integer
+    field :trips, :integer, default: 0
     belongs_to :user, Kefis.Users.User
     has_many :dispatches, Kefis.Chain.Dispatch
-    
+    has_many :collections, Kefis.Chain.Collection
+
     timestamps()
   end
 

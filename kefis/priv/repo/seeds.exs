@@ -150,21 +150,63 @@ order_detail = %{
 }
 
 #Build Relaionships
-order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
+order_detail = OrderDetail.changeset(%OrderDetail{}, order_detail)
 |> Ecto.Changeset.put_assoc(:product, order_detail_product)
 |> Ecto.Changeset.put_assoc( :partner, order_detail_supplier)
 |> Ecto.Changeset.put_assoc( :order, order)
 |> Repo.insert!()
 
 
+#Create a Driver User Account
+driver_user = %{
+  first_name: "User",
+  second_name: "Three",
+  phone: "254772327411",
+  email: "userthree@gmail.com",
+  role: "driver",
+  password: "userthree@gmail.com",
+  password_confirmation: "userthree@gmail.com"}
+
+driver_user = User.admin_changeset(%User{}, driver_user)
+driver_user = Repo.insert!(driver_user)
+
+driver_details = %{
+  vehicle: "KBT124BH",
+  trips: 0
+}
+
+driver = driver_user
+  |> Ecto.build_assoc(:driver)
+  |> Driver.changeset(driver_details)
+  |> Repo.insert!()
 
 
+#Create Warehouse
 warehouse_details = %{
   location_name: "Madaraka",
   lng: -123.32,
   lat: 32.2
-
 }
 
 warehouse_changeset = Warehouse.changeset(%Warehouse{}, warehouse_details)
-Repo.insert!(warehouse_changeset)
+warehouse = Repo.insert!(warehouse_changeset)
+
+
+collection_details = %{
+  status: "initialised",
+  value: 4000
+}
+
+"""
+
+collection = Collection.changeset(%Collection{}, collection_details)
+  |> Ecto.Changeset.put_assoc(:driver, driver)
+  |> Ecto.Changeset.put_assoc(:partner, supplier)
+  |> Ecto.Changeset.put_assoc(:warehouse, warehouse)
+  |> Ecto.Changeset.put_assoc(:order_detail, order_detail)
+  |> Repo.insert!()
+
+collection_changeset = Collection.changeset(%Collection{}, collection_details)
+
+
+"""

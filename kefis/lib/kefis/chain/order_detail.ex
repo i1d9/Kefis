@@ -6,7 +6,9 @@ defmodule Kefis.Chain.OrderDetail do
     belongs_to :partner, Kefis.Chain.Partner
     belongs_to :product, Kefis.Chain.Product
     belongs_to :order, Kefis.Chain.Order
-    belongs_to :collection, Kefis.Chain.Collection
+
+    has_one :collection, Kefis.Chain.Collection
+    
     field :quantity, :integer
     field :status, :string
     field :price, :integer
