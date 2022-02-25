@@ -155,3 +155,16 @@ order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
 |> Ecto.Changeset.put_assoc( :partner, order_detail_supplier)
 |> Ecto.Changeset.put_assoc( :order, order)
 |> Repo.insert!()
+
+
+
+
+warehouse_details = %{
+  location_name: "Madaraka",
+  lng: -123.32,
+  lat: 32.2
+
+}
+
+warehouse_changeset = Warehouse.changeset(%Warehouse{}, warehouse_details)
+Repo.insert!(warehouse_changeset)

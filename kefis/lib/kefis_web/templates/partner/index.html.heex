@@ -59,11 +59,17 @@
                             <div class="d-sm-none">
                                 <h2 class="h5">Products</h2>
                                 <h3 class="fw-extrabold mb-1">0</h3>
+                                                      
+    <%= link "Products", to: Routes.partner_path(@conn, :list_partner_products), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+          
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
-                                <h2 class="h6 text-gray-400 mb-0">Products</h2>
+                                
+                                                         
+    <%= link "Products", to: Routes.partner_path(@conn, :list_partner_products), class: "h6 text-gray-400 mb-0" %>
+          
                                 <h3 class="fw-extrabold mb-2">0</h3>
                             </div>
                             

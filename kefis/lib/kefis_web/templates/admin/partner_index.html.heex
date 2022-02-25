@@ -7,9 +7,6 @@
 <%= render( "dashboard_upper_nav.html", conn: @conn)  %>
 <%= render( "dashboard_description.html", dashboard_page_title: "Available Partners", dashboard_page_description: "A list of all partners on the platform") %>
  
-
-
-
     <div class="py-4">
     
     <%= link "New Partner", to: Routes.admin_path(@conn, :new_partner), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
@@ -50,9 +47,7 @@
              <td>0</td>
 
       <td>
-        <span><%= link "Show", to: Routes.partner_path(@conn, :show, partner) %></span>
-        <span><%= link "Edit", to: Routes.partner_path(@conn, :edit, partner) %></span>
-        <span><%= link "Delete", to: Routes.partner_path(@conn, :delete, partner), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      
       </td>
     </tr>
 <% end %>

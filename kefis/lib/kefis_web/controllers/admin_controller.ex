@@ -6,6 +6,8 @@ defmodule KefisWeb.AdminController do
   alias Kefis.Chain.Partner
   alias Kefis.Users.User
   alias Kefis.Partners
+  alias Kefis.Chain.Warehouse
+  alias Kefis.Warehouses
 
 
   def index(conn, _opts) do
@@ -101,6 +103,24 @@ defmodule KefisWeb.AdminController do
     conn
     |> put_flash(:info, "Partner deleted successfully.")
     |> redirect(to: Routes.admin_path(conn, :list_partners))
+  end
+
+  @doc """
+  Warehouse Actions
+  """
+  def list_warehouse(conn, _opts) do
+    warehouses = Warehouses.list()
+    render(conn, "warehouse_index.html", warehouses: warehouses)
+  end
+
+  def new_warehouse(conn, _opts) do
+    warehouse_changeset = Warehouse.changeset(%Warehouse{}, %{})
+    render(conn, "index.html", changeset: warehouse_changeset)
+  end
+
+  @spec create_warehouse(Plug.Conn.t(), any) :: Plug.Conn.t()
+  def create_warehouse(conn, _opts) do
+    render(conn, "index.html")
   end
 
 end

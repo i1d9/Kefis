@@ -1,10 +1,14 @@
 defmodule Kefis.Products do
   alias Kefis.Chain.Product
+  alias Kefis.Chain.Partner
   alias Kefis.Repo
-
+  import Ecto.Query, only: [from: 2]
 
   def list_partner_products(supplier) do
-    Repo.all(Product)
+
+    IO.inspect(supplier.id)
+    query = from po in Product, where: po.partner_id == ^supplier.id
+    Repo.all(query)
   end
 
   def create(supplier, details) do

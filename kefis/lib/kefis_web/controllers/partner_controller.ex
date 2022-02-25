@@ -125,6 +125,8 @@ defmodule KefisWeb.PartnerController do
 
   def list_partner_products(conn, _opts) do
     products = Products.list_partner_products(conn.assigns.current_user.partner)
+
+    IO.inspect(products)
     render(conn, "product_list.html", products: products)
   end
 
@@ -179,7 +181,7 @@ defmodule KefisWeb.PartnerController do
 
     conn
     |> put_flash(:info, "Product deleted successfully.")
-    |> redirect(to: Routes.product_path(conn, :index))
+    |> redirect(to: Routes.partner_path(conn, :list_partner_products))
   end
 
 end

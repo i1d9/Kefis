@@ -75,8 +75,12 @@ defmodule KefisWeb.Router do
 
     get "/new/partner/user", AdminController, :new_partner_user
     post "/new/partner/user", AdminController, :create_partner_user
-
     get "/partners", AdminController, :list_partners
+
+
+    get "/warehouse", AdminController, :list_warehouse
+    get "/warehouse/new", AdminController, :new_warehouse
+    post "/warehouse/new", AdminController, :create_warehouse
   end
 
 

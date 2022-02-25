@@ -6,8 +6,11 @@ defmodule Kefis.Chain.Warehouse do
     field :location_name, :string
     field :lng, :float
     field :lat, :float
+
     has_many :dispatches, Kefis.Chain.Dispatch
-    belongs_to :collections, Kefis.Chain.Collection
+    has_many :collections, Kefis.Chain.Collection
+
+    timestamps()
   end
 
   def changeset(warehouse, attrs) do
