@@ -14,6 +14,11 @@ defmodule KefisWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug KefisWeb.ApiAuth, otp_app: :kefis
+  end
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: KefisWeb.ApiAuthErrorHandler
   end
 
   pipeline :protected do
@@ -101,15 +106,35 @@ defmodule KefisWeb.Router do
   end
 
   scope "/r", KefisWeb do
-    pipe_through [:browser, :protected, :admin]
+    pipe_through [:browser, :protected, :retailer]
 
     get "/", RetailerController, :index
   end
 
+
+  scope "/s", KefisWeb do
+    pipe_through [:browser, :protected, :retailer]
+
+    get "/", SupplierController, :index
+  end
+
   # Other scopes may use custom stacks.
-  # scope "/api", KefisWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", KefisWeb do
+    pipe_through :api
+
+    post "/login", SessionController, :api_create, as: :api_login
+
+    delete "/logout", SessionController, :api_delete, as: :api_logout
+    post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api", KefisWeb do
+    pipe_through  [:api, :api_protected]
+
+
+
+    delete "/logout", SessionController, :delete, as: :logout
+  end
 
   # Enables LiveDashboard only for development
   #

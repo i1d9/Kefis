@@ -1,0 +1,13 @@
+POST /api/login
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+    "user":{
+
+         "email": "userone@gmail.com",
+      "password": "userone@gmail.com"
+    }
+
+    
+}

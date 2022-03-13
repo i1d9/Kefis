@@ -4,6 +4,8 @@ defmodule KefisWeb.SessionController do
   alias Kefis.Users.User
   alias KefisWeb.Auth
 
+  alias KefisWeb.ApiAuth
+
   def new(conn, _params) do
     changeset = Pow.Plug.change_user(conn)
 
@@ -40,4 +42,45 @@ defmodule KefisWeb.SessionController do
     |> Pow.Plug.delete()
     |> redirect(to: Routes.page_path(conn, :index))
   end
+
+
+
+  ### API ###
+  def api_create(conn, %{"user" => user_params}) do
+    IO.inspect(user_params)
+    conn
+    |> Pow.Plug.authenticate_user(user_params)
+    |> case do
+      {:ok, conn} ->
+        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
+
+      {:error, conn} ->
+        conn
+        |> put_status(401)
+        |> json(%{error: %{status: 401, message: "Invalid Credentials"}})
+    end
+  end
+
+  def api_renew(conn, _params) do
+    config = Pow.Plug.fetch_config(conn)
+
+    conn
+    |> ApiAuth.renew(config)
+    |> case do
+      {conn, nil} ->
+        conn
+        |> put_status(401)
+        |> json(%{error: %{status: 401, message: "Invalid token"}})
+
+      {conn, _user} ->
+        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
+    end
+  end
+
+  def api_delete(conn, _params) do
+    conn
+    |> Pow.Plug.delete()
+    |> json(%{data: %{}})
+  end
+
 end
