@@ -24,6 +24,7 @@ defmodule KefisWeb do
       import Plug.Conn
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
+      import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
     end
   end
 
@@ -66,6 +67,7 @@ defmodule KefisWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
     end
   end
 

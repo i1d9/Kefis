@@ -198,18 +198,18 @@ collection_details = %{
 }
 
 collection = Collection.changeset(%Collection{}, collection_details)
-|> Ecto.Changeset.put_assoc( :driver, driver)
-|> Ecto.Changeset.put_assoc( :partner, supplier)
-|> Ecto.Changeset.put_assoc( :warehouse, warehouse)
-|> Ecto.Changeset.put_assoc( :order_detail, order_detail)
-|> Repo.insert!()
+  |> Ecto.Changeset.put_assoc( :driver, driver)
+  |> Ecto.Changeset.put_assoc( :partner, supplier)
+  |> Ecto.Changeset.put_assoc( :warehouse, warehouse)
+  |> Ecto.Changeset.put_assoc( :order_detail, order_detail)
+  |> Repo.insert!()
 
 data_dispatch = %{
   status: "Initialised"
 }
 
 dispatch = Dispatch.changeset(%Dispatch{}, data_dispatch)
-|> Ecto.Changeset.put_assoc( :driver, driver)
-|> Ecto.Changeset.put_assoc( :order, order_result)
-|> Ecto.Changeset.put_assoc( :warehouse, warehouse)
-|> Repo.insert!()
+  |> Ecto.Changeset.put_assoc( :driver, driver)
+  |> Ecto.Changeset.put_assoc( :order, order_result)
+  |> Ecto.Changeset.put_assoc( :warehouse, warehouse)
+  |> Repo.insert!()

@@ -9,6 +9,7 @@ defmodule KefisWeb.Router do
     plug :put_root_layout, {KefisWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug KefisWeb.TestAuth
   end
 
   pipeline :api do
@@ -97,10 +98,12 @@ defmodule KefisWeb.Router do
     get "/partners/products/:id/edit", PartnerController, :edit_product
     delete "/partners/products/:id/delete", PartnerController, :delete_product
 
+  end
 
+  scope "/r", KefisWeb do
+    pipe_through [:browser, :protected, :admin]
 
-
-
+    get "/", RetailerController, :index
   end
 
   # Other scopes may use custom stacks.

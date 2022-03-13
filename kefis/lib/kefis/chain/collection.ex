@@ -7,13 +7,11 @@ defmodule Kefis.Chain.Collection do
     field :value, :integer
     field :status, :string
 
-    has_many :dispatch_details, Kefis.Chain.DispatchDetails
-
-
     belongs_to :driver, Kefis.Chain.Driver
     belongs_to :order_detail, Kefis.Chain.OrderDetail
     belongs_to :partner, Kefis.Chain.Partner
     belongs_to :warehouse, Kefis.Chain.Warehouse
+    belongs_to :dispatch, Kefis.Chain.Dispatch
 
     timestamps()
 

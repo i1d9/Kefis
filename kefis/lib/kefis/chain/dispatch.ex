@@ -6,9 +6,11 @@ defmodule Kefis.Chain.Dispatch do
 
     belongs_to :warehouse, Kefis.Chain.Warehouse
     belongs_to :driver, Kefis.Chain.Driver
-    belongs_to :orders, Kefis.Chain.Order
-    
+    belongs_to :order, Kefis.Chain.Order
+
     has_many :dispatch_details, Kefis.Chain.DispatchDetails
+    has_many :collections, Kefis.Chain.Collection
+
     field :status, :string
 
   end

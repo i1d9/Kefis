@@ -7,7 +7,6 @@ defmodule Kefis.Repo.Migrations.AddDispatch do
       add :warehouse_id, references(:warehouses)
       add :driver_id, references(:drivers)
       add :status, :string
-      
       timestamps()
     end
   end

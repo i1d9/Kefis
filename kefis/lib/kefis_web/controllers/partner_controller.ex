@@ -184,4 +184,25 @@ defmodule KefisWeb.PartnerController do
     |> redirect(to: Routes.partner_path(conn, :list_partner_products))
   end
 
+
+  ### Retailer Actions ###
+
+  def retailer_index(conn, _params) do
+
+  end
+
+  def retailer_show_products(conn, _params) do
+
+  end
+
+  def retailer_order(conn, _params) do
+
+  end
+
+  def retailer_make_order(conn, _params) do
+
+  end
+
+
+  ### Supplier Actions ###
 end

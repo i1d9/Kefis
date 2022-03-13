@@ -24,7 +24,6 @@ defmodule KefisWeb.ReloadUser do
         reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :account])
         Pow.Plug.assign_current_user(conn, reloaded_user, config)
 
-        
     end
   end
 end
