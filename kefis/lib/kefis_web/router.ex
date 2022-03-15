@@ -113,7 +113,7 @@ defmodule KefisWeb.Router do
 
 
   scope "/s", KefisWeb do
-    pipe_through [:browser, :protected, :retailer]
+    pipe_through [:browser, :protected, :supplier]
     #pipe_through [:browser]
 
     get "/", SupplierController, :index

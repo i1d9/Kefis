@@ -13,6 +13,7 @@ defmodule KefisWeb.SupplierController do
   alias Kefis.Products
 
 
+
   def index(conn, _opts) do
 
     changeset = Product.changeset(%Product{}, %{})
@@ -30,7 +31,7 @@ defmodule KefisWeb.SupplierController do
   end
 
   @doc """
-    case  Products.create(conn.assigns.current_user, product_params) do
+    case Products.create(conn.assigns.current_user, product_params) do
       {:ok, _product} ->
         conn
         |> put_flash(:info, "Product created successfully.")
@@ -44,15 +45,50 @@ defmodule KefisWeb.SupplierController do
     if upload = product_params["image"] do
       extension = Path.extname(upload.filename)
       #String.replace("Ian Nalyanya", " ", "_")
-      upload_destination = Path.join(Kefis.product_uploads_priv_dir(), "#{upload.filename}")
+
       File.cp(upload.path, upload_destination)
     end
   """
   def create_product(conn, %{"product" => product_params}) do
-    IO.inspect(product_params)
 
-    redirect(conn, to: Routes.supplier_path(conn, :index))
+    logged_user = Repo.get!(User, conn.assigns.current_user.id) |> Repo.preload([:partner])
 
+
+    if upload = product_params["image"] do
+      extension = Path.extname(upload.filename)
+      image_name = "#{String.replace(product_params["name"], " ", "_")}#{extension}"
+      updated_product_params = Map.put(product_params, "image", image_name)
+
+
+      case  Products.create(logged_user.partner, updated_product_params) do
+        {:ok, product} ->
+          IO.inspect(product.name)
+
+          upload_destination = Path.join(Kefis.product_uploads_priv_dir(), product.image)
+          File.cp(upload.path, upload_destination)
+
+          conn
+          |> put_flash(:info, "Product created successfully.")
+          |> redirect(to: Routes.supplier_path(conn, :index))
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          IO.inspect(changeset)
+          render(conn, "product_new.html", changeset: changeset)
+      end
+
+    else
+
+
+      product_changest = Product.changeset(%Product{}, product_params)
+
+      changeset = Ecto.Changeset.add_error(product_changest, :image, "Can't be blank")
+
+      IO.inspect(changeset)
+      conn
+      |> put_flash(:error, "No image selected")
+      |> render("product_new.html", changeset: changeset)
+
+    end
 
   end
 
