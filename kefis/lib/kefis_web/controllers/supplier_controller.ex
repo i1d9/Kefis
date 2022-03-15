@@ -62,7 +62,7 @@ defmodule KefisWeb.SupplierController do
 
       case  Products.create(logged_user.partner, updated_product_params) do
         {:ok, product} ->
-          IO.inspect(product.name)
+          IO.inspect(product)
 
           upload_destination = Path.join(Kefis.product_uploads_priv_dir(), product.image)
           File.cp(upload.path, upload_destination)

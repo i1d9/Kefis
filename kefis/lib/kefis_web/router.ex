@@ -109,6 +109,7 @@ defmodule KefisWeb.Router do
     pipe_through [:browser]
 
     get "/", RetailerController, :index
+    live "/order/new", Retailer.NewOrderLive
   end
 
 

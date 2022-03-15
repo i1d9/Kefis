@@ -1,0 +1,31 @@
+<h1>New Order</h1>
+
+
+
+
+<input type="text" placeholder="Search" phx-change="type_search" phx-debounce="blur"/>
+<button phx-click="search_click">Save</button>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Unit price</th>
+      <th>Sku</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="products">
+    <%= for product <- @products do %>
+      <tr id={"product-#{product.id}"}>
+        <td><%= product.name %></td>
+        
+        <td><%= product.price %></td>
+        <td><%= product.sku %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
