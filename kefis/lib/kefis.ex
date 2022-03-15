@@ -6,4 +6,10 @@ defmodule Kefis do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
+
+
+  def product_uploads_priv_dir do
+    Path.join([:code.priv_dir(:kefis), "static", "uploads", "products"])
+  end
+
 end

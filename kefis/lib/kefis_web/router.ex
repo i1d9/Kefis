@@ -9,7 +9,6 @@ defmodule KefisWeb.Router do
     plug :put_root_layout, {KefisWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug KefisWeb.TestAuth
   end
 
   pipeline :api do
@@ -106,7 +105,8 @@ defmodule KefisWeb.Router do
   end
 
   scope "/r", KefisWeb do
-    pipe_through [:browser, :protected, :retailer]
+    #pipe_through [:browser, :protected, :retailer]
+    pipe_through [:browser]
 
     get "/", RetailerController, :index
   end
@@ -114,8 +114,10 @@ defmodule KefisWeb.Router do
 
   scope "/s", KefisWeb do
     pipe_through [:browser, :protected, :retailer]
+    #pipe_through [:browser]
 
     get "/", SupplierController, :index
+    post "/", SupplierController, :create_product
   end
 
   # Other scopes may use custom stacks.

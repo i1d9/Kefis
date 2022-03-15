@@ -1,0 +1,9 @@
+
+  <img src={Routes.static_path(@conn, "/uploads/Screenshot from 2022-03-04 14-59-30.png")} class="img-fluid" />
+    
+    
+<h1>New Product</h1>
+
+<%= render "product_form.html", Map.put(assigns, :action, Routes.supplier_path(@conn, :create_product)) %>
+
+<span><%= link "Back", to: Routes.product_path(@conn, :index) %></span>

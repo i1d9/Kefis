@@ -14,8 +14,12 @@ defmodule KefisWeb.SupplierController do
 
 
   def index(conn, _opts) do
-    text conn, "Hello"
+
+    changeset = Product.changeset(%Product{}, %{})
+    render(conn, "product_new.html", changeset: changeset)
   end
+
+
 
   def list_partner_products(conn, _opts) do
 
@@ -25,7 +29,30 @@ defmodule KefisWeb.SupplierController do
 
   end
 
+  @doc """
+    case  Products.create(conn.assigns.current_user, product_params) do
+      {:ok, _product} ->
+        conn
+        |> put_flash(:info, "Product created successfully.")
+        |> redirect(to: Routes.partner_path(conn, :list_partner_products))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new_product.html", changeset: changeset)
+    end
+
+
+    if upload = product_params["image"] do
+      extension = Path.extname(upload.filename)
+      #String.replace("Ian Nalyanya", " ", "_")
+      upload_destination = Path.join(Kefis.product_uploads_priv_dir(), "#{upload.filename}")
+      File.cp(upload.path, upload_destination)
+    end
+  """
   def create_product(conn, %{"product" => product_params}) do
+    IO.inspect(product_params)
+
+    redirect(conn, to: Routes.supplier_path(conn, :index))
+
 
   end
 
