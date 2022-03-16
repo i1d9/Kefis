@@ -9,7 +9,7 @@ defmodule Kefis.Products do
     Repo.all(Product)
   end
 
-  def list_product(product_name) do
+  def search_product(product_name) do
     query = from p in Product, where: ilike(p.name, ^"%#{product_name}%")
     Repo.all(query)
   end
@@ -32,5 +32,9 @@ defmodule Kefis.Products do
     details
   end
 
+  def find(id) do
+    Repo.get(Product, id)
+    |> Repo.preload([:partner])
+  end
 
 end

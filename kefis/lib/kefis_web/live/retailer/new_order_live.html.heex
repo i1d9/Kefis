@@ -1,31 +1,51 @@
 <h1>New Order</h1>
 
 
+<%= live_patch "next", to: Routes.live_path(@socket, KefisWeb.Retailer.ConfirmOrderLive) %>
 
 
-<input type="text" placeholder="Search" phx-change="type_search" phx-debounce="blur"/>
-<button phx-click="search_click">Save</button>
+<button phx-click="toggle_finished">View Cart</button>
+
+
+ <%= if @finished_selection do%>
+ <%= for selected_product <- @selected_products do %>
+      <tr >
+        <td><%= selected_product.status %></td>
+        <td><%= selected_product.price %></td>
+        <td><%= selected_product.quantity %></td>
+                <td><%= selected_product.product.id %></td>
+        
+      </tr>
+    <% end %>
+
+  <% else %>
+   <%= form_for :search, "#", [phx_change: "type_search"], fn f -> %>
+      
+      <%= text_input f, :product_name, placeholder: "What do you want to order?" %>
+    
+    <% end %>
+
+
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
-      <th>Unit price</th>
-      <th>Sku</th>
+      <th>Price</th>
+      <th>SKU</th>
 
-      <th></th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody id="products">
     <%= for product <- @products do %>
       <tr id={"product-#{product.id}"}>
         <td><%= product.name %></td>
-        
         <td><%= product.price %></td>
         <td><%= product.sku %></td>
-
-
+        <td><button phx-click="product_click" value={"#{product.id}"}>Add</button></td>
+        
       </tr>
     <% end %>
   </tbody>
 </table>
+  <% end %>

@@ -110,6 +110,7 @@ defmodule KefisWeb.Router do
 
     get "/", RetailerController, :index
     live "/order/new", Retailer.NewOrderLive
+    live "/order/new/confirm", Retailer.ConfirmOrderLive
   end
 
 
