@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 alias Kefis.{Users.User, Repo, Users, Products}
 alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, DispatchDetails, Order, OrderDetail, Transaction, Warehouse}
+alias Ecto.Changeset
 
 #Create a Super User Account
 super_user = %{
@@ -151,9 +152,9 @@ order_detail = %{
 
 #Build Relaionships
 order_detail = OrderDetail.changeset(%OrderDetail{}, order_detail)
-|> Ecto.Changeset.put_assoc(:product, order_detail_product)
-|> Ecto.Changeset.put_assoc( :partner, order_detail_supplier)
-|> Ecto.Changeset.put_assoc( :order, order)
+|> Changeset.put_assoc(:product, order_detail_product)
+|> Changeset.put_assoc( :partner, order_detail_supplier)
+|> Changeset.put_assoc( :order, order)
 |> Repo.insert!()
 
 
@@ -213,3 +214,44 @@ dispatch = Dispatch.changeset(%Dispatch{}, data_dispatch)
   |> Ecto.Changeset.put_assoc( :order, order_result)
   |> Ecto.Changeset.put_assoc( :warehouse, warehouse)
   |> Repo.insert!()
+
+
+
+order = Repo.get(Order, 1)
+
+order_detail_info = %{price: 50, quantity: 5000, status: "done"}
+order_detail = Repo.get(Order, 1)
+  |> Ecto.Changeset.change(, order_detail_info)
+  |> Ecto.build_assoc(:order_details)
+  |> Repo.insert!()
+
+
+def add_detail_to_order(order) do
+  order_detail_info = %{price: 50, quantity: 5000, status: "done"}
+  order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail_info)
+  order_detail_changeset = Ecto.Changeset.change(order_detail_changeset)
+  order_detail_changeset = Ecto.Changeset.put_assoc(order_detail_changeset, :order, order)
+  order_detail = Repo.insert(order_detail_changeset)
+  order_detail_info = %{price: 50, quantity: 5000, status: "done"}
+  order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail_info)
+  order_detail = Repo.insert(order_detail_changeset)
+end
+
+
+order_detail_info = %{price: 50, quantity: 5000, status: "done"}
+order_detail_info_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail_info)
+order_info = %{value: 5000, status: "shjfd"}
+order_changeset = Order.changeset(%Order{}, order_info)
+order_changeset= Ecto.Changeset.change(order_changeset)
+#order_changeset = Ecto.Changeset.put_assoc(order_changeset, :order_details, [order_detail_info, order_detail_info, order_detail_info])
+order_detail_info_changeset = Changeset.put_assoc(order_detail_info_changeset, :product, product)
+order_detail_info_changeset = Changeset.put_assoc(order_detail_info_changeset, :partner, partner)
+order_changeset = Ecto.Changeset.put_assoc(order_changeset, :order_details, [order_detail_info_changeset])
+
+
+partner = Repo.get(Partner, 1)
+product = Repo.get(Product, 1)
+order_detail = %{status: "lol", quantity: 34, price: 323}
+order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
+order_detail_changeset = Changeset.put_assoc(order_detail_changeset, :product, product)
+order_detail_changeset = Changeset.put_assoc(order_detail_changeset, :partner, partner)
