@@ -18,6 +18,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     |> validate_format(:search_phrase, ~r/[A-Za-z0-9\ ]/)
   end
 
+  @impl true
   def mount(_params, _session, socket) do
     products = Products.list_products()
 
@@ -37,7 +38,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   end
 
   @impl true
-  def handle_event("toggle_finished", value, %{assigns: %{finished_selection: finished_selection, }} = socket) do
+  def handle_event("toggle_finished", _value, %{assigns: %{finished_selection: finished_selection, }} = socket) do
     {:noreply, assign(socket, :finished_selection, !finished_selection) }
   end
 
@@ -52,7 +53,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     order_detail = %{
       status: "initiated",
       price: 10,
-      quantity: 500,
+      quantity: 1,
       product: product_details
     }
     #Add Product IDS to the list

@@ -1,23 +1,33 @@
 <h1>New Order</h1>
 
-
-<%= live_patch "next", to: Routes.live_path(@socket, KefisWeb.Retailer.ConfirmOrderLive) %>
-
-
 <button phx-click="toggle_finished">View Cart</button>
 
 
  <%= if @finished_selection do%>
- <%= for selected_product <- @selected_products do %>
-      <tr >
-        <td><%= selected_product.status %></td>
+ 
+
+<table>
+<thead>
+<th>Name</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Add</th>
+<th>Sub</th>
+<th>Delete</th>
+
+</thead>
+<tbody>
+
+<%= for selected_product <- @selected_products do %>
+      <tr>
+        <td><%= selected_product.product.name %></td>
         <td><%= selected_product.price %></td>
         <td><%= selected_product.quantity %></td>
         <td><%= selected_product.product.id %></td>
-        
       </tr>
     <% end %>
-
+</tbody>
+</table>
   <% else %>
    <%= form_for :search, "#", [phx_change: "type_search"], fn f -> %>
       
@@ -49,3 +59,5 @@
   </tbody>
 </table>
   <% end %>
+
+  <%= live_patch "next", to: Routes.live_path(@socket, KefisWeb.Retailer.ConfirmOrderLive) %>
