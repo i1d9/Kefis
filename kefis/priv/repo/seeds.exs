@@ -255,3 +255,5 @@ order_detail = %{status: "lol", quantity: 34, price: 323}
 order_detail_changeset = OrderDetail.changeset(%OrderDetail{}, order_detail)
 order_detail_changeset = Changeset.put_assoc(order_detail_changeset, :product, product)
 order_detail_changeset = Changeset.put_assoc(order_detail_changeset, :partner, partner)
+
+Enum.find(products, fn map -> Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end) end)

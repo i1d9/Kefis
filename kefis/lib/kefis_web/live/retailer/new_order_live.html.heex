@@ -5,7 +5,6 @@
 
  <%= if @finished_selection do%>
  
-
 <table>
 <thead>
 <th>Name</th>
@@ -18,12 +17,16 @@
 </thead>
 <tbody>
 
-<%= for selected_product <- @selected_products do %>
+<%= for {selected_product, index} <- Enum.with_index(@selected_products) do %>
       <tr>
         <td><%= selected_product.product.name %></td>
         <td><%= selected_product.price %></td>
         <td><%= selected_product.quantity %></td>
-        <td><%= selected_product.product.id %></td>
+        <td><button phx-click="add" value={"#{index}"}>Add</button></td>
+        <td><button phx-click="sub" value={"#{index}"}>Sub</button></td>
+        <td><button phx-click="del" value={"#{index}"}>Del</button></td>
+       
+       
       </tr>
     <% end %>
 </tbody>

@@ -5,18 +5,6 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   alias Kefis.Products
   import Ecto.Changeset
 
-  @types %{search_phrase: :string}
-  defp search_changeset(attrs \\ %{}) do
-    cast(
-      {%{}, @types},
-      attrs,
-      [:search_phrase]
-    )
-    |> validate_required([:search_phrase])
-    |> update_change(:search_phrase, &String.trim/1)
-    |> validate_length(:search_phrase, min: 2)
-    |> validate_format(:search_phrase, ~r/[A-Za-z0-9\ ]/)
-  end
 
   @impl true
   def mount(_params, _session, socket) do
@@ -45,9 +33,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   @impl true
   def handle_event("product_click", %{"value" => value}, %{assigns: %{selected_products: selected_products, }} = socket) do
 
-
     IO.inspect(selected_products)
-
     product_details = Products.find(value)
 
     order_detail = %{
@@ -63,6 +49,43 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     |> assign(:selected_products, selected_products)
     }
 
+  end
+
+
+  def handle_event("add", value, %{assigns: %{selected_products: selected_products, }} = socket) do
+    new_selected_products = List.replace_at([1, 2, 4, 5], 0, 1)
+    IO.inspect(new_selected_products)
+
+    IO.inspect(value)
+
+    {:noreply,
+    socket
+    |> assign(:lol, "nm")}
+  end
+
+  def handle_event("sub", value, socket) do
+    new_selected_products = List.replace_at([1, 2, 4, 5], 0, 1)
+    IO.inspect(new_selected_products)
+
+
+    IO.inspect(value)
+    {:noreply,
+    socket
+    }
+  end
+
+  def handle_event("del", %{"value" => value}, %{assigns: %{selected_products: selected_products, }} = socket) do
+    #Remove item
+    result = List.pop_at(selected_products, String.to_integer(value))
+    IO.inspect(result)
+
+    new_selected_products = elem(result, 1)
+
+
+    {:noreply,
+    socket
+    |> assign(:selected_products, new_selected_products)
+    }
   end
 
 end

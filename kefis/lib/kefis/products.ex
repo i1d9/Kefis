@@ -37,4 +37,10 @@ defmodule Kefis.Products do
     |> Repo.preload([:partner])
   end
 
+  def get_by(params) do
+    Enum.find Repo.all(Products), fn map ->
+        Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
+    end
+  end
+
 end
