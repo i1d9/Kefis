@@ -52,7 +52,9 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     |> Changeset.put_assoc(:partner, product_details.partner)
 
     #Add Product IDS to the list
-    selected_products = List.insert_at(selected_products, -1, order_detail)
+    selected_products = List.insert_at(selected_products, -1, order_detail_changeset)
+
+    IO.inspect(selected_products)
     {:noreply,
     socket
     |> assign(:selected_products, selected_products)
@@ -62,41 +64,37 @@ defmodule KefisWeb.Retailer.NewOrderLive do
 
 
   def handle_event("add", %{"value" => value}, %{assigns: %{selected_products: selected_products, }} = socket) do
+    {_status, product} = Enum.fetch(selected_products, String.to_integer(value))
 
-    result = Enum.fetch(selected_products, String.to_integer(value))
-    product = elem(result, 1)
-
-    new_product = Map.update(product, :quantity, 1, fn existing_value -> existing_value + 1 end)
-    new_selected_products = List.replace_at(selected_products,  String.to_integer(value), new_product)
+    order_detail_changeset = Ecto.Changeset.update_change(product, :quantity, &(&1 + 1))
+      new_selected_products = List.replace_at(selected_products,  String.to_integer(value), order_detail_changeset)
 
     {:noreply,
-    socket
-    |> assign(:selected_products, new_selected_products)
+      socket
+      |> assign(:selected_products, new_selected_products)
     }
   end
 
   def handle_event("sub", %{"value" => value}, %{assigns: %{selected_products: selected_products, }} = socket) do
-    result = Enum.fetch(selected_products, String.to_integer(value))
-    product = elem(result, 1)
+    {_status, product} = Enum.fetch(selected_products, String.to_integer(value))
 
-    if product.quantity > 1 do
+    IO.inspect(product.changes.quantity)
 
-      new_product = Map.update(product, :quantity, 1, fn existing_value -> existing_value - 1 end)
-      new_selected_products = List.replace_at(selected_products,  String.to_integer(value), new_product)
+    if product.changes.quantity > 1 do
+      order_detail_changeset = Ecto.Changeset.update_change(product, :quantity, &(&1 - 1))
+      new_selected_products = List.replace_at(selected_products,  String.to_integer(value), order_detail_changeset)
 
       {:noreply,
       socket
       |> assign(:selected_products, new_selected_products)
       }
-
     else
-
       {:noreply,
       socket
       |> assign(:selected_products, selected_products)
       }
-
     end
+
 
 
   end
