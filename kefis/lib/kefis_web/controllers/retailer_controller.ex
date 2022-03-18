@@ -4,6 +4,7 @@ defmodule KefisWeb.RetailerController do
   alias Kefis.Chain
   alias Kefis.Chain.Partner
   alias Kefis.Chain.Product
+  alias Kefis.Orders
 
 
   def index(conn, _params) do
@@ -19,8 +20,13 @@ defmodule KefisWeb.RetailerController do
     })
   end
 
-  def make_order(conn, _params) do
+  
 
+  def show_order(conn, %{"id" => id}) do
+    order = Orders.get_order!(id)
+    live_render(conn, KefisWeb.Retailer.ConfirmOrderLive, session: %{
+      "order" => order
+    })
   end
 
 

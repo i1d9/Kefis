@@ -68,4 +68,4 @@
 </table>
   <% end %>
 
-  <%= live_patch "next", to: Routes.live_path(@socket, KefisWeb.Retailer.ConfirmOrderLive) %>
+  <%= live_patch "next", to: Routes.live_path(@socket, KefisWeb.Retailer.ConfirmOrderLive, order: 1) %>

@@ -82,7 +82,7 @@ defmodule KefisWeb.AdminController do
       {:ok, partner} ->
         conn
         |> put_flash(:info, "Partner updated successfully.")
-        |> redirect(to: Routes.partner_path(conn, :show, partner))
+        |> redirect(to: Routes.partner_path(:show, partner))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", partner: partner, changeset: changeset)

@@ -5,21 +5,24 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   alias Kefis.Products
   alias Kefis.Chain.OrderDetail
   alias Kefis.Chain.Order
+  alias Kefis.Orders
   alias Ecto.Changeset
   alias Kefis.Repo
-  alias Kefis.Chain.Partner
+  alias KefisWeb.Retailer.ConfirmOrderLive
+
 
   @impl true
-  def mount(_params, %{"current_user" => current_user} = _session, socket) do
+  def mount(_params, %{"current_user" => user} = _session, socket) do
 
     products = Products.list_products()
-
+    current_user = user |> Repo.preload([:partner, :account])
     {:ok,
     socket
     |> assign(:user, current_user)
     |> assign(:total, 0)
     |> assign(:finished_selection, false)
     |> assign(:selected_products, [])
+    |> assign(:selected_products_id, [])
     |> assign(:products, products)}
   end
 
@@ -38,9 +41,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   @impl true
   def handle_event("product_click", %{"value" => value}, %{assigns: %{selected_products: selected_products, total: total}} = socket) do
 
-
     product_details = Products.find(value)
-
 
     new_total = 1 * product_details.price + total
     order_detail = %{status: "initiated", quantity: 1, price: product_details.price}
@@ -49,8 +50,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     |> Changeset.put_assoc(:partner, product_details.partner)
 
     #Add Product IDS to the list
-    selected_products = List.insert_at(selected_products, -1, order_detail_changeset)
-
+    selected_products = Enum.uniq(List.insert_at(selected_products, -1, order_detail_changeset))
 
     {:noreply,
     socket
@@ -110,20 +110,28 @@ defmodule KefisWeb.Retailer.NewOrderLive do
     }
   end
 
-  def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total}} = socket) do
-    retailer = Repo.get(Partner, 1)
-    order_info = %{value: total, status: "Initiatied"}
-    order = Order.changeset(%Order{}, order_info)
-      |> Ecto.Changeset.change()
-      |> Ecto.Changeset.put_assoc(:order_details, selected_product_changesets)
-      |> Ecto.Changeset.put_assoc(:partner, retailer)
-      |> Repo.insert()
+  def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
 
-    IO.inspect(order)
-    {:noreply,
-    socket
-    |> assign(:selected_products, selected_product_changesets)
-    }
+    order_info = %{value: total, status: "Initiatied"}
+    case Orders.retailer_new_order(order_info, user, selected_product_changesets) do
+      {:ok, order} ->
+
+
+        {:noreply,
+        socket
+        |> redirect(to: Routes.retailer_path(socket, :show_order, order.id))
+        }
+
+
+      {:error, _changeset} ->
+        {:noreply,
+        socket
+        |> assign(:selected_products, selected_product_changesets)
+        }
+
+    end
+
+
   end
 
 end

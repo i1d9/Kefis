@@ -110,8 +110,10 @@ defmodule KefisWeb.Router do
 
     get "/", RetailerController, :index
     get "/order/new", RetailerController, :order
-    #live "/order/new", Retailer.NewOrderLive
-    live "/order/new/confirm", Retailer.ConfirmOrderLive
+
+    get "/order/:id", RetailerController, :show_order
+
+    live "/order/info", Retailer.ConfirmOrderLive
   end
 
 
@@ -135,9 +137,6 @@ defmodule KefisWeb.Router do
 
   scope "/api", KefisWeb do
     pipe_through  [:api, :api_protected]
-
-
-
     delete "/logout", SessionController, :delete, as: :logout
   end
 
