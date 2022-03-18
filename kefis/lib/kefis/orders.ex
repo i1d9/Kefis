@@ -2,6 +2,7 @@ defmodule Kefis.Orders do
 
   alias Kefis.Chain.{Order, OrderDetail}
   alias Kefis.Repo
+  import Ecto.Query, only: [from: 2]
 
 
   def get_order!(id), do: Repo.get!(Order, id) |> Repo.preload([order_details: [:product, :partner]])
@@ -54,5 +55,11 @@ defmodule Kefis.Orders do
       |> Ecto.Changeset.put_assoc(:order_details, selected_product_changesets)
       |> Ecto.Changeset.put_assoc(:partner, user.partner)
       |> Repo.insert()
+  end
+
+
+  def supplier_order(supplier, status \\ "initiated") do
+    query = from ord in OrderDetail, join: p in assoc(ord, :partner), where: p.id == 1, where: ord.status == ^status
+    Repo.all(query)
   end
 end
