@@ -9,7 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Kefis.{Users.User, Repo, Users, Products}
+alias Kefis.{Users.User, Repo, Users, Products, Accounts}
 alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, DispatchDetails, Order, OrderDetail, Transaction, Warehouse}
 alias Ecto.Changeset
 

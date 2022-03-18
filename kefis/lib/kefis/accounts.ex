@@ -12,7 +12,7 @@ defmodule Kefis.Accounts do
 
 
   def deposit(%Account{} = account, amount) do
-    Account.changeset(account, %{amount: account.balance + amount})
+    Account.changeset(account, %{balance: account.balance + amount})
     |> Repo.update()
   end
 
@@ -21,7 +21,7 @@ defmodule Kefis.Accounts do
   end
 
   def withdraw(%Account{} = account, amount) do
-    Account.changeset(account, %{amount: account.balance - amount})
+    Account.changeset(account, %{balance: account.balance - amount})
     |> Repo.update()
   end
 
