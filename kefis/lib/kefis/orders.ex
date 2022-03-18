@@ -4,7 +4,7 @@ defmodule Kefis.Orders do
   alias Kefis.Repo
 
 
-  def get_order!(id), do: Repo.get!(Order, id) |> Repo.preload([:order_details])
+  def get_order!(id), do: Repo.get!(Order, id) |> Repo.preload([order_details: [:product, :partner]])
 
   def all(_module), do: []
 

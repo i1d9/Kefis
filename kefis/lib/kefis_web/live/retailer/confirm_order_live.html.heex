@@ -1,1 +1,51 @@
 <h1>Lmao</h1>
+
+KES <%= @order.value %>
+
+
+<form phx-change="table_filter">
+<select name="filter">
+<option value="reset" selected>Filter</option>
+<option value="name">Name</option>
+<option value="nameD">Name(Desc)</option>
+
+<option value="price">Price</option>
+<option value="priceD">Price(Desc)</option>
+
+<option value="supplier">Supplier</option>
+<option value="supplierD">Supplier(Desc)</option>
+
+<option value="quantity">Quantity</option>
+<option value="quantityD">Quantity(Desc)</option>
+</select>
+</form>
+
+<h2>Details</h2>
+
+<table>
+<thead>
+<th phx-click="table_filter" phx-value-="name">
+Name
+ </th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Supplier</th>
+<th phx-click=""> Status</th>
+</thead>
+<tbody>
+    
+<%= for {detail, _index} <- Enum.with_index(@order.order_details) do %>
+ 
+ 
+    <tr>
+<td><%= detail.product.name %></td>
+<td><%= detail.price %></td>
+<td><%= detail.quantity %></td>
+<td><%= detail.partner.name %></td>
+<td><%= detail.status %></td>
+
+
+</tr>
+<% end %>
+</tbody>
+</table>
