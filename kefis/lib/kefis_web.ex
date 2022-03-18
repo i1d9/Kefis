@@ -22,6 +22,7 @@ defmodule KefisWeb do
       use Phoenix.Controller, namespace: KefisWeb
 
       import Plug.Conn
+      import Phoenix.LiveView.Controller
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
       import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]

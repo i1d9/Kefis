@@ -40,6 +40,8 @@ defmodule KefisWeb.SessionController do
   def delete(conn, _params) do
     conn
     |> Pow.Plug.delete()
+    |> configure_session(renew: true)
+    |> clear_session()
     |> redirect(to: Routes.page_path(conn, :index))
   end
 

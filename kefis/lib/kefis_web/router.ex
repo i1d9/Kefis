@@ -105,11 +105,12 @@ defmodule KefisWeb.Router do
   end
 
   scope "/r", KefisWeb do
-    #pipe_through [:browser, :protected, :retailer]
-    pipe_through [:browser]
+    pipe_through [:browser, :protected, :retailer]
+    #pipe_through [:browser]
 
     get "/", RetailerController, :index
-    live "/order/new", Retailer.NewOrderLive
+    get "/order/new", RetailerController, :order
+    #live "/order/new", Retailer.NewOrderLive
     live "/order/new/confirm", Retailer.ConfirmOrderLive
   end
 

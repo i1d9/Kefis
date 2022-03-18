@@ -11,8 +11,12 @@ defmodule KefisWeb.RetailerController do
     text conn, "Hello"
   end
 
-  def order(conn, _params) do
+  def order(%{assigns: %{current_user: current_user}}= conn, _params) do
 
+    IO.inspect(current_user)
+    live_render(conn, KefisWeb.Retailer.NewOrderLive, session: %{
+      "current_user" => current_user
+    })
   end
 
   def make_order(conn, _params) do

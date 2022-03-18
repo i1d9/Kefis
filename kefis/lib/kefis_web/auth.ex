@@ -30,7 +30,6 @@ defmodule KefisWeb.Auth do
       user.role == "retailer_admin" ->
         redirect(conn, to: Routes.retailer_path(conn, :index))
       true ->
-        IO.puts("Homepage")
         redirect(conn, to: Routes.page_path(conn, :index))
     end
   end

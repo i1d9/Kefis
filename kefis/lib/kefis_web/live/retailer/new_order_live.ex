@@ -3,7 +3,6 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   use KefisWeb, :live_view
 
   alias Kefis.Products
-  import Ecto.Changeset
   alias Kefis.Chain.OrderDetail
   alias Kefis.Chain.Order
   alias Ecto.Changeset
@@ -11,11 +10,13 @@ defmodule KefisWeb.Retailer.NewOrderLive do
   alias Kefis.Chain.Partner
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"current_user" => current_user} = _session, socket) do
+
     products = Products.list_products()
 
     {:ok,
     socket
+    |> assign(:user, current_user)
     |> assign(:total, 0)
     |> assign(:finished_selection, false)
     |> assign(:selected_products, [])
@@ -95,15 +96,11 @@ defmodule KefisWeb.Retailer.NewOrderLive do
       }
     end
 
-
-
   end
 
   def handle_event("del", %{"value" => value}, %{assigns: %{selected_products: selected_products, total: total}} = socket) do
     #Remove item
     {removed_product, new_selected_products} = List.pop_at(selected_products, String.to_integer(value))
-
-
     new_total = total - (removed_product.changes.quantity * removed_product.changes.price)
 
     {:noreply,
