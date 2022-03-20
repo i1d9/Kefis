@@ -20,13 +20,25 @@ defmodule KefisWeb.RetailerController do
     })
   end
 
-  
+
+
 
   def show_order(conn, %{"id" => id}) do
-    order = Orders.get_order!(id)
-    live_render(conn, KefisWeb.Retailer.ConfirmOrderLive, session: %{
-      "order" => order
-    })
+
+    case Orders.get_order(id) do
+      nil ->
+        conn
+        |> put_flash(:error, "Order not found!")
+        |> redirect(to: Routes.retailer_path(conn, :index))
+
+      order -> live_render(conn, KefisWeb.Retailer.ConfirmOrderLive, session: %{
+        "order" => order
+      })
+    end
+
+
+
+
   end
 
 
