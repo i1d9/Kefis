@@ -20,9 +20,6 @@ defmodule KefisWeb.RetailerController do
     })
   end
 
-
-
-
   def show_order(conn, %{"id" => id}) do
 
     case Orders.get_order(id) do
@@ -35,9 +32,6 @@ defmodule KefisWeb.RetailerController do
         "order" => order
       })
     end
-
-
-
 
   end
 

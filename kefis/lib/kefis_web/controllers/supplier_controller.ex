@@ -7,7 +7,7 @@ defmodule KefisWeb.SupplierController do
   alias Kefis.Users.User
   alias Kefis.Partners
   alias Kefis.Products
-
+  alias Kefis.Orders
   alias Kefis.Chain.Product
   alias Kefis.Repo
   alias Kefis.Products
@@ -16,8 +16,7 @@ defmodule KefisWeb.SupplierController do
 
   def index(conn, _opts) do
 
-    changeset = Product.changeset(%Product{}, %{})
-    render(conn, "product_new.html", changeset: changeset)
+    text conn, "Display Dashboard"
   end
 
 
@@ -27,7 +26,8 @@ defmodule KefisWeb.SupplierController do
   end
 
   def new_product(conn, _opts) do
-
+    changeset = Product.changeset(%Product{}, %{})
+    render(conn, "product_new.html", changeset: changeset)
   end
 
   @doc """
@@ -94,5 +94,30 @@ defmodule KefisWeb.SupplierController do
 
   def delete_product(conn, %{"id" => id}) do
 
+  end
+
+  def my_orders(%{assigns: %{current_user: current_user}}= conn, _params) do
+    live_render(conn, KefisWeb.Supplier.MyOrdersLive, session: %{
+      "current_user" => current_user
+    })
+  end
+
+
+  def show_order_details(%{assigns: %{current_user: current_user}}= conn, %{"id" => id}) do
+
+    user = current_user |> Repo.preload([:partner, :account])
+
+    case Orders.supplier_order_detail(id, user.partner) do
+      nil ->
+        conn
+        |> put_flash(:error, "Order not found")
+        |> redirect(to: Routes.supplier_path(conn, :index))
+      order_detail ->
+        live_render(conn, KefisWeb.Supplier.OrderDetailSummaryLive, session: %{
+          "user" => user,
+          "order_detail" => order_detail,
+        })
+
+    end
   end
 end

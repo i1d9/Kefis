@@ -60,9 +60,24 @@ defmodule Kefis.Orders do
 
 
   def supplier_orders(supplier, status \\ "initiated") do
-    query = from ord in OrderDetail, join: p in assoc(ord, :partner), where: p.id == 1, where: ord.status == ^status
+    query = from ord in OrderDetail, join: p in assoc(ord, :partner), preload: :product, where: p.id == ^supplier.id, where: ord.status == ^status
     Repo.all(query)
   end
 
+
+
+
+  def supplier_order_detail(id, supplier) do
+    query = from ord in OrderDetail, join: p in assoc(ord, :partner), preload: [:product, order: [:partner]], where: p.id == ^supplier.id, where: ord.id == ^id
+    Repo.one query
+  end
+
+  def get_order_details(id), do: Repo.get(OrderDetail, id) |> Repo.preload([:order, :partner, :product  ])
+
+  def update_order_detail(%OrderDetail{} = order_detail, details) do
+    order_detail
+    |> OrderDetail.changeset(details)
+    |> Repo.update()
+  end
 
 end

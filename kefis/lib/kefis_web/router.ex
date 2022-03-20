@@ -121,8 +121,12 @@ defmodule KefisWeb.Router do
     pipe_through [:browser, :protected, :supplier]
     #pipe_through [:browser]
 
-    get "/", SupplierController, :index
-    post "/", SupplierController, :create_product
+    get "/", SupplierController,:index
+    get "/new/product", SupplierController, :new_product
+    post "/new/product", SupplierController, :create_product
+
+    get "/orders", SupplierController, :my_orders
+    get "/orders/:id/", SupplierController, :show_order_details
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,22 @@
+<h1>Loading the orders...</h1>
+
+<table>
+<thead>
+<th>#</th>
+<th>Product Name</th>
+<th>Quantity</th>
+<th>Status</th>
+<th>Ordered on</th>
+</thead>
+<tbody>
+<%= for {order, index} <- Enum.with_index(@orders) do%>
+<tr>
+<td><%= index + 1 %></td>
+<td><%= order.product.name %></td>
+<td><%= order.quantity %></td>
+<td><%= order.status %></td>
+<td><%= Date.to_string(order.inserted_at) %></td>
+</tr>
+<% end %>
+</tbody>
+</table>

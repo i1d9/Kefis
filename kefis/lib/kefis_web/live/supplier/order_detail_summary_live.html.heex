@@ -1,0 +1,29 @@
+<h1><%= @order.order.partner.name %></h1>
+<h1><%= @order.order.partner.contact_email %></h1>
+<h1><%= @order.order.partner.phone %></h1>
+<p>
+<%= @order.product.name %>
+</p>
+<p>
+<%= @order.quantity %>
+</p>
+
+<p>
+<%= @order.status %>
+</p>
+
+<p>KES
+<%= @order.price %>
+</p>
+
+<%= if @order.status == "initiated" do%>
+<form phx-submit="change_order_detail_status" phx-target={@myself}>
+<select name="status">
+    <option value="confirmed">Confirmed</option>
+    <option value="cancelled">Cancelled</option>
+</select>
+<button type="submit">Save</button>
+</form>
+<% end %>
+
+
