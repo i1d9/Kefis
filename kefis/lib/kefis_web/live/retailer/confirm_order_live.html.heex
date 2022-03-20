@@ -5,7 +5,8 @@ KES <%= @order.value %>
 
 <form phx-change="table_filter">
 <select name="filter">
-<option value="reset" selected>Filter</option>
+<option value="reset" disabled selected>----</option>
+<option value="reset">Reset</option>
 <option value="name">Name</option>
 <option value="nameD">Name(Desc)</option>
 

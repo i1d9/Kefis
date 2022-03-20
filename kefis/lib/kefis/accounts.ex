@@ -11,26 +11,20 @@ defmodule Kefis.Accounts do
     |> Repo.insert!()
   end
 
-
-  def deposit(%Account{} = account, amount) do
-    Account.changeset(account, %{balance: account.balance + amount})
-    |> Repo.update()
-  end
-
   def send(from, to, amount) do
     amount
   end
 
   def withdraw(%Account{} = account, amount) do
-    Account.changeset(account, %{balance: account.balance - amount})
-    |> Repo.update()
-  end
-
-  def transact(account, type, amount, details) do
-    Transaction.changeset(%Transaction{}, details)
-    |> Changeset.put_assoc(:account, account)
+    Transaction.changeset(%Transaction{}, %{amount: amount, type: "withdraw", status: "confirmed"})
+    |> Changeset.put_assoc(:account, Account.changeset(account, %{balance: account.balance - amount}))
     |> Repo.insert!()
   end
 
+  def deposit(%Account{} = account, amount) do
+    Transaction.changeset(%Transaction{}, %{amount: amount, type: "deposit", status: "confirmed"})
+    |> Changeset.put_assoc(:account, Account.changeset(account, %{balance: account.balance + amount}))
+    |> Repo.insert!()
+  end
 
 end
