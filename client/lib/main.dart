@@ -1,8 +1,8 @@
+import 'package:client/common/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(GetMaterialApp(home: Home()));
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
