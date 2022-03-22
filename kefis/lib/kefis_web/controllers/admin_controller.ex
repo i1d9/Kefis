@@ -8,6 +8,7 @@ defmodule KefisWeb.AdminController do
   alias Kefis.Partners
   alias Kefis.Chain.Warehouse
   alias Kefis.Warehouses
+  alias Kefis.Orders
 
 
   def index(conn, _opts) do
@@ -138,9 +139,9 @@ defmodule KefisWeb.AdminController do
   def api_list_partners(conn, _opts) do
     partners = Chain.list_partners()
 
-    
+
     conn
-    |> render("list_partners.json", partners: partners)
+    |> render("partners.json", partners: partners)
   end
 
   def api_show_partner(conn, %{"id" => id}) do
@@ -158,4 +159,10 @@ defmodule KefisWeb.AdminController do
     |> render("partner_w_products.json", partner: partner)
   end
 
+  def api_show_order(conn, %{"id" => id}) do
+    order = Orders.admin_show_order(id)
+
+    conn
+    |> render("order.json", order: order)
+  end
 end

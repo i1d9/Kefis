@@ -80,4 +80,13 @@ defmodule Kefis.Orders do
     |> Repo.update()
   end
 
+
+  def admin_list_orders do
+    Repo.all(Order)
+  end
+
+  def admin_show_order(id) do
+    Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:product, :partner]])
+  end
+
 end

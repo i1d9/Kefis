@@ -146,6 +146,9 @@ defmodule KefisWeb.Router do
     get "/partners", AdminController, :api_list_partners
     get "/partners/:id", AdminController, :api_show_partner
     get "/partners/:id/products", AdminController, :api_show_partner_w_products
+    get "/orders/:id", AdminController, :api_show_order
+
+    
 
   end
 
