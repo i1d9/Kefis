@@ -5,9 +5,15 @@ Host: 127.0.0.1:4000
 {
     "user":{
 
-         "email": "userone@gmail.com",
+      "email": "userone@gmail.com",
       "password": "userone@gmail.com"
     }
 
     
 }
+
+###
+GET /api/admin/partners
+content-type: application/json
+Host: 127.0.0.1:4000
+Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSiifnPg8N8Ut4obJ4sTuZa9qNEDWKM0HZ7AaE

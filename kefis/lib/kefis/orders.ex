@@ -80,9 +80,8 @@ defmodule Kefis.Orders do
     |> Repo.update()
   end
 
-
   def admin_list_orders do
-    Repo.all(Order)
+    Repo.all(Order) |> Repo.preload(:partner)
   end
 
   def admin_show_order(id) do

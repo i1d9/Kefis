@@ -141,14 +141,15 @@ defmodule KefisWeb.Router do
   end
 
   scope "/api/admin", KefisWeb do
-    pipe_through [:api, :api_admin]
+    pipe_through [:api, :api_protected, :api_admin]
 
     get "/partners", AdminController, :api_list_partners
     get "/partners/:id", AdminController, :api_show_partner
     get "/partners/:id/products", AdminController, :api_show_partner_w_products
+    get "/orders", AdminController, :api_list_orders
     get "/orders/:id", AdminController, :api_show_order
 
-    
+
 
   end
 

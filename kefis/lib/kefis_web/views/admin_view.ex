@@ -46,7 +46,18 @@ defmodule KefisWeb.AdminView do
   end
 
   def render("orders.json", %{orders: orders}) do
-    %{data: render_many(orders, __MODULE__, "order.json", as: :order)}
+    %{data: render_many(orders, __MODULE__, "basic_order.json", as: :order)}
+  end
+
+
+  def render("basic_order.json", %{order: order}) do
+    %{
+      id: order.id,
+      value: order.value,
+      status: order.status,
+      ordered_by: render_one(order.partner, __MODULE__, "partner.json", as: :partner),
+
+    }
   end
 
   def render("order.json", %{order: order}) do

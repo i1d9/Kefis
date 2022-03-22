@@ -159,6 +159,13 @@ defmodule KefisWeb.AdminController do
     |> render("partner_w_products.json", partner: partner)
   end
 
+
+  def api_list_orders(conn, _opts) do
+    orders = Orders.admin_list_orders()
+    conn
+    |> render("orders.json", orders: orders)
+  end
+
   def api_show_order(conn, %{"id" => id}) do
     order = Orders.admin_show_order(id)
 

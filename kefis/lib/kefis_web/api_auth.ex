@@ -6,6 +6,8 @@ defmodule KefisWeb.ApiAuth do
   alias Plug.Conn
   alias Pow.{Config, Plug, Store.CredentialsCache}
   alias PowPersistentSession.Store.PersistentSessionCache
+  import Phoenix.Controller, only: [json: 2]
+
 
   @doc """
   Fetches the user from access token.
@@ -135,20 +137,44 @@ defmodule KefisWeb.ApiAuth do
 
 
   def api_admin(conn, _opts) do
-    config = Pow.Plug.fetch_config(conn)
-    IO.inspect(config)
-    conn
+    _config = Pow.Plug.fetch_config(conn)
+    IO.inspect(conn)
+    if conn.assigns.current_user.role == "admin" do
+      conn
+    else
+      not_authorized(conn)
+    end
   end
 
   def api_retailer(conn, _opts) do
-    conn
+    if conn.assigns.current_user.role == "retailer_admin" do
+      conn
+    else
+      not_authorized(conn)
+    end
   end
 
   def api_supplier(conn, _opts) do
-    conn
+    if conn.assigns.current_user.role == "supplier_admin" do
+      conn
+    else
+      not_authorized(conn)
+    end
   end
 
   def api_driver(conn, _opts) do
+    if conn.assigns.current_user.role == "driver" do
+      conn
+    else
+      not_authorized(conn)
+    end
+
+  end
+
+
+  defp not_authorized(conn) do
     conn
+    |> Conn.put_status(401)
+    |> json(%{error: %{code: 401, message: "Unauthorized"}})
   end
 end

@@ -2,10 +2,11 @@ defmodule KefisWeb.ApiAuthErrorHandler do
   use KefisWeb, :controller
   alias Plug.Conn
 
-
-  def call(conn, :not_authenicated) do
+  @spec call(Conn.t(), :not_authenticated) :: Conn.t()
+  def call(conn, :not_authenticated) do
     conn
     |> put_status(401)
-    |> json(%{error: %{code: 401, message: "Not Authenticated"}})
+    |> json(%{error: %{code: 401, message: "Unauthorized"}})
   end
+
 end
