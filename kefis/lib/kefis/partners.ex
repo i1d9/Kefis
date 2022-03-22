@@ -37,4 +37,9 @@ defmodule Kefis.Partners do
       {:error, partner_changeset}
     end
   end
+
+
+  def show_partner_products(id) do
+    Repo.get(Partner, id) |> Repo.preload(:products)
+  end
 end

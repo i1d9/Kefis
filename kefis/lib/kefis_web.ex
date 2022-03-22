@@ -26,6 +26,7 @@ defmodule KefisWeb do
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
       import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
+      import KefisWeb.ApiAuth, only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
     end
   end
 
@@ -69,6 +70,7 @@ defmodule KefisWeb do
       import Phoenix.Controller
       import Phoenix.LiveView.Router
       import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
+      import KefisWeb.ApiAuth, only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
     end
   end
 

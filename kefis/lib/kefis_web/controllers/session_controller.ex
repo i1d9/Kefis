@@ -6,6 +6,7 @@ defmodule KefisWeb.SessionController do
 
   alias KefisWeb.ApiAuth
 
+  
   def new(conn, _params) do
     changeset = Pow.Plug.change_user(conn)
 
@@ -54,7 +55,12 @@ defmodule KefisWeb.SessionController do
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
+        config        = Pow.Plug.fetch_config(conn)
+        user          = Pow.Plug.current_user(conn, config)
+
+
+
+        json(conn, %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token, first_name: user.first_name, email: user.email, second_name: user.second_name, role: user.role, phone: user.phone})
 
       {:error, conn} ->
         conn

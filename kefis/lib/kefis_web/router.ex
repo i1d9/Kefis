@@ -133,10 +133,36 @@ defmodule KefisWeb.Router do
   scope "/api", KefisWeb do
     pipe_through :api
 
+
     post "/login", SessionController, :api_create, as: :api_login
 
-    delete "/logout", SessionController, :api_delete, as: :api_logout
+    #delete "/logout", SessionController, :api_delete, as: :api_logout
     post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api/admin", KefisWeb do
+    pipe_through [:api, :api_admin]
+
+    get "/partners", AdminController, :api_list_partners
+    get "/partners/:id", AdminController, :api_show_partner
+    get "/partners/:id/products", AdminController, :api_show_partner_w_products
+
+  end
+
+  scope "/api/s", KefisWeb do
+    pipe_through [:api, :api_supplier]
+
+    get "/partners", AdminController, :api_list_partners
+    get "/partners/:id", AdminController, :api_show_partner
+
+  end
+
+  scope "/api/r", KefisWeb do
+    pipe_through [:api, :api_retailer]
+
+    get "/partners", AdminController, :api_list_partners
+    get "/partners/:id", AdminController, :api_show_partner
+
   end
 
   scope "/api", KefisWeb do

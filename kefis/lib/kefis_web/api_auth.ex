@@ -132,4 +132,23 @@ defmodule KefisWeb.ApiAuth do
 
     [backend: backend, pow_config: config]
   end
+
+
+  def api_admin(conn, _opts) do
+    config = Pow.Plug.fetch_config(conn)
+    IO.inspect(config)
+    conn
+  end
+
+  def api_retailer(conn, _opts) do
+    conn
+  end
+
+  def api_supplier(conn, _opts) do
+    conn
+  end
+
+  def api_driver(conn, _opts) do
+    conn
+  end
 end
