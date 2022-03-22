@@ -49,7 +49,7 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   dio:
     dependency: "direct main"
     description:
@@ -85,6 +85,41 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.6.0"
+  firebase_in_app_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_in_app_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0+8"
+  firebase_in_app_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_in_app_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "11.2.7"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.8"
   flutter:
     dependency: "direct main"
     description: flutter

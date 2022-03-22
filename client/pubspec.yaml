@@ -38,6 +38,8 @@ dependencies:
   dio: ^4.0.4
   get: ^4.6.1
   flutter_map: ^0.14.0
+  firebase_in_app_messaging: ^0.6.0+8
+  firebase_messaging: ^11.2.7
 
 dev_dependencies:
   flutter_test:
