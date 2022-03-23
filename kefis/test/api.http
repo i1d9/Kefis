@@ -17,3 +17,36 @@ GET /api/admin/partners
 content-type: application/json
 Host: 127.0.0.1:4000
 Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSiifnPg8N8Ut4obJ4sTuZa9qNEDWKM0HZ7AaE
+
+### Add Product
+
+### Update Product
+
+### Delete Product
+
+### Add Warehouse
+
+### Update Warehouse
+
+### Delete Warehouse
+
+### Add Partner
+
+### Update Partner
+
+### Delete Partner
+
+### Add Order
+
+### Update Order
+
+### Delete Order
+
+### Update OrderDetails
+
+### Delete OrderDetails
+
+
+
+
+
