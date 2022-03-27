@@ -31,6 +31,30 @@ Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSi
 ### Delete Warehouse
 
 ### Add Partner
+GET /api/admin/partner/new
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+  "partner": {
+    "name":"",
+    "phone":"",
+    "location":"",
+    "contact_emali","",
+    "lat": "",
+    "lng": "",
+    "type": ""
+    "user":{
+      "first_name":"",
+            "second_name":"",
+            "phone": "",
+            "email": "",
+            "role":"",
+            "password_hash"":"""
+
+    }
+  }
+}
 
 ### Update Partner
 
