@@ -172,4 +172,41 @@ defmodule KefisWeb.AdminController do
     conn
     |> render("order.json", order: order)
   end
+
+
+  def api_add_partner(conn, %{"partner"=> partner = %{"user" => user}}) do
+
+
+    IO.inspect(partner)
+    IO.inspect(user)
+    text conn, "sdjkdjk"
+  end
+
+  def api_update_partner(conn, %{"id" => id, "partner" => partner} = _opts) do
+    IO.inspect(id)
+    IO.inspect(partner)
+    text conn, "sdklsdkl"
+  end
+
+  def api_delete_partner(conn, %{"id" => id} = _opts) do
+    IO.inspect(id)
+    text conn, "sdklsdkl"
+  end
+
+  def api_add_product(conn, opts) do
+    IO.inspect(opts)
+    text conn, "SDkdklds"
+  end
+
+  def api_update_product(conn, opts) do
+    IO.inspect(opts)
+    text conn, "SDkdklds"
+  end
+
+  def api_delete_product(conn, opts) do
+    IO.inspect(opts)
+    text conn, "SDkdklds"
+  end
+
+
 end

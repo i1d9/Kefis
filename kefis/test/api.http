@@ -22,7 +22,7 @@ Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSi
 
 ###Admin
 ### Add Partner
-POST /api/admin/partner/new
+POST /api/admin/partners/new
 content-type: application/json
 Host: 127.0.0.1:4000
 
@@ -35,22 +35,38 @@ Host: 127.0.0.1:4000
     "lat": "",
     "lng": "",
     "type": "",
-    "user":{
+    "user": {
             "first_name":"",
             "second_name":"",
             "phone": "",
             "email": "",
             "role":"",
             "password":"",
-            "confirme-password":""
-
+            "confirmed-password":""
     }
   }
 }
 
 ### Update Partner
+POST /api/admin/partners/1/edit
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+  "partner": {
+    "name":"",
+    "phone":"",
+    "location":"",
+    "contact_email":"",
+    "lat": "",
+    "lng": "",
+    "type": ""
+  }
+}
 
 ### Delete Partner
+
+### Show Products
 
 ### Add Product
 
