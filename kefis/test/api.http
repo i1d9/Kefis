@@ -18,6 +18,40 @@ content-type: application/json
 Host: 127.0.0.1:4000
 Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSiifnPg8N8Ut4obJ4sTuZa9qNEDWKM0HZ7AaE
 
+
+
+###Admin
+### Add Partner
+POST /api/admin/partner/new
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+  "partner": {
+    "name":"",
+    "phone":"",
+    "location":"",
+    "contact_email":"",
+    "lat": "",
+    "lng": "",
+    "type": "",
+    "user":{
+            "first_name":"",
+            "second_name":"",
+            "phone": "",
+            "email": "",
+            "role":"",
+            "password":"",
+            "confirme-password":""
+
+    }
+  }
+}
+
+### Update Partner
+
+### Delete Partner
+
 ### Add Product
 
 ### Update Product
@@ -30,36 +64,8 @@ Authorization: SFMyNTY.ZmFjMTJlN2QtY2Y4Ny00N2QyLWIzYjktOTFjZjA1NDU4MjI4.BHh3NPSi
 
 ### Delete Warehouse
 
-### Add Partner
-GET /api/admin/partner/new
-content-type: application/json
-Host: 127.0.0.1:4000
 
-{
-  "partner": {
-    "name":"",
-    "phone":"",
-    "location":"",
-    "contact_emali","",
-    "lat": "",
-    "lng": "",
-    "type": ""
-    "user":{
-      "first_name":"",
-            "second_name":"",
-            "phone": "",
-            "email": "",
-            "role":"",
-            "password_hash"":"""
-
-    }
-  }
-}
-
-### Update Partner
-
-### Delete Partner
-
+###Retailer
 ### Add Order
 
 ### Update Order
@@ -69,6 +75,13 @@ Host: 127.0.0.1:4000
 ### Update OrderDetails
 
 ### Delete OrderDetails
+
+###Supplier
+### Add Product
+
+### Update Product
+
+### Delete Product
 
 
 
