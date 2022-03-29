@@ -75,10 +75,39 @@ content-type: application/json
 Host: 127.0.0.1:4000
 
 ### Show Products
+GET  /api/admin/partners/1/products
+content-type: application/json
+Host: 127.0.0.1:4000
 
 ### Add Product
+POST  /api/admin/partners/1/products/new
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+  "product": {
+    "name": "API Product",
+    "category": "Shoes",
+    "price": 433,
+    "sku": "sdkjnckjnjdnskjwe",
+    "image": "product-image.jpg"
+  }
+}
 
 ### Update Product
+POST  /api/admin/partners/1/products/17/edit
+content-type: application/json
+Host: 127.0.0.1:4000
+
+{
+  "product": {
+    "name": "Updated API Product",
+    "category": "API Shoes",
+    "price": 433,
+    "sku": "sjvnkjsvjskvjdsjkvndsv",
+    "image": "product-image.jpg"
+  }
+}
 
 ### Delete Product
 

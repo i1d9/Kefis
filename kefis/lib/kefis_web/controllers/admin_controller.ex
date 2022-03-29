@@ -10,6 +10,8 @@ defmodule KefisWeb.AdminController do
   alias Kefis.Warehouses
   alias Kefis.Orders
   alias Kefis.Repo
+  alias Kefis.Products
+  alias Kefis.Chain.Product
 
 
   def index(conn, _opts) do
@@ -227,17 +229,38 @@ defmodule KefisWeb.AdminController do
   end
 
 
-  def api_add_product(conn, opts) do
-    IO.inspect(opts)
-    text conn, "SDkdklds"
+  def api_add_product(conn, %{"id" => id, "product" => product }= _opts) do
+    IO.inspect(id)
+    IO.inspect(product)
+    partner = Repo.get(Partner, id)
+    case Products.create(partner, product) do
+      {:ok, _product} ->
+        json(conn, %{success: true, message: "Product Created Successfully"})
+      {:error, %Ecto.Changeset{} = changeset} ->
+          conn
+          |> put_status(:unprocessable_entity)
+          |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
   end
 
-  def api_update_product(conn, opts) do
-    IO.inspect(opts)
-    text conn, "SDkdklds"
+
+  def api_update_product(conn, %{"id" => _supplier_id, "product" => product_info, "product_id" => product_id }= _opts) do
+
+    product = Repo.get(Product, product_id)
+    IO.inspect(product)
+    case Chain.update_product(product, product_info) do
+      {:ok, _product} ->
+        json(conn, %{success: true, message: "Product Updated Successfully"})
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
+
+
   end
 
-  def api_delete_product(conn, opts) do
+  def api_delete_product(conn, "product_id" => product_id) do
     IO.inspect(opts)
     text conn, "SDkdklds"
   end
