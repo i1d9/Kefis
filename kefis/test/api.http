@@ -28,43 +28,51 @@ Host: 127.0.0.1:4000
 
 {
   "partner": {
-    "name":"",
-    "phone":"",
-    "location":"",
-    "contact_email":"",
-    "lat": "",
-    "lng": "",
-    "type": "",
+    "name":"API Test API",
+    "phone":"254741287654",
+    "location":"Mugumoinias",
+    "contact_email":"user@retailer.com",
+    "lat": "-1.268870",
+    "lng": "36.785554",
+    "type": "retailer",
     "user": {
-            "first_name":"",
-            "second_name":"",
-            "phone": "",
-            "email": "",
-            "role":"",
-            "password":"",
-            "confirmed-password":""
+            "first_name":"API",
+            "second_name":"Test",
+            "phone": "254741287654",
+            "email": "apitest@gmail.com",
+            "role": "retailer_admin",
+            "password": "apitest@gmail.com",
+            "confirm_password": "apitest@gmail.com"
     }
   }
 }
 
+### Show Partner
+GET  /api/admin/partners/1
+content-type: application/json
+Host: 127.0.0.1:4000
+
 ### Update Partner
-POST /api/admin/partners/1/edit
+POST /api/admin/partners/2/edit
 content-type: application/json
 Host: 127.0.0.1:4000
 
 {
   "partner": {
-    "name":"",
-    "phone":"",
-    "location":"",
-    "contact_email":"",
-    "lat": "",
-    "lng": "",
-    "type": ""
+    "name":"Updated Through API",
+    "phone":"254712983876",
+    "location":"Madaraka Estate",
+    "contact_email":"retailer@user.com",
+    "lat": -1.268870,
+    "lng": 36.785554,
+    "type": "retailer"
   }
 }
 
 ### Delete Partner
+DELETE  /api/admin/partners/3
+content-type: application/json
+Host: 127.0.0.1:4000
 
 ### Show Products
 

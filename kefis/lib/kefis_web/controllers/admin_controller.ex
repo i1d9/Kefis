@@ -9,6 +9,7 @@ defmodule KefisWeb.AdminController do
   alias Kefis.Chain.Warehouse
   alias Kefis.Warehouses
   alias Kefis.Orders
+  alias Kefis.Repo
 
 
   def index(conn, _opts) do
@@ -176,22 +177,55 @@ defmodule KefisWeb.AdminController do
 
   def api_add_partner(conn, %{"partner"=> partner = %{"user" => user}}) do
 
-
-    IO.inspect(partner)
-    IO.inspect(user)
-    text conn, "sdjkdjk"
+    case Partners.api_create_partner(partner, user) do
+       {:ok, partner} ->
+        conn
+        |> render("admin_partner.json", partner: partner)
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
   end
 
-  def api_update_partner(conn, %{"id" => id, "partner" => partner} = _opts) do
-    IO.inspect(id)
-    IO.inspect(partner)
-    text conn, "sdklsdkl"
+  def api_admin_show_partner(conn, %{"id" => id}) do
+    partner = Repo.get(Partner, id) |> Repo.preload(:user)
+    conn
+    |> render("admin_partner.json", partner: partner)
+  end
+
+  def api_update_partner(conn, %{"id" => id, "partner" => partner_info} = _opts) do
+
+    partner = Repo.get(Partner, id)
+
+    case Chain.update_partner(partner, partner_info) do
+      {:ok, partner} ->
+        IO.inspect(partner)
+        conn
+        |> render("partner.json", partner: partner)
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
+
   end
 
   def api_delete_partner(conn, %{"id" => id} = _opts) do
-    IO.inspect(id)
-    text conn, "sdklsdkl"
+
+    partner = Repo.get(Partner, id)
+    case Partners.api_delete_partner(partner) do
+      {:ok, _partner} ->
+        json(conn, %{success: true, message: "Partner Deleted Successfully"})
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
+
   end
+
 
   def api_add_product(conn, opts) do
     IO.inspect(opts)

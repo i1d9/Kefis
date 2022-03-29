@@ -72,7 +72,6 @@ retailer_money_account = Account.changeset(%Account{}, retailer_account_details)
 #Create a Supplier record
 supplier_details = %{
   contact_email: "user@supplier.com",
-
   lat: -1.337517,
   lng: 36.808900,
   location: "Mugumoini",
@@ -88,7 +87,6 @@ supplier = supplier_user
 #Create a Retailer record
 retailer_details = %{
   contact_email: "user@retailer.com",
-
   lat: -1.268870,
   lng: 36.785554,
   location: "Mugumoini",

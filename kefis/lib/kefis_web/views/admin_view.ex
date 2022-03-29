@@ -21,6 +21,20 @@ defmodule KefisWeb.AdminView do
     }
   end
 
+
+  def render("admin_partner.json", %{partner: partner}) do
+    %{
+      type: partner.type,
+      id: partner.id,
+      name: partner.name,
+      phone: partner.phone,
+      lat: partner.lat,
+      lng: partner.lng,
+      contact_email: partner.contact_email,
+      user: render_one(partner.user, __MODULE__, "user.json", as: :user)
+    }
+  end
+
   def render("partner_w_products.json", %{partner: partner}) do
     %{
       type: partner.type,
@@ -77,6 +91,19 @@ defmodule KefisWeb.AdminView do
      quantity: order_detail.quantity,
      supplied_by: render_one(order_detail.partner, __MODULE__, "partner.json", as: :partner),
      product: render_one(order_detail.product, __MODULE__, "product.json", as: :product)
+    }
+  end
+
+
+  def render("user.json", %{user: user}) do
+    %{
+      email: user.email,
+      second_name: user.second_name,
+      first_name: user.first_name,
+      role: user.role,
+      phone: user.phone,
+      id: user.id,
+
     }
   end
 

@@ -42,4 +42,18 @@ defmodule Kefis.Partners do
   def show_partner_products(id) do
     Repo.get(Partner, id) |> Repo.preload(:products)
   end
+
+
+  def api_create_partner(partner, user) do
+    IO.inspect(    Partner.changeset(%Partner{}, partner))
+
+    Partner.changeset(%Partner{}, partner)
+    |> Ecto.Changeset.put_assoc(:user, User.admin_changeset(%User{}, user))
+    |> Repo.insert()
+  end
+
+
+  def api_delete_partner(%Partner{} = partner) do
+    Repo.delete(partner)
+  end
 end
