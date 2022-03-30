@@ -45,17 +45,18 @@ defmodule KefisWeb.Supplier.Product.FormComponent do
         uploaded_files = for entry <- entries do
           file_path =
             consume_uploaded_entry(socket, entry, fn %{path: path} ->
-              dest = Path.join(Kefis.product_uploads_priv_dir(), Path.basename(path))
+
+              dest = Path.join("priv/static/uploads/products", Path.basename(path))
 
               IO.inspect(entry)
               IO.inspect(path)
               File.cp!(path, dest)
-              Routes.static_path(socket, "#{Kefis.product_uploads_priv_dir()}/#{Path.basename(dest)}")
 
+              Routes.static_path(socket, "/uploads/products/#{Path.basename(dest)}")
 
             end)
 
-          product = Map.put(product_params, :image, file_path)
+          product = Map.put(product_params, "image", file_path)
           IO.inspect(product)
           IO.inspect(file_path)
         end
