@@ -33,7 +33,7 @@ defmodule KefisWeb.LayoutView do
          document.addEventListener('readystatechange', event => {
            if (event.target.readyState === 'complete') {
 
-          window.display_modal({icon: 'success', title: 'Error', message: '#{info}'});
+          window.display_modal({icon: 'success', title: 'Success', message: '#{info}'});
            }
          });
          </script>"
@@ -43,10 +43,7 @@ defmodule KefisWeb.LayoutView do
           console.log('error');
          document.addEventListener('readystatechange', event => {
            if(event.target.readyState === 'complete') {
-
-
           window.display_modal({icon: 'error', title: 'Error', message: '#{error}'});
-
            }
          });
          </script>"

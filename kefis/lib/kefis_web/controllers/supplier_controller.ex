@@ -10,13 +10,15 @@ defmodule KefisWeb.SupplierController do
   alias Kefis.Orders
   alias Kefis.Chain.Product
   alias Kefis.Repo
-  alias Kefis.Products
+  
 
 
 
   def index(conn, _opts) do
 
-    text conn, "Display Dashboard"
+
+
+    render(conn, "index.html")
   end
 
 
@@ -27,7 +29,7 @@ defmodule KefisWeb.SupplierController do
 
   def new_product(conn, _opts) do
     changeset = Product.changeset(%Product{}, %{})
-    render(conn, "product_new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset)
   end
 
   @doc """

@@ -1,5 +1,19 @@
-<h1>New Supplier</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.supplier_path(@conn, :create)) %>
+<%= render("dashboard_nav.html", conn: @conn) %>
 
-<span><%= link "Back", to: Routes.supplier_path(@conn, :index) %></span>
+
+<main class="content">
+
+
+<%= render("dashboard_upper_nav.html", conn: @conn)  %>
+
+
+<%= render("dashboard_description.html", dashboard_page_title: "New Product", dashboard_page_description: "Create a new product") %>
+ 
+
+<%= live_render(@conn, KefisWeb.Supplier.Product.NewLive) %>
+
+
+</main>
+
+

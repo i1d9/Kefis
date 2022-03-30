@@ -140,30 +140,25 @@ defmodule KefisWeb.AdminController do
 
   def list_users(conn, _opts) do
     users = []
-    conn = put_flash(conn, :info, "Welcome Back!")
+
     render(conn, "user_index.html", users: users, meme: 1)
   end
 
   ###API
   def api_list_partners(conn, _opts) do
     partners = Chain.list_partners()
-
-
     conn
     |> render("partners.json", partners: partners)
   end
 
   def api_show_partner(conn, %{"id" => id}) do
     partner = Chain.get_partner!(id)
-
-
     conn
     |> render("show.json", partner: partner)
   end
 
   def api_show_partner_w_products(conn, %{"id" => id}) do
     partner = Partners.show_partner_products(id)
-
     conn
     |> render("partner_w_products.json", partner: partner)
   end
@@ -177,7 +172,6 @@ defmodule KefisWeb.AdminController do
 
   def api_show_order(conn, %{"id" => id}) do
     order = Orders.admin_show_order(id)
-
     conn
     |> render("order.json", order: order)
   end
