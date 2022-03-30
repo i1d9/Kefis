@@ -260,9 +260,17 @@ defmodule KefisWeb.AdminController do
 
   end
 
-  def api_delete_product(conn, "product_id" => product_id) do
-    IO.inspect(opts)
-    text conn, "SDkdklds"
+  def api_delete_product(conn, %{"product_id" => product_id}) do
+    product = Repo.get(Product, product_id)
+
+    case Chain.delete_product(product) do
+      {:ok, _result} ->
+        json(conn, %{success: true, message: ""})
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(KefisWeb.ErrorView, "error.json", changeset: changeset)
+    end
   end
 
 

@@ -154,7 +154,7 @@ defmodule KefisWeb.Router do
     get "/partners/:id/products/:id", AdminController, :api_show_partner_w_products
     post "/partners/:id/products/new", AdminController, :api_add_product
     post "/partners/:id/products/:product_id/edit", AdminController, :api_update_product
-    post "/partners/:id/products/:product_id/delete", AdminController, :api_delete_product
+    delete "/partners/:id/products/:product_id/delete", AdminController, :api_delete_product
 
     get "/orders", AdminController, :api_list_orders
     get "/orders/:id", AdminController, :api_show_order

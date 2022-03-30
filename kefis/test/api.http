@@ -110,6 +110,10 @@ Host: 127.0.0.1:4000
 }
 
 ### Delete Product
+DELETE /api/admin/partners/1/products/17/delete
+content-type: application/json
+Host: 127.0.0.1:4000
+
 
 ### Add Warehouse
 
