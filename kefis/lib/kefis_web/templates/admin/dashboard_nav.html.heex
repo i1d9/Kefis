@@ -10,6 +10,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
+
+    
 </nav>
 
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
@@ -50,39 +52,54 @@
                 
             </li>
             <li class="nav-item">
-                <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank"
-                    class="nav-link d-flex justify-content-between">
-                    <span>
+
+
+                <%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+<span>
                         <span class="sidebar-icon">
+                        
                             <i class="fas fa-store"></i>
+
                         </span>
                         <span class="sidebar-text">Retailers</span>
                     </span>
-                </a>
+<% end %>
+
+
             </li>
             <li class="nav-item">
-                <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank"
-                    class="nav-link d-flex justify-content-between">
-                    <span>
+                
+<%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+<span>
                         <span class="sidebar-icon">
+                        
                             <i class="fa-solid fa-industry"></i>
+
                         </span>
                         <span class="sidebar-text">Suppliers</span>
                     </span>
-                </a>
+<% end %>
+
+
+
             </li>
 
             <li class="nav-item">
-                <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank"
-                    class="nav-link d-flex justify-content-between">
-                    <span>
+
+
+<%= link to: Routes.admin_path(@conn, :list_warehouse), class: "nav-link d-flex justify-content-between" do%>
+<span>
                         <span class="sidebar-icon">
 <i class="fa fa-truck" aria-hidden="true"></i>
 
                         </span>
                         <span class="sidebar-text">Warehouses</span>
                     </span>
-                </a>
+<% end %>
+
+
+
+
             </li>
 
             <li class="nav-item ">
@@ -94,21 +111,26 @@
                 </a>
             </li>
 
-
             <li class="nav-item">
-                <a href="https://demo.themesberg.com/volt-pro/pages/calendar.html" target="_blank"
-                    class="nav-link d-flex justify-content-between">
-                    <span>
+
+
+<%= link to: Routes.admin_path(@conn, :list_users), class: "nav-link d-flex justify-content-between" do%>
+<span>
                         <span class="sidebar-icon">
                             <i class="fas fa-user"></i>
+
                         </span>
                         <span class="sidebar-text">Users</span>
                     </span>
-                    <span>
-                        <span class="badge badge-sm bg-secondary ms-1 text-gray-800"></span>
-                    </span>
-                </a>
+<% end %>
+
+
+
+
             </li>
+
+
+
             <li class="nav-item">
                 <a href="https://demo.themesberg.com/volt-pro/pages/map.html" target="_blank"
                     class="nav-link d-flex justify-content-between">
@@ -140,7 +162,6 @@
             </li>
 
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-
 
 
         </ul>

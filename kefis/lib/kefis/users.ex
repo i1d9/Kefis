@@ -1,6 +1,8 @@
 defmodule Kefis.Users do
   alias Kefis.{Repo, Users.User}
 
+  import Ecto.Query, only: [from: 2]
+
   @type t :: %User{}
 
   @spec create_admin(map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
@@ -44,4 +46,23 @@ defmodule Kefis.Users do
   def get_user!(id) do
     Repo.get!(User, id)
   end
+
+  def all(_module), do: []
+
+  def get_by(params) do
+    Enum.find all(User), fn map ->
+      Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
+    end
+  end
+
+  def get_supplier do
+    query = from u in User, where: u.role == "supplier_admin"
+    Repo.all query
+  end
+
+  def get_retailer do
+    query = from u in User, where: u.role == "retailer_admin"
+    Repo.all query
+  end
+
 end
