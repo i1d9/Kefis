@@ -24,6 +24,8 @@ import "phoenix_html"
 import 'bootstrap'; // Bootstrap support
 import "jquery";
 
+import "../node_modules/smooth-scroll";
+
 import "./custom";
 
 
@@ -50,3 +52,37 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 import "./custom.js";
+
+
+const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-gray'
+    },
+    buttonsStyling: false
+});
+
+
+
+
+
+
+function display_modal(params) {
+    console.log(params);
+
+    document.getElementById('flashButton').addEventListener('click', function () {
+        swalWithBootstrapButtons.fire({
+            icon: params.icon,
+            title: params.title,
+            text: params.message,
+            showConfirmButton: true,
+            
+            
+        })
+    });
+
+    document.getElementById('flashButton').click();
+
+}
+
+window.display_modal = display_modal;

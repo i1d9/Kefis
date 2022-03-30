@@ -140,7 +140,8 @@ defmodule KefisWeb.AdminController do
 
   def list_users(conn, _opts) do
     users = []
-    render(conn, "user_index.html", users: users)
+    conn = put_flash(conn, :info, "Welcome Back!")
+    render(conn, "user_index.html", users: users, meme: 1)
   end
 
   ###API

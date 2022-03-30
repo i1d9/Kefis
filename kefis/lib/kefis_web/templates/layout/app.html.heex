@@ -1,7 +1,7 @@
 <div>
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
- 
-</div>
- <%= @inner_content %>
+<span class="btn btn-success" id="flashButton" />
 
+<%= flasher(get_flash(@conn)) %>
+</div>
+
+ <%= @inner_content %>

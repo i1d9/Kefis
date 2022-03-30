@@ -5,21 +5,14 @@ defmodule KefisWeb.User.IndexLive do
 
   alias Kefis.Users
 
-  def mount(params, _session, socket) do
-
-    IO.inspect(params)
-    IO.inspect(socket)
-   {:ok,
+  def mount(_params, _session, socket) do
+    {:ok,
       socket
       |> assign(:users, Users.list)
-
-  }
-
+    }
   end
 
-  def handle_params(params, socket) do
-    IO.inspect(params)
-
+  def handle_params(_params, socket) do
     socket
   end
 
