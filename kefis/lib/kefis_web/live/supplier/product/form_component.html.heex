@@ -10,11 +10,6 @@
 
 <%= live_flash(@flash, :info) %>
 
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
 
   <%= label f, :name, for: "name" %>
   <%= text_input f, :name, class: "form-control", id: "name" %>
@@ -32,11 +27,8 @@
   <%= text_input f, :category, class: "form-control", id: "category" %>
   <%= error_tag f, :category %>
 
-  <%= live_file_input @uploads.avatar %>
-
-  <%= label f, :image, for: "image" %>
-  <%= text_input f, :image, class: "form-control", id: "image" %>
-  <%= error_tag f, :image %>
+    <%= label f, :image %>
+  <%= live_file_input @uploads.image, class: "form-control" %>
 
 
 

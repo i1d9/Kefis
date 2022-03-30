@@ -10,24 +10,11 @@ defmodule KefisWeb.Supplier.Product.NewLive do
     socket
     |> assign(:changeset, changeset)
     |> assign(:uploaded_files, [])
-    |> allow_upload(:image,
-        accept: ~w(.jpg .jpeg .png),
-        max_entries: 1,
-        auto_upload: true,
-        progress: &handle_progress/3
-      )}
-
+    }
   end
 
-  @impl true
-  def handle_event("validate", %{"product" => product_params}, socket) do
-    changeset =
-      socket.assigns.product
-      |> Catalog.change_product(product_params)
-      |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
-  end
+
 
   def handle_event("save", %{"product" => product_params}, _socket) do
     IO.inspect(product_params)
