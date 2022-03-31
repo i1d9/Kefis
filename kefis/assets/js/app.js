@@ -34,6 +34,13 @@ import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+import './leaflet/leaflet-map';
+import './leaflet/leaflet-marker'
+import './leaflet/leaflet-icon'
+
+
+
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 let Hooks = {}
 
@@ -46,23 +53,29 @@ Hooks.LeafLetAdminMapComponent = {
             var y = e.layerY;
 
             // calculate point in xy space
-            var pointXY = L.point(x, y);        
-            console.log(e);    
+            var pointXY = L.point(x, y);
+            console.log(e);
 
             console.log(window.clicked_pos);
             // convert to lat/lng space
             var pointlatlng = window.map.layerPointToLatLng(pointXY);
             //console.log(pointlatlng);
             window.map_component_marker.setLatLng(window.clicked_pos);
+
+            var popup = L.popup()
+                .setLatLng(window.clicked_pos)
+                .setContent('<p><center>Here</center></p>')
+                .openOn(window.map);
             //window.map.panTo(pointlatlng);
-            this.pushEventTo( this.el,"map_component_coordinates", {lat: window.clicked_pos.lat,lng: window.clicked_pos.lng});
+            //Send the coordinates to the map_component using map_component_coordinates event
+            this.pushEventTo(this.el, "map_component_coordinates", { lat: window.clicked_pos.lat, lng: window.clicked_pos.lng });
             // why doesn't this match e.latlng?
             //console.log("Point in lat,lng space: " + pointlatlng);
         });
     }
 }
 
-let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks, params: { _csrf_token: csrfToken } })
 
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
@@ -102,3 +115,5 @@ function display_modal(params) {
     document.getElementById('flashButton').click();
 }
 window.display_modal = display_modal;
+
+
