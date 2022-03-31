@@ -54,19 +54,19 @@ Hooks.LeafLetAdminMapComponent = {
 
             // calculate point in xy space
             var pointXY = L.point(x, y);
-            console.log(e);
+            //console.log(e);
 
             console.log(window.clicked_pos);
             // convert to lat/lng space
             var pointlatlng = window.map.layerPointToLatLng(pointXY);
-            //console.log(pointlatlng);
+            console.log(pointlatlng);
             window.map_component_marker.setLatLng(window.clicked_pos);
 
             var popup = L.popup()
                 .setLatLng(window.clicked_pos)
                 .setContent('<p><center>Here</center></p>')
                 .openOn(window.map);
-            //window.map.panTo(pointlatlng);
+            window.map.panTo(window.clicked_pos);
             //Send the coordinates to the map_component using map_component_coordinates event
             this.pushEventTo(this.el, "map_component_coordinates", { lat: window.clicked_pos.lat, lng: window.clicked_pos.lng });
             // why doesn't this match e.latlng?
