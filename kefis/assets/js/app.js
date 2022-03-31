@@ -34,8 +34,35 @@ import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken } })
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+let Hooks = {}
+
+
+
+Hooks.LeafLetAdminMapComponent = {
+    mounted() {
+        this.el.addEventListener("click", e => {
+            var x = e.layerX;
+            var y = e.layerY;
+
+            // calculate point in xy space
+            var pointXY = L.point(x, y);        
+            console.log(e);    
+
+            console.log(window.clicked_pos);
+            // convert to lat/lng space
+            var pointlatlng = window.map.layerPointToLatLng(pointXY);
+            //console.log(pointlatlng);
+            window.map_component_marker.setLatLng(window.clicked_pos);
+            //window.map.panTo(pointlatlng);
+            this.pushEventTo( this.el,"map_component_coordinates", {lat: window.clicked_pos.lat,lng: window.clicked_pos.lng});
+            // why doesn't this match e.latlng?
+            //console.log("Point in lat,lng space: " + pointlatlng);
+        });
+    }
+}
+
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })

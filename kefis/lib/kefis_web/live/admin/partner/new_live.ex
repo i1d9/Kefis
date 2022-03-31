@@ -8,6 +8,7 @@ defmodule KefisWeb.Admin.Partner.NewLive do
   def mount(_params, _session, socket) do
     partner_changeset = Chain.change_partner(%Partner{})
     user_changeset = User.admin_changeset(%User{}, %{})
+
     {
       :ok,
       socket
@@ -34,6 +35,38 @@ defmodule KefisWeb.Admin.Partner.NewLive do
     }
   end
 
+
+
+
+
+  def handle_event("partner_save", %{"partner" => _partner_params}, socket) do
+    {:noreply, socket}
+  end
+
+
+  def handle_event("user_save", %{"user" => _user_params}, socket) do
+    IO.inspect(socket)
+    {:noreply, socket}
+  end
+
+  def handle_event("user_validate", %{"user" => user_parmas}, socket) do
+    changeset =
+      User.admin_changeset(%User{}, user_parmas)
+      |> Map.put(:action, :validate)
+    {:noreply,
+    socket
+    |> assign(:user_changeset, changeset)
+
+    }
+  end
+
+
+  def handle_event("partner_save", %{"partner" => partner_params}, socket) do
+
+    IO.inspect(partner_params)
+    {:noreply, socket}
+  end
+
   def handle_event("partner_validate", %{"partner" => partner_params}, socket) do
 
     changeset =
@@ -47,22 +80,13 @@ defmodule KefisWeb.Admin.Partner.NewLive do
   end
 
 
-  def handle_event("partner_save", %{"partner" => _partner_params}, socket) do
-    {:noreply, socket}
+  def handle_info({:updated_map_component, %{coordinate: %{"lat" => lat, "lng" => lng}}}, socket) do
+
+    {:noreply,
+    socket
+    |> assign(map_lat: lat, map_lng: lng)
+    }
   end
-
-  def handle_event("user_validate", %{"user" => user_params}, socket) do
-    changeset =
-      User.admin_changeset(%User{}, user_params)
-      |> Map.put(:action, :validate)
-
-      {:noreply, assign(socket, :user_changeset, changeset)}
-  end
-
-  def handle_event("user_save", %{"user" => _user_params}, %{assigns: %{partner_changeset: _partner_changeset, user_changeset: _user_changeset}} = socket) do
-    {:noreply, socket}
-  end
-
 
 
 
