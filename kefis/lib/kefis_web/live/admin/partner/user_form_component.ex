@@ -1,4 +1,4 @@
-defmodule KefisWeb.Admin.Partner.FormComponent do
+defmodule KefisWeb.Admin.Partner.UserFormComponent do
   use KefisWeb, :live_component
 
 

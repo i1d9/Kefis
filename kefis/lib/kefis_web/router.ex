@@ -75,6 +75,8 @@ defmodule KefisWeb.Router do
     pipe_through [:browser, :protected]
 
     get "/", AdminController, :index
+    live "/live/new/partner", Admin.Partner.NewLive
+    
     get "/new/partner", AdminController, :new_partner
     post "/new/partner", AdminController, :create_new_partner
 

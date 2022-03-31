@@ -8,7 +8,11 @@
 <%= render( "dashboard_upper_nav.html", conn: @conn)  %>
 <%= render( "dashboard_description.html", dashboard_page_title: "New Partner", dashboard_page_description: "Add a new supplier or retailer") %>
  
-<%= render "partner_form.html", Map.put(assigns, :action, Routes.admin_path(@conn, :create_new_partner)) %>
+
+<div>
+<%= live_render(@conn, KefisWeb.Admin.Partner.NewLive) %>
+
+</div>
 
 
 </main>
