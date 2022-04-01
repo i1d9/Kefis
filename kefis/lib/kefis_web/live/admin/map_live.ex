@@ -11,6 +11,11 @@ defmodule KefisWeb.Admin.MapLive do
   end
 
 
+  @doc """
+  Receive the coordinates from the javascript file
+
+
+  """
   def handle_event("map_component_coordinates", %{"lat"=> lat, "lng"=> lng} = coordinate, socket) do
 
     IO.inspect(lat)
@@ -25,7 +30,7 @@ defmodule KefisWeb.Admin.MapLive do
   end
 
   def get_icon_url(true) do
-    "/images/dark-elixir-icon.png"
+    "/images/marker.svg"
   end
 
 end

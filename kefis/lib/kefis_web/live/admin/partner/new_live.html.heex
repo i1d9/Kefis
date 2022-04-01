@@ -6,27 +6,18 @@
               <div class="col-lg-4 col-sm-6">
                 <!-- Form -->
                 <div class="mb-4">
-                  
-
-<%= if @user_form_visible do %>
-                  <%= live_component @socket, KefisWeb.Admin.Partner.UserFormComponent, id: "new-user-partner-component", user_changeset: @user_changeset, partner_changeset: @partner_changeset %>        
-<% else %>
-   <%= live_component @socket, KefisWeb.Admin.Partner.PartnerFormComponent, id: "new-partner", user_changeset: @user_changeset, partner_changeset: @partner_changeset, partner_details_valid: @partner_details_valid  %>
- 
-<% end %>
+                  <%= if @user_form_visible do %>
+                    <%= live_component @socket, KefisWeb.Admin.Partner.UserFormComponent, id: "new-user-partner-component", user_changeset: @user_changeset, partner_changeset: @partner_changeset %>        
+                  <% else %>
+                    <%= live_component @socket, KefisWeb.Admin.Partner.PartnerFormComponent, id: "new-partner", user_changeset: @user_changeset, partner_changeset: @partner_changeset, partner_details_valid: @partner_details_valid  %>
+                    <%= live_component @socket, KefisWeb.Admin.MapLive, id: "map-component", map_lat: @map_component_marker_lat, map_lng: @map_component_marker_lng %>
 
 
-
-        
+                  <% end %>
                 </div>
                 <!-- End of Form -->
-                
-
-              </div>
-              
-              
+              </div>            
             </div>
-            
           </div>
         </div>
       </div>

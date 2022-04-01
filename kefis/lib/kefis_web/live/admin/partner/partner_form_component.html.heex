@@ -6,8 +6,6 @@
                       phx-change="partner_validate"
           phx-submit="partner_save"
                     id="admin-partner-form"
-
-
                       >
  
  
@@ -35,13 +33,13 @@
   <%= error_tag partner_f, :contact_email %>
 </div>
 
-  <div class="mb-4">
+  <div class="mb-4" style="display: none">
   <%= label partner_f, :lng, for: "lng" %>
   <%= number_input partner_f, :lng, class: "form-control", id: "lng", step: "any" %>
   <%= error_tag partner_f, :lng %>
 </div>
 
-  <div class="mb-4">
+  <div class="mb-4" style="display: none">
   <%= label partner_f, :lat, for: "lat" %>
   <%= number_input partner_f, :lat, class: "form-control", id: "lng", step: "any" %>
   <%= error_tag partner_f, :lat %>
@@ -55,6 +53,8 @@
   <%= error_tag partner_f, :type %>
 </div>
 
+
+            
 
 <%= if @partner_details_valid do %>
     <button type="button" phx-click="next_page" class="btn btn-success"> Next</button>

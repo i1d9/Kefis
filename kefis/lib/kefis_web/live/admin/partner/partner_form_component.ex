@@ -9,7 +9,6 @@ defmodule KefisWeb.Admin.Partner.PartnerFormComponent do
     |> assign(:partner_changeset, partner_changeset)
     |> assign(:user_changeset, user_changeset)
     |> assign(:partner_details_valid, partner_details_valid)
-
     }
   end
 

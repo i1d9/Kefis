@@ -38,6 +38,11 @@ defmodule Kefis.Partners do
     end
   end
 
+  def create_partner_changeset(partner, user) do
+    partner
+    |> Changeset.put_assoc(:user, user)
+    |> Repo.insert()
+  end
 
   def show_partner_products(id) do
     Repo.get(Partner, id) |> Repo.preload(:products)

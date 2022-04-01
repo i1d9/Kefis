@@ -25,8 +25,8 @@ class LeafletMap extends HTMLElement {
 
         window.map = this.map;
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            
+            maxZoom: 20,
+
         }).addTo(this.map);
 
         this.map.on("click", (e) => {
@@ -53,8 +53,8 @@ class LeafletMap extends HTMLElement {
                 markerEl.click()
             });
 
-            
-            
+
+
             window[`${markerEl.getAttribute('marker-id')}`] = leafletMarker;
             const iconEl = markerEl.querySelector('leaflet-icon');
             const iconSize = [iconEl.getAttribute('width'), iconEl.getAttribute('height')]

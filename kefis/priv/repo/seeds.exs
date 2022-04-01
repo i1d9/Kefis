@@ -79,6 +79,7 @@ supplier_details = %{
   type: "supplier",
   name: "Blue Band"
 }
+
 supplier = supplier_user
   |> Ecto.build_assoc(:partner)
   |> Partner.changeset(supplier_details)
