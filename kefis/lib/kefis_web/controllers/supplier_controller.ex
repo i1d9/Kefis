@@ -10,7 +10,7 @@ defmodule KefisWeb.SupplierController do
   alias Kefis.Orders
   alias Kefis.Chain.Product
   alias Kefis.Repo
-  
+
 
 
 
@@ -99,9 +99,10 @@ defmodule KefisWeb.SupplierController do
   end
 
   def my_orders(%{assigns: %{current_user: current_user}}= conn, _params) do
-    live_render(conn, KefisWeb.Supplier.MyOrdersLive, session: %{
-      "current_user" => current_user
-    })
+
+
+    render(conn, "orders.html", current_user: current_user)
+
   end
 
 
