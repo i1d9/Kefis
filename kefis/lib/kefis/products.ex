@@ -43,4 +43,9 @@ defmodule Kefis.Products do
     end
   end
 
+  def delete(id) do
+    product = Repo.get(Product, id)
+    Repo.delete(product)
+  end
+
 end

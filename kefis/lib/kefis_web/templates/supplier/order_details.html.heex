@@ -1,0 +1,20 @@
+
+<%= render("dashboard_nav.html", conn: @conn) %>
+
+
+<main class="content">
+
+
+<%= render("dashboard_upper_nav.html", conn: @conn)  %>
+
+
+<%= render("dashboard_description.html", dashboard_page_title: "Order Details", dashboard_page_description: "Showing details") %>
+ 
+
+<%= live_render(@conn, KefisWeb.Supplier.OrderDetailSummaryLive, session: %{
+          "user" => @user,
+          "order_detail" => @order_detail,
+     
+        }) %>
+        
+</main>

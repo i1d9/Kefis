@@ -76,7 +76,7 @@ defmodule KefisWeb.Router do
 
     get "/", AdminController, :index
     live "/live/new/partner", Admin.Partner.NewLive
-    
+
     get "/new/partner", AdminController, :new_partner
     post "/new/partner", AdminController, :create_new_partner
 
@@ -125,11 +125,15 @@ defmodule KefisWeb.Router do
     #pipe_through [:browser]
 
     get "/", SupplierController,:index
+    get "/products", SupplierController, :list_partner_products
+
     get "/new/product", SupplierController, :new_product
-    post "/new/product", SupplierController, :create_product
+
 
     get "/orders", SupplierController, :my_orders
     get "/orders/:id/", SupplierController, :show_order_details
+
+
   end
 
   # Other scopes may use custom stacks.

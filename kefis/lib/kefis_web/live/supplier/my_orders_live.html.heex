@@ -46,7 +46,7 @@
 </thead>
 <tbody>
 <%= for {order, _index} <- Enum.with_index(@orders_for_page, 1) do%>
-<tr>
+<tr phx-click="order">
 <td><%= order.id %></td>
 <td><%= order.product.name %></td>
 <td><%= order.quantity %></td>

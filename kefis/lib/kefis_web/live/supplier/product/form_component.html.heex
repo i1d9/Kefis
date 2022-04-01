@@ -1,12 +1,10 @@
 <div>
 
-
           <.form let={f} for={@changeset}
           id="product-form"
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save" >
-
 
 <%= live_flash(@flash, :info) %>
 
@@ -38,9 +36,6 @@
 </.form>
 
 
-  <img
-      alt="product image" 
-      width="200" 
-      height="200" 
-      src={Routes.static_path(@socket, "/uploads/products/live_view_upload-1648673659-829040224941413-3")} >
+
+
 </div>

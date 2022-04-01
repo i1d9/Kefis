@@ -47,14 +47,14 @@
 
             <li class="nav-item  active ">
 
-            <%= link "Dashboard", to: Routes.admin_path(@conn, :index), class: "sidebar-text" %>
+            <%= link "Dashboard", to: Routes.supplier_path(@conn, :index), class: "sidebar-text" %>
                 
                 
             </li>
             <li class="nav-item">
 
 
-                <%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+                <%= link to: Routes.supplier_path(@conn, :list_partner_products), class: "nav-link d-flex justify-content-between" do%>
 <span>
                         <span class="sidebar-icon">
                         
@@ -69,7 +69,7 @@
             </li>
             <li class="nav-item">
                 
-<%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+<%= link to: Routes.supplier_path(@conn, :my_orders), class: "nav-link d-flex justify-content-between" do%>
 <span>
                         <span class="sidebar-icon">
                         

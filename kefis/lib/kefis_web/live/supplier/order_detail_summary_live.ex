@@ -9,6 +9,7 @@ defmodule KefisWeb.Supplier.OrderDetailSummaryLive do
       socket
       |> assign(:user, user)
       |> assign(:order, order_detail)
+
     }
   end
 
@@ -19,7 +20,8 @@ defmodule KefisWeb.Supplier.OrderDetailSummaryLive do
       {:ok, order} ->
         IO.inspect(order)
         {:noreply,
-          assign(:order, order)
+          socket
+          |> assign(:order, order)
         }
       {:error, error} ->
         IO.inspect(error)
@@ -28,4 +30,7 @@ defmodule KefisWeb.Supplier.OrderDetailSummaryLive do
     end
 
   end
+
+
+
 end

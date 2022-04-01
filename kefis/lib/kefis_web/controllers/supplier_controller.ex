@@ -14,6 +14,7 @@ defmodule KefisWeb.SupplierController do
 
 
 
+
   def index(conn, _opts) do
 
 
@@ -23,8 +24,12 @@ defmodule KefisWeb.SupplierController do
 
 
 
-  def list_partner_products(conn, _opts) do
+  def list_partner_products(%{assigns: %{current_user: current_user}}= conn, _opts) do
+    user = current_user |> Repo.preload([:partner, :account])
 
+    partner = user.partner
+
+    render(conn, "products.html", user: user, partner: partner)
   end
 
   def new_product(conn, _opts) do
@@ -110,16 +115,18 @@ defmodule KefisWeb.SupplierController do
 
     user = current_user |> Repo.preload([:partner, :account])
 
+
+
     case Orders.supplier_order_detail(id, user.partner) do
       nil ->
         conn
         |> put_flash(:error, "Order not found")
-        |> redirect(to: Routes.supplier_path(conn, :index))
+        |> redirect(to: Routes.supplier_path(conn, :my_orders))
       order_detail ->
-        live_render(conn, KefisWeb.Supplier.OrderDetailSummaryLive, session: %{
-          "user" => user,
-          "order_detail" => order_detail,
-        })
+        render(conn, "order_details.html", order_detail: order_detail, user: user)
+
+
+
 
     end
   end

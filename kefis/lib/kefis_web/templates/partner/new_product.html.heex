@@ -11,6 +11,6 @@
 
 <%= render("dashboard_description.html", dashboard_page_title: "New Product", dashboard_page_description: "Add a product to your catalog") %>
 
-<%= render "product_form.html", Map.put(assigns, :action, Routes.partner_path(@conn, :create_product)) %>
+<%= render "product_form.html", Map.put(assigns, :action, Routes.partner_path(@conn, :new_product)) %>
 
 </main>

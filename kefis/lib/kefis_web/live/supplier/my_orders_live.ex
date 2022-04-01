@@ -54,7 +54,7 @@ defmodule KefisWeb.Supplier.MyOrdersLive do
 
   def handle_event("next", _params, %{assigns: %{page_number: page_number, paginated_orders: paginated_orders  }} = socket) do
 
-    
+
     orders_for_page = paginated_orders |> Enum.at(page_number + 1)
     page_entries = orders_for_page |> Enum.count()
 
@@ -78,6 +78,11 @@ defmodule KefisWeb.Supplier.MyOrdersLive do
     |> assign(:orders_for_page, orders_for_page)
     |> assign(:page_entries, page_entries)
     }
+  end
+
+  def handle_event("order", _params, socket) do
+    
+    {:noreply, socket}
   end
 
 
