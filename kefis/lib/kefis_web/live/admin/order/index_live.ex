@@ -84,11 +84,8 @@ defmodule KefisWeb.Admin.Order.IndexLive do
 
   end
 
-  def handle_event("show_item", %{"id" => order_id} = _params, socket) do
 
-    {:noreply, push_redirect(socket, to: Routes.live_path(socket, KefisWeb.Admin.Order.DetailLive, %{id: order_id}))}
-  end
-
+  
   def handle_event("edit_item", %{"id" => id} = _params, socket) do
     IO.inspect(id)
     {:noreply, socket}

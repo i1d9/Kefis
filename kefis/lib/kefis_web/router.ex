@@ -95,7 +95,8 @@ defmodule KefisWeb.Router do
 
     get "/orders", AdminController, :list_orders
 
-    live "/orders/detail", Admin.Order.DetailLive
+    live "/orders/:id", Admin.Order.ShowLive, :index
+    live "/orders/:id/info", Admin.Order.ShowLive, :view_detail
 
   end
 

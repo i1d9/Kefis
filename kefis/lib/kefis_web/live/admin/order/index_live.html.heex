@@ -49,7 +49,11 @@
 <tbody>
 <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
 <tr>
-<td phx-value-id={item.id} phx-click="show_item"><%= index %></td>
+<td phx-value-id={item.id} phx-click="show_item">
+
+<%= live_redirect index, to: Routes.show_path(@socket, :index, item.id) %>
+
+</td>
 
 <td><%= item.id %></td>
 <td>

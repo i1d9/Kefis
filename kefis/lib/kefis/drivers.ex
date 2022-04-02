@@ -27,4 +27,9 @@ defmodule Kefis.Drivers do
   end
 
 
+  def admin_load_driver do
+    Repo.all(Driver) |> Repo.preload([:user])
+  end
+
+
 end

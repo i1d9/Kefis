@@ -4,11 +4,10 @@ defmodule KefisWeb.Retailer.NewOrderLive do
 
   alias Kefis.Products
   alias Kefis.Chain.OrderDetail
-  alias Kefis.Chain.Order
   alias Kefis.Orders
   alias Ecto.Changeset
   alias Kefis.Repo
-  alias KefisWeb.Retailer.ConfirmOrderLive
+
 
 
   @impl true

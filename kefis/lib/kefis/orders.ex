@@ -90,4 +90,9 @@ defmodule Kefis.Orders do
     Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:product, :partner]])
   end
 
+
+  def admin_order_detail(id) do
+    Repo.get(OrderDetail, id) |> Repo.preload([:partner, :product, collection: [:driver]])
+  end
+
 end
