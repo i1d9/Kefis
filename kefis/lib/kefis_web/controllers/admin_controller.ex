@@ -144,6 +144,9 @@ defmodule KefisWeb.AdminController do
     render(conn, "user_index.html", users: users, meme: 1)
   end
 
+  def list_orders(conn, _opts) do
+    render(conn, "orders.html")
+  end
   ###API
   def api_list_partners(conn, _opts) do
     partners = Chain.list_partners()

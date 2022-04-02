@@ -92,6 +92,11 @@ defmodule KefisWeb.Router do
     get "/user", AdminController, :list_users
     get "/user/:id", AdminController, :list_users
 
+
+    get "/orders", AdminController, :list_orders
+
+    live "/orders/detail", Admin.Order.DetailLive
+
   end
 
 

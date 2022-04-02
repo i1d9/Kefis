@@ -5,7 +5,9 @@ defmodule Kefis.Orders do
   import Ecto.Query, only: [from: 2]
 
 
-  def get_order(id), do: Repo.get(Order, id) |> Repo.preload([order_details: [:product, :partner]])
+  def get_order(id), do: Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:product, :partner]])
+
+  def get(id), do: Repo.get(Order, id)
 
   def all(_module), do: []
 
