@@ -31,5 +31,9 @@ defmodule Kefis.Drivers do
     Repo.all(Driver) |> Repo.preload([:user])
   end
 
+  def get(id) do
+    Repo.get Driver, id
+  end
+
 
 end

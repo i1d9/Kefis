@@ -59,7 +59,8 @@
 
 
 
-        <%= if @collection_changeset do%>
+        <%= if @detail.status == "confirmed" do%>
+       
 
         <table class="table table-centered table-nowrap mb-0 rounded">
         <thead class="thead-light">
@@ -70,16 +71,33 @@
         </tr>
         </thead>
         <tbody>
+
         <tr>
-        <td><%= @supplier.name %>
+        <form phx-change="collection_update" phx-target={@myself}>
+        <td>
+        
+        <select name="driver" phx-change="select_driver">
+                <option selected disabled>--Select Driver--</option>
+        <%= for driver <- @drivers do%>
+
+
+<option value={driver.id} > <%= driver.user.first_name%> <%= driver.user.second_name%> </option>
+<% end  %>
+</select>
+
         </td>
-        <td>            <%= @supplier.contact_email %>
-        </td>
+        <td>       
+        <select name="warehouse" phx-change="select_warehouse">
+        <option selected disabled>--Select Warehouse--</option>
+        <%= for warehouse <- @warehouses do%>
+<option value={warehouse.id} > <%= warehouse.location_name %> </option>
+<% end  %>
+</select> </td>
         
         <td>
-                        <span class="btn btn-gray-200">Assign</span>
+                        <span phx-click="assign_driver" phx-target={@myself} class="btn btn-gray-200">Assign</span>
         </td>
-        
+        </form>
         </tr>
         
         </tbody>

@@ -27,6 +27,6 @@ defmodule Kefis.Warehouses do
   end
 
   def show(id) do
-
+    Repo.get Warehouse, id
   end
 end

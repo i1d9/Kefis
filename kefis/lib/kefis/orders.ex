@@ -92,7 +92,12 @@ defmodule Kefis.Orders do
 
 
   def admin_order_detail(id) do
-    Repo.get(OrderDetail, id) |> Repo.preload([:partner, :product, collection: [:driver]])
+    Repo.get(OrderDetail, id) |> Repo.preload([:partner, :product, collection: [driver: [:user]]])
+  end
+
+
+  def update_detail(order_detail) do
+    Repo.update(order_detail)
   end
 
 end
