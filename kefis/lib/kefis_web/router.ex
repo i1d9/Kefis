@@ -116,6 +116,13 @@ defmodule KefisWeb.Router do
 
   end
 
+
+  scope "/drivers", KefisWeb do
+    pipe_through [:browser]
+
+    live "/", Driver.DashboardLive
+  end
+
   scope "/r", KefisWeb do
     pipe_through [:browser, :protected, :retailer]
     #pipe_through [:browser]
