@@ -6,7 +6,7 @@ defmodule KefisWeb.SessionController do
 
   alias KefisWeb.ApiAuth
 
-  
+
   def new(conn, _params) do
     changeset = Pow.Plug.change_user(conn)
 
@@ -26,6 +26,7 @@ defmodule KefisWeb.SessionController do
 
         conn
         |> Pow.Plug.assign_current_user(reloaded_user, config)
+        |> put_session(:user, reloaded_user)
         |> put_flash(:info, "Welcome back!")
         |> Auth.landing_page(reloaded_user)
 
