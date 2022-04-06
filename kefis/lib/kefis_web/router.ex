@@ -121,6 +121,9 @@ defmodule KefisWeb.Router do
     pipe_through [:browser]
 
     live "/", Driver.DashboardLive
+    live "/trips", Driver.TripsLive
+    live "/trips/collection", Driver.TripsLive, :collections
+    live "/trips/delivery", Driver.TripsLive, :delivery
   end
 
   scope "/r", KefisWeb do
