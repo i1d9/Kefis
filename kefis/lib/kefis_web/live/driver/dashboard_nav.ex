@@ -4,13 +4,13 @@ defmodule KefisWeb.Driver.DashboardNav do
 
 
   @impl true
-  def update(%{title: title, component: component, description: description} = _assigns, socket) do
-    IO.inspect(title)
+  def update(%{title: title, component: component, description: description, component_info: component_info} = _assigns, socket) do
     {:ok,
     socket
     |> assign(:title, title)
     |> assign(:description, description)
     |> assign(:component, component)
+    |> assign(:component_info, component_info)
 
     }
   end
@@ -18,7 +18,6 @@ defmodule KefisWeb.Driver.DashboardNav do
 
   @impl true
   def render(assigns) do
-    IO.inspect(assigns.title)
     ~H"""
     <div>
 
@@ -54,50 +53,9 @@ defmodule KefisWeb.Driver.DashboardNav do
     </div>
     <% end %>
 
-    <div class="table-settings mb-4">
-      <div class="row align-items-center justify-content-between">
-        <div class="col col-md-6 col-lg-3 col-xl-4">
-          <div class="input-group me-2 me-lg-3 fmxw-400">
-            <span class="input-group-text">
-              <svg class="icon icon-xs" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </span>
-            <input type="text" class="form-control" placeholder="Search orders">
-          </div>
-        </div>
-        <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
-          <div class="dropdown">
-            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end pb-0">
-              <span class="small ps-3 fw-bold text-dark">Show</span>
-              <a class="dropdown-item d-flex align-items-center fw-bold" href="#">10 <svg class="icon icon-xxs ms-auto"
-                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"></path>
-                </svg></a>
-              <a class="dropdown-item fw-bold" href="#">20</a>
-              <a class="dropdown-item fw-bold rounded-bottom" href="#">30</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="card card-body border-0 shadow table-wrapper table-responsive">
 
-    <%= live_component @socket, assigns.component, id: "map-component" %>
+    <%= live_component @socket, assigns.component, id: assigns.component_info.id, info: assigns.component_info %>
 
     </div>
       </main>
@@ -112,8 +70,8 @@ defmodule KefisWeb.Driver.DashboardNav do
 
       <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
       <a class="navbar-brand me-lg-5" href="../../index.html">
-        <img class="navbar-brand-dark" src="../../assets/img/brand/light.svg" alt="Volt logo" /> <img
-          class="navbar-brand-light" src="../../assets/img/brand/dark.svg" alt="Volt logo" />
+        <img class="navbar-brand-dark" src="../../assets/img/brand/light.svg" alt="Kefis" /> <img
+          class="navbar-brand-light" src="../../assets/img/brand/dark.svg" alt="Kefis" />
       </a>
       <div class="d-flex align-items-center">
         <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
@@ -159,13 +117,14 @@ defmodule KefisWeb.Driver.DashboardNav do
           <li class="nav-item">
             <a href="../../index.html" class="nav-link d-flex align-items-center">
               <span class="sidebar-icon">
-                <img src="../../assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                <img src="../../assets/img/brand/light.svg" height="20" width="20" alt="Kefis">
               </span>
-              <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
+              <span class="mt-1 ms-1 sidebar-text">Kefis</span>
             </a>
           </li>
           <li class="nav-item  active ">
-            <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+
+            <%= link  to: Routes.dashboard_path(@socket, :index), class: "nav-link" do%>
               <span class="sidebar-icon">
                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
@@ -173,12 +132,17 @@ defmodule KefisWeb.Driver.DashboardNav do
                 </svg>
               </span>
               <span class="sidebar-text">Dashboard</span>
-            </a>
+
+
+            <% end %>
+
+
           </li>
 
           <li class="nav-item ">
-            <a href="../../pages/transactions.html" class="nav-link">
-              <span class="sidebar-icon">
+
+            <%= link  to: Routes.trips_path(@socket, :collections), class: "nav-link" do%>
+            <span class="sidebar-icon">
                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
                   <path fill-rule="evenodd"
@@ -186,21 +150,24 @@ defmodule KefisWeb.Driver.DashboardNav do
                     clip-rule="evenodd"></path>
                 </svg>
               </span>
-              <span class="sidebar-text">Collections</span>
-            </a>
+            <span class="sidebar-text">Collections</span>
+          <% end %>
           </li>
+
           <li class="nav-item ">
-            <a href="../../pages/settings.html" class="nav-link">
-              <span class="sidebar-icon">
-                <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                    clip-rule="evenodd"></path>
-                </svg>
-              </span>
-              <span class="sidebar-text">Deliveries</span>
-            </a>
-          </li>
+
+          <%= link  to: Routes.trips_path(@socket, :delivery), class: "nav-link" do%>
+          <span class="sidebar-icon">
+              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
+                <path fill-rule="evenodd"
+                  d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </span>
+          <span class="sidebar-text">Delivery</span>
+        <% end %>
+        </li>
         </ul>
       </div>
     </nav>
@@ -217,20 +184,7 @@ defmodule KefisWeb.Driver.DashboardNav do
           <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
               <!-- Search form -->
-              <form class="navbar-search form-inline" id="navbar-search-main">
-                <div class="input-group input-group-merge search-bar">
-                  <span class="input-group-text" id="topbar-addon">
-                    <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
-                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                  </span>
-                  <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Search"
-                    aria-label="Search" aria-describedby="topbar-addon">
-                </div>
-              </form>
+
               <!-- / Search form -->
             </div>
             <!-- Navbar links -->

@@ -5,7 +5,6 @@ defmodule KefisWeb.Driver.TripsLive do
 
   def mount(_params, %{"user" => user} = _session, socket) do
 
-    IO.inspect(1)
     {:ok,
     socket
     |> assign(:user, user)

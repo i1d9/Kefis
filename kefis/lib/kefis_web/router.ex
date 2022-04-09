@@ -120,8 +120,7 @@ defmodule KefisWeb.Router do
   scope "/drivers", KefisWeb do
     pipe_through [:browser]
 
-    live "/", Driver.DashboardLive
-    live "/trips", Driver.TripsLive, :index
+    live "/", Driver.DashboardLive, :index
     live "/trips/collection", Driver.TripsLive, :collections
     live "/trips/delivery", Driver.TripsLive, :delivery
   end

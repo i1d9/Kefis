@@ -1,7 +1,10 @@
 defmodule KefisWeb.Driver.ExampleLive do
   use KefisWeb, :live_component
 
-  def update(_assign, socket) do
+  def update(assign, socket) do
+
+    IO.inspect("here")
+    IO.inspect(socket)
     {:ok, socket}
   end
 

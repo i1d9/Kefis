@@ -3,11 +3,10 @@ defmodule KefisWeb.Driver.DashboardLive do
 
 
   def mount(_params, session, socket) do
-    IO.inspect(session)
     {:ok, socket}
   end
 
-  
+
 
 
 end
