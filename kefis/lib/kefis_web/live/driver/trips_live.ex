@@ -5,16 +5,25 @@ defmodule KefisWeb.Driver.TripsLive do
 
   def mount(_params, %{"user" => user} = _session, socket) do
 
+    IO.inspect(1)
     {:ok,
     socket
-    |> init_items(user.driver)
+    |> assign(:user, user)
+    |> init_items(user.driver, "collection")
     }
   end
 
 
-  defp init_items(socket, driver) do
 
-    items = Drivers.driver_collection(driver)
+  defp init_items(socket, driver, type) do
+
+    items = case type do
+      "collection" ->
+        Drivers.driver_collection(driver)
+      "delivery" ->
+        Drivers.driver_deliveries(driver)
+    end
+
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
@@ -32,6 +41,21 @@ defmodule KefisWeb.Driver.TripsLive do
     |> assign(:paginated_items, paginated_items)
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
+  end
+
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  defp apply_action(socket, :collections, _params) do
+    IO.inspect(2)
+    socket
+
+
+  end
+
+  defp apply_action(socket, :delivery, _params) do
+    socket
   end
 
 

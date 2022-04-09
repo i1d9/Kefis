@@ -4,6 +4,7 @@ defmodule Kefis.Drivers do
   alias Kefis.Users.User
   alias Ecto.Changeset
   alias Kefis.Chain.Collection
+  alias Kefis.Chain.Dispatch
   import Ecto.Query, only: [from: 2]
 
   def create_driver(details) do
@@ -42,4 +43,12 @@ defmodule Kefis.Drivers do
     query = from c in Collection, preload: [order_detail: [:partner, :product]], where: c.driver_id == ^driver.id
     Repo.all query
   end
+
+
+  def driver_deliveries(driver) do
+    query = from d in Dispatch, preload: [:warehouse, order: [:partner]], where: d.driver_id == ^driver.id
+    Repo.all query
+  end
+
+
 end
