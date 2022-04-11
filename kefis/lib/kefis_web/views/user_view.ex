@@ -13,9 +13,12 @@ defmodule KefisWeb.UserView do
         "Retailer"
       role == "retailer_user" ->
         "Retailer"
+      role == "warehouse_admin" ->
+          "Warehouse Head"
+      role == "warehouse_user" ->
+          "Warehouse Worker"
       role == "driver" ->
         "Driver"
-
       true ->
           "Role not set"
     end

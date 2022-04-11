@@ -3,7 +3,7 @@ defmodule Kefis.Users.User do
   use Pow.Ecto.Schema
   import Ecto.Changeset
 
-  @roles ~w(user super supplier_admin supplier_user retailer_admin retailer_user driver)
+  @roles ~w(user super supplier_admin supplier_user retailer_admin retailer_user driver warehouse_admin warehouse_user)
 
   schema "users" do
     pow_user_fields()

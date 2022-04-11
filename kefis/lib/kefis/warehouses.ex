@@ -1,7 +1,9 @@
 defmodule Kefis.Warehouses do
 
   alias Kefis.Chain.Warehouse
+  alias Kefis.Chain.Collection
   alias Kefis.Repo
+  import Ecto.Query, only: [from: 2]
 
   def list() do
     warehouses = Repo.all(Warehouse)
@@ -28,5 +30,16 @@ defmodule Kefis.Warehouses do
 
   def show(id) do
     Repo.get Warehouse, id
+  end
+
+
+  def incoming_orders(warehouse) do
+    warehouse
+
+  end
+
+  def outgoing_orders(warehouse) do
+    query = from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [:driver], where: c.status == ^"Picked"
+    |> Repo.all()
   end
 end

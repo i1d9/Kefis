@@ -1,0 +1,33 @@
+<%= if @live_action in [:incoming]  do%>
+
+<h1>Incoming Orders</h1>
+<table class="table table-centered table-nowrap mb-0 rounded"> 
+<thead>
+<tr>
+<th>Driver</th>
+<th>Vehicle</th>
+<th>Value</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+<% end %>
+
+
+<%= if @live_action in [:outgoing]  do%>
+<h1>Outgoing Orders</h1>
+<table class="table table-centered table-nowrap mb-0 rounded">
+<thead>
+<th>Driver</th>
+<th>Vehicle</th>
+<th>Value</th>
+<th>Actions</th>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+<% end %>

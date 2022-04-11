@@ -97,6 +97,21 @@ defmodule KefisWeb.Auth do
   end
 
 
+  def warehouse(conn, _opts) do
+
+    if conn.assigns.current_user.role == "warehouse_admin" do
+      IO.puts("Warehouse is logged")
+      conn
+    else
+        conn
+        |> put_flash(:error, "You must be logged in to access that page")
+        |> Pow.Plug.delete()
+        |> redirect(to: Routes.login_path(conn, :new))
+        |> halt()
+    end
+  end
+
+
 
 
 end

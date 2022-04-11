@@ -151,6 +151,19 @@ defmodule KefisWeb.Router do
 
   end
 
+
+  scope "/w", KefisWeb do
+    #pipe_through [:browser, :protected, :warehouse]
+    pipe_through [:browser]
+
+    live "/", Warehouse.IndexLive
+    live "/incoming", Warehouse.OrdersLive, :incoming
+    live "/outgoing", Warehouse.OrdersLive, :outgoing
+
+
+
+  end
+
   # Other scopes may use custom stacks.
   scope "/api", KefisWeb do
     pipe_through :api
