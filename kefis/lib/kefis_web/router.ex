@@ -169,7 +169,7 @@ defmodule KefisWeb.Router do
     pipe_through :api
 
 
-    post "/login", SessionController, :api_create, as: :api_login
+      post "/login", SessionController, :api_create, as: :api_login
 
     #delete "/logout", SessionController, :api_delete, as: :api_logout
     post "/session/renew", SessionController, :renew

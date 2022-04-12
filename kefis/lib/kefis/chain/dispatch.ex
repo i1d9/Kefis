@@ -13,6 +13,7 @@ defmodule Kefis.Chain.Dispatch do
 
     field :status, :string
 
+    timestamps()
   end
 
   def changeset(dispatch, attrs) do

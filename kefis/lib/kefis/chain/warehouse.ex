@@ -10,6 +10,9 @@ defmodule Kefis.Chain.Warehouse do
     has_many :dispatches, Kefis.Chain.Dispatch
     has_many :collections, Kefis.Chain.Collection
 
+    belongs_to :user, Kefis.Users.User
+
+
     timestamps()
   end
 

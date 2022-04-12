@@ -6,6 +6,7 @@ defmodule Kefis.Repo.Migrations.AddWarehouse do
       add :location_name, :string
       add :lng, :float
       add :lat, :float
+      add :user_id, references(:users)
 
       timestamps()
     end
