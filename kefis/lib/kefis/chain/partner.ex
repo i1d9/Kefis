@@ -17,6 +17,8 @@ defmodule Kefis.Chain.Partner do
     has_many :order_details, Kefis.Chain.OrderDetail
     has_many :orders, Kefis.Chain.Order
     has_many :collections, Kefis.Chain.Collection
+    has_one :account, Kefis.Chain.Account
+
     timestamps()
   end
 

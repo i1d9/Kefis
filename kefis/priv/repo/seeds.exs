@@ -38,14 +38,7 @@ supplier_user = %{
 supplier_user = User.admin_changeset(%User{}, supplier_user)
 supplier_user = Repo.insert!(supplier_user)
 
-#Create a monetary account for the supplier
-supplier_account_details = %{
-  balance: 0,
-  status: "active"
-}
-supplier_money_account = Account.changeset(%Account{}, supplier_account_details)
-|> Ecto.Changeset.put_assoc(:user, supplier_user)
-|> Repo.insert!()
+
 
 
 #Create a Retailer Account
@@ -60,14 +53,7 @@ retailer_user = %{
 retailer_user = User.admin_changeset(%User{}, retailer_user)
 retailer_user = Repo.insert!(retailer_user)
 
-#Create a monetary account for the retailer
-retailer_account_details = %{
-  balance: 0,
-  status: "active"
-}
-retailer_money_account = Account.changeset(%Account{}, retailer_account_details)
-|> Ecto.Changeset.put_assoc(:user, retailer_user)
-|> Repo.insert!()
+
 
 #Create a Supplier record
 supplier_details = %{
@@ -99,6 +85,27 @@ retailer = retailer_user
   |> Ecto.build_assoc(:partner)
   |> Partner.changeset(retailer_details)
   |> Repo.insert!()
+
+
+
+#Create a monetary account for the supplier
+supplier_account_details = %{
+  balance: 0,
+  status: "active"
+}
+supplier_money_account = Account.changeset(%Account{}, supplier_account_details)
+|> Ecto.Changeset.put_assoc(:partner, supplier)
+|> Repo.insert!()
+
+#Create a monetary account for the retailer
+retailer_account_details = %{
+  balance: 0,
+  status: "active"
+}
+retailer_money_account = Account.changeset(%Account{}, retailer_account_details)
+|> Ecto.Changeset.put_assoc(:partner, retailer)
+|> Repo.insert!()
+
 
 #Deposit KES 5000 in the retailer account
 transaction_details = %{

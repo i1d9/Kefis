@@ -13,7 +13,6 @@ defmodule Kefis.Users.User do
     field :phone, :string
 
     has_one :partner, Kefis.Chain.Partner
-    has_one :account, Kefis.Chain.Account
     has_one :driver, Kefis.Chain.Driver
     has_one :warehouse, Kefis.Chain.Warehouse
 

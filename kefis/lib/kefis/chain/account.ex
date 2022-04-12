@@ -7,8 +7,10 @@ defmodule Kefis.Chain.Account do
   schema "accounts" do
     field :balance, :integer
     field :status, :string, default: "active"
-    belongs_to :user, Kefis.Users.User
+
+    belongs_to :partner, Kefis.Chain.Partner
     has_many :transactions, Kefis.Chain.Transaction
+
     timestamps()
   end
 

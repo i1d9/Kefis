@@ -3,11 +3,12 @@ defmodule Kefis.Repo.Migrations.AddAccounts do
 
   def change do
     create table(:accounts) do
-      add :user_id, references(:users)
+      add :partner_id, references(:partners)
       add :balance, :integer
       add :status, :string
 
       timestamps()
     end
   end
+  
 end
