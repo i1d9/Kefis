@@ -1,9 +1,12 @@
 defmodule KefisWeb.Warehouse.IncomingLive do
   use KefisWeb, :live_component
+  alias Kefis.Warehouses
 
-
-  def update(assigns, socket) do
-    {:ok, socket}
+  def update(%{details: details} = _assigns, socket) do
+    {:ok,
+    socket
+    |> init_items(details.warehouse)
+    }
   end
 
 
@@ -27,5 +30,29 @@ defmodule KefisWeb.Warehouse.IncomingLive do
     </div>
     """
   end
+
+  defp init_items(socket, warehouse) do
+
+    items = Warehouses.incoming_orders(warehouse)
+
+    page_entries = 10
+    paginated_items = items |> Enum.chunk_every(page_entries)
+    items_for_page = paginated_items |> Enum.at(0)
+    total_entries = items |> Enum.count()
+    total_pages = paginated_items |> Enum.count()
+
+    socket
+    |> assign(:items, items)
+    |> assign(:total_pages, total_pages)
+    |> assign(:total_entries, total_entries)
+    |> assign(:page_number, 0)
+    |> assign(:page_size, 0)
+    |> assign(:current_page, 0)
+    |> assign(:paginated_items, paginated_items)
+    |> assign(:items_for_page, items_for_page)
+    |> assign(:page_entries, page_entries)
+  end
+
+
 
 end

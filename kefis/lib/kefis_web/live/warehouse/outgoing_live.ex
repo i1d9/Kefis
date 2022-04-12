@@ -2,17 +2,22 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
   use KefisWeb, :live_component
 
 
-  def update(assigns, socket) do
+  alias Kefis.Warehouses
+
+  def update(%{details: details} = _assigns, socket) do
+
     {:ok,
-    socket}
+    socket
+    |> init_items(details.warehouse)
+    }
   end
 
 
 
 
-  defp init_items(socket) do
+  defp init_items(socket, warehouse) do
 
-    items = []
+    items = Warehouses.outgoing_orders(warehouse)
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
