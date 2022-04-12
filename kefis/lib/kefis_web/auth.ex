@@ -31,6 +31,8 @@ defmodule KefisWeb.Auth do
         redirect(conn, to: Routes.retailer_path(conn, :index))
       user.role == "driver" ->
           redirect(conn, to: Routes.dashboard_path(conn, :index))
+      user.role == "warehouse_admin" ->
+        redirect(conn, to: Routes.dashboard_path(conn, :index))
       true ->
         redirect(conn, to: Routes.page_path(conn, :index))
     end

@@ -2,12 +2,14 @@ defmodule KefisWeb.Warehouse.IndexLive do
   use KefisWeb, :live_view
 
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"user" => user} = _session, socket) do
 
     {
       :ok,
       socket
       |> init_items()
+      |> assign(:user, user)
+      |> assign(:warehouse, user.warehouse)
     }
   end
 

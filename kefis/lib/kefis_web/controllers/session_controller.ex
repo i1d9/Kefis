@@ -21,7 +21,7 @@ defmodule KefisWeb.SessionController do
 
         config        = Pow.Plug.fetch_config(conn)
         user          = Pow.Plug.current_user(conn, config)
-        reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :account])
+        reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :warehouse])
         Pow.Plug.assign_current_user(conn, reloaded_user, config)
 
         conn

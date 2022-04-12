@@ -171,6 +171,15 @@ defmodule KefisWeb.ApiAuth do
 
   end
 
+  def api_warehouse(conn, _opts) do
+    if conn.assigns.current_user.role == "warehouse_admin" do
+      conn
+    else
+      not_authorized(conn)
+    end
+
+  end
+
 
   defp not_authorized(conn) do
     conn
