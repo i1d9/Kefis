@@ -18,7 +18,8 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
   defp init_items(socket, warehouse) do
 
     items = Warehouses.outgoing_orders(warehouse)
-
+    IO.inspect(items)
+    
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)

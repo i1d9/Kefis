@@ -37,11 +37,12 @@ defmodule Kefis.Warehouses do
     query =
       from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [:driver], where: c.status == ^"picked"
     Repo.all(query)
+
   end
 
   def outgoing_orders(warehouse) do
     query =
-      from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [:driver], where: c.status == ^"processed"
+      from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [driver: [:user]], where: c.status == ^"processed"
     Repo.all(query)
   end
 end

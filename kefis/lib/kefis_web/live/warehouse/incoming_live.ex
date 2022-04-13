@@ -24,7 +24,20 @@ defmodule KefisWeb.Warehouse.IncomingLive do
     </tr>
     </thead>
     <tbody>
+    <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
+    <tr>
+    <td phx-value-id={item.id} phx-click="show_item">
 
+
+    </td>
+
+
+
+
+    <td><%= item.driver.vehicle %></td>
+        <td><%= item.value %></td>
+    </tr>
+    <% end %>
     </tbody>
     </table>
     </div>
@@ -34,7 +47,7 @@ defmodule KefisWeb.Warehouse.IncomingLive do
   defp init_items(socket, warehouse) do
 
     items = Warehouses.incoming_orders(warehouse)
-
+    IO.inspect(items
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)
