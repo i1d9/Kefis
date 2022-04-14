@@ -16,7 +16,7 @@ defmodule Kefis.Products do
 
   def list_partner_products(supplier) do
 
-    IO.inspect(supplier.id)
+    
     query = from po in Product, where: po.partner_id == ^supplier.id
     Repo.all(query)
   end

@@ -67,6 +67,10 @@
   .phx-disconnected *{
     pointer-events: none;
   }
+
+  #sidebarMenu{
+    z-index: 0;
+  }
   
   .phx-modal {
     opacity: 1!important;

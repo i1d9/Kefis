@@ -28,7 +28,7 @@ defmodule KefisWeb.Auth do
       user.role == "supplier_admin" ->
         redirect(conn, to: Routes.supplier_path(conn, :index))
       user.role == "retailer_admin" ->
-        redirect(conn, to: Routes.retailer_path(conn, :index))
+        redirect(conn, to: Routes.live_path(conn,  KefisWeb.Retailer.IndexLive))
       user.role == "driver" ->
           redirect(conn, to: Routes.dashboard_path(conn, :index))
       user.role == "warehouse_admin" ->
@@ -43,7 +43,6 @@ defmodule KefisWeb.Auth do
   def retailer(conn, _opts) do
 
     if conn.assigns.current_user.role == "retailer_admin" do
-      IO.puts("Retailer is logged")
       conn
     else
         conn
@@ -58,7 +57,6 @@ defmodule KefisWeb.Auth do
   def admin(conn, _opts) do
 
     if conn.assigns.current_user.role == "admin" do
-      IO.puts("Admin is logged")
       conn
     else
         conn
@@ -72,8 +70,7 @@ defmodule KefisWeb.Auth do
   def supplier(conn, _opts) do
 
     if conn.assigns.current_user.role == "supplier_admin" do
-      IO.puts("Supplier is logged")
-      conn
+        conn
     else
         conn
         |> put_flash(:error, "You must be logged in to access that page")

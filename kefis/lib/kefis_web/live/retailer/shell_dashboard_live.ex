@@ -1,14 +1,11 @@
-defmodule KefisWeb.Warehouse.ShellDashboardLive do
+defmodule KefisWeb.Retailer.ShellDashboardLive do
   use KefisWeb, :live_component
 
-  def update(%{component: component, component_details: component_details }= assigns, socket) do
-
-    IO.inspect(component)
+  def update(%{component: component, component_details: component_details} = _assigns, socket) do
     {:ok,
-    socket
-    |> assign(component: component)
-    |> assign(component_details: component_details)
-    }
+     socket
+     |> assign(component: component)
+     |> assign(component_details: component_details)}
   end
 
   def render(assigns) do
@@ -68,6 +65,7 @@ defmodule KefisWeb.Warehouse.ShellDashboardLive do
             <span class="mt-1 ms-1 sidebar-text">Kefis</span>
           </a>
         </li>
+
         <li class="nav-item  active ">
 
           <%= link to: Routes.live_path(@socket, KefisWeb.Warehouse.IndexLive), class: "nav-link" do%>
@@ -82,45 +80,42 @@ defmodule KefisWeb.Warehouse.ShellDashboardLive do
 
         </li>
         <li class="nav-item">
-
-          <%= link to: Routes.orders_path(@socket, :incoming), class: "nav-link d-flex justify-content-between" do%>
+        <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-components" aria-expanded="true">
           <span>
-          <span class="sidebar-icon">
-          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <span class="sidebar-icon">
+            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
 
+            </span>
+            <span class="sidebar-text">Orders</span>
           </span>
-          <span class="sidebar-text">Incoming</span>
-        </span>
-          <% end %>
-
-        </li>
-
-
-        <%= link to: Routes.orders_path(@socket, :outgoing), class: "nav-link d-flex justify-content-between" do%>
-        <span>
-        <span class="sidebar-icon">
-        <i class="fa fa-repeat" aria-hidden="true"></i>
-
-        </span>
-        <span class="sidebar-text">Processing</span>
-      </span>
-        <% end %>
-
-        <li class="nav-item ">
-
-        <%= link to: Routes.orders_path(@socket, :outgoing), class: "nav-link d-flex justify-content-between" do%>
-          <span>
-          <span class="sidebar-icon">
-          <i class="fa fa-arrow-up" aria-hidden="true"></i>
-
+          <span class="link-arrow">
+            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
           </span>
-          <span class="sidebar-text">Outgoing</span>
         </span>
-          <% end %>
+        <div class="multi-level collapse show" role="list" id="submenu-components" aria-expanded="false" style="">
+          <ul class="flex-column nav">
+            <li class="nav-item">
 
 
+            <%= link to: Routes.live_path(@socket, KefisWeb.Retailer.NewLive), class: "nav-link d-flex justify-content-between" do%>
+            <span>
 
-        </li>
+            <span class="sidebar-text">New</span>
+          </span>
+            <% end %>
+
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="../../pages/components/buttons.html">
+                <span class="sidebar-text">History</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+
+      
         <li class="nav-item ">
           <a href="#" class="nav-link">
             <span class="sidebar-icon">

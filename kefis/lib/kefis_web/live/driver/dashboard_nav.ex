@@ -70,8 +70,8 @@ defmodule KefisWeb.Driver.DashboardNav do
 
       <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
       <a class="navbar-brand me-lg-5" href="../../index.html">
-        <img class="navbar-brand-dark" src="../../assets/img/brand/light.svg" alt="Kefis" /> <img
-          class="navbar-brand-light" src="../../assets/img/brand/dark.svg" alt="Kefis" />
+        <img class="navbar-brand-dark" src="" alt="Kefis" /> <img
+          class="navbar-brand-light" src="" alt="Kefis" />
       </a>
       <div class="d-flex align-items-center">
         <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
@@ -86,7 +86,7 @@ defmodule KefisWeb.Driver.DashboardNav do
         <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
           <div class="d-flex align-items-center">
             <div class="avatar-lg me-4">
-              <img src="../../assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white"
+              <img src="" class="card-img-top rounded-circle border-white"
                 alt="Bonnie Green">
             </div>
             <div class="d-block">
@@ -117,7 +117,7 @@ defmodule KefisWeb.Driver.DashboardNav do
           <li class="nav-item">
             <a href="../../index.html" class="nav-link d-flex align-items-center">
               <span class="sidebar-icon">
-                <img src="../../assets/img/brand/light.svg" height="20" width="20" alt="Kefis">
+                <img src="" height="20" width="20" alt="Kefis">
               </span>
               <span class="mt-1 ms-1 sidebar-text">Kefis</span>
             </a>
@@ -206,7 +206,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                       <div class="row align-items-center">
                         <div class="col-auto">
                           <!-- Avatar -->
-                          <img alt="Image placeholder" src="../assets/img/team/profile-picture-1.jpg"
+                          <img alt="Image placeholder" src=""
                             class="avatar-md rounded">
                         </div>
                         <div class="col ps-0 ms-2">
@@ -227,7 +227,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                       <div class="row align-items-center">
                         <div class="col-auto">
                           <!-- Avatar -->
-                          <img alt="Image placeholder" src="../assets/img/team/profile-picture-2.jpg"
+                          <img alt="Image placeholder" src=""
                             class="avatar-md rounded">
                         </div>
                         <div class="col ps-0 ms-2">
@@ -247,7 +247,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                       <div class="row align-items-center">
                         <div class="col-auto">
                           <!-- Avatar -->
-                          <img alt="Image placeholder" src="../assets/img/team/profile-picture-3.jpg"
+                          <img alt="Image placeholder" src=""
                             class="avatar-md rounded">
                         </div>
                         <div class="col ps-0 m-2">
@@ -267,7 +267,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                       <div class="row align-items-center">
                         <div class="col-auto">
                           <!-- Avatar -->
-                          <img alt="Image placeholder" src="../assets/img/team/profile-picture-4.jpg"
+                          <img alt="Image placeholder" src=""
                             class="avatar-md rounded">
                         </div>
                         <div class="col ps-0 ms-2">
@@ -287,7 +287,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                       <div class="row align-items-center">
                         <div class="col-auto">
                           <!-- Avatar -->
-                          <img alt="Image placeholder" src="../assets/img/team/profile-picture-5.jpg"
+                          <img alt="Image placeholder" src=""
                             class="avatar-md rounded">
                         </div>
                         <div class="col ps-0 ms-2">
@@ -322,7 +322,7 @@ defmodule KefisWeb.Driver.DashboardNav do
                   aria-expanded="false">
                   <div class="media d-flex align-items-center">
                     <img class="avatar rounded-circle" alt="Image placeholder"
-                      src="../assets/img/team/profile-picture-3.jpg">
+                      src="">
                     <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                       <span class="mb-0 font-small fw-bold text-gray-900">Bonnie Green</span>
                     </div>

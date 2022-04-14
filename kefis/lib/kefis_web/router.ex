@@ -128,7 +128,11 @@ defmodule KefisWeb.Router do
   scope "/r", KefisWeb do
     pipe_through [:browser, :protected, :retailer]
     #pipe_through [:browser]
-    get "/", RetailerController, :index
+
+    live "/", Retailer.IndexLive
+    live "/order/new", Retailer.NewLive
+
+
     get "/order/new", RetailerController, :order
     get "/order/:id", RetailerController, :show_order
     live "/order/info", Retailer.ConfirmOrderLive

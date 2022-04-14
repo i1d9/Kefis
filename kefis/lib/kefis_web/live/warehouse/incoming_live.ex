@@ -47,7 +47,7 @@ defmodule KefisWeb.Warehouse.IncomingLive do
   defp init_items(socket, warehouse) do
 
     items = Warehouses.incoming_orders(warehouse)
-    IO.inspect(items
+    IO.inspect(items)
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)
