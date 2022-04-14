@@ -4,7 +4,7 @@ defmodule Kefis.Chain.Product do
 
   schema "products" do
     field :category, :string
-    field :image, :string
+    field :image, :string, default: "/images/product_placeholder.jpg"
     field :name, :string
     field :price, :integer
     field :sku, :string
@@ -22,5 +22,5 @@ defmodule Kefis.Chain.Product do
   end
 
 
-  
+
 end

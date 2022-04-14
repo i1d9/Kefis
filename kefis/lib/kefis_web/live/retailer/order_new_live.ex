@@ -75,7 +75,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
     <%= if @finished_selection do %>
 
-      
+
 
       <%= live_component KefisWeb.Retailer.CartLive,
         id: "order.id",
@@ -102,10 +102,15 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
       <%= if @total_entries > 0 do%>
 
+
+
         <div class="table-responsive">
           <table class="table table-centered table-nowrap mb-0 rounded">
             <thead class="thead-light">
               <tr>
+                <th class="border-0">
+
+                </th>
                 <th class="border-0">Name</th>
                 <th class="border-0">Price</th>
                 <th class="border-0">Quantity</th>
@@ -116,6 +121,9 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
             <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
               <tr>
+                <td>
+                  <img class="icon" src={Routes.static_path(@socket, item.image)} />
+                </td>
                 <td><%= item.name %></td>
                 <td><%= item.price %></td>
                 <td><%= item.sku %></td>

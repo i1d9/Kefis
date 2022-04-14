@@ -38,6 +38,7 @@ defmodule KefisWeb.Retailer.CartLive do
       <table class="table table-centered table-nowrap mb-0 rounded">
       <thead class="thead-light">
       <tr>
+      <th class="border-0"></th>
       <th class="border-0">Name</th>
       <th class="border-0">Price</th>
       <th class="border-0">Quantity</th>
@@ -50,6 +51,9 @@ defmodule KefisWeb.Retailer.CartLive do
 
         <%= for {%{changes: selected_product} = _product, index} <- Enum.with_index(@selected_products) do %>
             <tr>
+            <td>
+            <img class="icon" src={Routes.static_path(@socket, selected_product.product.data.image)} />
+          </td>
               <td><%= selected_product.product.data.name %></td>
               <td><%= selected_product.price %></td>
               <td><%= selected_product.quantity %></td>
@@ -117,7 +121,6 @@ defmodule KefisWeb.Retailer.CartLive do
   end
 
   def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
-
     order_info = %{value: total, status: "Initiatied"}
     case Orders.retailer_new_order(order_info, user, selected_product_changesets) do
       {:ok, order} ->

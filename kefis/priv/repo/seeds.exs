@@ -127,7 +127,7 @@ for i <- 1..10 do
   category: "shoes",
   price: 5,
   sku: "HJABJHbjhbsdh&(@&*7w48",
-  image: "image.jpg"
+  image: "/images/product_placeholder.jpg"
   }
 
   Products.create(supplier, product_detail)
