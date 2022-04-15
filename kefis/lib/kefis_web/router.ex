@@ -131,7 +131,8 @@ defmodule KefisWeb.Router do
 
     live "/", Retailer.IndexLive
     live "/order/new", Retailer.NewLive
-
+    live "/order", Retailer.OrdersLive, :index
+    live "/order/detail", Retailer.OrdersLive, :detail
 
     get "/order/new", RetailerController, :order
     get "/order/:id", RetailerController, :show_order

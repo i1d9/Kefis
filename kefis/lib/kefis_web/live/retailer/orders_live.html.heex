@@ -1,0 +1,10 @@
+
+<%= if @show_detail do %>
+
+<%= live_component @socket, KefisWeb.Retailer.ShellDashboardLive, id: "order_details", component: KefisWeb.Retailer.OrderDetailsLive, component_details: %{id: "order_list_component", user: @user, order_detail_id: @order_detail_id} %>
+
+<% else %>
+
+<%= live_component @socket, KefisWeb.Retailer.ShellDashboardLive, id: "order_list", component: KefisWeb.Retailer.OrdersListLive, component_details: %{id: "order_list_component", user: @user, live_action: @live_action} %>
+
+<% end %>

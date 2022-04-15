@@ -3,7 +3,7 @@ defmodule KefisWeb.Driver.CollectionLive do
 
   alias Kefis.Drivers
 
-  def update(%{info: %{user: user}}= assigns, socket) do
+  def update(%{info: %{user: user}}= _assigns, socket) do
     IO.inspect(user)
     {:ok,
     socket

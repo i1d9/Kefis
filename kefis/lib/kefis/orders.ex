@@ -59,6 +59,11 @@ defmodule Kefis.Orders do
       |> Repo.insert()
   end
 
+  def retailer_orders(user) do
+    query = from o in Order, preload: [:partner, order_details: [:product, :partner]], where: o.partner_id == ^user.partner.id
+    Repo.all(query)
+  end
+
 
 
   def supplier_orders(supplier, status \\ "initiated") do

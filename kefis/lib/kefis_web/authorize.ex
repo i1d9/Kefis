@@ -3,8 +3,7 @@ defmodule KefisWeb.Authorize do
   import Plug.Conn
   import Phoenix.Controller
   import Kefis.Authorization
-  alias Kefis.Repo
-  alias Kefis.Users.User
+
   alias KefisWeb.Router.Helpers, as: Routes
 
   def init(opts), do: opts

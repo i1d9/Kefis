@@ -4,7 +4,7 @@ defmodule KefisWeb.Admin.Order.ShowLive do
   alias Kefis.Orders
   def mount(params, _session, socket) do
 
-    IO.inspect(params)
+    
     case params do
       %{"id" => id} ->
 

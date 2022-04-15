@@ -16,7 +16,6 @@ defmodule KefisWeb.Retailer.ConfirmOrderLive do
   def handle_event("table_filter", %{"filter" => filter} = _value, %{assigns: %{order: order, order_holder: order_holder}} = socket) do
     IO.inspect(order.order_details)
 
-
     {:noreply,
     socket
     |> assign(:order, filter_order_details(order, filter, order_holder))}

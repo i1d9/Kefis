@@ -7,17 +7,20 @@ defmodule KefisWeb.Retailer.CartLive do
   alias Ecto.Changeset
   alias Kefis.Repo
 
-  def update(%{selected_products: selected_products, total: total }= assig, socket) do
+  @impl true
+  def update(%{selected_products: selected_products, total: total, user: user }= assig, socket) do
     IO.inspect(assig)
 
     {:ok,
     socket
     |> assign(selected_products: selected_products)
     |> assign(total: total)
+    |> assign(user: user)
 
     }
   end
 
+  @impl true
   def render(assigns) do
     ~H"""
     <div>
@@ -120,6 +123,7 @@ defmodule KefisWeb.Retailer.CartLive do
     }
   end
 
+  @impl true
   def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
     order_info = %{value: total, status: "Initiatied"}
     case Orders.retailer_new_order(order_info, user, selected_product_changesets) do

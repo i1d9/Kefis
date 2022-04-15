@@ -7,14 +7,14 @@ defmodule KefisWeb.Retailer.OrderNewLive do
   alias Ecto.Changeset
   alias Kefis.Repo
 
-  def update(%{details: %{live_action: live_action}} = _dsds, socket) do
+  def update(%{details: %{user: user}} = _dsds, socket) do
     {:ok,
      socket
      |> assign(:total, 0)
      |> assign(:finished_selection, false)
      |> assign(:selected_products, [])
      |> assign(:selected_products_id, [])
-     |> assign(:live_action, live_action)
+     |> assign(:user, user)
      |> init_items()}
   end
 
@@ -79,6 +79,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
       <%= live_component KefisWeb.Retailer.CartLive,
         id: "order.id",
+        user: @user,
         selected_products: @selected_products,
         total: @total
       %>
