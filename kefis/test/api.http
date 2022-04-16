@@ -39,7 +39,7 @@ Host: 127.0.0.1:4000
             "first_name":"API",
             "second_name":"Test",
             "phone": "254741287654",
-            "email": "api_test@gmail.com",
+            "phone": "api_test@gmail.com",
             "role": "retailer_admin",
             "password": "apitest@gmail.com",
             "confirm_password": "apitest@gmail.com"
