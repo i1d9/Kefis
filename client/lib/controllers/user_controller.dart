@@ -1,9 +1,21 @@
 part of 'package:client/helpers/imports.dart';
 
 class UserController extends GetxController {
-  User login(String email, String password) {
-    User p = User(token: "token", fcm: "fcm", firstName: "firstName", secondName: "secondName", phone: "phone", email: "email", role: "role");
+  var userFirstName = "".obs;
+  var userEmail = "".obs;
+  var userPhone = "".obs;
+  var userSecondName = "".obs;
+  var userRole = "".obs;
+  var userPassword = "".obs;
+  var userConfirmPassword = "".obs;
 
-    return p;
-  }
+  set setRole(String value) => userRole.value = value;
+  set setFirstName(String value) => userFirstName.value = value;
+  set setSecondName(String value) => userSecondName.value = value;
+
+  set setEmail(String value) => userEmail.value = value;
+  set setPhone(String value) => userPhone.value = value;
+
+  set setPassword(String value) => userPassword.value = value;
+  set setConfirmPassword(String value) => userConfirmPassword.value = value;
 }
