@@ -47,3 +47,5 @@ app.*.map.json
 
 # google
 google-services.json
+
+secrets.dart

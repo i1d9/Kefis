@@ -45,6 +45,7 @@ dependencies:
   latlong2: ^0.8.1
   geolocator: #latest version
   geocoding:  #latest version
+  flutter_polyline_points: ^1.0.0
 
 dev_dependencies:
   flutter_test:
