@@ -3,39 +3,58 @@ part of 'package:client/helpers/imports.dart';
 class MapForm extends StatelessWidget {
   MapForm({Key? key}) : super(key: key);
 
-  final Completer<GoogleMapController> _controller = Completer();
+  late final MapController mapController;
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  late Future<List<Polyline>> polylines;
 
-  static const CameraPosition _kLake =  CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  var points = <LatLng>[
+    LatLng(51.5, -0.09),
+    LatLng(53.3498, -6.2603),
+    LatLng(48.8566, 2.3522),
+  ];
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.place),
+        onPressed: () async {
+          var lol = await determinePosition();
+          print(lol);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+      body: FlutterMap(
+        options: MapOptions(
+          onTap: (var position, LatLng point) {
+            print(point);
+          },
+          //center: LatLng(-1.3076, 36.8148),
+          //zoom: 17.0,
+          center: LatLng(51.5, -0.09),
+          zoom: 5.0,
+        ),
+        layers: [
+          TileLayerOptions(
+              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+              subdomains: ['a', 'b', 'c']),
+          PolylineLayerOptions(
+            polylines: [
+              Polyline(points: points, strokeWidth: 4.0, color: Colors.purple),
+            ],
+          ),
+          MarkerLayerOptions(
+            markers: [
+              Marker(
+                width: 80.0,
+                height: 80.0,
+                point: LatLng(-1.3076, 36.8148),
+                builder: (ctx) => Container(
+                  child: Icon(Icons.place),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }

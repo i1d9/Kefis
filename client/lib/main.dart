@@ -24,14 +24,14 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder(
         future: accountDetails,
         builder: (context, snapshot) {
-         
-          if (!snapshot.hasData) return Text("Loading");
+          if (!snapshot.hasData) return Container(child: Text("Loading"));
           if (snapshot.data != "") {
-            
-            authenticationController.loadUser(jsonDecode(snapshot.data as String));
-            return PartnerForm();
+            authenticationController
+                .loadUser(jsonDecode(snapshot.data as String));
+            return MapForm();
           } else {
-            return Login();
+            return MapForm();
+            //return Login();
           }
         },
       ),

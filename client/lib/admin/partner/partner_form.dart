@@ -73,7 +73,6 @@ class PartnerForm extends StatelessWidget {
           "confirm_password": "apitest@gmail.com"
         }
       };
-      
 
       Get.bottomSheet(
         UserForm(passedData: data),
@@ -126,21 +125,49 @@ class PartnerForm extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        const TextField(
-          decoration:
-              InputDecoration(border: OutlineInputBorder(), hintText: "Email"),
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          height: 250,
+          child: FlutterMap(
+            options: MapOptions(
+              onTap: (var position, LatLng point) {
+                print(point);
+              },
+              center: LatLng(-1.3076, 36.8148),
+              zoom: 17.0,
+            ),
+            layers: [
+              TileLayerOptions(
+                urlTemplate:
+                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                subdomains: ['a', 'b', 'c'],
+              ),
+              MarkerLayerOptions(
+                markers: [
+                  Marker(
+                    width: 80.0,
+                    height: 80.0,
+                    point: LatLng(-1.3076, 36.8148),
+                    builder: (ctx) => Container(
+                      child: Icon(Icons.place),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         GestureDetector(
           onTap: () {
             sendData();
           },
-          child: Text(update ? "Update" : "Add"),
+          child: Container(
+            decoration: const BoxDecoration(color: Colors.blue),
+            padding: const EdgeInsets.all(10),
+            child: Text(update ? "Update" : "Add")),
         ),
-        Container(
-          
-          height: 250,
-          
-          child: MapForm())
       ]),
     ));
   }

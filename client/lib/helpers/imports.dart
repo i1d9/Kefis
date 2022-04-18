@@ -6,7 +6,9 @@ import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:geolocator/geolocator.dart';
 
 //UI
 part 'package:client/common/home.dart';
