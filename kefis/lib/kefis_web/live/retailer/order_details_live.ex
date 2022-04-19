@@ -5,7 +5,6 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
   alias Kefis.Chain.OrderDetail
   alias Kefis.Orders
 
-
   def update(%{details: %{order_detail_id: order_id}} = _as, socket) do
 
     {:ok,
@@ -74,7 +73,7 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
       <div class="card-body">
 
         <div>
-        
+
         </div>
         <div class="table-responsive">
           <table class="table table-centered table-nowrap mb-0 rounded">
