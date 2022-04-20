@@ -37,7 +37,6 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
 
   end
 
-
   def render(assigns) do
     ~H"""
     <div>
