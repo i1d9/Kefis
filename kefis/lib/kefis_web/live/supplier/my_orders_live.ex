@@ -6,7 +6,7 @@ defmodule KefisWeb.Supplier.MyOrdersLive do
   alias Kefis.Chain.Order
 
   def mount(_params, %{"current_user" => user} = _session, socket) do
-    current_user = user |> Repo.preload([:partner, :account])
+    current_user = user |> Repo.preload([:partner])
 
     orders = Orders.supplier_orders(current_user.partner)
 
@@ -81,7 +81,7 @@ defmodule KefisWeb.Supplier.MyOrdersLive do
   end
 
   def handle_event("order", _params, socket) do
-    
+
     {:noreply, socket}
   end
 

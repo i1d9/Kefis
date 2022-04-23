@@ -25,7 +25,7 @@ defmodule KefisWeb.SupplierController do
 
 
   def list_partner_products(%{assigns: %{current_user: current_user}}= conn, _opts) do
-    user = current_user |> Repo.preload([:partner, :account])
+    user = current_user |> Repo.preload([:partner])
 
     partner = user.partner
 
@@ -113,7 +113,7 @@ defmodule KefisWeb.SupplierController do
 
   def show_order_details(%{assigns: %{current_user: current_user}}= conn, %{"id" => id}) do
 
-    user = current_user |> Repo.preload([:partner, :account])
+    user = current_user |> Repo.preload([:partner])
 
 
 
