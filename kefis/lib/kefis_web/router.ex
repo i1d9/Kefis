@@ -95,6 +95,7 @@ defmodule KefisWeb.Router do
 
     get "/orders", AdminController, :list_orders
 
+    live "/order", Admin.ShowOrder
     live "/orders/:id", Admin.Order.ShowLive, :index
     live "/orders/:id/info", Admin.Order.ShowLive, :view_detail
 
@@ -133,6 +134,7 @@ defmodule KefisWeb.Router do
     live "/order/new", Retailer.NewLive
     live "/order", Retailer.OrdersLive, :index
     live "/order/detail", Retailer.OrdersLive, :detail
+
 
     get "/order/new", RetailerController, :order
     get "/order/:id", RetailerController, :show_order

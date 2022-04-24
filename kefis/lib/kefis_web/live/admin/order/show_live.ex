@@ -1,28 +1,41 @@
 defmodule KefisWeb.Admin.Order.ShowLive do
-  use KefisWeb, :live_view
+  use KefisWeb, :live_component
 
   alias Kefis.Orders
-  def mount(params, _session, socket) do
 
-    
+  def mount(params, _session, socket) do
     case params do
       %{"id" => id} ->
-
         {:ok,
-          socket
-          |> load_order(String.to_integer(id))}
+         socket
+         |> load_order(String.to_integer(id))}
+
       _ ->
         {:ok, socket}
     end
-
   end
 
+  def update(%{details: details} = assigns, socket) do
+    IO.inspect(assigns)
+    IO.inspect(details)
+
+    case details do
+      %{order_id: order_id} ->
+         {:ok,
+           socket
+           |> load_order(String.to_integer(order_id))}
+
+      _ ->
+          {:ok, socket}
+    end
+
+    {:ok, socket}
+  end
 
   defp load_order(socket, id) do
     order = Orders.get_order(id)
     order_details = order.order_details
     retailer = order.partner
-
 
     socket
     |> assign(:order, order)
@@ -36,7 +49,6 @@ defmodule KefisWeb.Admin.Order.ShowLive do
   end
 
   defp apply_action(socket, :index, %{"id" => id}) do
-
     socket
     |> load_order(id)
   end
@@ -48,10 +60,4 @@ defmodule KefisWeb.Admin.Order.ShowLive do
     |> load_order(id)
     |> assign(:order_detail_id, detail)
   end
-
-
-
-
-
-
 end
