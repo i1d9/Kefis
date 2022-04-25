@@ -114,7 +114,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
                 </th>
                 <th class="border-0">Name</th>
                 <th class="border-0">Price</th>
-                <th class="border-0">Quantity</th>
+                <th class="border-0">SKU</th>
                 <th class="border-0">Action</th>
               </tr>
             </thead>

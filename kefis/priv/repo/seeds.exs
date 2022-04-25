@@ -214,6 +214,7 @@ warehouse =
   |> Ecto.Changeset.put_assoc(:user, warehouse_admin_user)
   |> Repo.insert!()
 
+"""
 
 collection_details = %{
   status: "initialised",
@@ -239,10 +240,4 @@ dispatch = Dispatch.changeset(%Dispatch{}, data_dispatch)
 
 
 
-order = Repo.get(Order, 1)
-
-order_detail_info = %{price: 50, quantity: 5000, status: "done"}
-
-order_detail = OrderDetail.changeset(%OrderDetail{}, order_detail_info)
-  |> Ecto.Changeset.put_assoc(:order, order)
-  |> Repo.insert!()
+"""

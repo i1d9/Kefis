@@ -109,6 +109,9 @@ defmodule KefisWeb.Admin.Order.DetailComponent do
           }
         } = socket
       ) do
+
+    IO.inspect(socket)
+
     collection_info = %{
       status: "initated",
       value: detail.quantity * detail.price
@@ -207,7 +210,7 @@ defmodule KefisWeb.Admin.Order.DetailComponent do
               <tr>
               <th>Driver</th>
               <th>Warehouse</th>
-              
+
               </tr>
               </thead>
               <tbody>

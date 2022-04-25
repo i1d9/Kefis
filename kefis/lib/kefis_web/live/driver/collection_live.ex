@@ -4,7 +4,7 @@ defmodule KefisWeb.Driver.CollectionLive do
   alias Kefis.Drivers
 
   def update(%{info: %{user: user}}= _assigns, socket) do
-    IO.inspect(user)
+
     {:ok,
     socket
     |> init_items(user.driver)
@@ -93,6 +93,7 @@ defmodule KefisWeb.Driver.CollectionLive do
 
 
       <td><%= item.order_detail.product.name %></td>
+
       <td><%= item.order_detail.quantity %></td>
       <td><%= item.order_detail.partner.name %></td>
       <td><%= item.status %></td>

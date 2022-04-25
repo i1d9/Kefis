@@ -3,15 +3,19 @@ defmodule KefisWeb.Driver.DeliveryLive do
 
   alias Kefis.Drivers
 
-  def update(%{"info"=> %{"user" => user} } = _assigns, socket) do
-    IO.inspect(user)
+  def update(%{info: %{user: user}} = _assigns, socket) do
+
+
     {:ok,
-    socket
-    }
+     socket
+     |> init_items(user.driver)}
   end
 
   defp init_items(socket, driver) do
     items = Drivers.driver_deliveries(driver)
+
+    IO.inspect(items)
+
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
@@ -33,6 +37,7 @@ defmodule KefisWeb.Driver.DeliveryLive do
 
   def render(assigns) do
     ~H"""
+    <div>
     <div class="table-settings mb-4">
                 <div class="row align-items-center justify-content-between">
                     <div class="col col-md-6 col-lg-3 col-xl-4">
@@ -80,6 +85,9 @@ defmodule KefisWeb.Driver.DeliveryLive do
     </tr>
     </thead>
     <tbody>
+
+    <%= if @total_entries != 0 do%>
+
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
     <td phx-value-id={item.id} phx-click="show_item">
@@ -95,6 +103,11 @@ defmodule KefisWeb.Driver.DeliveryLive do
     <td><%= item.order_detail.partner.name %></td>
     <td><%= item.status %></td>
     </tr>
+
+
+    <% end %>
+    <% else %>
+    <tr></tr>
     <% end %>
     </tbody>
     </table>
@@ -138,55 +151,54 @@ defmodule KefisWeb.Driver.DeliveryLive do
                      </div>
                       </div>
 
-
+    </div>
 
 
     """
   end
 
-  def handle_event("change_page", %{"index" => index} =  _params, %{assigns: %{paginated_items: paginated_items }} = socket) do
-
-
+  def handle_event(
+        "change_page",
+        %{"index" => index} = _params,
+        %{assigns: %{paginated_items: paginated_items}} = socket
+      ) do
     items_for_page = paginated_items |> Enum.at(String.to_integer(index))
     page_entries = items_for_page |> Enum.count()
 
     {:noreply,
-    socket
-    |> assign(:page_number, String.to_integer(index))
-    |> assign(:items_for_page, items_for_page)
-    |> assign(:page_entries, page_entries)
-
-
-    }
+     socket
+     |> assign(:page_number, String.to_integer(index))
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
   end
 
-
-  def handle_event("next", _params, %{assigns: %{page_number: page_number, paginated_items: paginated_items  }} = socket) do
-
-
+  def handle_event(
+        "next",
+        _params,
+        %{assigns: %{page_number: page_number, paginated_items: paginated_items}} = socket
+      ) do
     items_for_page = paginated_items |> Enum.at(page_number + 1)
     page_entries = items_for_page |> Enum.count()
 
     {:noreply,
-    socket
-    |> assign(:page_number, page_number + 1)
-    |> assign(:items_for_page, items_for_page)
-    |> assign(:page_entries, page_entries)
-    }
+     socket
+     |> assign(:page_number, page_number + 1)
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
   end
 
-  def handle_event("previous", _params, %{assigns: %{page_number: page_number, paginated_items: paginated_items  }} = socket) do
-
-
+  def handle_event(
+        "previous",
+        _params,
+        %{assigns: %{page_number: page_number, paginated_items: paginated_items}} = socket
+      ) do
     items_for_page = paginated_items |> Enum.at(page_number - 1)
     page_entries = items_for_page |> Enum.count()
 
     {:noreply,
-    socket
-    |> assign(:page_number, page_number - 1)
-    |> assign(:items_for_page, items_for_page)
-    |> assign(:page_entries, page_entries)
-    }
-
+     socket
+     |> assign(:page_number, page_number - 1)
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
   end
 end

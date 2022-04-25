@@ -1,13 +1,17 @@
 
 <div>
-<%= if @live_action in [:collections] do %>
-    <%= live_component @socket, KefisWeb.Driver.DashboardNav, id: "dash-nav", title: "Collection ", component: KefisWeb.Driver.CollectionLive, component_info: %{id: "sdklds", user: @user}, description: "Collections" %>
 
-<% end %>
 
-<%= if @live_action in [:delivery] do %>
-    <%= live_component @socket, KefisWeb.Driver.DashboardNav, id: "dash-nav", title: "Delivery ", component: KefisWeb.Driver.DeliveryLive, component_info: %{id: "sdklds"}, description: "Deliverires" %>
+<%= case @type do %>
+  <% "collection" -> %> <%= live_component @socket, KefisWeb.Driver.DashboardNav, id: "dash-nav", title: "Collection ", component: KefisWeb.Driver.CollectionLive, component_info: %{id: "sdklds", user: @user}, description: "Collections" %>
+  <% "delivery" -> %> <%= live_component @socket, KefisWeb.Driver.DashboardNav, id: "dash-nav", title: "Delivery ", component: KefisWeb.Driver.DeliveryLive, component_info: %{id: "sdklds", user: @user}, description: "Deliverires" %>
+<% end%>
 
-<% end %>
+
+
+
+
+
+
 </div>
 

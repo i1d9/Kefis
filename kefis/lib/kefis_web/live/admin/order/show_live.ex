@@ -1,9 +1,11 @@
 defmodule KefisWeb.Admin.Order.ShowLive do
-  use KefisWeb, :live_component
+  use KefisWeb, :live_view
 
   alias Kefis.Orders
 
   def mount(params, _session, socket) do
+    IO.inspect(params)
+
     case params do
       %{"id" => id} ->
         {:ok,
@@ -21,12 +23,12 @@ defmodule KefisWeb.Admin.Order.ShowLive do
 
     case details do
       %{order_id: order_id} ->
-         {:ok,
-           socket
-           |> load_order(String.to_integer(order_id))}
+        {:ok,
+         socket
+         |> load_order(String.to_integer(order_id))}
 
       _ ->
-          {:ok, socket}
+        {:ok, socket}
     end
 
     {:ok, socket}

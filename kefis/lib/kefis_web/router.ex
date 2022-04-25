@@ -46,21 +46,18 @@ defmodule KefisWeb.Router do
     pipe_through [:browser, :protected]
     resources "/users", UserController
     resources "/products", ProductController
-    #resources "/partners", PartnerController
+    # resources "/partners", PartnerController
 
     get "/partners/user/new", PartnerController, :new_partner_user
     post "/partners/user/new", PartnerController, :create_partner_user
     get "/partners/user/:id", PartnerController, :show_partner_user
-
-
   end
-
 
   scope "/", KefisWeb do
     pipe_through [:browser, :not_authenticated]
 
-    #get "/signup", RegistrationController, :new, as: :signup
-    #post "/signup", RegistrationController, :create, as: :signup
+    # get "/signup", RegistrationController, :new, as: :signup
+    # post "/signup", RegistrationController, :create, as: :signup
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
   end
@@ -84,7 +81,6 @@ defmodule KefisWeb.Router do
     post "/new/partner/user", AdminController, :create_partner_user
     get "/partners", AdminController, :list_partners
 
-
     get "/warehouse", AdminController, :list_warehouse
     get "/warehouse/new", AdminController, :new_warehouse
     post "/warehouse/new", AdminController, :create_warehouse
@@ -92,15 +88,11 @@ defmodule KefisWeb.Router do
     get "/user", AdminController, :list_users
     get "/user/:id", AdminController, :list_users
 
-
     get "/orders", AdminController, :list_orders
 
-    live "/order", Admin.ShowOrder
     live "/orders/:id", Admin.Order.ShowLive, :index
     live "/orders/:id/info", Admin.Order.ShowLive, :view_detail
-
   end
-
 
   scope "/partners", KefisWeb do
     pipe_through [:browser, :protected]
@@ -114,76 +106,65 @@ defmodule KefisWeb.Router do
     get "/partners/products/:id", PartnerController, :show_product
     get "/partners/products/:id/edit", PartnerController, :edit_product
     delete "/partners/products/:id/delete", PartnerController, :delete_product
-
   end
 
-
   scope "/drivers", KefisWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :protected, :driver]
 
     live "/", Driver.DashboardLive, :index
+    live "/trips", Driver.TripsLive
     live "/trips/collection", Driver.TripsLive, :collections
     live "/trips/delivery", Driver.TripsLive, :delivery
   end
 
   scope "/r", KefisWeb do
     pipe_through [:browser, :protected, :retailer]
-    #pipe_through [:browser]
+    # pipe_through [:browser]
 
     live "/", Retailer.IndexLive
     live "/order/new", Retailer.NewLive
     live "/order", Retailer.OrdersLive, :index
     live "/order/detail", Retailer.OrdersLive, :detail
 
-
-    get "/order/new", RetailerController, :order
+    # get "/order/new", RetailerController, :order
     get "/order/:id", RetailerController, :show_order
     live "/order/info", Retailer.ConfirmOrderLive
   end
 
-
   scope "/s", KefisWeb do
     pipe_through [:browser, :protected, :supplier]
-    #pipe_through [:browser]
+    # pipe_through [:browser]
 
-    get "/", SupplierController,:index
+    get "/", SupplierController, :index
     get "/products", SupplierController, :list_partner_products
 
     get "/new/product", SupplierController, :new_product
 
-
     get "/orders", SupplierController, :my_orders
     get "/orders/:id/", SupplierController, :show_order_details
-
-
   end
 
-
   scope "/w", KefisWeb do
-    #pipe_through [:browser, :protected, :warehouse]
+    # pipe_through [:browser, :protected, :warehouse]
     pipe_through [:browser]
 
     live "/", Warehouse.IndexLive
     live "/incoming", Warehouse.OrdersLive, :incoming
     live "/outgoing", Warehouse.OrdersLive, :outgoing
-
-
-
   end
 
   # Other scopes may use custom stacks.
   scope "/api", KefisWeb do
     pipe_through :api
 
+    post "/login", SessionController, :api_create, as: :api_login
 
-      post "/login", SessionController, :api_create, as: :api_login
-
-    #delete "/logout", SessionController, :api_delete, as: :api_logout
+    # delete "/logout", SessionController, :api_delete, as: :api_logout
     post "/session/renew", SessionController, :renew
   end
 
   scope "/api/admin", KefisWeb do
-    #pipe_through [:api, :api_protected, :api_admin]
+    # pipe_through [:api, :api_protected, :api_admin]
     pipe_through :api
 
     get "/partners", AdminController, :api_list_partners
@@ -200,9 +181,6 @@ defmodule KefisWeb.Router do
 
     get "/orders", AdminController, :api_list_orders
     get "/orders/:id", AdminController, :api_show_order
-
-
-
   end
 
   scope "/api/s", KefisWeb do
@@ -210,7 +188,6 @@ defmodule KefisWeb.Router do
 
     get "/partners", AdminController, :api_list_partners
     get "/partners/:id", AdminController, :api_show_partner
-
   end
 
   scope "/api/r", KefisWeb do
@@ -218,11 +195,10 @@ defmodule KefisWeb.Router do
 
     get "/partners", AdminController, :api_list_partners
     get "/partners/:id", AdminController, :api_show_partner
-
   end
 
   scope "/api", KefisWeb do
-    pipe_through  [:api, :api_protected]
+    pipe_through [:api, :api_protected]
     delete "/logout", SessionController, :delete, as: :logout
   end
 

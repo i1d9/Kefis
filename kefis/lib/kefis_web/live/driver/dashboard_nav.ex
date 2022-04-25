@@ -141,7 +141,7 @@ defmodule KefisWeb.Driver.DashboardNav do
 
           <li class="nav-item ">
 
-            <%= link  to: Routes.trips_path(@socket, :collections), class: "nav-link" do%>
+            <%= link  to: Routes.live_path(@socket, KefisWeb.Driver.TripsLive, %{type: "collection"}), class: "nav-link" do%>
             <span class="sidebar-icon">
                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
@@ -156,7 +156,7 @@ defmodule KefisWeb.Driver.DashboardNav do
 
           <li class="nav-item ">
 
-          <%= link  to: Routes.trips_path(@socket, :delivery), class: "nav-link" do%>
+          <%= link  to: Routes.live_path(@socket, KefisWeb.Driver.TripsLive, %{type: "delivery"}), class: "nav-link" do%>
           <span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
