@@ -4,8 +4,6 @@ defmodule KefisWeb.Driver.DeliveryLive do
   alias Kefis.Drivers
 
   def update(%{info: %{user: user}} = _assigns, socket) do
-
-
     {:ok,
      socket
      |> init_items(user.driver)}
@@ -15,7 +13,6 @@ defmodule KefisWeb.Driver.DeliveryLive do
     items = Drivers.driver_deliveries(driver)
 
     IO.inspect(items)
-
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
@@ -92,7 +89,7 @@ defmodule KefisWeb.Driver.DeliveryLive do
     <tr>
     <td phx-value-id={item.id} phx-click="show_item">
 
-    <%= live_redirect index, to: Routes.show_path(@socket, :index, item.id) %>
+    <%= live_redirect index, to: Routes.live_path(@socket, KefisWeb.Driver.OrderLive, %{type: "order", id: item.order_detail.id }) %>
 
     </td>
 

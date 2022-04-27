@@ -115,6 +115,8 @@ defmodule KefisWeb.Router do
     live "/trips", Driver.TripsLive
     live "/trips/collection", Driver.TripsLive, :collections
     live "/trips/delivery", Driver.TripsLive, :delivery
+
+    live "/order", Driver.OrderLive
   end
 
   scope "/r", KefisWeb do
