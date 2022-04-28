@@ -22,10 +22,14 @@ class LeafletMap extends HTMLElement {
 
         this.map = L.map(this.mapElement).setView([this.getAttribute('lat'), this.getAttribute('lng')], 13);
 
+        let zoom = this.getAttribute('zoom');
+        console.log(this.getAttribute('zoom'));
 
         window.map = this.map;
+        this.map.setZoom(zoom);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
+            
+            
 
         }).addTo(this.map);
 

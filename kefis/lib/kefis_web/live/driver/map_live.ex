@@ -14,9 +14,11 @@ defmodule KefisWeb.Driver.MapLive do
     "/images/marker.svg"
   end
 
+
+
   def render(assigns) do
     ~H"""
-    <leaflet-map lat={"#{ @map_lat }"} lng={"#{ @map_lng }"}
+    <leaflet-map zoom={14.5} lat={"#{ @map_lat }"} lng={"#{ @map_lng }"}
       phx-update="ignore" phx-target={@myself}>
 
     <leaflet-marker
