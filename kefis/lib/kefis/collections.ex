@@ -18,9 +18,16 @@ defmodule Kefis.Collections do
   def driver_get(id) do
     query =
       from c in Collection,
-        preload: [:partner, :warehouse, order_detail: [:partner]],
+        preload: [:partner, :warehouse, order_detail: [:partner, :product]],
         where: c.id == ^id
 
     Repo.one(query)
   end
+
+  def update(%Collection{} = collection, attrs) do
+    collection
+    |> Collection.changeset(attrs)
+    |> Repo.update()
+  end
+
 end

@@ -1,20 +1,17 @@
 defmodule KefisWeb.Driver.MapLive do
   use KefisWeb, :live_component
 
-  def update(%{map_lat: map_lat, map_lng: map_lng  } = assigns, socket) do
+  def update(%{map_lat: map_lat, map_lng: map_lng} = assigns, socket) do
     {:ok,
-    socket
-    |> assign(assigns)
-    |> assign(:map_lat, map_lat)
-    |> assign(:map_lng, map_lng)
-    }
+     socket
+     |> assign(assigns)
+     |> assign(:map_lat, map_lat)
+     |> assign(:map_lng, map_lng)}
   end
 
-  def get_icon_url(true) do
-    "/images/marker.svg"
+  def get_icon_url(socket) do
+    Routes.static_path(socket, "/images/live_view_upload-1648673659-829040224941413-3")
   end
-
-
 
   def render(assigns) do
     ~H"""
@@ -29,7 +26,7 @@ defmodule KefisWeb.Driver.MapLive do
 
           phx-value-id="map_component_marker">
           <leaflet-icon
-            icon-url={get_icon_url(true)}
+            icon-url={get_icon_url(@socket)}
             width="64"
             height="64">
           </leaflet-icon>
