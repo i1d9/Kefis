@@ -105,4 +105,10 @@ defmodule Kefis.Orders do
     Repo.update(order_detail)
   end
 
+
+  def processed_orders() do
+    Repo.all(Order) |> Repo.preload(order_details: [:collection])
+
+  end
+
 end

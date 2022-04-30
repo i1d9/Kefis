@@ -2,6 +2,9 @@
 <%= live_component @socket, KefisWeb.Warehouse.ShellDashboardLive, id: "incoming_page", component: KefisWeb.Warehouse.IncomingLive, component_details: %{id: "dsjkdsjk", warehouse: @warehouse, user: @user} %>
 <% end %>
 
+<%= if @live_action in [:processing]  do%>
+<%= live_component @socket, KefisWeb.Warehouse.ShellDashboardLive, id: "outgoing_page", component: KefisWeb.Warehouse.ProcessedLive, component_details: %{id: "dsjkdsjk", warehouse: @warehouse, user: @user} %>
+<% end %>
 
 <%= if @live_action in [:outgoing]  do%>
 <%= live_component @socket, KefisWeb.Warehouse.ShellDashboardLive, id: "outgoing_page", component: KefisWeb.Warehouse.OutgoingLive, component_details: %{id: "dsjkdsjk", warehouse: @warehouse, user: @user} %>

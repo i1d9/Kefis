@@ -45,4 +45,7 @@ defmodule Kefis.Warehouses do
       from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [driver: [:user]], where: c.status == ^"processed"
     Repo.all(query)
   end
+
+
+
 end

@@ -152,6 +152,7 @@ defmodule KefisWeb.Router do
 
     live "/", Warehouse.IndexLive
     live "/incoming", Warehouse.OrdersLive, :incoming
+    live "/processing", Warehouse.OrdersLive, :processing
     live "/outgoing", Warehouse.OrdersLive, :outgoing
     live "/info", Warehouse.ShowDetailLive
   end

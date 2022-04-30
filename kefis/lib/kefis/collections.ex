@@ -15,6 +15,11 @@ defmodule Kefis.Collections do
     Repo.insert(collection)
   end
 
+
+  def get(id) do
+    Repo.get(Collection, id)
+  end
+
   def driver_get(id) do
     query =
       from c in Collection,
@@ -28,6 +33,11 @@ defmodule Kefis.Collections do
     collection
     |> Collection.changeset(attrs)
     |> Repo.update()
+  end
+
+  def processed_collection(warehouse) do
+    collection_query = from c in Collection, preload: [order_detail: [order: [:partner]]], where: c.status == "processed", where: c.warehouse_id == ^warehouse.id
+    Repo.all collection_query
   end
 
 end

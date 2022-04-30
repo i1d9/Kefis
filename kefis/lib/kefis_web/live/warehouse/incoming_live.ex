@@ -1,21 +1,45 @@
 defmodule KefisWeb.Warehouse.IncomingLive do
   use KefisWeb, :live_component
   alias Kefis.Warehouses
+  alias Kefis.Collections
 
-  def update(%{details: details} = assigns, socket) do
-    IO.inspect(details.warehouse)
+  def update(%{details: details} = _assigns, socket) do
     {:ok,
      socket
+     |> assign(:warehouse, details.warehouse)
      |> init_items(details.warehouse)}
+  end
+
+  def handle_event(
+        "confirm",
+        %{"id" => id} = _value,
+        %{assigns: %{warehouse: warehouse}} = socket
+      ) do
+    IO.inspect(id)
+
+    collection = Collections.get(id)
+
+    case Collections.update(collection, %{status: "processed"}) do
+      {:ok, _collection} ->
+        {:noreply,
+         socket
+         |> init_items(warehouse)}
+
+      {:error, _} ->
+        {:noreply, socket}
+    end
   end
 
   def render(assigns) do
     ~H"""
     <div>
     <h1>Incoming Orders</h1>
+
+
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead>
     <tr>
+    <th>#</th>
     <th>Driver</th>
     <th>Vehicle</th>
     <th>Value</th>
@@ -28,6 +52,7 @@ defmodule KefisWeb.Warehouse.IncomingLive do
 
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
+    <td><%= index %></td>
     <td phx-value-id={item.id} phx-click="show_item">
 
       <%= item.driver.user.first_name %>
@@ -36,7 +61,13 @@ defmodule KefisWeb.Warehouse.IncomingLive do
 
     <td><%= item.driver.vehicle %></td>
         <td><%= item.value %></td>
+
+      <td>
+      <button phx-click="confirm" phx-value-id={item.id} phx-target={@myself} class="btn btn-primary" type="button">Confirm</button>
+      </td>
     </tr>
+
+
     <% end %>
     <% end %>
 
@@ -48,7 +79,6 @@ defmodule KefisWeb.Warehouse.IncomingLive do
 
   defp init_items(socket, warehouse) do
     items = Warehouses.incoming_orders(warehouse)
-    IO.inspect(items)
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)
