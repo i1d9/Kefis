@@ -153,6 +153,7 @@ defmodule KefisWeb.Router do
     live "/", Warehouse.IndexLive
     live "/incoming", Warehouse.OrdersLive, :incoming
     live "/outgoing", Warehouse.OrdersLive, :outgoing
+    live "/info", Warehouse.ShowDetailLive
   end
 
   # Other scopes may use custom stacks.

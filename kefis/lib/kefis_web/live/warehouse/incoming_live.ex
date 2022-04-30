@@ -2,13 +2,12 @@ defmodule KefisWeb.Warehouse.IncomingLive do
   use KefisWeb, :live_component
   alias Kefis.Warehouses
 
-  def update(%{details: details} = _assigns, socket) do
+  def update(%{details: details} = assigns, socket) do
+    IO.inspect(details.warehouse)
     {:ok,
-    socket
-    |> init_items(details.warehouse)
-    }
+     socket
+     |> init_items(details.warehouse)}
   end
-
 
   def render(assigns) do
     ~H"""
@@ -24,20 +23,23 @@ defmodule KefisWeb.Warehouse.IncomingLive do
     </tr>
     </thead>
     <tbody>
+
+    <%= if @total_entries > 0 do%>
+
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
     <td phx-value-id={item.id} phx-click="show_item">
 
-
+      <%= item.driver.user.first_name %>
+      <%= item.driver.user.second_name %>
     </td>
-
-
-
 
     <td><%= item.driver.vehicle %></td>
         <td><%= item.value %></td>
     </tr>
     <% end %>
+    <% end %>
+
     </tbody>
     </table>
     </div>
@@ -45,7 +47,6 @@ defmodule KefisWeb.Warehouse.IncomingLive do
   end
 
   defp init_items(socket, warehouse) do
-
     items = Warehouses.incoming_orders(warehouse)
     IO.inspect(items)
     page_entries = 10
@@ -65,7 +66,4 @@ defmodule KefisWeb.Warehouse.IncomingLive do
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
   end
-
-
-
 end

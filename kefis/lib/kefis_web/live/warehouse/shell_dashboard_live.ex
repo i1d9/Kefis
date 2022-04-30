@@ -3,7 +3,6 @@ defmodule KefisWeb.Warehouse.ShellDashboardLive do
 
   def update(%{component: component, component_details: component_details }= assigns, socket) do
 
-    IO.inspect(component)
     {:ok,
     socket
     |> assign(component: component)
