@@ -20,9 +20,11 @@ defmodule KefisWeb.Warehouse.OrdersLive do
      |> push_redirect(
        to:
          Routes.live_path(socket, KefisWeb.Warehouse.ShowDetailLive, %{
-           "id" => 1,
+           "id" => id,
            "type" => action
          })
      )}
   end
+
+
 end

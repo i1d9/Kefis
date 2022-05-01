@@ -4,15 +4,10 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
   alias Kefis.Warehouses
   alias Kefis.Collections
 
-
   def update(%{details: details} = _assigns, socket) do
-
-
-
     {:ok,
-    socket
-    |> init_items(details.warehouse)
-    }
+     socket
+     |> init_items(details.warehouse)}
   end
 
   defp init_items(socket, warehouse) do
@@ -35,6 +30,19 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
     |> assign(:page_entries, page_entries)
   end
 
+  def handle_event("check_order", %{"order" => order} = _value, socket) do
+    IO.inspect(order)
+    {:noreply,
+     socket
+     |> push_redirect(
+       to:
+         Routes.live_path(socket, KefisWeb.Warehouse.ShowDetailLive, %{
+           "id" => order,
+           "type" => "processing"
+         })
+     )}
+  end
+
   def render(assigns) do
     ~H"""
     <div>
@@ -54,7 +62,7 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
 
     <%= for {%{order_detail: %{order: %{partner: retailer }=order} = order_detail}=item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
-    <td phx-click="check_order" phx-value-order_id={order.id} phx-target={@myself}>
+    <td phx-click="check_order" phx-value-order={order.id} phx-target={@myself}>
     <%= index %>
     </td>
     <td>

@@ -64,6 +64,9 @@ defmodule Kefis.Orders do
     Repo.all(query)
   end
 
+  def warehouse_processing_order(id) do
+    Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:collection]])
+  end
 
 
   def supplier_orders(supplier, status \\ "initiated") do
