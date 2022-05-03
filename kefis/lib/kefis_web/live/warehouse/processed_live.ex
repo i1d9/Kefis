@@ -45,7 +45,9 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
 
   def render(assigns) do
     ~H"""
-    <div>
+    <div class="card border-0 shadow mb-4">
+    <div class="card-body">
+
     <h1>Processed Orders</h1>
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead class="thead-light">
@@ -82,6 +84,7 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
     </tbody>
     </table>
 
+    </div>
     </div>
     """
   end

@@ -32,7 +32,9 @@ defmodule KefisWeb.Warehouse.IncomingLive do
 
   def render(assigns) do
     ~H"""
-    <div>
+    <div class="card border-0 shadow mb-4">
+    <div class="card-body">
+
     <h1>Incoming Orders</h1>
 
 
@@ -73,6 +75,7 @@ defmodule KefisWeb.Warehouse.IncomingLive do
 
     </tbody>
     </table>
+    </div>
     </div>
     """
   end

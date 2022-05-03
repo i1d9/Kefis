@@ -19,7 +19,7 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
 
     items = Warehouses.outgoing_orders(warehouse)
     IO.inspect(items)
-    
+
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)
@@ -41,7 +41,9 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
 
   def render(assigns) do
     ~H"""
-    <div>
+    <div class="card border-0 shadow mb-4">
+    <div class="card-body">
+
     <h1>Outgoing Orders</h1>
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead>
@@ -56,6 +58,7 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
 
     </tbody>
     </table>
+    </div>
     </div>
     """
   end

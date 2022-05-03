@@ -131,7 +131,7 @@ defmodule KefisWeb.Admin.Order.DetailComponent do
        socket
        |> assign(detail: updated_detail)
        |> push_patch(
-         to: Routes.show_path(socket, :view_detail, order_id, %{detail: updated_detail.id})
+         to: Routes.index_path(socket, :detail, order_id, %{detail: updated_detail.id})
        )}
     end
   end

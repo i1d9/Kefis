@@ -65,7 +65,7 @@ defmodule Kefis.Orders do
   end
 
   def warehouse_processing_order(id) do
-    Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:collection]])
+    Repo.get(Order, id) |> Repo.preload([:partner, order_details: [:collection, :product, :partner]])
   end
 
 

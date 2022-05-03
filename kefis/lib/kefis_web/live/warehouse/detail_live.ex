@@ -78,23 +78,32 @@ defmodule KefisWeb.Warehouse.DetailLive do
     <thead class="thead-light">
     <tr>
     <th class="border-0 rounded-start">#</th>
-    <th class="border-0">Name</th>
+    <th class="border-0">Supplier</th>
+    <th class="border-0">Product</th>
+    <th class="border-0">Quantity</th>
+
 
     <th class="border-0">Price</th>
 
-    <th class="border-0">Collected</th>
+    <th class="border-0">Status</th>
     </tr>
     </thead>
     <tbody>
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
+
     <tr>
 
 
+
       <td><%= index   %></td>
+      <td><%= item.partner.name   %></td>
+      <td><%= item.product.name   %></td>
+      <td><%= item.quantity   %></td>
+      <td><%= item.price   %></td>
 
       <td>
       <%= if item.collection == nil do%>
-        <span>-</span>
+        <span><%= item.status %></span>
       <% else %>
       <span>Collected</span>
       <% end %>

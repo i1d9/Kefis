@@ -88,10 +88,12 @@ defmodule KefisWeb.Router do
     get "/user", AdminController, :list_users
     get "/user/:id", AdminController, :list_users
 
-    get "/orders", AdminController, :list_orders
+    #get "/orders", AdminController, :list_orders
 
-    live "/orders/:id", Admin.Order.ShowLive, :index
-    live "/orders/:id/info", Admin.Order.ShowLive, :view_detail
+    live "/orders", Admin.Order.IndexLive, :index
+    live "/orders/:id", Admin.Order.IndexLive, :detail
+    live "/orders/:id/info", Admin.Order.IndexLive, :info
+
   end
 
   scope "/partners", KefisWeb do
