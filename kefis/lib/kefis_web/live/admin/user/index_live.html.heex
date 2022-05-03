@@ -20,7 +20,7 @@
                                     <th class="border-0 rounded-end">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
 
 <%= for {user, index} <- Enum.with_index(@users, 1) do %>
     <tr>
@@ -30,7 +30,10 @@
                   <td><%= user.email %></td>
                         <td><%= user.phone %></td>
                               <td><%= user.role %></td>
-                              <td><%= user.role %></td>
+                              <td>
+                              <div class="btn btn-warning">Edit</div>
+                                                            <div class="btn btn-danger">Delete</div>
+                              </td>
     </tr>
 <% end %>
                    </tbody>

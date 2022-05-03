@@ -10,7 +10,7 @@
                     <%= live_component @socket, KefisWeb.Admin.Partner.UserFormComponent, id: "new-user-partner-component", user_changeset: @user_changeset, partner_changeset: @partner_changeset %>        
                   <% else %>
                     <%= live_component @socket, KefisWeb.Admin.Partner.PartnerFormComponent, id: "new-partner", user_changeset: @user_changeset, partner_changeset: @partner_changeset, partner_details_valid: @partner_details_valid  %>
-                    <%= live_component @socket, KefisWeb.Admin.MapLive, id: "map-component", map_lat: @map_component_marker_lat, map_lng: @map_component_marker_lng %>
+                    <%= live_component @socket, KefisWeb.Admin.MapComponent, id: "map-component", map_lat: @map_component_marker_lat, map_lng: @map_component_marker_lng, coordniated: [] %>
 
 
                   <% end %>

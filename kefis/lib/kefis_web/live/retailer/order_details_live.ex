@@ -6,15 +6,12 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
   alias Kefis.Orders
 
   def update(%{details: %{order_detail_id: order_id}} = _as, socket) do
-
     {:ok,
-    socket
-    |> init_items(order_id)
-    }
+     socket
+     |> init_items(order_id)}
   end
 
   defp init_items(socket, order_id) do
-
     order = Orders.get_order(order_id)
     items = order.order_details
 
@@ -34,7 +31,6 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
     |> assign(:paginated_items, paginated_items)
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
-
   end
 
   def render(assigns) do
@@ -116,9 +112,4 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
     </div>
     """
   end
-
-
-
-
-
 end

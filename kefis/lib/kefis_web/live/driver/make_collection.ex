@@ -27,7 +27,7 @@ defmodule KefisWeb.Driver.MakeCollection do
         IO.inspect(collection)
         {:noreply,
         socket
-        |> assign(:collection, collection)  
+        |> assign(:collection, collection)
         }
       {:error, _} ->
         {:noreply, socket}
@@ -49,7 +49,7 @@ defmodule KefisWeb.Driver.MakeCollection do
     <%= @collection.order_detail.product.name %> X <%= @collection.order_detail.quantity %>
     </h1>
 
-    <%= live_component @socket, KefisWeb.Driver.MapLive, id: "collection_coordinates" , map_lat: @collection_lat, map_lng: @collection_lng%>
+    <%= live_component @socket, KefisWeb.Driver.MapComponent, id: "collection_coordinates" , map_lat: @collection_lat, map_lng: @collection_lng %>
 
       <%= if @collection.status == "initated" do %>
       <form phx-submit="change_collection_status" phx-target={@myself}>

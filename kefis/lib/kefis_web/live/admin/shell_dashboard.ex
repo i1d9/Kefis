@@ -57,65 +57,125 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
         </div>
       </div>
       <ul class="nav flex-column pt-3 pt-md-0">
-        <li class="nav-item">
-          <a href="../../index.html" class="nav-link d-flex align-items-center">
-            <span class="sidebar-icon">
-              <img src="" height="20" width="20" alt="Kefis Logo">
-            </span>
-            <span class="mt-1 ms-1 sidebar-text">Kefis</span>
-          </a>
-        </li>
 
-        <li class="nav-item  active ">
+      <li class="nav-item  active ">
 
-          <%= link to: Routes.live_path(@socket, KefisWeb.Warehouse.IndexLive), class: "nav-link" do%>
-          <span class="sidebar-icon">
-          <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-          </svg>
-        </span>
-        <span class="sidebar-text">Dashboard</span>
-          <% end %>
-
-        </li>
-        <li class="nav-item">
-        <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-components" aria-expanded="true">
-          <span>
-            <span class="sidebar-icon">
-            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-
-            </span>
-            <span class="sidebar-text">Orders</span>
-          </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </span>
-        </span>
-        <div class="multi-level collapse show" role="list" id="submenu-components" aria-expanded="false" style="">
-          <ul class="flex-column nav">
-            <li class="nav-item">
+      <%= link "Dashboard", to: Routes.admin_path(@socket, :index), class: "sidebar-text" %>
 
 
-            <%= link to: Routes.live_path(@socket, KefisWeb.Retailer.NewLive), class: "nav-link d-flex justify-content-between" do%>
-            <span>
-
-            <span class="sidebar-text">New</span>
-          </span>
-            <% end %>
-
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../../pages/components/buttons.html">
-                <span class="sidebar-text">History</span>
-              </a>
-            </li>
-
-          </ul>
-        </div>
       </li>
 
+              <li class="nav-item">
 
+
+              <%= link to: Routes.index_path(@socket, :retailer), class: "nav-link d-flex justify-content-between" do%>
+        <span>
+                      <span class="sidebar-icon">
+
+                          <i class="fas fa-store"></i>
+
+                      </span>
+                      <span class="sidebar-text">Retailers</span>
+                  </span>
+        <% end %>
+
+
+          </li>
+          <li class="nav-item">
+
+        <%= link to: Routes.index_path(@socket, :supplier), class: "nav-link d-flex justify-content-between" do%>
+        <span>
+                      <span class="sidebar-icon">
+
+                          <i class="fa-solid fa-industry"></i>
+
+                      </span>
+                      <span class="sidebar-text">Suppliers</span>
+                  </span>
+        <% end %>
+
+        <li class="nav-item">
+
+        <%= link to: Routes.index_path(@socket, :index), class: "nav-link d-flex justify-content-between" do%>
+        <span>
+                                <span class="sidebar-icon">
+
+                                    <i class="fa-solid fa-store"></i>
+
+                                </span>
+                                <span class="sidebar-text">Orders</span>
+                            </span>
+        <% end %>
+
+
+
+                    </li>
+
+
+          </li>
+
+
+          <li class="nav-item">
+
+
+          <%= link to: Routes.admin_path(@socket, :list_warehouse), class: "nav-link d-flex justify-content-between" do%>
+          <span>
+                                  <span class="sidebar-icon">
+          <i class="fa fa-truck" aria-hidden="true"></i>
+
+                                  </span>
+                                  <span class="sidebar-text">Warehouses</span>
+                              </span>
+          <% end %>
+
+
+
+
+                      </li>
+
+                      <li class="nav-item ">
+                      <a href="../../pages/transactions.html" class="nav-link">
+                          <span class="sidebar-icon">
+                              <i class="fas fa-credit-card"></i>
+                          </span>
+                          <span class="sidebar-text">Transactions</span>
+                      </a>
+                  </li>
+
+
+                  <li class="nav-item">
+
+
+                  <%= link to: Routes.admin_path(@socket, :list_users), class: "nav-link d-flex justify-content-between" do%>
+                  <span>
+                                          <span class="sidebar-icon">
+                                              <i class="fas fa-user"></i>
+
+                                          </span>
+                                          <span class="sidebar-text">Users</span>
+                                      </span>
+                  <% end %>
+
+
+
+
+                              </li>
+                              <li class="nav-item">
+                              <a href="https://demo.themesberg.com/volt-pro/pages/map.html" target="_blank"
+                                  class="nav-link d-flex justify-content-between">
+                                  <span>
+                                      <span class="sidebar-icon">
+
+
+               <i class='fa-solid fa-map'></i>
+                                      </span>
+                                      <span class="sidebar-text">Map</span>
+                                  </span>
+                                  <span>
+                                      <span class="badge badge-sm bg-success ms-1 text-gray-800"></span>
+                                  </span>
+                              </a>
+                          </li>
         <li class="nav-item ">
           <a href="#" class="nav-link">
             <span class="sidebar-icon">
@@ -144,7 +204,7 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
           <div class="d-flex align-items-center">
             <!-- Search form -->
-            
+
             <!-- / Search form -->
           </div>
           <!-- Navbar links -->

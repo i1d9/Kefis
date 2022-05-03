@@ -54,7 +54,7 @@
             <li class="nav-item">
 
 
-                <%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+                <%= link to: Routes.index_path(@conn, :retailer), class: "nav-link d-flex justify-content-between" do%>
 <span>
                         <span class="sidebar-icon">
                         
@@ -69,7 +69,7 @@
             </li>
             <li class="nav-item">
                 
-<%= link to: Routes.admin_path(@conn, :list_partners), class: "nav-link d-flex justify-content-between" do%>
+<%= link to: Routes.index_path(@conn, :supplier), class: "nav-link d-flex justify-content-between" do%>
 <span>
                         <span class="sidebar-icon">
                         
@@ -87,7 +87,7 @@
 
                         <li class="nav-item">
                 
-<%= link to: Routes.admin_path(@conn, :list_orders), class: "nav-link d-flex justify-content-between" do%>
+<%= link to: Routes.index_path(@conn, :index), class: "nav-link d-flex justify-content-between" do%>
 <span>
                         <span class="sidebar-icon">
                         

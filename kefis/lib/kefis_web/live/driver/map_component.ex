@@ -1,4 +1,4 @@
-defmodule KefisWeb.Driver.MapLive do
+defmodule KefisWeb.Driver.MapComponent do
   use KefisWeb, :live_component
 
   def update(%{map_lat: map_lat, map_lng: map_lng} = assigns, socket) do

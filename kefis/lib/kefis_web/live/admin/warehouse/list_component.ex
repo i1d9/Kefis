@@ -1,14 +1,17 @@
-defmodule KefisWeb.Admin.Order.ListComponent do
+defmodule KefisWeb.Admin.Warehouse.ListComponent do
   use KefisWeb, :live_component
-  alias Kefis.Orders
 
-  def update(assigns, socket) do
+  alias Kefis.Warehouses
+
+  def update(_params, socket) do
     {:ok,
      socket
      |> init_items()}
   end
 
   def render(assigns) do
+    IO.inspect(assigns)
+
     ~H"""
     <div>
     <div class="table-settings mb-4">
@@ -20,7 +23,7 @@ defmodule KefisWeb.Admin.Order.ListComponent do
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                 </svg>
                             </span>
-                            <input type="text" class="form-control" placeholder="Search Order">
+                            <input type="text" class="form-control" placeholder="Search Warehouse">
                         </div>
                     </div>
                     <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
@@ -48,29 +51,18 @@ defmodule KefisWeb.Admin.Order.ListComponent do
     <thead class="thead-light">
     <tr>
     <th class="border-0 rounded-start">#</th>
-    <th class="border-0">Retailer</th>
-    <th class="border-0">Value</th>
+    <th class="border-0">Location</th>
 
-    <th class="border-0">Status</th>
+    <th class="border-0">Action</th>
 
-    <th class="border-0">Actions</th>
+
     </tr>
     </thead>
     <tbody>
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
-    <td phx-value-id={item.id} phx-target={@myself} phx-click="show_item">
-
-    <%= live_redirect index, to: Routes.index_path(@socket, :detail, item.id) %>
-
-    </td>
-
-    <td><%= item.partner.name %></td>
-
-    <td><%= item.value %></td>
-
-    <td><%= item.status %></td>
-
+    <td><%= index %></td>
+    <td><%= item.location_name %></td>
     <td>
     <button class="btn btn-gray-200" phx-target={@myself} phx-value-id={item.id} phx-click="edit_item" >Edit</button>
     <button class="btn btn-danger" phx-target={@myself} phx-value-id={item.id} phx-click="delete_item">Delete</button>
@@ -132,7 +124,7 @@ defmodule KefisWeb.Admin.Order.ListComponent do
   end
 
   defp init_items(socket) do
-    items = Orders.admin_list_orders()
+    items = Warehouses.list()
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)

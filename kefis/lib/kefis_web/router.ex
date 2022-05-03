@@ -88,7 +88,14 @@ defmodule KefisWeb.Router do
     get "/user", AdminController, :list_users
     get "/user/:id", AdminController, :list_users
 
-    #get "/orders", AdminController, :list_orders
+    live "/warehouses", Admin.Warehouse.IndexLive, :list
+    live "/warehouses/new", Admin.Warehouse.IndexLive, :new
+    live "/warehouses/:id", Admin.Warehouse.IndexLive, :update
+
+    live "/transactions", Admin.Transaction.IndexLive
+
+    live "/partners/retailer", Admin.Partner.IndexLive, :retailer
+    live "/partners/supplier", Admin.Partner.IndexLive, :supplier
 
     live "/orders", Admin.Order.IndexLive, :index
     live "/orders/:id", Admin.Order.IndexLive, :detail
@@ -133,6 +140,12 @@ defmodule KefisWeb.Router do
     # get "/order/new", RetailerController, :order
     get "/order/:id", RetailerController, :show_order
     live "/order/info", Retailer.ConfirmOrderLive
+  end
+
+  scope "/pos", KefisWeb do
+    pipe_through [:browser, :protected, :retailer]
+    # pipe_through [:browser]
+
   end
 
   scope "/s", KefisWeb do

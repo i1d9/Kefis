@@ -1,4 +1,4 @@
-defmodule KefisWeb.Admin.MapLive do
+defmodule KefisWeb.Admin.Transaction.IndexLive do
   use KefisWeb, :live_view
 
   def mount(_params, _session, socket) do
@@ -7,7 +7,7 @@ defmodule KefisWeb.Admin.MapLive do
 
   def render(assigns) do
     ~H"""
-
+    <div></div>
     """
   end
 end

@@ -4,6 +4,7 @@ defmodule Kefis.Partners do
   alias Kefis.Chain.Partner
   alias Ecto.Changeset
 
+  import Ecto.Query, only: [from: 2]
   def create_partner_user(partner_details, user_details) do
 
     user_changeset = User.admin_changeset(%User{}, add_role(partner_details, user_details))
@@ -25,6 +26,11 @@ defmodule Kefis.Partners do
       user_details = Map.put(user_details, "role", "supplier_admin")
       user_details
     end
+  end
+
+  def partners_type(type) do
+    query = from p in Partner, where: p.type == ^type
+    Repo.all(query)
   end
 
   def create_partner(details) do

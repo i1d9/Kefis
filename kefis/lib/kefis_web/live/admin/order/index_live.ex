@@ -40,7 +40,7 @@ defmodule KefisWeb.Admin.Order.IndexLive do
 
   def render_me(socket, assigns, :index) do
     ~H"""
-      <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "order-list-component",  component: KefisWeb.Admin.ListView, component_details: %{id: "order_list_component", live_action: assigns.live_action} %>
+      <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "order-list-component",  component: KefisWeb.Admin.Order.ListComponent, component_details: %{id: "order_list_component", live_action: assigns.live_action} %>
 
 
     """
