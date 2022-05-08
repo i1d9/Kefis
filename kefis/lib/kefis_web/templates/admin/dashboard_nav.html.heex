@@ -120,15 +120,23 @@
 
             </li>
 
-            <li class="nav-item ">
-                <a href="../../pages/transactions.html" class="nav-link">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-credit-card"></i>
-                    </span>
-                    <span class="sidebar-text">Transactions</span>
-                </a>
-            </li>
+                      <li class="nav-item">
 
+
+                      <%= link to: Routes.index_path(@conn, :transaction_index), class: "nav-link d-flex justify-content-between" do%>
+                      <span>
+                                              <span class="sidebar-icon">
+                                                  <i class="fas fa-user"></i>
+
+                                              </span>
+                                              <span class="sidebar-text">Transactions</span>
+                                          </span>
+                      <% end %>
+
+
+
+
+                                  </li>
             <li class="nav-item">
 
 

@@ -2,12 +2,36 @@ defmodule KefisWeb.Admin.Transaction.IndexLive do
   use KefisWeb, :live_view
 
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    IO.inspect(socket.assigns.live_action)
+    {:ok,
+    socket
+
+    }
+  end
+
+
+
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action)}
+  end
+
+  defp apply_action(socket, :transaction_index) do
+    socket
+  end
+
+  def render_me(socket, assigns, :transaction_index) do
+    ~H"""
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "transaction_component", component: KefisWeb.Admin.Transaction.ListComponent, description: "sdkjnsdjkn", component_details: %{id: "dsjkdsjk"} %>
+    """
   end
 
   def render(assigns) do
     ~H"""
-    <div></div>
+      <div>
+      <%= render_me(@socket, assigns, @live_action) %>
+      </div>
     """
   end
+
+
 end

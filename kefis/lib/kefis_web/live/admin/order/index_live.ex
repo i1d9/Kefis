@@ -41,13 +41,11 @@ defmodule KefisWeb.Admin.Order.IndexLive do
   def render_me(socket, assigns, :index) do
     ~H"""
       <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "order-list-component",  component: KefisWeb.Admin.Order.ListComponent, component_details: %{id: "order_list_component", live_action: assigns.live_action} %>
-
-
     """
   end
 
   def render_me(socket, assigns, :detail) do
-    #IO.inspect(assigns)
+
     ~H"""
     <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "order-detail-component",  component: KefisWeb.Admin.Order.ShowLive, component_details: %{id: "order_detail_component",order_id: @order_id, live_action: @live_action, modal: false} %>
 
@@ -55,7 +53,7 @@ defmodule KefisWeb.Admin.Order.IndexLive do
   end
 
   def render_me(socket, assigns, :info) do
-    #IO.inspect(assigns)
+
     ~H"""
     <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "order-detail-modal-component",  component: KefisWeb.Admin.Order.ShowLive, component_details: %{id: "order_detail_component",order_id: @order_id, live_action: @live_action, modal: true, detail: @order_detail_id} %>
 
@@ -153,12 +151,12 @@ defmodule KefisWeb.Admin.Order.IndexLive do
 
 
   def handle_event("edit_item", %{"id" => id} = _params, socket) do
-    IO.inspect(id)
+
     {:noreply, socket}
   end
 
   def handle_event("delete_item", %{"id" => id} = _params, socket) do
-    IO.inspect(id)
+
 
     order = Orders.get(String.to_integer(id))
 

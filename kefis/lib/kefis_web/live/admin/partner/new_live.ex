@@ -91,7 +91,7 @@ defmodule KefisWeb.Admin.Partner.NewLive do
     }
   end
 
-  
+
   @impl true
   def handle_info({:updated_map_component, %{coordinate: %{"lat" => lat, "lng" => lng}}}, %{assigns: %{partner_changeset: partner_changeset}} = socket) do
 
@@ -105,6 +105,34 @@ defmodule KefisWeb.Admin.Partner.NewLive do
     |> assign(map_component_marker_lat: lat, map_component_marker_lng: lng)
     |> assign(:partner_changeset, changeset)
     }
+  end
+
+  def main_component(assigns) do
+    ~H"""
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-lg-4 col-sm-6">
+                <!-- Form -->
+                  <div class="mb-4">
+                    <%= if @user_form_visible do %>
+                        <%= live_component @socket, KefisWeb.Admin.Partner.UserFormComponent, id: "new-user-partner-component", user_changeset: @user_changeset, partner_changeset: @partner_changeset %>
+                      <% else %>
+                        <%= live_component @socket, KefisWeb.Admin.Partner.PartnerFormComponent, id: "new-partner", user_changeset: @user_changeset, partner_changeset: @partner_changeset, partner_details_valid: @partner_details_valid  %>
+                        <%= live_component @socket, KefisWeb.Admin.MapComponent, id: "map-component", map_lat: @map_component_marker_lat, map_lng: @map_component_marker_lng, coordniated: [] %>
+                    <% end %>
+                  </div>
+                <!-- End of Form -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    """
   end
 
 

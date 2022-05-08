@@ -65,17 +65,23 @@ defmodule KefisWeb.Admin.Partner.ReatilerComponent do
     <div class="card-body">
 
 
-          <table class="table table-centered table-nowrap mb-0 rounded">
+
+
+
+
+    
+          <%= link "New", to: Routes.live_path(@socket, KefisWeb.Admin.Partner.NewLive), class: "btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" %>
+
+
+        <table class="table table-centered table-nowrap mb-0 rounded">
           <thead class="thead-light">
-          <tr>
-          <th class="border-0 rounded-start">#</th>
-          <th class="border-0">Name</th>
-          <th class="border-0">Phone</th>
+            <tr>
+              <th class="border-0 rounded-start">#</th>
+              <th class="border-0">Name</th>
+              <th class="border-0">Phone</th>
               <th class="border-0">Email</th>
               <th class="border-0">Location</th>
-
-
-          </tr>
+            </tr>
           </thead>
           <tbody>
           <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>

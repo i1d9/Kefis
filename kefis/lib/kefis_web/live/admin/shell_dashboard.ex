@@ -8,6 +8,12 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
      |> assign(component_details: component_details)}
   end
 
+  def handle_event("test_target", _value, socket) do
+    IO.inspect("socket")
+    {:noreply, socket}
+  end
+
+
   def render(assigns) do
     ~H"""
     <div>
@@ -133,15 +139,25 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
 
                       </li>
 
-                      <li class="nav-item ">
-                      <a href="../../pages/transactions.html" class="nav-link">
-                          <span class="sidebar-icon">
-                              <i class="fas fa-credit-card"></i>
-                          </span>
-                          <span class="sidebar-text">Transactions</span>
-                      </a>
-                  </li>
 
+
+                      <li class="nav-item">
+
+
+                      <%= link to: Routes.index_path(@socket, :transaction_index), class: "nav-link d-flex justify-content-between" do%>
+                      <span>
+                                              <span class="sidebar-icon">
+                                                  <i class="fas fa-user"></i>
+
+                                              </span>
+                                              <span class="sidebar-text">Transactions</span>
+                                          </span>
+                      <% end %>
+
+
+
+
+                                  </li>
 
                   <li class="nav-item">
 
@@ -188,10 +204,6 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
             <span class="sidebar-text">Settings</span>
           </a>
         </li>
-
-
-
-
       </ul>
     </div>
     </nav>
@@ -393,6 +405,8 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
         </div>
       </div>
     </nav>
+
+
     <%= live_component assigns.component, id: assigns.component_details.id, details: assigns.component_details %>
     </main>
 

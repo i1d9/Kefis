@@ -3,21 +3,21 @@ defmodule KefisWeb.Admin.Order.ShowLive do
 
   alias Kefis.Orders
 
-  def update(%{details: %{live_action: live_action}=details} = _assigns, socket) do
+  def update(%{details: %{live_action: live_action} = details} = _assigns, socket) do
 
-    IO.inspect(live_action)
     %{order_id: order_id, live_action: live_action, modal: modal} = details
+
     case live_action do
-
-
       :info ->
         %{detail: detail} = details
+
         {:ok,
-        socket
-        |> assign(:modal, modal)
-        |> assign(:live_action, live_action)
-        |> assign(:order_detail_id, detail)
-        |> load_order(String.to_integer(order_id))}
+         socket
+         |> assign(:modal, modal)
+         |> assign(:live_action, live_action)
+         |> assign(:order_detail_id, detail)
+         |> load_order(String.to_integer(order_id))}
+
       :detail ->
         {:ok,
          socket
@@ -25,13 +25,7 @@ defmodule KefisWeb.Admin.Order.ShowLive do
          |> assign(:live_action, live_action)
          |> load_order(String.to_integer(order_id))}
     end
-
   end
-
-
-
-
-
 
   def handle_event("show_detail", %{"detail" => detail} = value, socket) do
     IO.inspect(value)
@@ -41,7 +35,6 @@ defmodule KefisWeb.Admin.Order.ShowLive do
      |> assign(:order_detail_id, detail)
      |> assign(:modal, true)}
   end
-
 
   def render(assigns) do
     ~H"""

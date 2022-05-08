@@ -71,16 +71,11 @@ defmodule KefisWeb.Router do
   scope "/admin", KefisWeb do
     pipe_through [:browser, :protected]
 
-    get "/", AdminController, :index
-    live "/live/new/partner", Admin.Partner.NewLive
 
-    get "/new/partner", AdminController, :new_partner
-    post "/new/partner", AdminController, :create_new_partner
+    live "/", Admin.IndexLive
 
-    get "/new/partner/user", AdminController, :new_partner_user
-    post "/new/partner/user", AdminController, :create_partner_user
-    get "/partners", AdminController, :list_partners
 
+    
     get "/warehouse", AdminController, :list_warehouse
     get "/warehouse/new", AdminController, :new_warehouse
     post "/warehouse/new", AdminController, :create_warehouse
@@ -88,13 +83,21 @@ defmodule KefisWeb.Router do
     get "/user", AdminController, :list_users
     get "/user/:id", AdminController, :list_users
 
+
     live "/warehouses", Admin.Warehouse.IndexLive, :list
     live "/warehouses/new", Admin.Warehouse.IndexLive, :new
     live "/warehouses/:id", Admin.Warehouse.IndexLive, :update
 
-    live "/transactions", Admin.Transaction.IndexLive
+    live "/transactions", Admin.Transaction.IndexLive, :transaction_index
+    live "/transactions/:id", Admin.Transaction.IndexLive, :transaction_detail
 
+    live "/partners/new", Admin.Partner.NewLive
     live "/partners/retailer", Admin.Partner.IndexLive, :retailer
+    live "/partners/:id", Admin.Partner.IndexLive, :partner_details
+    live "/partners/:id/edit", Admin.Partner.IndexLive, :edit_partner
+    live "/partners/:id/orders", Admin.Partner.IndexLive, :partner_order
+    live "/partners/:id/orders/:id", Admin.Partner.IndexLive, :partner_order_details
+    live "/partners/:id/transactions", Admin.Partner.IndexLive, :partner_transactions
     live "/partners/supplier", Admin.Partner.IndexLive, :supplier
 
     live "/orders", Admin.Order.IndexLive, :index

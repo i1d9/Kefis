@@ -8,7 +8,7 @@ defmodule KefisWeb.PartnerController do
   alias Kefis.Products
 
   alias Kefis.Chain.Product
-  alias Kefis.Repo
+
   alias Kefis.Products
 
 
@@ -118,10 +118,6 @@ defmodule KefisWeb.PartnerController do
 
   end
 
-  def show_partner_user(conn, %{"id" => id}) do
-
-  end
-
 
   def list_partner_products(conn, _opts) do
     products = Products.list_partner_products(conn.assigns.current_user.partner)
@@ -185,24 +181,7 @@ defmodule KefisWeb.PartnerController do
   end
 
 
-  ### Retailer Actions ###
-
-  def retailer_index(conn, _params) do
-
-  end
-
-  def retailer_show_products(conn, _params) do
-
-  end
-
-  def retailer_order(conn, _params) do
-
-  end
-
-  def retailer_make_order(conn, _params) do
-
-  end
 
 
-  ### Supplier Actions ###
+
 end

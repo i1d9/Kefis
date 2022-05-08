@@ -13,8 +13,6 @@ defmodule KefisWeb.Admin.MapComponent do
 
   @doc """
   Receive the coordinates from the javascript file
-
-
   """
   def handle_event("map_component_coordinates", %{"lat"=> lat, "lng"=> lng} = coordinate, socket) do
 
@@ -36,7 +34,7 @@ defmodule KefisWeb.Admin.MapComponent do
 
   def render(assigns) do
     ~H"""
-        <leaflet-map lat={"#{ @map_lat }"} lng={"#{ @map_lng }"}
+        <leaflet-map zoom={14.5} lat={"#{ @map_lat }"} lng={"#{ @map_lng }"}
       phx-hook="LeafLetAdminMapComponent" phx-update="ignore" phx-target={@myself}>
 
       <leaflet-marker
