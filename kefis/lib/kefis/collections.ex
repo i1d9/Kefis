@@ -11,6 +11,7 @@ defmodule Kefis.Collections do
       |> Repo.insert!()
   end
 
+  
   def new(collection) do
     Repo.insert(collection)
   end
