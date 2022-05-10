@@ -75,7 +75,7 @@ defmodule KefisWeb.Router do
     live "/", Admin.IndexLive
 
 
-    
+
     get "/warehouse", AdminController, :list_warehouse
     get "/warehouse/new", AdminController, :new_warehouse
     post "/warehouse/new", AdminController, :create_warehouse
@@ -93,12 +93,13 @@ defmodule KefisWeb.Router do
 
     live "/partners/new", Admin.Partner.NewLive
     live "/partners/retailer", Admin.Partner.IndexLive, :retailer
+    live "/partners/supplier", Admin.Partner.IndexLive, :supplier
+
     live "/partners/:id", Admin.Partner.IndexLive, :partner_details
     live "/partners/:id/edit", Admin.Partner.IndexLive, :edit_partner
     live "/partners/:id/orders", Admin.Partner.IndexLive, :partner_order
     live "/partners/:id/orders/:id", Admin.Partner.IndexLive, :partner_order_details
     live "/partners/:id/transactions", Admin.Partner.IndexLive, :partner_transactions
-    live "/partners/supplier", Admin.Partner.IndexLive, :supplier
 
     live "/orders", Admin.Order.IndexLive, :index
     live "/orders/:id", Admin.Order.IndexLive, :detail
