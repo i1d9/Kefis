@@ -24,7 +24,7 @@ defmodule KefisWeb.Auth do
   def landing_page(conn, user) do
     cond do
       user.role == "super" ->
-        redirect(conn, to: Routes.admin_path(conn, :index))
+        redirect(conn, to: Routes.live_path(conn, KefisWeb.Admin.IndexLive))
       user.role == "supplier_admin" ->
         redirect(conn, to: Routes.supplier_path(conn, :index))
       user.role == "retailer_admin" ->
