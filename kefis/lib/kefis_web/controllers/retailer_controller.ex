@@ -31,7 +31,7 @@ defmodule KefisWeb.RetailerController do
       order -> live_render(conn, KefisWeb.Retailer.ConfirmOrderLive, session: %{
         "order" => order
       })
-      
+
     end
 
   end
