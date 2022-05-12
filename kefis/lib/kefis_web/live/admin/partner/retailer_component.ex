@@ -83,7 +83,7 @@ defmodule KefisWeb.Admin.Partner.ReatilerComponent do
             <td><%= index %></td>
             <td><%= item.name %></td>
             <td><%= item.phone %></td>
-            <td><%= item.contact_email %></td>
+            <td><%= item.email %></td>
             <td><%= item.location %></td>
           </tr>
           <% end %>

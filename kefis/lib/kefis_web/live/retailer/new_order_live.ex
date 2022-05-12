@@ -135,7 +135,7 @@ defmodule KefisWeb.Retailer.NewOrderLive do
 
   def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
 
-    order_info = %{value: total, status: "Initiatied"}
+    order_info = %{value: total, status: "Initiatied", date: Date.utc_today()}
     case Orders.retailer_new_order(order_info, user, selected_product_changesets) do
       {:ok, order} ->
 

@@ -6,12 +6,12 @@ defmodule Kefis.Repo.Migrations.AddPartners do
       add :name, :string
       add :location, :string
       add :phone, :string
-      add :contact_email, :string
+      add :email, :string
       add :lng, :float
       add :lat, :float
       add :type, :string
       add :user_id, references(:users)
-      
+
 
       timestamps()
     end

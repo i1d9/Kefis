@@ -3,7 +3,7 @@ defmodule Kefis.Chain.Partner do
   import Ecto.Changeset
 
   schema "partners" do
-    field :contact_email, :string
+    field :email, :string
     field :lat, :float
     field :lng, :float
     field :location, :string
@@ -25,11 +25,11 @@ defmodule Kefis.Chain.Partner do
   @doc false
   def changeset(partner, attrs) do
     partner
-    |> cast(attrs, [:name, :location, :phone, :contact_email,  :lng, :lat, :type])
-    |> validate_required([:name, :location, :phone, :contact_email,  :lng, :lat, :type])
-    |> unique_constraint(:contact_email)
+    |> cast(attrs, [:name, :location, :phone, :email,  :lng, :lat, :type])
+    |> validate_required([:name, :location, :phone, :email,  :lng, :lat, :type])
+    |> unique_constraint(:email)
     |> validate_length(:phone, min: 10, max: 12)
-    |> validate_format(:contact_email, ~r/@/)
+    |> validate_format(:email, ~r/@/)
     |> validate_inclusion(:type, ~w(supplier retailer))
   end
 end

@@ -17,7 +17,7 @@ defmodule KefisWeb.AdminView do
       phone: partner.phone,
       lat: partner.lat,
       lng: partner.lng,
-      contact_email: partner.contact_email
+      email: partner.email
     }
   end
 
@@ -30,7 +30,7 @@ defmodule KefisWeb.AdminView do
       phone: partner.phone,
       lat: partner.lat,
       lng: partner.lng,
-      contact_email: partner.contact_email,
+      email: partner.email,
       user: render_one(partner.user, __MODULE__, "user.json", as: :user)
     }
   end
@@ -43,7 +43,7 @@ defmodule KefisWeb.AdminView do
       phone: partner.phone,
       lat: partner.lat,
       lng: partner.lng,
-      contact_email: partner.contact_email,
+      email: partner.email,
       products: render_many(partner.products, __MODULE__, "product.json", as: :product)
     }
   end

@@ -5,6 +5,7 @@ defmodule Kefis.Chain.Order do
   schema "orders" do
     field :value, :integer
     field :status, :string
+    field :date, :date
     has_many :order_details, Kefis.Chain.OrderDetail
     has_one :dispatch, Kefis.Chain.Dispatch
 
@@ -14,8 +15,8 @@ defmodule Kefis.Chain.Order do
 
   def changeset(order, attrs) do
     order
-    |> cast(attrs, [:value, :status])
-    |> validate_required([:value, :status])
+    |> cast(attrs, [:value, :status, :date])
+    |> validate_required([:value, :status, :date])
   end
 
 end

@@ -28,13 +28,13 @@ super_user = Repo.insert!(super_user)
 
 #Create a Supplier account
 supplier_user = %{
-  first_name: "User",
-  second_name: "One",
+  first_name: "Supplier",
+  second_name: "Account",
   phone: "254712345678",
-  email: "userone@gmail.com",
+  email: "supplier@gmail.com",
   role: "supplier_admin",
-  password: "userone@gmail.com",
-  password_confirmation: "userone@gmail.com"}
+  password: "supplier@gmail.com",
+  password_confirmation: "supplier@gmail.com"}
 supplier_user = User.admin_changeset(%User{}, supplier_user)
 supplier_user = Repo.insert!(supplier_user)
 
@@ -47,9 +47,9 @@ retailer_user = %{
   second_name: "Two",
   phone: "254712387654",
   role: "retailer_admin",
-  email: "usertwo@gmail.com",
-  password: "usertwo@gmail.com",
-  password_confirmation: "usertwo@gmail.com"}
+  email: "retailer@gmail.com",
+  password: "retailer@gmail.com",
+  password_confirmation: "retailer@gmail.com"}
 retailer_user = User.admin_changeset(%User{}, retailer_user)
 retailer_user = Repo.insert!(retailer_user)
 
@@ -57,7 +57,7 @@ retailer_user = Repo.insert!(retailer_user)
 
 #Create a Supplier record
 supplier_details = %{
-  contact_email: "user@supplier.com",
+  email: "user@supplier.com",
   lat: -1.337517,
   lng: 36.808900,
   location: "Mugumoini",
@@ -73,7 +73,7 @@ supplier = supplier_user
 
 #Create a Retailer record
 retailer_details = %{
-  contact_email: "user@retailer.com",
+  email: "user@retailer.com",
   lat: -1.268870,
   lng: 36.785554,
   location: "Mugumoini",

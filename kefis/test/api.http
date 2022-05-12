@@ -31,7 +31,7 @@ Host: 127.0.0.1:4000
     "name":"API Test API",
     "phone":"254741287654",
     "location":"Mugumoinias",
-    "contact_email":"user@retailer.com",
+    "email":"user@retailer.com",
     "lat": "-1.268870",
     "lng": "36.785554",
     "type": "retailer",
@@ -62,7 +62,7 @@ Host: 127.0.0.1:4000
     "name":"Updated Through API",
     "phone":"254712983876",
     "location":"Madaraka Estate",
-    "contact_email":"retailer@user.com",
+    "email":"retailer@user.com",
     "lat": -1.268870,
     "lng": 36.785554,
     "type": "retailer"
