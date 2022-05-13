@@ -4,13 +4,12 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
   alias Kefis.Chain
   alias Kefis.Chain.Partner
 
-  def update(%{details: %{partner: partner, type: type}} = assigns, socket) do
+  def update(%{details: %{partner: partner} = details}, socket) do
     {:ok,
      socket
-     |> assign(assigns)
+     |> assign(details)
      |> assign(changeset: Chain.change_partner(partner))
      |> assign(:partner_details_valid, false)
-     |> assign(:type, type)
      |> assign(map_component_marker_lat: -1.286389, map_component_marker_lng: 36.817223)}
   end
 
@@ -31,8 +30,6 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
                     phx-submit="partner_save"
                               id="admin-partner-form"
                                 >
-
-
                 <div class="mb-4">
                 <%= label partner_f, :name, for: "name" %>
                 <%= text_input partner_f, :name, class: "form-control", id: "name" %>
@@ -57,10 +54,6 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
                 <%= error_tag partner_f, :email %>
               </div>
 
-
-
-
-
               </.form>
     </div></div></div>
     </div>
@@ -69,6 +62,4 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
     </div>
     """
   end
-
-  
 end

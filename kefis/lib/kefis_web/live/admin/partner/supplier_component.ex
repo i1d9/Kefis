@@ -66,6 +66,9 @@ defmodule KefisWeb.Admin.Partner.SupplierComponent do
     <div class="card-body">
 
 
+    <%= link "New", to: Routes.live_path(@socket, KefisWeb.Admin.Partner.NewLive), class: "btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" %>
+
+
           <table class="table table-centered table-nowrap mb-0 rounded">
           <thead class="thead-light">
           <tr>
