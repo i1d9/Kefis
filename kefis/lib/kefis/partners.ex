@@ -67,4 +67,9 @@ defmodule Kefis.Partners do
   def api_delete_partner(%Partner{} = partner) do
     Repo.delete(partner)
   end
+
+
+  def change_partner(%Partner{} = partner, attrs \\ %{}) do
+    Partner.changeset(partner, attrs)
+  end
 end
