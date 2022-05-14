@@ -7,6 +7,7 @@ defmodule Kefis.Repo.Migrations.AddTransactions do
       add :type, :string
       add :status, :string
       add :account_id, references(:accounts)
+      add :date, :date
       timestamps()
     end
   end

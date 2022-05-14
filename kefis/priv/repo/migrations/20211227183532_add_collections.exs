@@ -10,6 +10,8 @@ defmodule Kefis.Repo.Migrations.AddCollections do
       add :dispatch_id, references(:dispatches)
       add :value, :integer
       add :status, :string
+      add :date, :date
+
       timestamps()
     end
   end
