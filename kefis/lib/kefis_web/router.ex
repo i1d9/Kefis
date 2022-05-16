@@ -74,16 +74,6 @@ defmodule KefisWeb.Router do
 
     live "/", Admin.IndexLive
 
-
-
-    get "/warehouse", AdminController, :list_warehouse
-    get "/warehouse/new", AdminController, :new_warehouse
-    post "/warehouse/new", AdminController, :create_warehouse
-
-    get "/user", AdminController, :list_users
-    get "/user/:id", AdminController, :list_users
-
-
     live "/warehouses", Admin.Warehouse.IndexLive, :list
     live "/warehouses/new", Admin.Warehouse.IndexLive, :new
     live "/warehouses/:id", Admin.Warehouse.IndexLive, :update
@@ -99,11 +89,19 @@ defmodule KefisWeb.Router do
     live "/partners/:id/edit", Admin.Partner.IndexLive, :edit_partner
     live "/partners/:id/orders", Admin.Partner.IndexLive, :partner_order
     live "/partners/:id/orders/:id", Admin.Partner.IndexLive, :partner_order_details
+
+    live "/partners/:id/products/", Admin.Partner.ProductIndexLive, :partner_products
+    live "/partners/:id/products/new", Admin.Partner.ProductIndexLive, :new_partner_product
+    live "/partners/:id/products/:product", Admin.Partner.ProductIndexLive, :show_partner_product
+    live "/partners/:id/products/:product/edit", Admin.Partner.ProductIndexLive, :edit_partner_product
+
     live "/partners/:id/transactions", Admin.Partner.IndexLive, :partner_transactions
 
     live "/orders", Admin.Order.IndexLive, :index
     live "/orders/:id", Admin.Order.IndexLive, :detail
     live "/orders/:id/info", Admin.Order.IndexLive, :info
+
+    live "/users", Admin.User.IndexLive
 
   end
 
@@ -137,12 +135,14 @@ defmodule KefisWeb.Router do
     # pipe_through [:browser]
 
     live "/", Retailer.IndexLive
-    live "/order/new", Retailer.NewLive
+
     live "/order", Retailer.OrdersLive, :index
-    live "/order/detail", Retailer.OrdersLive, :detail
+    live "/order/new", Retailer.NewLive
+    live "/order/history", Retailer.OrdersLive, :history
+    live "/order/:id", Retailer.OrdersLive, :show_order
+
 
     # get "/order/new", RetailerController, :order
-    get "/order/:id", RetailerController, :show_order
     live "/order/info", Retailer.ConfirmOrderLive
   end
 
