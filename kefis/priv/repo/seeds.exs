@@ -10,234 +10,156 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 alias Kefis.{Users.User, Repo, Users, Products, Accounts}
-alias Kefis.Chain.{Partner, Collection, Product, Account, Driver, Dispatch, DispatchDetails, Order, OrderDetail, Transaction, Warehouse}
+
+alias Kefis.Chain.{
+  Partner,
+  Collection,
+  Product,
+  Account,
+  Driver,
+  Dispatch,
+  DispatchDetails,
+  Order,
+  OrderDetail,
+  Transaction,iex
+  Warehouse
+}
+
 alias Ecto.Changeset
 
-#Create a Super User Account
+# Create a Super User Account
 super_user = %{
   first_name: "User",
   second_name: "Zero",
   phone: "254712345418",
-  email: "userzero@gmail.com",
+  email: "admin@gmail.com",
   role: "super",
-  password: "userzero@gmail.com",
-  password_confirmation: "userzero@gmail.com"}
+  password: "admin@gmail.com",
+  password_confirmation: "admin@gmail.com"
+}
 
 super_user = User.admin_changeset(%User{}, super_user)
 super_user = Repo.insert!(super_user)
 
-#Create a Supplier account
-supplier_user = %{
-  first_name: "Supplier",
-  second_name: "Account",
-  phone: "254712345678",
-  email: "supplier@gmail.com",
-  role: "supplier_admin",
-  password: "supplier@gmail.com",
-  password_confirmation: "supplier@gmail.com"}
-supplier_user = User.admin_changeset(%User{}, supplier_user)
-supplier_user = Repo.insert!(supplier_user)
+suppliers = [
+  %{
+    email: "centro@supplier.com",
+    lat: -1.344601,
+    lng: 36.735410,
+    location: "Kiambu",
+    phone: "2542051455",
+    type: "supplier",
+    name: "Centro Food"
+  },
+  %{
+    email: "palmhouse@supplier.com",
+    lat: -1.234766,
+    lng: 36.894712,
+    location: "Githunguri Road",
+    phone: "2542051455",
+    type: "supplier",
+    name: "Palmhouse Dairies"
+  },
+  %{
+    email: "nuvita@supplier.com",
+    lat: -1.321948,
+    lng: 36.884756,
+    location: "Kiambu",
+    phone: "2542051455",
+    type: "supplier",
+    name: "Nuvita Biscuits"
+  },
+  %{
+    email: "britannia@supplier.com",
+    lat: -1.298265,
+    lng: 36.714811,
+    location: "Kiambu",
+    phone: "2542044412",
+    type: "supplier",
+    name: "Britiana Industries Limited"
+  },
+  %{
+    email: "kenafric@supplier.com",
+    lat: -1.264456,
+    lng: 36.708803,
+    location: "Industrial Area",
+    phone: "2547307000",
+    type: "supplier",
+    name: "Kenafric Limited"
+  },
+  %{
+    email: "alphadiary@supplier.com",
+    lat: -1.301011,
+    lng: 36.837549,
+    location: "Mogadishu Road",
+    phone: "2540651256",
+    type: "supplier",
+    name: "Alpha Diary Products LTD"
+  },
+  %{
+    email: "chemilil@supplier.com",
+    lat: -1.238027,
+    lng: 36.859178,
+    location: "Mombasa Road",
+    phone: "25402031883",
+    type: "supplier",
+    name: "Chemelil Sugar Factory"
+  },
+  %{
+    email: "alphafine@supplier.com",
+    lat: -1.288998,
+    lng: 36.865014,
+    location: "Enterprise Road",
+    phone: "2542065125",
+    type: "supplier",
+    name: "Alpha Fine Food LTD"
+  },
+  %{
+    email: "bico_oil@supplier.com",
+    lat: -1.384695,
+    lng: 36.943624,
+    location: "Enterprise Road",
+    phone: "25420651251",
+    type: "supplier",
+    name: "Bidco Oil Refineries Limited"
+  }
+]
 
+"""
+Tried Ecto.Multi.new() but it doesn't work 🙂 I'm justifiying the loop
+"""
 
+for supplier_details <- suppliers do
+  names = String.split(supplier_details.name, " ")
 
-
-#Create a Retailer Account
-retailer_user = %{
-  first_name: "User",
-  second_name: "Two",
-  phone: "254712387654",
-  role: "retailer_admin",
-  email: "retailer@gmail.com",
-  password: "retailer@gmail.com",
-  password_confirmation: "retailer@gmail.com"}
-retailer_user = User.admin_changeset(%User{}, retailer_user)
-retailer_user = Repo.insert!(retailer_user)
-
-
-
-#Create a Supplier record
-supplier_details = %{
-  email: "user@supplier.com",
-  lat: -1.337517,
-  lng: 36.808900,
-  location: "Mugumoini",
-  phone: "254712387654",
-  type: "supplier",
-  name: "Blue Band"
-}
-
-supplier = supplier_user
-  |> Ecto.build_assoc(:partner)
-  |> Partner.changeset(supplier_details)
-  |> Repo.insert!()
-
-#Create a Retailer record
-retailer_details = %{
-  email: "user@retailer.com",
-  lat: -1.268870,
-  lng: 36.785554,
-  location: "Mugumoini",
-  phone: "254712983876",
-  type: "retailer",
-  name: "Sanford and Sons WholeSalers"
-}
-retailer = retailer_user
-  |> Ecto.build_assoc(:partner)
-  |> Partner.changeset(retailer_details)
-  |> Repo.insert!()
-
-
-
-#Create a monetary account for the supplier
-supplier_account_details = %{
-  balance: 0,
-  status: "active"
-}
-supplier_money_account = Account.changeset(%Account{}, supplier_account_details)
-|> Ecto.Changeset.put_assoc(:partner, supplier)
-|> Repo.insert!()
-
-#Create a monetary account for the retailer
-retailer_account_details = %{
-  balance: 0,
-  status: "active"
-}
-retailer_money_account = Account.changeset(%Account{}, retailer_account_details)
-|> Ecto.Changeset.put_assoc(:partner, retailer)
-|> Repo.insert!()
-
-
-#Deposit KES 5000 in the retailer account
-transaction_details = %{
-  amount: 5000,
-  status: "confirmed",
-  type: "deposit"
-}
-
-transcation_changeset = Transaction.changeset(%Transaction{}, transaction_details)
-|> Ecto.Changeset.put_assoc(:account, retailer_money_account)
-|> Repo.insert!()
-
-
-
-#Create Dummy Products and associate them with the supplier
-for i <- 1..10 do
-  product_detail = %{
-  name: "Product #{i}",
-  category: "shoes",
-  price: 5,
-  sku: "HJABJHbjhbsdh&(@&*7w48",
-  image: "/images/product_placeholder.jpg"
+  supplier_user = %{
+    first_name: Enum.at(names, 0),
+    second_name: Enum.at(names, 1),
+    phone: supplier_details.phone,
+    role: "supplier_admin",
+    email: supplier_details.email,
+    password: supplier_details.email,
+    password_confirmation: supplier_details.email
   }
 
-  Products.create(supplier, product_detail)
+  supplier_user = User.admin_changeset(%User{}, supplier_user)
+  supplier_user = Repo.insert!(supplier_user)
 
+  supplier =
+    supplier_user
+    |> Ecto.build_assoc(:partner)
+    |> Partner.changeset(supplier_details)
+    |> Repo.insert!()
+
+  supplier_account_details = %{
+    balance: 0,
+    status: "active"
+  }
+
+  supplier_money_account =
+    Account.changeset(%Account{}, supplier_account_details)
+    |> Ecto.Changeset.put_assoc(:partner, supplier)
+    |> Repo.insert!()
+
+  IO.inspect(supplier)
 end
-
-
-#Create a dummy supply order associated with the retailer above
-order = %{
-  value: 5000,
-  status: "initiated"
-}
-
-order_result = retailer
-|> Ecto.build_assoc(:orders)
-|> Order.changeset(order)
-|> Repo.insert!()
-
-#Create order details
-order_detail_product = Repo.get(Product, 1)
-order_detail_supplier = Repo.get(Partner, 1)
-order = Repo.get(Order, 2)
-order_detail = %{
-  status: "initiated",
-  price: 10,
-  quantity: 500,
-}
-
-#Build Relaionships
-order_detail = OrderDetail.changeset(%OrderDetail{}, order_detail)
-|> Changeset.put_assoc(:product, order_detail_product)
-|> Changeset.put_assoc( :partner, order_detail_supplier)
-|> Changeset.put_assoc( :order, order)
-|> Repo.insert!()
-
-
-#Create a Driver User Account
-driver_user = %{
-  first_name: "User",
-  second_name: "Three",
-  phone: "254772327411",
-  email: "userthree@gmail.com",
-  role: "driver",
-  password: "userthree@gmail.com",
-  password_confirmation: "userthree@gmail.com"}
-
-driver_user = User.admin_changeset(%User{}, driver_user)
-driver_user = Repo.insert!(driver_user)
-
-driver_details = %{
-  vehicle: "KBT124BH",
-  trips: 0
-}
-
-driver = driver_user
-  |> Ecto.build_assoc(:driver)
-  |> Driver.changeset(driver_details)
-  |> Repo.insert!()
-
-
-
-#Warehouse Admin User
-warehouse_admin_details = %{
-  first_name: "Warehouse",
-  second_name: "Admin",
-  phone: "254772346901",
-  email: "userfour@gmail.com",
-  role: "warehouse_admin",
-  password: "userfour@gmail.com",
-  password_confirmation: "userfour@gmail.com"
-}
-warehouse_admin_user = User.admin_changeset(%User{}, warehouse_admin_details)
-warehouse_admin_user = Repo.insert!(warehouse_admin_user)
-
-#Create Warehouse
-warehouse_details = %{
-  location_name: "Madaraka",
-  lng: -123.32,
-  lat: 32.2
-}
-
-warehouse =
-  Warehouse.changeset(%Warehouse{}, warehouse_details)
-  |> Ecto.Changeset.put_assoc(:user, warehouse_admin_user)
-  |> Repo.insert!()
-
-"""
-
-collection_details = %{
-  status: "initialised",
-  value: 4000
-}
-
-collection = Collection.changeset(%Collection{}, collection_details)
-  |> Ecto.Changeset.put_assoc( :driver, driver)
-  |> Ecto.Changeset.put_assoc( :partner, supplier)
-  |> Ecto.Changeset.put_assoc( :warehouse, warehouse)
-  |> Ecto.Changeset.put_assoc( :order_detail, order_detail)
-  |> Repo.insert!()
-
-data_dispatch = %{
-  status: "Initialised"
-}
-
-dispatch = Dispatch.changeset(%Dispatch{}, data_dispatch)
-  |> Ecto.Changeset.put_assoc( :driver, driver)
-  |> Ecto.Changeset.put_assoc( :order, order_result)
-  |> Ecto.Changeset.put_assoc( :warehouse, warehouse)
-  |> Repo.insert!()
-
-
-
-"""
