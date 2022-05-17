@@ -21,9 +21,20 @@ defmodule KefisWeb.Admin.Partner.Product.ListComponent do
                           <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                       </svg>
                   </span>
-                  <input type="text" class="form-control" placeholder="Search Supplier">
+                  <input type="text" class="form-control" placeholder="Search Products">
               </div>
           </div>
+
+          <div class="row align-items-center justify-content-between">
+          <div class="col col-md-6 col-lg-3 col-xl-4">
+              <div class="input-group me-2 me-lg-3 fmxw-400">
+                <%= form_for :search, "#", [phx_change: "product_search", phx_target: @myself], fn f -> %>
+                  <%= text_input f, :product_name, placeholder: "Search", class: "form-control" %>
+                <% end %>
+              </div>
+          </div>
+        </div>
+
           <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
               <div class="dropdown">
                   <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,9 +66,10 @@ defmodule KefisWeb.Admin.Partner.Product.ListComponent do
           <tr>
           <th class="border-0 rounded-start">#</th>
           <th class="border-0">Name</th>
-          <th class="border-0">Phone</th>
-              <th class="border-0">Email</th>
-              <th class="border-0">Location</th>
+          <th class="border-0">Price</th>
+          <th class="border-0">Category</th>
+          <th class="border-0">Actions</th>
+
 
 
           </tr>
@@ -66,7 +78,18 @@ defmodule KefisWeb.Admin.Partner.Product.ListComponent do
           <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
           <tr>
             <td>
-            <%= link index, to: Routes.index_path(@socket, :partner_details, item.id) %>
+            <%= link index, to: Routes.index_path(@socket, :show_partner_product,@supplier.id, item.id) %>
+            </td>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><%= item.category %></td>
+            <td>
+            <%= link "Edit", to: Routes.index_path(@socket, :edit_partner_product,@supplier.id, item.id), class: "btn btn-warning" %>
+            <button class="btn btn-danger" phx-click="delete_product" phx-value-product={item.id} phx-target={@myself} type="button">
+            Delete
+            </button>
+
+
             </td>
 
           </tr>
@@ -135,5 +158,24 @@ defmodule KefisWeb.Admin.Partner.Product.ListComponent do
     |> assign(:paginated_items, paginated_items)
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
+  end
+
+  def handle_event("product_search", %{"search" => %{"product_name" => product}} = _value, socket) do
+    products = Products.search_product(product)
+    {:noreply, assign(socket, :products, products)}
+  end
+
+  
+
+  def handle_event("delete_product", %{"product" => product}, socket) do
+
+    case Products.delete(product) do
+      {:ok, _product} ->
+        socket
+        |> init_items()
+      {:error, _} ->
+        {:noreply, socket}
+    end
+
   end
 end

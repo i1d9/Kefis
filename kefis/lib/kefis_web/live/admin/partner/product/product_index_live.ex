@@ -26,8 +26,6 @@ defmodule KefisWeb.Admin.Partner.Product.IndexLive do
   end
 
   defp apply_action(socket, :partner_products, %{"id" => id}) do
-
-
     socket
     |> assign(:supplier, Partners.get!(id))
   end
@@ -53,28 +51,28 @@ defmodule KefisWeb.Admin.Partner.Product.IndexLive do
   defp render_me(assigns, :partner_products) do
     ~H"""
 
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.ListComponent, component_details: %{id: "dsjkdsjk", supplier: @supplier} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.ListComponent, component_details: %{id: "dsjkdsjk", supplier: @supplier, live_action: @live_action} %>
 
     """
   end
 
   defp render_me(assigns, :new_partner_product) do
     ~H"""
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.FormComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.FormComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier, live_action: @live_action} %>
 
     """
   end
 
   defp render_me(assigns, :show_partner_product) do
     ~H"""
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.ShowComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.ShowComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier, live_action: @live_action} %>
 
     """
   end
 
   defp render_me(assigns, :edit_partner_product) do
     ~H"""
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.FormComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.Product.FormComponent, component_details: %{id: "dsjkdsjk", product: @product, supplier: @supplier, live_action: @live_action} %>
 
     """
   end
