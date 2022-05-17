@@ -90,10 +90,10 @@ defmodule KefisWeb.Router do
     live "/partners/:id/orders", Admin.Partner.IndexLive, :partner_order
     live "/partners/:id/orders/:id", Admin.Partner.IndexLive, :partner_order_details
 
-    live "/partners/:id/products/", Admin.Partner.ProductIndexLive, :partner_products
-    live "/partners/:id/products/new", Admin.Partner.ProductIndexLive, :new_partner_product
-    live "/partners/:id/products/:product", Admin.Partner.ProductIndexLive, :show_partner_product
-    live "/partners/:id/products/:product/edit", Admin.Partner.ProductIndexLive, :edit_partner_product
+    live "/partners/:id/products/", Admin.Partner.Product.IndexLive, :partner_products
+    live "/partners/:id/products/new", Admin.Partner.Product.IndexLive, :new_partner_product
+    live "/partners/:id/products/:product", Admin.Partner.Product.IndexLive, :show_partner_product
+    live "/partners/:id/products/:product/edit", Admin.Partner.Product.IndexLive, :edit_partner_product
 
     live "/partners/:id/transactions", Admin.Partner.IndexLive, :partner_transactions
 
