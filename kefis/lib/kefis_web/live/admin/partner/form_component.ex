@@ -9,7 +9,6 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
      socket
      |> assign(details)
      |> assign(changeset: Chain.change_partner(partner))
-     |> assign(:partner_details_valid, false)
      |> assign(map_component_marker_lat: -1.286389, map_component_marker_lng: 36.817223)}
   end
 
@@ -24,11 +23,13 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
       <!-- Form -->
         <div class="mb-4">
 
-              <.form let={partner_f} for={@changeset}
-
-                                phx-change="partner_validate"
-                    phx-submit="partner_save"
-                              id="admin-partner-form"
+              <.form
+                    let={partner_f}
+                    for={@changeset}
+                    phx-target={@myself}
+                    phx-change="validate"
+                    phx-submit="save"
+                    id="admin-partner-form"
                                 >
                 <div class="mb-4">
                 <%= label partner_f, :name, for: "name" %>
@@ -54,6 +55,11 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
                 <%= error_tag partner_f, :email %>
               </div>
 
+              <div>
+              <%= submit "Save", class: "btn btn-success" %>
+            </div>
+
+
               </.form>
     </div></div></div>
     </div>
@@ -61,5 +67,30 @@ defmodule KefisWeb.Admin.Partner.FormComponent do
     </div>
     </div>
     """
+  end
+
+  def handle_event("validate", %{"partner" => partner_params}, socket) do
+    # IO.inspect(socket)
+    changeset =
+      Chain.change_partner(%Partner{}, partner_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply,
+     socket
+     |> assign(:changeset, changeset)}
+  end
+
+  def handle_event("save", %{"partner" => partner_params}, socket) do
+    case Chain.update_partner(socket.assigns.partner, partner_params) do
+      {:ok, partner} ->
+        {:noreply,
+         socket
+         |> assign(:partner, partner)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply,
+         socket
+         |> assign(:changeset, changeset)}
+    end
   end
 end

@@ -84,7 +84,9 @@ defmodule KefisWeb.Admin.Partner.SupplierComponent do
           <tbody>
           <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
           <tr>
-            <td><%= index %></td>
+            <td>
+            <%= link index, to: Routes.index_path(@socket, :partner_details, item.id) %>
+            </td>
             <td><%= item.name %></td>
             <td><%= item.phone %></td>
             <td><%= item.email %></td>

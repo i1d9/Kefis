@@ -11,7 +11,8 @@ defmodule KefisWeb.Admin.Partner.Order.DetailComponent do
 
   def render(assigns) do
     ~H"""
-    <div></div>
+    <div>
+    </div>
     """
   end
 end

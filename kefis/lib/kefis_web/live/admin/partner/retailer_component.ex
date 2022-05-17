@@ -69,7 +69,7 @@ defmodule KefisWeb.Admin.Partner.ReatilerComponent do
 
 
 
-    
+
           <%= link "New", to: Routes.live_path(@socket, KefisWeb.Admin.Partner.NewLive), class: "btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" %>
 
 
@@ -86,7 +86,11 @@ defmodule KefisWeb.Admin.Partner.ReatilerComponent do
           <tbody>
           <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
           <tr>
-            <td><%= index %></td>
+
+          <td>
+          <%= link index, to: Routes.index_path(@socket, :partner_details, item.id) %>
+          </td>
+
             <td><%= item.name %></td>
             <td><%= item.phone %></td>
             <td><%= item.email %></td>

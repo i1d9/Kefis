@@ -6,13 +6,14 @@ defmodule KefisWeb.Admin.Partner.NewLive do
   alias Kefis.Users.User
   alias Kefis.Partners
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"user" => user}, socket) do
     partner_changeset = Chain.change_partner(%Partner{})
     user_changeset = User.admin_changeset(%User{}, %{})
     {
       :ok,
       socket
       |> assign(:partner_changeset, partner_changeset)
+      |> assign(:user, user)
       |> assign(:user_changeset, user_changeset)
       |> assign(:partner_details_valid, false)
       |> assign(:user_form_visible, false)

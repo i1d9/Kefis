@@ -6,9 +6,10 @@ defmodule KefisWeb.Admin.Partner.IndexLive do
   alias Kefis.Users.User
   alias Kefis.Partners
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"user" => user}, socket) do
     {:ok,
     socket
+    |> assign(:user, user)
     }
   end
 
@@ -16,16 +17,50 @@ defmodule KefisWeb.Admin.Partner.IndexLive do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :retailer, _params) do
+
+  defp apply_action(socket, :edit_partner, %{"id" => id} = params) do
+
+    IO.inspect(id)
+    socket
+    |> assign(:partner, Chain.get_partner!(id))
+  end
+
+
+  defp apply_action(socket, :retailer, params) do
     socket
   end
 
-  defp apply_action(socket, :supplier, _params) do
+  defp apply_action(socket, :supplier, params) do
     socket
   end
 
 
-  
+  defp apply_action(socket, :partner_details, %{"id" => id} = params) do
+    socket
+    |> assign(:partner, Chain.get_partner!(id))
+  end
+
+
+  defp apply_action(socket, :partner_order, %{"id" => id} = params) do
+    socket
+    |> assign(:partner, Chain.get_partner!(id))
+  end
+
+
+  defp apply_action(socket, :partner_order_details, %{"id" => id} = params) do
+    socket
+    |> assign(:partner, Chain.get_partner!(id))
+  end
+
+
+  defp apply_action(socket, :partner_transactions, %{"id" => id} = params) do
+    socket
+    |> assign(:partner, Chain.get_partner!(id))
+  end
+
+
+
+
   def render(assigns) do
     ~H"""
     <div>
@@ -33,12 +68,35 @@ defmodule KefisWeb.Admin.Partner.IndexLive do
 
 
     <%= if @live_action in [:supplier]  do%>
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component", component: KefisWeb.Admin.Partner.SupplierComponent, component_details: %{id: "dsjkdsjk"} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "supplier_component",user: @user, component: KefisWeb.Admin.Partner.SupplierComponent, component_details: %{id: "dsjkdsjk"} %>
     <% end %>
 
     <%= if @live_action in [:retailer]  do%>
-    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component", component: KefisWeb.Admin.Partner.ReatilerComponent, component_details: %{id: "dsjkdsjk"} %>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.ReatilerComponent, component_details: %{id: "dsjkdsjk"} %>
     <% end %>
+
+    <%= if @live_action in [:edit_partner]  do%>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.FormComponent, component_details: %{id: "dsjkdsjk", partner: @partner} %>
+    <% end %>
+
+    <%= if @live_action in [:partner_details]  do%>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.DetailComponent, component_details: %{id: "dsjkdsjk", partner: @partner} %>
+    <% end %>
+
+    <%= if @live_action in [:partner_order]  do%>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.Order.ListComponent, component_details: %{id: "dsjkdsjk", partner: @partner} %>
+    <% end %>
+
+    <%= if @live_action in [:partner_order_details]  do%>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.Order.DetailComponent, component_details: %{id: "dsjkdsjk", partner: @partner} %>
+    <% end %>
+
+    <%= if @live_action in [:partner_transactions]  do%>
+    <%= live_component @socket, KefisWeb.Admin.ShellDashboardLive, id: "retailer_component",user: @user, component: KefisWeb.Admin.Partner.Transaction.ListComponent, component_details: %{id: "dsjkdsjk", partner: @partner} %>
+    <% end %>
+
+
+
     </div>
     """
   end
