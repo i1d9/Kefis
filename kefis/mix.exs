@@ -51,6 +51,7 @@ defmodule Kefis.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:pow, "~> 1.0.26"},
+      {:erlport, "~> 0.10.1"}
     ]
   end
 
