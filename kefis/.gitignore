@@ -38,3 +38,4 @@ npm-debug.log
 
 test.txt
 
+__pycache__/
