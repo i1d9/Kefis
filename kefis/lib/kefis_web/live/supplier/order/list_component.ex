@@ -4,17 +4,15 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
   alias Kefis.Repo
   alias Kefis.Orders
 
-
   def update(%{details: assigns}, socket) do
     {:ok,
-    socket
-    |> assign(assigns)
-    |> init_items()
-    }
+     socket
+     |> assign(assigns)
+     |> init_items()}
   end
 
-  defp init_items(socket, status \\ "initiated") do
-    orders = Orders.supplier_orders(socket.assigns.supplier, status)
+  defp init_items(socket) do
+    orders = Orders.supplier_orders(socket.assigns.supplier)
 
     page_entries = 10
     paginated_orders = orders |> Enum.chunk_every(page_entries)
@@ -24,14 +22,59 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
 
     socket
     |> assign(:orders, orders)
+    |> assign(:initial_orders, orders)
     |> assign(:total_pages, total_pages)
     |> assign(:total_entries, total_entries)
+    |> assign(:filter_status, 0)
     |> assign(:page_number, 0)
     |> assign(:page_size, 0)
     |> assign(:current_page, 0)
     |> assign(:paginated_orders, paginated_orders)
     |> assign(:orders_for_page, orders_for_page)
     |> assign(:page_entries, page_entries)
+  end
+
+  def handle_event("filter_time", _value, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("filter_status", _value, socket) do
+    orders =
+      case rem(socket.assigns.filter_status, 5) do
+        0 ->
+          Enum.filter(socket.assigns.initial_orders, fn x -> x.status == "confirmed" end)
+
+        1 ->
+          Enum.filter(socket.assigns.initial_orders, fn x -> x.status == "picked" end)
+
+        2 ->
+          Enum.filter(socket.assigns.initial_orders, fn x -> x.status == "done" end)
+
+        3 ->
+          Enum.filter(socket.assigns.initial_orders, fn x -> x.status == "initiated" end)
+
+        4 ->
+          socket.assigns.initial_orders
+      end
+
+    page_entries = 10
+    paginated_orders = orders |> Enum.chunk_every(page_entries)
+    orders_for_page = paginated_orders |> Enum.at(0)
+    total_entries = orders |> Enum.count()
+    total_pages = paginated_orders |> Enum.count()
+
+    {:noreply,
+     socket
+     |> assign(:orders, orders)
+     |> assign(:total_entries, total_entries)
+     |> assign(:total_pages, total_pages)
+     |> assign(:page_entries, page_entries)
+     |> assign(:page_number, 0)
+     |> assign(:page_size, 0)
+     |> assign(:paginated_orders, paginated_orders)
+     |> assign(:orders_for_page, orders_for_page)
+     |> assign(:current_page, 0)
+     |> assign(:filter_status, socket.assigns.filter_status + 1)}
   end
 
   def handle_event(
@@ -83,16 +126,6 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     {:noreply, socket}
   end
 
-  def handle_event("filter_status", %{"status" => status}, %{assigns: %{user: current_user}}=socket) do
-    IO.inspect(status)
-    IO.inspect(current_user)
-
-    {:noreply,
-    socket
-    |> init_items(status)
-    }
-  end
-
   def render(assigns) do
     ~H"""
     <div class="table-settings mb-4">
@@ -115,10 +148,10 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
             </button>
             <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end pb-0" style="">
                 <span class="small ps-3 fw-bold text-dark">Show</span>
-                <button class="dropdown-item fw-bold"type="button" phx-value-status="initated" phx-click="filter_status">Initiated</button>
-                <button class="dropdown-item fw-bold"type="button" phx-value-status="confirmed" phx-click="filter_status">Confirmed</button>
-                <button class="dropdown-item fw-bold"type="button" phx-value-status="picked"phx-click="filter_status">Picked</button>
-                <button class="dropdown-item fw-bold"type="button" phx-value-status="done"phx-click="filter_status">Done</button>
+                <button class="dropdown-item fw-bold"type="button" phx-value-status="initated" phx-click="filter_time">Initiated</button>
+                <button class="dropdown-item fw-bold"type="button" phx-value-status="confirmed" phx-click="filter_time">Confirmed</button>
+                <button class="dropdown-item fw-bold"type="button" phx-value-status="picked"phx-click="filter_time">Picked</button>
+                <button class="dropdown-item fw-bold"type="button" phx-value-status="done"phx-click="filter_time">Done</button>
 
             </div>
         </div>
@@ -129,7 +162,7 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     <div class="card-body">
     <div class="table-responsive">
 
-    <%= if Enum.count(@orders) >0 do%>
+
 
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead class="thead-light">
@@ -137,12 +170,13 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     <th class="border-0 rounded-start">#</th>
     <th class="border-0">Product Name</th>
     <th class="border-0">Quantity</th>
-    <th class="border-0">Status</th>
+    <th class="border-0" phx-click="filter_status" phx-target={@myself}>Status</th>
     <th class="border-0">Ordered on</th>
     </tr>
     </thead>
     <tbody>
 
+    <%= if Enum.count(@orders) >0 do%>
 
 
     <%= for {order, index} <- Enum.with_index(@orders_for_page, 1) do%>
@@ -170,7 +204,8 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     </tr>
     <% end %>
 
-
+    <% else %>
+    <% end %>
 
     </tbody>
 
@@ -221,8 +256,7 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
 
 
 
-    <% else %>
-    <% end %>
+
 
             </div>
     </div>

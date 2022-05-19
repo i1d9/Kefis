@@ -77,8 +77,13 @@ defmodule Kefis.Orders do
   end
 
 
-  def supplier_orders(supplier, status \\ "initiated") do
+  def supplier_orders(supplier, status) do
     query = from ord in OrderDetail, join: p in assoc(ord, :partner), preload: :product, where: p.id == ^supplier.id, where: ord.status == ^status
+    Repo.all(query)
+  end
+
+  def supplier_orders(supplier) do
+    query = from ord in OrderDetail, join: p in assoc(ord, :partner), preload: :product, where: p.id == ^supplier.id
     Repo.all(query)
   end
 
