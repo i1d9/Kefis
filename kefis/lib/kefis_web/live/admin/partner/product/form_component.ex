@@ -54,7 +54,9 @@ defmodule KefisWeb.Admin.Partner.Product.FormComponent do
       <%= text_input f, :category, class: "form-control", id: "category" %>
       <%= error_tag f, :category %>
 
-
+      <%= label f, :package, for: "category" %>
+      <%= text_input f, :package, class: "form-control", id: "category" %>
+      <%= error_tag f, :package %>
 
 
       <%= label f, :image %>

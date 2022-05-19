@@ -3,19 +3,15 @@ defmodule KefisWeb.Retailer.OrdersListLive do
 
   alias Kefis.Orders
 
-  def update(%{details: %{user: user, live_action: live_action} }= assign, socket) do
-
+  def update(%{details: %{user: user, live_action: live_action}} = assign, socket) do
     {:ok,
-    socket
-    |> init_items(user)
-    |> assign(:live_action, live_action)
-    |> assign(:show_detail, 1)
-    }
+     socket
+     |> init_items(user)
+     |> assign(:live_action, live_action)
+     |> assign(:show_detail, 1)}
   end
 
-
   defp init_items(socket, user) do
-
     items = Orders.retailer_orders(user)
 
     page_entries = 10
@@ -34,11 +30,7 @@ defmodule KefisWeb.Retailer.OrdersListLive do
     |> assign(:paginated_items, paginated_items)
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
-
   end
-
-
-
 
   @impl true
   def render(assigns) do
@@ -63,12 +55,19 @@ defmodule KefisWeb.Retailer.OrdersListLive do
             </ol>
           </nav>
           <h2 class="h4"></h2>
-          <p class="mb-0"> Request for items for your shop </p>
+          <p class="mb-0"> Your Orders </p>
         </div>
       </div>
 
       <div class="py-4">
-        <button type="button" phx-click="toggle_finished" phx-target={@myself} class="btn btn-gray-800 d-inline-flex align-items-center me-2">New</button>
+
+
+
+      <%= link "New", to: Routes.live_path(@socket, KefisWeb.Retailer.NewLive), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+
+
+
+
       </div>
 
       <div class="card border-0 shadow mb-4">
@@ -77,82 +76,87 @@ defmodule KefisWeb.Retailer.OrdersListLive do
 
 
           <div class="table-responsive">
-            <table class="table table-centered table-nowrap mb-0 rounded">
-              <thead>
-                <tr>
-                  <th class="border-0">#</th>
-                  <th class="border-0">Value</th>
-                  <th class="border-0">Items</th>
-                  <th class="border-0">Status</th>
-                  <th class="border-0">Created on</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
-                <tr>
-                <td phx-value-id={item.id} phx-click="show_item">
-                  <%= index %>
-                </td>
-                <td>
-                  <%= item.value %>
-                </td>
-
-                <td>
-                  <%= Enum.count(item.order_details) %>
-                </td>
-
-
-                <td>
-                  <%= item.status %>
-                </td>
-
-                <td>
-
-                  <%= Date.to_iso8601(item.inserted_at) %>
-                </td>
-
-
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-
-
-                <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination mb-0">
-
-      <%= unless @page_number == 0 do %>
-                  <li class="page-item">
-                            <span class="page-link" phx-click="previous">Previous</span>
-                        </li>
-
-      <% end %>
 
 
 
+                        <table class="table table-centered table-nowrap mb-0 rounded">
+            <thead>
+              <tr>
+                <th class="border-0">#</th>
+                <th class="border-0">Value</th>
+                <th class="border-0">Items</th>
+                <th class="border-0">Status</th>
+                <th class="border-0">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
+              <tr>
+              <td phx-value-id={item.id} phx-click="show_item">
 
-      <%= for {_page, index} <- Enum.with_index(@paginated_items) do%>
+                <%= link index, to: Routes.orders_path(@socket, :show_order, item.id) %>
 
-        <%= if @page_number == index do%>
-            <li class="page-item active">
-                <span class="page-link" ><%= index + 1%></span>
-            </li>
-        <% else %>
-        <li class="page-item">
-            <span class="page-link" phx-click="change_page" phx-value-index={index} ><%= index + 1%></span>
-        </li>
-        <% end %>
-      <% end %>
-      <%= unless @page_number == @total_pages - 1 do %>
-                  <li class="page-item">
-                            <span class="page-link" phx-click="next">Next</span>
-                        </li>
-      <% end %>
-                    </ul>
-                </nav>
-                <div class="fw-normal small mt-4 mt-lg-0">Showing <b>  <%= if @page_entries < 10, do: @page_entries, else: @total_entries %></b> out of <b><%= @total_entries %></b> entries</div>
-            </div>
+
+              </td>
+              <td>
+                <%= item.value %>
+              </td>
+
+              <td>
+                <%= Enum.count(item.order_details) %>
+              </td>
+
+
+              <td>
+                <%= item.status %>
+              </td>
+
+              <td>
+
+                <%= Date.to_iso8601(item.inserted_at) %>
+              </td>
+
+
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+          <nav aria-label="Page navigation example">
+              <ul class="pagination mb-0">
+
+            <%= unless @page_number == 0 do %>
+                        <li class="page-item">
+                                  <span class="page-link" phx-click="previous">Previous</span>
+                              </li>
+
+            <% end %>
+
+
+
+
+            <%= for {_page, index} <- Enum.with_index(@paginated_items) do%>
+
+              <%= if @page_number == index do%>
+                  <li class="page-item active">
+                      <span class="page-link" ><%= index + 1%></span>
+                  </li>
+              <% else %>
+              <li class="page-item">
+                  <span class="page-link" phx-click="change_page" phx-value-index={index} ><%= index + 1%></span>
+              </li>
+              <% end %>
+            <% end %>
+            <%= unless @page_number == @total_pages - 1 do %>
+                        <li class="page-item">
+                                  <span class="page-link" phx-click="next">Next</span>
+                              </li>
+            <% end %>
+                          </ul>
+                      </nav>
+                      <div class="fw-normal small mt-4 mt-lg-0">Showing <b>  <%= if @page_entries < 10, do: @page_entries, else: @total_entries %></b> out of <b><%= @total_entries %></b> entries</div>
+                  </div>
 
 
 

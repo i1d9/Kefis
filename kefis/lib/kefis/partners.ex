@@ -28,6 +28,10 @@ defmodule Kefis.Partners do
     end
   end
 
+
+  def get!(id) do
+    Repo.get!(Partner, id)
+  end
   def partners_type(type) do
     query = from p in Partner, where: p.type == ^type
     Repo.all(query)

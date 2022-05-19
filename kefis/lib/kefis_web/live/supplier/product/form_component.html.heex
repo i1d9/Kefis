@@ -1,39 +1,51 @@
 <div>
 
-          <.form let={f} for={@changeset}
-          id="product-form"
-    phx-target={@myself}
-    phx-change="validate"
-    phx-submit="save" >
-
-<%= live_flash(@flash, :info) %>
 
 
-  <%= label f, :name, for: "name" %>
-  <%= text_input f, :name, class: "form-control", id: "name" %>
-  <%= error_tag f, :name %>
-
-  <%= label f, :price, for: "name" %>
-  <%= number_input f, :price, class: "form-control", id: "price" %>
-  <%= error_tag f, :price %>
-
-  <%= label f, :sku %>
-  <%= text_input f, :sku, class: "form-control", id: "sku" %>
-  <%= error_tag f, :sku %>
-
-  <%= label f, :category, for: "category" %>
-  <%= text_input f, :category, class: "form-control", id: "category" %>
-  <%= error_tag f, :category %>
-
-    <%= label f, :image %>
-  <%= live_file_input @uploads.image, class: "form-control" %>
+    <%= if @correct do%>
+      <.form
+      let={f}
+      for={@changeset}
+      id="supplier-product-form"
+      phx-target={@myself}
+      phx-change="validate"
+      phx-submit="save"
+      >
 
 
+      <%= label f, :name, for: "name" %>
+      <%= text_input f, :name, class: "form-control", id: "name" %>
+      <%= error_tag f, :name %>
 
-  <div>
-    <%= submit "Save", class: "btn btn-success" %>
-  </div>
-</.form>
+      <%= label f, :price, for: "price" %>
+      <%= number_input f, :price, class: "form-control", id: "price" %>
+      <%= error_tag f, :price %>
+
+      <%= label f, :sku %>
+      <%= text_input f, :sku, class: "form-control", id: "sku" %>
+      <%= error_tag f, :sku %>
+
+
+      <%= label f, :category, for: "category" %>
+      <%= text_input f, :category, class: "form-control", id: "category" %>
+      <%= error_tag f, :category %>
+
+
+      <%= label f, :package, for: "category" %>
+      <%= text_input f, :package, class: "form-control", id: "category" %>
+      <%= error_tag f, :package %>
+
+
+      <%= label f, :image %>
+      <%= live_file_input @uploads.image, class: "form-control" %>
+
+
+
+      <div>
+        <%= submit "Save", class: "btn btn-success" %>
+      </div>
+      </.form>
+    <% end %>
 
 
 

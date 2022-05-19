@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="col-12 col-sm-6 col-xl-6 mb-6">
             <div class="card border-0 shadow">
                 <div class="card-body">
                     <div class="row d-block d-xl-flex align-items-center">
@@ -49,7 +49,7 @@
                             <div class="d-sm-none">
                                 <h2 class="h5">
                                 
-    <%= link "Products", to: Routes.admin_path(@conn, :list_partners), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+    <%= link "Products", to: Routes.supplier_path(@conn, :list_partner_products), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
           
                                 </h2>
 
@@ -61,7 +61,7 @@
 
 
                                                       
-    <%= link "Products", to: Routes.admin_path(@conn, :list_partners), class: "h6 text-gray-400 mb-0" %>
+    <%= link "Products", to: Routes.supplier_path(@conn, :list_partner_products), class: "h6 text-gray-400 mb-0" %>
           
                                 <h3 class="fw-extrabold mb-2">3</h3>
                             </div>
@@ -77,7 +77,7 @@
 
 
         
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="col-12 col-sm-6 col-xl-6 mb-6">
             <div class="card border-0 shadow">
                 <div class="card-body">
                     <div class="row d-block d-xl-flex align-items-center">
@@ -108,36 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div
-                            class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                <svg class="icon" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div class="d-sm-none">
-                                <h2 class="fw-extrabold h5">Users</h2>
-                                <h3 class="mb-1">5</h3>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h2 class="h6 text-gray-400 mb-0"> Activity</h2>
-                                <h3 class="fw-extrabold mb-2">0</h3>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <div class="row">
         <div class="col-12 col-xl-8">
@@ -187,47 +158,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xxl-6 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-                            <h2 class="fs-5 fw-bold mb-0">Users</h2>
-                            <a href="#" class="btn btn-sm btn-primary">See all</a>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush list my--3">
-                                <li class="list-group-item px-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <!-- Avatar -->
-                                            <a href="#" class="avatar">
-                                                <img class="rounded" alt="Image placeholder"
-                                                    src="">
-                                            </a>
-                                        </div>
-                                        <div class="col-auto ms--2">
-                                            <h4 class="h6 mb-0">
-                                                <a href="#"></a>
-                                            </h4>
-                                            <div class="d-flex align-items-center">
-                                                <div class="bg-success dot rounded-circle me-1"></div>
-                                                <small style="display:none">Online</small>
-                                            </div>
-                                        </div>
-                                        <div class="col text-end">
-                                            <a href="#"
-                                                class="btn btn-sm btn-secondary d-inline-flex align-items-center">
-
-                                                View
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
 
 
             </div>
@@ -250,39 +181,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 px-0 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
-                            <div>
-                                <div class="h6 mb-0 d-flex align-items-center">
-                                    <svg class="icon icon-xs text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    Top Partners
-                                </div>
-                            </div>
-                            <div>
-                            
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex align-items-center justify-content-between pt-3">
-                            <div>
-                                <div class="h6 mb-0 d-flex align-items-center">
-                                    1. 
-                                    
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             
             
         </div>

@@ -8,6 +8,7 @@ defmodule Kefis.Chain.Product do
     field :name, :string
     field :price, :integer
     field :sku, :string
+    field :package, :string
     belongs_to :partner, Kefis.Chain.Partner
     has_many :order_details, Kefis.Chain.OrderDetail
 
@@ -17,8 +18,8 @@ defmodule Kefis.Chain.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :price, :sku, :category, :image])
-    |> validate_required([:name, :price, :sku, :category, :image])
+    |> cast(attrs, [:name, :price, :sku, :category, :image, :package])
+    |> validate_required([:name, :price, :sku, :category, :image, :package])
   end
 
 

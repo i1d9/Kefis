@@ -5,10 +5,10 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
   alias Kefis.Chain.OrderDetail
   alias Kefis.Orders
 
-  def update(%{details: %{order_detail_id: order_id}} = _as, socket) do
+  def update(%{details: %{order: order}} = _as, socket) do
     {:ok,
      socket
-     |> init_items(order_id)}
+     |> init_items(order.id)}
   end
 
   defp init_items(socket, order_id) do
@@ -20,6 +20,8 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
     items_for_page = paginated_items |> Enum.at(0)
     total_entries = items |> Enum.count()
     total_pages = paginated_items |> Enum.count()
+
+    IO.inspect(items)
 
     socket
     |> assign(:items, items)
@@ -61,7 +63,11 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
     </div>
 
       <div class="py-4">
-        <button type="button" class="btn btn-primary" phx-click="show_orders">Back</button>
+
+        <%= link to: Routes.orders_path(@socket, :index) do%>
+        <button type="button" class="btn btn-primary">Back</button>
+        <% end%>
+
       </div>
 
       <div class="card border-0 shadow mb-4">
@@ -70,6 +76,9 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
         <div>
 
         </div>
+
+        <%= if Enum.count(@items) > 0 do%>
+
         <div class="table-responsive">
           <table class="table table-centered table-nowrap mb-0 rounded">
             <thead>
@@ -104,6 +113,8 @@ defmodule KefisWeb.Retailer.OrderDetailsLive do
             </tbody>
           </table>
         </div>
+        <% end %>
+
       </div>
       </div>
 

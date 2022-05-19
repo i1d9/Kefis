@@ -3,102 +3,80 @@ defmodule KefisWeb.Supplier.Product.IndexLive do
 
   alias Kefis.Repo
   alias Kefis.Products
+  alias Kefis.Chain
+  alias Kefis.Chain.Product
 
-  def mount(_params, %{"partner" => partner, "user" => user} = _session, socket) do
-    partner = Repo.preload partner, :products
+  def mount(_params, %{"user" => user}, socket) do
 
-    IO.inspect(partner.products)
 
-    products = partner.products
-
-    page_entries = 10
-    paginated_products = products |> Enum.chunk_every(page_entries)
-    products_for_page = paginated_products |> Enum.at(0)
-    total_entries = products |> Enum.count()
-    total_pages = paginated_products |> Enum.count()
 
     {:ok,
-    socket
-    |> assign(:user, user)
-    |> assign(:products, products)
-    |> assign(:total_pages, total_pages)
-    |> assign(:total_entries, total_entries)
-    |> assign(:page_number, 0)
-    |> assign(:page_size, 0)
-    |> assign(:current_page, 0)
-    |> assign(:paginated_products, paginated_products)
-    |> assign(:products_for_page, products_for_page)
-    |> assign(:page_entries, page_entries)
-
+     socket
+     |> assign(:user, user)
     }
   end
 
 
+  def render(assigns) do
+    ~H"""
+    <%= render_me(assigns, @live_action) %>
+    """
+  end
 
-  def handle_event("change_page", %{"index" => index} =  _params, %{assigns: %{paginated_products: paginated_products }} = socket) do
 
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
 
-    products_for_page = paginated_products |> Enum.at(String.to_integer(index))
-    page_entries = products_for_page |> Enum.count()
-
-    {:noreply,
+  defp apply_action(socket, :list_product, _) do
     socket
-    |> assign(:page_number, String.to_integer(index))
-    |> assign(:products_for_page, products_for_page)
-    |> assign(:page_entries, page_entries)
-
-
-    }
+    |> assign(:product, nil)
   end
 
-
-  def handle_event("next", _params, %{assigns: %{page_number: page_number, paginated_products: paginated_products  }} = socket) do
-
-
-    products_for_page = paginated_products |> Enum.at(page_number + 1)
-    page_entries = products_for_page |> Enum.count()
-
-    {:noreply,
+  defp apply_action(socket, :new_product, _) do
     socket
-    |> assign(:page_number, page_number + 1)
-    |> assign(:products_for_page, products_for_page)
-    |> assign(:page_entries, page_entries)
-    }
+    |> assign(:product, %Product{})
   end
 
-  def handle_event("previous", _params, %{assigns: %{page_number: page_number, paginated_products: paginated_products  }} = socket) do
-
-
-    products_for_page = paginated_products |> Enum.at(page_number - 1)
-    page_entries = products_for_page |> Enum.count()
-
-    {:noreply,
+  defp apply_action(socket, :show_product, %{"id" => id}) do
     socket
-    |> assign(:page_number, page_number - 1)
-    |> assign(:products_for_page, products_for_page)
-    |> assign(:page_entries, page_entries)
-    }
+    |> assign(:product, Chain.get_product!(id))
   end
 
-  def handle_event("delete_product",%{"id" => id} = value, socket) do
-    #Products.delete()
-
-    case Products.delete(String.to_integer(id)) do
-      {:ok, _product} ->
-        {:noreply, socket}
-      {:error, _error} ->
-        {:noreply, socket}
-    end
-
-  end
-
-  def handle_event("edit_product", _value, socket) do
-    {:noreply,
-    socket}
+  defp apply_action(socket, :edit_product, %{"id" => id}) do
+    socket
+    |> assign(:product, Chain.get_product!(id))
   end
 
 
+  def render_me(assigns, :list_product) do
+    ~H"""
+    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Product.ListComponent, component_details: %{id: "order_list_component", supplier: @user.partner, live_action: assigns.live_action} %>
+
+    """
+  end
 
 
+  def render_me(assigns, :new_product) do
+    ~H"""
+    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Product.FormComponent, component_details: %{id: "order_list_component", supplier: @user.partner, product: @product, live_action: assigns.live_action} %>
 
+
+    """
+  end
+
+  def render_me(assigns, :show_product) do
+    ~H"""
+    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Product.ShowComponent, component_details: %{id: "order_list_component", supplier: @user.partner, product: @product, live_action: assigns.live_action} %>
+
+    """
+  end
+
+
+  def render_me(assigns, :edit_product) do
+    ~H"""
+    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Product.FormComponent, component_details: %{id: "order_list_component",supplier: @user.partner, product: @product, live_action: assigns.live_action} %>
+
+    """
+  end
 end

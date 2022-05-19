@@ -16,7 +16,7 @@ defmodule Kefis.Products do
 
   def list_partner_products(supplier) do
 
-    
+
     query = from po in Product, where: po.partner_id == ^supplier.id
     Repo.all(query)
   end
@@ -28,13 +28,22 @@ defmodule Kefis.Products do
     |> Repo.insert()
   end
 
-  def update(%Product{} = product, details) do
-    details
+
+
+
+  def update(product, attrs) do
+    product
+    |> Product.changeset(attrs)
+    |> Repo.update()
   end
 
   def find(id) do
     Repo.get(Product, id)
     |> Repo.preload([:partner])
+  end
+
+  def get!(id) do
+    Repo.get!(Product, id)
   end
 
   def get_by(params) do
@@ -46,6 +55,10 @@ defmodule Kefis.Products do
   def delete(id) do
     product = Repo.get(Product, id)
     Repo.delete(product)
+  end
+
+  def change_product(%Product{} = inventory, attrs \\ %{}) do
+    Product.changeset(inventory, attrs)
   end
 
 end

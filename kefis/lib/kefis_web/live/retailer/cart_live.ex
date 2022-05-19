@@ -8,9 +8,9 @@ defmodule KefisWeb.Retailer.CartLive do
   alias Kefis.Repo
 
   @impl true
-  def update(%{selected_products: selected_products, total: total, user: user }= assig, socket) do
-    IO.inspect(assig)
+  def update(%{selected_products: selected_products, total: total, user: user }= assigns, socket) do
 
+    
     {:ok,
     socket
     |> assign(selected_products: selected_products)

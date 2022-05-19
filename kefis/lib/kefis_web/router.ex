@@ -156,13 +156,25 @@ defmodule KefisWeb.Router do
     pipe_through [:browser, :protected, :supplier]
     # pipe_through [:browser]
 
-    get "/", SupplierController, :index
-    get "/products", SupplierController, :list_partner_products
+    #get "/", SupplierController, :index
+    #get "/products", SupplierController, :list_partner_products
 
-    get "/new/product", SupplierController, :new_product
+    #get "/new/product", SupplierController, :new_product
 
-    get "/orders", SupplierController, :my_orders
-    get "/orders/:id/", SupplierController, :show_order_details
+    live "/", Supplier.IndexLive, :supplier_home
+    live "/products", Supplier.Product.IndexLive, :list_product
+    live "/products/new", Supplier.Product.IndexLive, :new_product
+    live "/products/:id", Supplier.Product.IndexLive, :show_product
+    live "/products/:id/edit", Supplier.Product.IndexLive, :edit_product
+
+    live "/transactions", Supplier.IndexLive, :list_transactions
+    live "/transactions/:id", Supplier.IndexLive, :show_transaction
+
+    live "/orders", Supplier.IndexLive, :list_my_orders
+    live "/orders/:id", Supplier.IndexLive, :show_my_orders
+
+    #get "/orders", SupplierController, :my_orders
+    #get "/orders/:id/", SupplierController, :show_order_details
   end
 
   scope "/w", KefisWeb do

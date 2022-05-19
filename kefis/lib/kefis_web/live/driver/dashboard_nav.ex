@@ -91,15 +91,15 @@ defmodule KefisWeb.Driver.DashboardNav do
             </div>
             <div class="d-block">
               <h2 class="h5 mb-3">Hi, Jane</h2>
-              <a href="../../pages/examples/sign-in.html"
-                class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-                <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                </svg>
-                Sign Out
-              </a>
+              <%= link  to: Routes.logout_path(@socket, :delete), method: :delete, class: "btn btn-secondary btn-sm d-inline-flex align-items-center" do%>
+              <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+
+            Sign Out
+              <%end%>
             </div>
           </div>
           <div class="collapse-close d-md-none">
@@ -321,12 +321,16 @@ defmodule KefisWeb.Driver.DashboardNav do
                 <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <div class="media d-flex align-items-center">
-                    <img class="avatar rounded-circle" alt="Image placeholder"
-                      src="">
-                    <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                      <span class="mb-0 font-small fw-bold text-gray-900">Bonnie Green</span>
-                    </div>
+                  <img class="avatar rounded-circle" alt="Image placeholder"
+                    src={Routes.static_path(@socket, "/images/user.png")}>
+                  <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
+                    <span class="mb-0 font-small fw-bold text-gray-900">
+
+                    <%= @user.first_name %> <%= @user.second_name %>
+                    </span>
+
                   </div>
+                </div>
                 </a>
                 <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
                   <a class="dropdown-item d-flex align-items-center" href="#">

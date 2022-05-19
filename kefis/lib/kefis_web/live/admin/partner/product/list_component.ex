@@ -165,17 +165,14 @@ defmodule KefisWeb.Admin.Partner.Product.ListComponent do
     {:noreply, assign(socket, :products, products)}
   end
 
-  
-
   def handle_event("delete_product", %{"product" => product}, socket) do
-
     case Products.delete(product) do
       {:ok, _product} ->
         socket
         |> init_items()
+
       {:error, _} ->
         {:noreply, socket}
     end
-
   end
 end

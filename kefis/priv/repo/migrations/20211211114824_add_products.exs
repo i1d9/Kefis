@@ -8,6 +8,7 @@ defmodule Kefis.Repo.Migrations.AddProducts do
       add :sku, :string
       add :category, :string
       add :image, :string
+      add :package, :string
       add :partner_id, references(:partners)
 
       timestamps()

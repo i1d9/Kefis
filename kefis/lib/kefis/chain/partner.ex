@@ -28,7 +28,7 @@ defmodule Kefis.Chain.Partner do
     |> cast(attrs, [:name, :location, :phone, :email,  :lng, :lat, :type])
     |> validate_required([:name, :location, :phone, :email,  :lng, :lat, :type])
     |> unique_constraint(:email)
-    |> validate_length(:phone, min: 10, max: 12)
+    |> validate_length(:phone, min: 10, max: 20)
     |> validate_format(:email, ~r/@/)
     |> validate_inclusion(:type, ~w(supplier retailer))
   end

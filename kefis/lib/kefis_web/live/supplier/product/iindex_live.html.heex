@@ -30,7 +30,14 @@
 
             <div class="card border-0 shadow mb-4">
                 <div class="card-body">
+
+                    <div class="py-4">
+                    <%= link "New Product", to: Routes.supplier_path(@socket, :new_product),  class: "btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" %>
+                    </div>
                     <div class="table-responsive">
+
+
+<%= if Enum.count(@products) > 0 do%>
 
 
 
@@ -108,6 +115,10 @@
                     </nav>
                     <div class="fw-normal small mt-4 mt-lg-0">Showing <b><%= @page_entries%></b> out of <b><%= @total_entries %></b> entries</div>
                 </div>
+
+                <% else %>
+<h1>You don't have any products</h1>
+<% end %>
                     </div>
                      </div>
                       </div>

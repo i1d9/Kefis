@@ -34,7 +34,7 @@ defmodule KefisWeb.SessionController do
         changeset = Pow.Plug.change_user(conn, conn.params["user"])
 
         conn
-        |> put_flash(:info, "Invalid email or password")
+        |> put_flash(:error, "Invalid email or password")
         |> render("new.html", changeset: changeset)
     end
   end

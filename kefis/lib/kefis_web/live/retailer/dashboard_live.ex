@@ -3,8 +3,11 @@ defmodule KefisWeb.Retailer.DashboardLive do
   use KefisWeb, :live_component
 
 
-  def update(_assigns, socket) do
-    {:ok, socket}
+  def update(assigns, socket) do
+    {:ok,
+    socket
+    |> assign(assigns)
+    }
   end
 
 

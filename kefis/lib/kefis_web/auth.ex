@@ -26,7 +26,7 @@ defmodule KefisWeb.Auth do
       user.role == "super" ->
         redirect(conn, to: Routes.live_path(conn, KefisWeb.Admin.IndexLive))
       user.role == "supplier_admin" ->
-        redirect(conn, to: Routes.supplier_path(conn, :index))
+        redirect(conn, to: Routes.index_path(conn, :supplier_home))
       user.role == "retailer_admin" ->
         redirect(conn, to: Routes.live_path(conn,  KefisWeb.Retailer.IndexLive))
       user.role == "driver" ->

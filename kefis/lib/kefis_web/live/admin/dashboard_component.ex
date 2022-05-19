@@ -94,7 +94,7 @@ defmodule KefisWeb.Admin.DashboardComponent do
                         <div class="d-sm-none">
                             <h2 class="h5">
 
-                            <%= link "Suppliers", to: Routes.admin_path(@socket, :list_partners), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+                            <%= link "Suppliers", to: Routes.index_path(@socket, :supplier), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
 
                             </h2>
 
@@ -106,7 +106,7 @@ defmodule KefisWeb.Admin.DashboardComponent do
 
 
 
-                            <%= link "Suppliers", to: Routes.admin_path(@socket, :list_partners), class: "h6 text-gray-400 mb-0" %>
+                            <%= link "Suppliers", to: Routes.index_path(@socket, :supplier), class: "h6 text-gray-400 mb-0" %>
 
                             <h3 class="fw-extrabold mb-2"><%= @no_of_suppliers %></h3>
                         </div>
@@ -138,8 +138,9 @@ defmodule KefisWeb.Admin.DashboardComponent do
                         <div class="d-sm-none">
                             <h2 class="h5">
 
-                            <%= link "Retailer", to: Routes.admin_path(@socket, :list_partners), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+                            <%= link "Retailer", to: Routes.index_path(@socket, :retailer), class: "h6 text-gray-400 mb-0" %>
 
+                            
                             </h2>
 
                             <h3 class="fw-extrabold mb-1">3</h3>
@@ -147,8 +148,9 @@ defmodule KefisWeb.Admin.DashboardComponent do
                     </div>
                     <div class="col-12 col-xl-7 px-xl-0">
                         <div class="d-none d-sm-block">
+                        <%= link "Retailer", to: Routes.index_path(@socket, :retailer), class: "h6 text-gray-400 mb-0" %>
 
-                            <%= link "Retailer", to: Routes.admin_path(@socket, :list_partners), class: "h6 text-gray-400 mb-0" %>
+
 
                             <h3 class="fw-extrabold mb-2"><%= @no_of_retailers %></h3>
                         </div>
