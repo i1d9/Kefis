@@ -3,6 +3,8 @@ defmodule KefisWeb.Admin.DashboardComponent do
 
   alias Kefis.Partners
   alias Kefis.Users
+  alias Kefis.Transactions
+  alias Kefis.Orders
 
   def update(_assigns, socket) do
     {:ok,
@@ -13,14 +15,19 @@ defmodule KefisWeb.Admin.DashboardComponent do
   defp init(socket) do
     retailers = Partners.partners_type("retailer")
     suppliers = Partners.partners_type("supplier")
-    users = Users.list()
+    orders = Orders.admin_list_orders()
+    users = Users.list() |> Enum.slice(0..5)
+    transactions = Transactions.list_transactions() |> Enum.slice(0..5)
     no_of_suppliers = Enum.count(suppliers)
+    no_of_orders = Enum.count(orders)
     no_of_retailers = Enum.count(retailers)
 
     socket
     |> assign(:no_of_retailers, no_of_retailers)
+    |> assign(:no_of_orders, no_of_orders)
     |> assign(:no_of_suppliers, no_of_suppliers)
     |> assign(:users, users)
+    |> assign(:transactions, transactions)
   end
 
   def render(assigns) do
@@ -140,7 +147,7 @@ defmodule KefisWeb.Admin.DashboardComponent do
 
                             <%= link "Retailer", to: Routes.index_path(@socket, :retailer), class: "h6 text-gray-400 mb-0" %>
 
-                            
+
                             </h2>
 
                             <h3 class="fw-extrabold mb-1">3</h3>
@@ -212,7 +219,8 @@ defmodule KefisWeb.Admin.DashboardComponent do
                                     <h2 class="fs-5 fw-bold mb-0">Recent Transactions</h2>
                                 </div>
                                 <div class="col text-end">
-                                    <a href="#" class="btn btn-sm btn-primary">See all</a>
+                                    <%= link "See all", to: Routes.index_path(@socket, :transaction_index) , class: "btn btn-sm btn-primary" %>
+
                                 </div>
                             </div>
                         </div>
@@ -220,26 +228,35 @@ defmodule KefisWeb.Admin.DashboardComponent do
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="border-bottom" scope="col">User</th>
+                                        <th class="border-bottom" scope="col">Partner</th>
                                         <th class="border-bottom" scope="col">Type</th>
                                         <th class="border-bottom" scope="col">Value</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th class="text-gray-900" scope="row">
+
+                                <%= for transaction <- @transactions do %>
+                                <tr>
+                                <td>
+                                <%= transaction.account.partner.name %>
+                                </td>
+
+                                <td>
+                                <%= transaction.type %>
+                                </td>
 
 
-                                        </th>
-                                        <td class="fw-bolder text-gray-500">
+                                <td>
+                                <%= transaction.amount %>
+                                </td>
 
-                                        </td>
-                                        <td class="fw-bolder text-gray-500">
-                                            KES 0
-                                        </td>
+
+
 
                                     </tr>
+                                <% end %>
+
 
 
 
@@ -249,11 +266,12 @@ defmodule KefisWeb.Admin.DashboardComponent do
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xxl-6 mb-4">
+                <div class="col-12  mb-4">
                     <div class="card border-0 shadow">
                         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
                             <h2 class="fs-5 fw-bold mb-0">Users</h2>
-                            <a href="#" class="btn btn-sm btn-primary">See all</a>
+                            <%= link "See all", to: Routes.live_path(@socket, KefisWeb.Admin.User.IndexLive) , class: "btn btn-sm btn-primary" %>
+
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush list my--3">
@@ -302,7 +320,7 @@ defmodule KefisWeb.Admin.DashboardComponent do
                     <div class="card-header d-flex flex-row align-items-center flex-0 border-bottom">
                         <div class="d-block">
                             <div class="h6 fw-normal text-gray mb-2">Total orders</div>
-                            <h2 class="h3 fw-extrabold">0</h2>
+                            <h2 class="h3 fw-extrabold"><%= @no_of_orders %></h2>
                             <div class="small mt-2">
 
                             </div>
@@ -310,7 +328,9 @@ defmodule KefisWeb.Admin.DashboardComponent do
 
                     </div>
                     <div class="card-body p-2">
-                        <div class="ct-chart-ranking ct-golden-section ct-series-a"></div>
+                        <div class="ct-chart-ranking ct-golden-section ct-series-a">
+                        <%= live_component @socket, KefisWeb.Admin.Order.SalesPredicted %>
+                        </div>
                     </div>
                 </div>
             </div>

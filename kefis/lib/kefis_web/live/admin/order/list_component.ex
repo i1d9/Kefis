@@ -123,8 +123,10 @@ defmodule KefisWeb.Admin.Order.ListComponent do
                           <% end %>
                         </ul>
                     </nav>
-                    <div class="fw-normal small mt-4 mt-lg-0">Showing <b><%= @page_entries%></b> out of <b><%= @total_entries %></b> entries</div>
-                </div>
+                    <div class="fw-normal small mt-4 mt-lg-0">Showing <b>  <%= if @page_entries < 10, do: @page_entries, else: @total_entries %></b> out of <b><%= @total_entries %></b> entries</div>
+
+
+                    </div>
                     </div>
                      </div>
       </div>

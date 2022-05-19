@@ -10,7 +10,7 @@ defmodule KefisWeb.Retailer.CartLive do
   @impl true
   def update(%{selected_products: selected_products, total: total, user: user }= assigns, socket) do
 
-    
+
     {:ok,
     socket
     |> assign(selected_products: selected_products)
@@ -125,14 +125,16 @@ defmodule KefisWeb.Retailer.CartLive do
 
   @impl true
   def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
-    order_info = %{value: total, status: "Initiatied"}
+    order_info = %{value: total, status: "Initiatied", date: Date.utc_today()}
+    IO.inspect(order_info)
     case Orders.retailer_new_order(order_info, user, selected_product_changesets) do
       {:ok, order} ->
         {:noreply,
         socket
-        |> redirect(to: Routes.retailer_path(socket, :show_order, order.id))
+        |> redirect(to: Routes.orders_path(socket, :show_order, order.id))
         }
-      {:error, _changeset} ->
+      {:error, changeset} ->
+        IO.inspect(changeset)
         {:noreply,
         socket
         |> assign(:selected_products, selected_product_changesets)

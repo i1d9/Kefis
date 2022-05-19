@@ -15,6 +15,14 @@ defmodule Kefis.Orders do
     Repo.get_by!(Order, params)
   end
 
+  def admin_list_orders() do
+    Repo.all Order
+  end
+
+  def total_orders do
+    Repo.all(from p in Order, select: sum(p.value)) |> Enum.at(0)
+  end
+
 
   def new(retailer, details) do
       retailer

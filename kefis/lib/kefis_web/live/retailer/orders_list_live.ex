@@ -79,7 +79,7 @@ defmodule KefisWeb.Retailer.OrdersListLive do
 
 
 
-                        <table class="table table-centered table-nowrap mb-0 rounded">
+          <table class="table table-centered table-nowrap mb-0 rounded">
             <thead>
               <tr>
                 <th class="border-0">#</th>

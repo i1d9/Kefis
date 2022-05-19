@@ -160,8 +160,6 @@ for supplier_details <- suppliers do
     Account.changeset(%Account{}, supplier_account_details)
     |> Ecto.Changeset.put_assoc(:partner, supplier)
     |> Repo.insert!()
-
-
 end
 
 retailers = [
@@ -283,200 +281,245 @@ for retailer_details <- retailers do
     Account.changeset(%Account{}, retailer_account_details)
     |> Ecto.Changeset.put_assoc(:partner, retailer)
     |> Repo.insert!()
-
-  # Add Bidco Products
-  bidco = Repo.get_by(Partner, %{name: "Bidco Oil Refineries Limited"})
-
-  bidco_products = [
-    %{
-      name: "Msafi Bleach",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/19.png",
-      package: "15pcs"
-    },
-    %{
-      name: "Germonil Toilet Cleaner ",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/1.png",
-      package: "25pcs"
-    },
-    %{
-      name: "Nuru Anionic-Action Dish Washing Liquid ",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/2.png",
-      package: "50pcs"
-    },
-    %{
-      name: "Gental Care Hand Sanitizer ",
-      category: "sanitizer",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/6.png",
-      package: "10pcs"
-    },
-    %{
-      name: "Gental Care Hand Wash",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/7.png",
-      package: "20pcs"
-    },
-    %{
-      name: "Tiger Multipurpose Soap",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/8.png",
-      package: "100pcs"
-    },
-    %{
-      name: "Nuru Anionic-Action Dish Washing Paste",
-      category: "detergent",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/3.png",
-      package: "100pcs"
-    },
-    %{
-      name: "Elianto Corn Oil",
-      category: "oil",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/elianto-1.png",
-      package: "50pcs"
-    },
-    %{
-      name: "SoyaGold Soybean Oil ",
-      category: "oil",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/soyaGoldProduct.png",
-      package: "10pcs"
-    },
-    %{
-      name: "SunGold Sunflower Oil ",
-      category: "oil",
-      price: "150",
-      sku: "sdknlknknlkwe",
-      image: "/images/bidco/sunGoldProduct.png",
-      package: "10pcs"
-    }
-  ]
-
-  Enum.each(bidco_products, fn bidco_product -> Products.create(bidco, bidco_product) end)
-
-
-  
-
-  # Add Nuvita Products
-  nuvita = Repo.get_by(Partner, %{name: "Nuvita Biscuits"})
-
-  nuvita_products = [
-    %{
-      name: "Nuvita Secrets Coconut Creams",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF0XT75UNAFAMZ",
-      image: "/images/nuvita/1.jpg",
-      package: "15pcs"
-    },
-    %{
-      name: "Nuvita Digestive Chocolate Coated 200g Nuvita",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750OT1M5N19NAFAMZ",
-      image: "/images/nuvita/2.jpg",
-      package: "25pcs"
-    },
-    %{
-      name: "Nuvita Chocolate Coated Vanilla Cake With Vanilla Cream",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF1L13R6NAFAMZ",
-      image: "/images/bidco/3.jpg",
-      package: "50pcs"
-    },
-    %{
-      name: "Nuvita Oat Digestive Chocolate Coated 200g",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750OT09XJ19NAFAMZ",
-      image: "/images/nuvita/4.jpg",
-      package: "10pcs"
-    },
-    %{
-      name: "Nuvita Bravo G Glucose Biscuits",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF1IVJAJNAFAMZ",
-      image: "/images/nuvita/5.jpg",
-      package: "20pcs"
-    },
-    %{
-      name: "Nuvita Westbury's Coconut Biscuits ",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF1LMJCYNAFAMZ",
-      image: "/images/nuvita/6.jpg",
-      package: "100pcs"
-    },
-    %{
-      name: "Nuvita Porridge Oats - 1kg",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF0LWJ2ANAFAMZ",
-      image: "/images/nuvita/7.jpg",
-      package: "100pcs"
-    },
-    %{
-      name: "Nuvita Digestive Biscuit",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750FF12KO02NAFAMZ",
-      image: "/images/nuvita/8.jpg",
-      package: "50pcs"
-    },
-    %{
-      name: "Nuvita Cookies Choco Chip 100g",
-      category: "biscuits",
-      price: "150",
-      sku: "NU750OT03MTU7NAFAMZ",
-      image: "/images/nuvita/9.jpg",
-      package: "10pcs"
-    },
-    %{
-      name: "Nuvita Cereos Choc Chip Cereal 375G",
-      category: "cereal",
-      price: "150",
-      sku: "NU750FF0D8X1WNAFAMZ",
-      image: "/images/nuvita/10.jpg",
-      package: "10pcs"
-    }
-  ]
-
-  Enum.each(nuvita_products, fn nuvita_product -> Products.create(nuvita, nuvita_product) end)
-
-
-
-  Repo.transaction(
-      fn ->
-        query = """
-        DELETE FROM products s1
-        USING products s2
-        where s1.id < s2.id
-        AND s1.name = s2.name
-        """
-
-        Ecto.Adapters.SQL.query!(Repo, query)
-      end,
-      timeout: :infinity
-  )
-
 end
+
+# Add Bidco Products
+bidco = Repo.get_by(Partner, %{name: "Bidco Oil Refineries Limited"})
+
+bidco_products = [
+  %{
+    name: "Msafi Bleach",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/19.png",
+    package: "15pcs"
+  },
+  %{
+    name: "Germonil Toilet Cleaner ",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/1.png",
+    package: "25pcs"
+  },
+  %{
+    name: "Nuru Anionic-Action Dish Washing Liquid ",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/2.png",
+    package: "50pcs"
+  },
+  %{
+    name: "Gental Care Hand Sanitizer ",
+    category: "sanitizer",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/6.png",
+    package: "10pcs"
+  },
+  %{
+    name: "Gental Care Hand Wash",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/7.png",
+    package: "20pcs"
+  },
+  %{
+    name: "Tiger Multipurpose Soap",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/8.png",
+    package: "100pcs"
+  },
+  %{
+    name: "Nuru Anionic-Action Dish Washing Paste",
+    category: "detergent",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/3.png",
+    package: "100pcs"
+  },
+  %{
+    name: "Elianto Corn Oil",
+    category: "oil",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/elianto-1.png",
+    package: "50pcs"
+  },
+  %{
+    name: "SoyaGold Soybean Oil ",
+    category: "oil",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/soyaGoldProduct.png",
+    package: "10pcs"
+  },
+  %{
+    name: "SunGold Sunflower Oil ",
+    category: "oil",
+    price: "150",
+    sku: "sdknlknknlkwe",
+    image: "/images/bidco/sunGoldProduct.png",
+    package: "10pcs"
+  }
+]
+
+Enum.each(bidco_products, fn bidco_product -> Products.create(bidco, bidco_product) end)
+
+# Add Nuvita Products
+nuvita = Repo.get_by(Partner, %{name: "Nuvita Biscuits"})
+
+nuvita_products = [
+  %{
+    name: "Nuvita Secrets Coconut Creams",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF0XT75UNAFAMZ",
+    image: "/images/nuvita/1.jpg",
+    package: "15pcs"
+  },
+  %{
+    name: "Nuvita Digestive Chocolate Coated 200g Nuvita",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750OT1M5N19NAFAMZ",
+    image: "/images/nuvita/2.jpg",
+    package: "25pcs"
+  },
+  %{
+    name: "Nuvita Chocolate Coated Vanilla Cake With Vanilla Cream",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF1L13R6NAFAMZ",
+    image: "/images/nuvita/3.jpg",
+    package: "50pcs"
+  },
+  %{
+    name: "Nuvita Oat Digestive Chocolate Coated 200g",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750OT09XJ19NAFAMZ",
+    image: "/images/nuvita/4.jpg",
+    package: "10pcs"
+  },
+  %{
+    name: "Nuvita Bravo G Glucose Biscuits",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF1IVJAJNAFAMZ",
+    image: "/images/nuvita/5.jpg",
+    package: "20pcs"
+  },
+  %{
+    name: "Nuvita Westbury's Coconut Biscuits ",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF1LMJCYNAFAMZ",
+    image: "/images/nuvita/6.jpg",
+    package: "100pcs"
+  },
+  %{
+    name: "Nuvita Porridge Oats - 1kg",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF0LWJ2ANAFAMZ",
+    image: "/images/nuvita/7.jpg",
+    package: "100pcs"
+  },
+  %{
+    name: "Nuvita Digestive Biscuit",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750FF12KO02NAFAMZ",
+    image: "/images/nuvita/8.jpg",
+    package: "50pcs"
+  },
+  %{
+    name: "Nuvita Cookies Choco Chip 100g",
+    category: "biscuits",
+    price: "150",
+    sku: "NU750OT03MTU7NAFAMZ",
+    image: "/images/nuvita/9.jpg",
+    package: "10pcs"
+  },
+  %{
+    name: "Nuvita Cereos Choc Chip Cereal 375G",
+    category: "cereal",
+    price: "150",
+    sku: "NU750FF0D8X1WNAFAMZ",
+    image: "/images/nuvita/10.jpg",
+    package: "10pcs"
+  }
+]
+
+Enum.each(nuvita_products, fn nuvita_product -> Products.create(nuvita, nuvita_product) end)
+
+Repo.transaction(
+  fn ->
+    query = """
+    DELETE FROM products s1
+    USING products s2
+    where s1.id < s2.id
+    AND s1.name = s2.name
+    """
+
+    Ecto.Adapters.SQL.query!(Repo, query)
+  end,
+  timeout: :infinity
+)
+
+# Create a Driver User Account
+driver_user = %{
+  first_name: "Nicolas",
+  second_name: "Mas",
+  phone: "254772327411",
+  email: "userthree@gmail.com",
+  role: "driver",
+  password: "userthree@gmail.com",
+  password_confirmation: "userthree@gmail.com"
+}
+
+driver_user = User.admin_changeset(%User{}, driver_user)
+driver_user = Repo.insert!(driver_user)
+
+driver_details = %{
+  vehicle: "KBT124BH",
+  trips: 0
+}
+
+driver =
+  driver_user
+  |> Ecto.build_assoc(:driver)
+  |> Driver.changeset(driver_details)
+  |> Repo.insert!()
+
+# Warehouse Admin User
+warehouse_admin_details = %{
+  first_name: "Mark",
+  second_name: "Junior",
+  phone: "254772346901",
+  email: "userfour@gmail.com",
+  role: "warehouse_admin",
+  password: "userfour@gmail.com",
+  password_confirmation: "userfour@gmail.com"
+}
+
+warehouse_admin_user = User.admin_changeset(%User{}, warehouse_admin_details)
+warehouse_admin_user = Repo.insert!(warehouse_admin_user)
+
+# Create Warehouse
+warehouse_details = %{
+  location_name: "Madaraka",
+  lng: -123.32,
+  lat: 32.2
+}
+
+warehouse =
+  Warehouse.changeset(%Warehouse{}, warehouse_details)
+  |> Ecto.Changeset.put_assoc(:user, warehouse_admin_user)
+  |> Repo.insert!()

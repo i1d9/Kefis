@@ -141,6 +141,10 @@ defmodule KefisWeb.Router do
     live "/order/history", Retailer.OrdersLive, :history
     live "/order/:id", Retailer.OrdersLive, :show_order
 
+    live "/transactions", Retailer.OrdersLive, :list_my_transaction
+    live "/transactions/transact", Retailer.OrdersLive, :transact
+    live "/transactions/:id", Retailer.OrdersLive, :show_my_transaction
+
 
     # get "/order/new", RetailerController, :order
     live "/order/info", Retailer.ConfirmOrderLive
@@ -167,8 +171,10 @@ defmodule KefisWeb.Router do
     live "/products/:id", Supplier.Product.IndexLive, :show_product
     live "/products/:id/edit", Supplier.Product.IndexLive, :edit_product
 
+    live "/transactions/transact", Supplier.IndexLive, :transact_supplier
     live "/transactions", Supplier.IndexLive, :list_transactions
     live "/transactions/:id", Supplier.IndexLive, :show_transaction
+
 
     live "/orders", Supplier.IndexLive, :list_my_orders
     live "/orders/:id", Supplier.IndexLive, :show_my_orders

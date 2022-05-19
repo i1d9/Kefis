@@ -120,14 +120,14 @@ defmodule KefisWeb.Supplier.ShellDashboard do
           <li class="nav-item">
 
 
-          <%= link to: Routes.index_path(@socket, :list), class: "nav-link d-flex justify-content-between" do%>
+          <%= link to: "#", class: "nav-link d-flex justify-content-between" do%>
           <span>
                                   <span class="sidebar-icon">
           <i class="fa fa-truck" aria-hidden="true"></i>
 
                                   </span>
                                   <span class="sidebar-text">Map</span>
-                              </span>
+                  </span>
           <% end %>
 
 
@@ -158,7 +158,7 @@ defmodule KefisWeb.Supplier.ShellDashboard do
             <!-- / Search form -->
           </div>
           <!-- Navbar links -->
-          <ul class="navbar-nav align-items-center">
+            <ul class="navbar-nav align-items-center">
 
 
             <li class="nav-item dropdown ms-lg-3">

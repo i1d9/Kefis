@@ -46,7 +46,7 @@ defmodule KefisWeb.Admin.Warehouse.ListComponent do
             <div class="card border-0 shadow mb-4">
                 <div class="card-body">
                     <div class="table-responsive">
-
+                    <%= if Enum.count(@items) > 0 do%>
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead class="thead-light">
     <tr>
@@ -59,6 +59,9 @@ defmodule KefisWeb.Admin.Warehouse.ListComponent do
     </tr>
     </thead>
     <tbody>
+
+
+
     <%= for {item, index} <- Enum.with_index(@items_for_page, 1) do%>
     <tr>
     <td><%= index %></td>
@@ -71,6 +74,7 @@ defmodule KefisWeb.Admin.Warehouse.ListComponent do
 
     </tr>
     <% end %>
+
     </tbody>
     </table>
 
@@ -115,6 +119,9 @@ defmodule KefisWeb.Admin.Warehouse.ListComponent do
                     </nav>
                     <div class="fw-normal small mt-4 mt-lg-0">Showing <b><%= @page_entries%></b> out of <b><%= @total_entries %></b> entries</div>
                 </div>
+                <% else %>
+                
+                <%end%>
                     </div>
                      </div>
       </div>

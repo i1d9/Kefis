@@ -82,6 +82,20 @@ defmodule KefisWeb.Retailer.ShellDashboardLive do
           <% end %>
 
         </li>
+
+        <li class="nav-item">
+
+        <%= link to: Routes.orders_path(@socket, :list_my_transaction), class: "nav-link" do%>
+        <span class="sidebar-icon">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </span>
+      <span class="sidebar-text">Transactions</span>
+        <% end %>
+
+      </li>
+
+
+
         <li class="nav-item">
         <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-components" aria-expanded="true">
           <span>

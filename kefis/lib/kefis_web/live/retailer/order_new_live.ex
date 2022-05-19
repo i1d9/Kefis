@@ -143,7 +143,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
               <%= unless @page_number == 0 do %>
                 <li class="page-item">
-                  <span class="page-link" phx-click="previous">Previous</span>
+                  <span class="page-link" phx-click="previous" phx-target={@myself}>Previous</span>
                 </li>
               <% end %>
 
@@ -157,7 +157,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
                   </li>
                 <% else %>
                   <li class="page-item">
-                  <span class="page-link" phx-click="change_page" phx-value-index={index} ><%= index + 1%></span>
+                  <span class="page-link" phx-click="change_page" phx-target={@myself} phx-value-index={index} ><%= index + 1%></span>
                   </li>
                 <% end %>
               <% end %>
@@ -166,7 +166,7 @@ defmodule KefisWeb.Retailer.OrderNewLive do
 
               <%= unless @page_number == @total_pages - 1 do %>
                 <li class="page-item">
-                          <span class="page-link" phx-click="next">Next</span>
+                          <span class="page-link" phx-target={@myself} phx-click="next">Next</span>
                 </li>
               <% end %>
             </ul>
@@ -227,6 +227,36 @@ defmodule KefisWeb.Retailer.OrderNewLive do
     {:noreply, assign(socket, :items, items)}
   end
 
+  def handle_event(
+        "next",
+        _params,
+        %{assigns: %{page_number: page_number, paginated_items: paginated_items}} = socket
+      ) do
+    items_for_page = paginated_items |> Enum.at(page_number + 1)
+    page_entries = items_for_page |> Enum.count()
+
+    {:noreply,
+     socket
+     |> assign(:page_number, page_number + 1)
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
+  end
+
+  def handle_event(
+        "previous",
+        _params,
+        %{assigns: %{page_number: page_number, paginated_items: paginated_items}} = socket
+      ) do
+    items_for_page = paginated_items |> Enum.at(page_number - 1)
+    page_entries = items_for_page |> Enum.count()
+
+    {:noreply,
+     socket
+     |> assign(:page_number, page_number - 1)
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
+  end
+
   @impl true
   def handle_event(
         "product_click",
@@ -260,4 +290,22 @@ defmodule KefisWeb.Retailer.OrderNewLive do
       ) do
     {:noreply, assign(socket, :finished_selection, !finished_selection)}
   end
+
+  @impl true
+  def handle_event("change_page", %{"index" => index} =  _params, %{assigns: %{paginated_items: paginated_items }} = socket) do
+
+
+    items_for_page = paginated_items |> Enum.at(String.to_integer(index))
+    page_entries = items_for_page |> Enum.count()
+
+    {:noreply,
+    socket
+    |> assign(:page_number, String.to_integer(index))
+    |> assign(:items_for_page, items_for_page)
+    |> assign(:page_entries, page_entries)
+
+
+    }
+  end
+
 end

@@ -129,7 +129,7 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     <div class="card-body">
     <div class="table-responsive">
 
-
+    <%= if Enum.count(@orders) >0 do%>
 
     <table class="table table-centered table-nowrap mb-0 rounded">
     <thead class="thead-light">
@@ -143,21 +143,38 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
     </thead>
     <tbody>
 
-    <%= if Enum.count(@orders) >0 do%>
 
-    <%= for {order, _index} <- Enum.with_index(@orders_for_page, 1) do%>
+
+    <%= for {order, index} <- Enum.with_index(@orders_for_page, 1) do%>
     <tr phx-click="order">
     <td>
 
-    <%= link order.id, to: Routes.supplier_path(@socket, :show_order_details, order.id) %>
+    <%= link index, to: Routes.index_path(@socket, :show_my_orders, order.id) %>
 
     </td>
-    <td><%= order.product.name %></td>
+    <td>
+
+    <span class="avatar">
+    <img
+        alt={order.product.name}
+
+        class="rounded"
+        src={Routes.static_path(@socket, order.product.image)} >
+    </span>
+    <%= order.product.name %>
+
+    </td>
     <td><%= order.quantity %></td>
     <td><%= order.status %></td>
     <td><%= Date.to_string(order.inserted_at) %></td>
     </tr>
     <% end %>
+
+
+
+    </tbody>
+
+    </table>
 
     <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
     <nav aria-label="Page navigation example">
@@ -201,20 +218,11 @@ defmodule KefisWeb.Supplier.Order.ListComponent do
         </div>
 
 
+
+
+
     <% else %>
-
-    <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    </tr>
     <% end %>
-    </tbody>
-
-    </table>
-
 
             </div>
     </div>

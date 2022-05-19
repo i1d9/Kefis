@@ -1,4 +1,4 @@
-defmodule KefisWeb.Supplier.Transaction.ListComponent do
+defmodule KefisWeb.Retailer.Transaction.ListComponent do
   use KefisWeb, :live_component
 
   alias Kefis.Repo
@@ -47,9 +47,9 @@ defmodule KefisWeb.Supplier.Transaction.ListComponent do
     <div class="py-4">
 
 
+    <%= link "Deposit", to: Routes.orders_path(@socket, :transact, %{type: "deposit"}), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
 
-
-    <%= link "Withdraw", to: Routes.index_path(@socket, :transact_supplier, %{type: "withdraw"}), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
+    <%= link "Withdraw", to: Routes.orders_path(@socket, :transact, %{type: "withdraw"}), class: "btn btn-gray-800 d-inline-flex align-items-center me-2" %>
 
     </div>
 

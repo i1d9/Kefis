@@ -5,8 +5,14 @@ defmodule Kefis.Transactions do
   import Ecto.Query
 
   def list_transactions do
-    transactions = Repo.all(Transaction)
-    transactions
+
+    #transactions = Repo.all(Transaction)
+    #transactions
+
+    transaction_query = from c in Transaction, preload: [account: :partner]
+    Repo.all transaction_query
+
+
   end
 
 
