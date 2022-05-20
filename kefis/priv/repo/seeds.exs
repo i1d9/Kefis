@@ -125,9 +125,7 @@ suppliers = [
   }
 ]
 
-"""
-Tried Ecto.Multi.new() but it doesn't work 🙂 I'm justifiying the loop
-"""
+
 
 for supplier_details <- suppliers do
   names = String.split(supplier_details.name, " ")
@@ -246,9 +244,7 @@ retailers = [
   }
 ]
 
-"""
-Tried Ecto.Multi.new() but it doesn't work 🙂 I'm justifiying the loop
-"""
+
 
 for retailer_details <- retailers do
   names = String.split(retailer_details.name, " ")

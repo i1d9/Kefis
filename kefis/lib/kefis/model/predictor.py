@@ -9,5 +9,5 @@ def load_model():
 
 def predict_model(args):
     model = load_model()
-    return model.predict([args])[0]
+    return model.predict([args])
     

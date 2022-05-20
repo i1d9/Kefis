@@ -130,9 +130,6 @@ defmodule KefisWeb.Supplier.ShellDashboard do
                   </span>
           <% end %>
 
-
-
-
                       </li>
 
 

@@ -178,7 +178,7 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
 
                               </li>
                               <li class="nav-item">
-                              <a href="https://demo.themesberg.com/volt-pro/pages/map.html" target="_blank"
+                              <a href="" target="_blank"
                                   class="nav-link d-flex justify-content-between">
                                   <span>
                                       <span class="sidebar-icon">

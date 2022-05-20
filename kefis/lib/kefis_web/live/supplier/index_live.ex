@@ -36,7 +36,7 @@ defmodule KefisWeb.Supplier.IndexLive do
 
   def render_me(assigns, :supplier_home) do
     ~H"""
-    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Dashboard, component_details: %{id: "order_list_component", supplier: @user.partner,live_action: assigns.live_action} %>
+    <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Dashboard, component_details: %{id: "order_list_component", supplier: @user.partner, user: @user, live_action: assigns.live_action} %>
 
     """
   end
