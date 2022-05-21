@@ -1,11 +1,10 @@
 defmodule KefisWeb.Admin.Warehouse.IndexLive do
   use KefisWeb, :live_view
 
-  def mount(_params, %{"user"=> user}, socket) do
+  def mount(_params, %{"user" => user}, socket) do
     {:ok,
-    socket
-    |> assign(:user, user)
-    }
+     socket
+     |> assign(:user, user)}
   end
 
   def render(assigns) do

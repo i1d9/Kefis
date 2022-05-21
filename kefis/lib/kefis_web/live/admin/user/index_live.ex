@@ -1,15 +1,13 @@
 defmodule KefisWeb.Admin.User.IndexLive do
-
   use KefisWeb, :live_view
-
 
   alias Kefis.Users
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"user" => user}, socket) do
     {:ok,
-      socket
-      |> assign(:users, Users.list())
-    }
+     socket
+     |> assign(:user, user)
+     |> assign(:users, Users.list())}
   end
 
   def handle_params(_params, socket) do
@@ -17,18 +15,16 @@ defmodule KefisWeb.Admin.User.IndexLive do
   end
 
   defp params_role(socket, %{"role" => "supplier_admin"}) do
-    assign(socket, :users, Users.get_supplier)
+    assign(socket, :users, Users.get_supplier())
   end
 
   defp params_role(socket, %{"role" => "retailer_admin"}) do
-    assign(socket, :users, Users.get_supplier)
+    assign(socket, :users, Users.get_supplier())
   end
 
   defp params_role(socket, %{}) do
     assign(socket, :users, [])
   end
-
-  
 
   def main_component(assigns) do
     ~H"""

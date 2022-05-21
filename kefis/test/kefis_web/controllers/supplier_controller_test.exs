@@ -3,9 +3,33 @@ defmodule KefisWeb.SupplierControllerTest do
 
   import Kefis.ChainFixtures
 
-  @create_attrs %{contact_email: "some contact_email", contact_phone: "some contact_phone", lat: 120.5, lng: 120.5, location: "some location", name: "some name", phone: "some phone"}
-  @update_attrs %{contact_email: "some updated contact_email", contact_phone: "some updated contact_phone", lat: 456.7, lng: 456.7, location: "some updated location", name: "some updated name", phone: "some updated phone"}
-  @invalid_attrs %{contact_email: nil, contact_phone: nil, lat: nil, lng: nil, location: nil, name: nil, phone: nil}
+  @create_attrs %{
+    contact_email: "some contact_email",
+    contact_phone: "some contact_phone",
+    lat: 120.5,
+    lng: 120.5,
+    location: "some location",
+    name: "some name",
+    phone: "some phone"
+  }
+  @update_attrs %{
+    contact_email: "some updated contact_email",
+    contact_phone: "some updated contact_phone",
+    lat: 456.7,
+    lng: 456.7,
+    location: "some updated location",
+    name: "some updated name",
+    phone: "some updated phone"
+  }
+  @invalid_attrs %{
+    contact_email: nil,
+    contact_phone: nil,
+    lat: nil,
+    lng: nil,
+    location: nil,
+    name: nil,
+    phone: nil
+  }
 
   describe "index" do
     test "lists all suppliers", %{conn: conn} do

@@ -1,5 +1,4 @@
 defmodule Kefis.ModelPredictor do
-
   alias Kefis.Python, as: Helper
 
   @path 'lib/kefis/model'
@@ -17,5 +16,4 @@ defmodule Kefis.ModelPredictor do
 
     result
   end
-
 end

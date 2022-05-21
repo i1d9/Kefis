@@ -20,8 +20,7 @@ defmodule Kefis.Users do
     |> Repo.update()
   end
 
-
-  def add(details)do
+  def add(details) do
     %User{}
     |> User.admin_changeset(details)
     |> Repo.insert()
@@ -33,11 +32,9 @@ defmodule Kefis.Users do
     |> Repo.update()
   end
 
-
   def delete(%User{} = user) do
     Repo.delete(user)
   end
-
 
   def list() do
     Repo.all(User)
@@ -50,19 +47,18 @@ defmodule Kefis.Users do
   def all(_module), do: []
 
   def get_by(params) do
-    Enum.find all(User), fn map ->
+    Enum.find(all(User), fn map ->
       Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
-    end
+    end)
   end
 
   def get_supplier do
     query = from u in User, where: u.role == "supplier_admin"
-    Repo.all query
+    Repo.all(query)
   end
 
   def get_retailer do
     query = from u in User, where: u.role == "retailer_admin"
-    Repo.all query
+    Repo.all(query)
   end
-
 end

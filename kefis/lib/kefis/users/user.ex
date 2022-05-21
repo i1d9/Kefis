@@ -42,5 +42,4 @@ defmodule Kefis.Users.User do
     |> cast(attrs, [:role])
     |> validate_inclusion(:role, @roles)
   end
-
 end

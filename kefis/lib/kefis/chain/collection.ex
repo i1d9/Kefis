@@ -3,7 +3,6 @@ defmodule Kefis.Chain.Collection do
   import Ecto.Changeset
 
   schema "collections" do
-
     field :value, :integer
     field :status, :string
 
@@ -14,7 +13,6 @@ defmodule Kefis.Chain.Collection do
     belongs_to :dispatch, Kefis.Chain.Dispatch
 
     timestamps()
-
   end
 
   def changeset(collection, attrs) do

@@ -8,5 +8,4 @@ defmodule KefisWeb.ApiAuthErrorHandler do
     |> put_status(401)
     |> json(%{error: %{code: 401, message: "Unauthorized"}})
   end
-
 end

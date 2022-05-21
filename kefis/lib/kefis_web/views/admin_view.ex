@@ -21,7 +21,6 @@ defmodule KefisWeb.AdminView do
     }
   end
 
-
   def render("admin_partner.json", %{partner: partner}) do
     %{
       type: partner.type,
@@ -48,14 +47,13 @@ defmodule KefisWeb.AdminView do
     }
   end
 
-
   def render("product.json", %{product: product}) do
     %{
       price: product.price,
       id: product.id,
       name: product.name,
       sku: product.sku,
-      image: product.image,
+      image: product.image
     }
   end
 
@@ -63,14 +61,12 @@ defmodule KefisWeb.AdminView do
     %{data: render_many(orders, __MODULE__, "basic_order.json", as: :order)}
   end
 
-
   def render("basic_order.json", %{order: order}) do
     %{
       id: order.id,
       value: order.value,
       status: order.status,
-      ordered_by: render_one(order.partner, __MODULE__, "partner.json", as: :partner),
-
+      ordered_by: render_one(order.partner, __MODULE__, "partner.json", as: :partner)
     }
   end
 
@@ -80,20 +76,20 @@ defmodule KefisWeb.AdminView do
       value: order.value,
       status: order.status,
       ordered_by: render_one(order.partner, __MODULE__, "partner.json", as: :partner),
-      details: render_many(order.order_details, __MODULE__, "order_detail.json", as: :order_detail)
+      details:
+        render_many(order.order_details, __MODULE__, "order_detail.json", as: :order_detail)
     }
   end
 
   def render("order_detail.json", %{order_detail: order_detail}) do
     %{
-     id: order_detail.id,
-     price: order_detail.price,
-     quantity: order_detail.quantity,
-     supplied_by: render_one(order_detail.partner, __MODULE__, "partner.json", as: :partner),
-     product: render_one(order_detail.product, __MODULE__, "product.json", as: :product)
+      id: order_detail.id,
+      price: order_detail.price,
+      quantity: order_detail.quantity,
+      supplied_by: render_one(order_detail.partner, __MODULE__, "partner.json", as: :partner),
+      product: render_one(order_detail.product, __MODULE__, "product.json", as: :product)
     }
   end
-
 
   def render("user.json", %{user: user}) do
     %{
@@ -102,12 +98,7 @@ defmodule KefisWeb.AdminView do
       first_name: user.first_name,
       role: user.role,
       phone: user.phone,
-      id: user.id,
-
+      id: user.id
     }
   end
-
-
-
-
 end

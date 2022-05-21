@@ -3,9 +3,8 @@ defmodule KefisWeb.Retailer.OrdersLive do
   alias Kefis.Orders
 
   alias Kefis.Transactions
+
   def mount(_, %{"user" => user} = _session, socket) do
-
-
     {:ok,
      socket
      |> assign(user: user)
@@ -59,7 +58,6 @@ defmodule KefisWeb.Retailer.OrdersLive do
     """
   end
 
-
   def render_me(assigns, :show_my_transaction) do
     ~H"""
     <%= live_component @socket, KefisWeb.Retailer.ShellDashboardLive,user: @user, id: "order_list", component: KefisWeb.Retailer.Transaction.ShowComponent, component_details: %{id: "order_list_component", user: @user, live_action: @live_action} %>
@@ -82,7 +80,7 @@ defmodule KefisWeb.Retailer.OrdersLive do
     """
   end
 
-  defp apply_action(socket, :show_order, %{"id"=> id}) do
+  defp apply_action(socket, :show_order, %{"id" => id}) do
     socket
     |> assign(:order, Orders.get(id))
   end
@@ -90,7 +88,6 @@ defmodule KefisWeb.Retailer.OrdersLive do
   defp apply_action(socket, :index, _params) do
     socket
   end
-
 
   defp apply_action(socket, :list_my_transaction, _) do
     socket
@@ -101,7 +98,7 @@ defmodule KefisWeb.Retailer.OrdersLive do
     |> assign(:type, type)
   end
 
-  defp apply_action(socket, :show_my_transaction, %{"id"=> id}) do
+  defp apply_action(socket, :show_my_transaction, %{"id" => id}) do
     socket
     |> assign(:transaction, Transactions.get_transaction!(id))
   end

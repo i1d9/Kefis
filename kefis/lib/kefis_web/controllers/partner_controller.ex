@@ -11,10 +11,7 @@ defmodule KefisWeb.PartnerController do
 
   alias Kefis.Products
 
-
-
   def index(conn, _params) do
-
     partners = Chain.list_partners()
     render(conn, "index.html", partners: partners)
   end
@@ -25,7 +22,6 @@ defmodule KefisWeb.PartnerController do
   end
 
   def create(conn, %{"partner" => partner_params}) do
-
     case Partners.create_partner(partner_params) do
       {:ok, partner} ->
         conn
@@ -36,9 +32,6 @@ defmodule KefisWeb.PartnerController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
-
-
-
   end
 
   def show(conn, %{"id" => id}) do
@@ -75,8 +68,6 @@ defmodule KefisWeb.PartnerController do
     |> redirect(to: Routes.partner_path(conn, :index))
   end
 
-
-
   def new_partner_user(conn, _opts) do
     partner = get_session(conn, :partner)
     IO.inspect(partner)
@@ -93,31 +84,24 @@ defmodule KefisWeb.PartnerController do
 
     partner_user_changeset = User.admin_changeset(%User{}, %{})
     render(conn, "new_user.html", changeset: partner_user_changeset, partner: partner)
-
   end
 
-
   def create_partner_user(conn, %{"user" => user_params}) do
-
     partner = get_session(conn, :partner)
-
 
     case Partners.create_partner_user(partner, user_params) do
       {:ok, _user} ->
         conn
         |> put_flash(:info, "User Account added successfully.")
         |> redirect(to: Routes.partner_path(conn, :index))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new_user.html", changeset: changeset)
     end
 
-
-
-    #partner_user_changeset = User.admin_changeset(%User{}, %{})
-    #render(conn, "new_user.html", changeset: partner_user_changeset)
-
+    # partner_user_changeset = User.admin_changeset(%User{}, %{})
+    # render(conn, "new_user.html", changeset: partner_user_changeset)
   end
-
 
   def list_partner_products(conn, _opts) do
     products = Products.list_partner_products(conn.assigns.current_user.partner)
@@ -132,10 +116,8 @@ defmodule KefisWeb.PartnerController do
     render(conn, "new_product.html", changeset: changeset)
   end
 
-
-
   def create_product(conn, %{"product" => product_params}) do
-    case  Products.create(conn.assigns.current_user.partner, product_params) do
+    case Products.create(conn.assigns.current_user.partner, product_params) do
       {:ok, _product} ->
         conn
         |> put_flash(:info, "Product created successfully.")
@@ -179,9 +161,4 @@ defmodule KefisWeb.PartnerController do
     |> put_flash(:info, "Product deleted successfully.")
     |> redirect(to: Routes.partner_path(conn, :list_partner_products))
   end
-
-
-
-
-
 end

@@ -3,14 +3,11 @@ defmodule KefisWeb.Admin.Transaction.IndexLive do
 
   def mount(_params, %{"user" => user}, socket) do
     IO.inspect(socket.assigns.live_action)
+
     {:ok,
-    socket
-    |> assign(:user, user)
-
-    }
+     socket
+     |> assign(:user, user)}
   end
-
-
 
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action)}
@@ -33,6 +30,4 @@ defmodule KefisWeb.Admin.Transaction.IndexLive do
       </div>
     """
   end
-
-
 end

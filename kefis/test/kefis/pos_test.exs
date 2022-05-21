@@ -147,7 +147,9 @@ defmodule Kefis.POSTest do
       sale_detail = sale_detail_fixture()
       update_attrs = %{price: 43, quantity: 43, total: 43}
 
-      assert {:ok, %SaleDetail{} = sale_detail} = POS.update_sale_detail(sale_detail, update_attrs)
+      assert {:ok, %SaleDetail{} = sale_detail} =
+               POS.update_sale_detail(sale_detail, update_attrs)
+
       assert sale_detail.price == 43
       assert sale_detail.quantity == 43
       assert sale_detail.total == 43

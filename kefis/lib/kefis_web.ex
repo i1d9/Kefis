@@ -26,7 +26,9 @@ defmodule KefisWeb do
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
       import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
-      import KefisWeb.ApiAuth, only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
+
+      import KefisWeb.ApiAuth,
+        only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
     end
   end
 
@@ -39,7 +41,6 @@ defmodule KefisWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller,
         only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
-
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
@@ -71,7 +72,9 @@ defmodule KefisWeb do
       import Phoenix.Controller
       import Phoenix.LiveView.Router
       import KefisWeb.Auth, only: [retailer: 2, landing_page: 2, admin: 2, supplier: 2, driver: 2]
-      import KefisWeb.ApiAuth, only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
+
+      import KefisWeb.ApiAuth,
+        only: [api_retailer: 2, api_admin: 2, api_supplier: 2, api_driver: 2]
     end
   end
 
@@ -97,7 +100,6 @@ defmodule KefisWeb do
       import KefisWeb.ErrorHelpers
       import KefisWeb.Gettext
       alias KefisWeb.Router.Helpers, as: Routes
-
 
       import KefisWeb.ViewHelper
     end

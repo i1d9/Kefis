@@ -8,16 +8,12 @@ defmodule KefisWeb.Retailer.CartLive do
   alias Kefis.Repo
 
   @impl true
-  def update(%{selected_products: selected_products, total: total, user: user }= assigns, socket) do
-
-
+  def update(%{selected_products: selected_products, total: total, user: user} = assigns, socket) do
     {:ok,
-    socket
-    |> assign(selected_products: selected_products)
-    |> assign(total: total)
-    |> assign(user: user)
-
-    }
+     socket
+     |> assign(selected_products: selected_products)
+     |> assign(total: total)
+     |> assign(user: user)}
   end
 
   @impl true
@@ -73,73 +69,93 @@ defmodule KefisWeb.Retailer.CartLive do
   end
 
   @impl true
-  def handle_event("add", %{"value" => value}, %{assigns: %{selected_products: selected_products, total: total}} = socket) do
+  def handle_event(
+        "add",
+        %{"value" => value},
+        %{assigns: %{selected_products: selected_products, total: total}} = socket
+      ) do
     {_status, product} = Enum.fetch(selected_products, String.to_integer(value))
 
     order_detail_changeset = Ecto.Changeset.update_change(product, :quantity, &(&1 + 1))
-    new_selected_products = List.replace_at(selected_products,  String.to_integer(value), order_detail_changeset)
+
+    new_selected_products =
+      List.replace_at(selected_products, String.to_integer(value), order_detail_changeset)
 
     new_total = total + order_detail_changeset.changes.price
 
     {:noreply,
-      socket
-      |> assign(:selected_products, new_selected_products)
-      |> assign(:total, new_total)
-    }
+     socket
+     |> assign(:selected_products, new_selected_products)
+     |> assign(:total, new_total)}
   end
 
   @impl true
-  def handle_event("sub", %{"value" => value}, %{assigns: %{selected_products: selected_products, total: total}} = socket) do
+  def handle_event(
+        "sub",
+        %{"value" => value},
+        %{assigns: %{selected_products: selected_products, total: total}} = socket
+      ) do
     {_status, product} = Enum.fetch(selected_products, String.to_integer(value))
 
     if product.changes.quantity > 1 do
       order_detail_changeset = Ecto.Changeset.update_change(product, :quantity, &(&1 - 1))
-      new_selected_products = List.replace_at(selected_products,  String.to_integer(value), order_detail_changeset)
+
+      new_selected_products =
+        List.replace_at(selected_products, String.to_integer(value), order_detail_changeset)
 
       new_total = total - order_detail_changeset.changes.price
+
       {:noreply,
-      socket
-      |> assign(:selected_products, new_selected_products)
-      |> assign(:total, new_total)
-      }
+       socket
+       |> assign(:selected_products, new_selected_products)
+       |> assign(:total, new_total)}
     else
       {:noreply,
-      socket
-      |> assign(:selected_products, selected_products)
-      }
+       socket
+       |> assign(:selected_products, selected_products)}
     end
-
   end
 
   @impl true
-  def handle_event("del", %{"value" => value}, %{assigns: %{selected_products: selected_products, total: total}} = socket) do
-    #Remove item
-    {removed_product, new_selected_products} = List.pop_at(selected_products, String.to_integer(value))
-    new_total = total - (removed_product.changes.quantity * removed_product.changes.price)
+  def handle_event(
+        "del",
+        %{"value" => value},
+        %{assigns: %{selected_products: selected_products, total: total}} = socket
+      ) do
+    # Remove item
+    {removed_product, new_selected_products} =
+      List.pop_at(selected_products, String.to_integer(value))
+
+    new_total = total - removed_product.changes.quantity * removed_product.changes.price
+
     {:noreply,
-    socket
-    |> assign(:selected_products, new_selected_products)
-    |> assign(:total, new_total)
-    }
+     socket
+     |> assign(:selected_products, new_selected_products)
+     |> assign(:total, new_total)}
   end
 
   @impl true
-  def handle_event("submit_order", _value, %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} = socket) do
+  def handle_event(
+        "submit_order",
+        _value,
+        %{assigns: %{selected_products: selected_product_changesets, total: total, user: user}} =
+          socket
+      ) do
     order_info = %{value: total, status: "Initiatied", date: Date.utc_today()}
     IO.inspect(order_info)
+
     case Orders.retailer_new_order(order_info, user, selected_product_changesets) do
       {:ok, order} ->
         {:noreply,
-        socket
-        |> redirect(to: Routes.orders_path(socket, :show_order, order.id))
-        }
+         socket
+         |> redirect(to: Routes.orders_path(socket, :show_order, order.id))}
+
       {:error, changeset} ->
         IO.inspect(changeset)
+
         {:noreply,
-        socket
-        |> assign(:selected_products, selected_product_changesets)
-        }
+         socket
+         |> assign(:selected_products, selected_product_changesets)}
     end
   end
-
 end

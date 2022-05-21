@@ -12,7 +12,6 @@ defmodule KefisWeb.AuthErrorHandler do
 
   @spec call(Conn.t(), atom()) :: Conn.t()
   def call(conn, :already_authenticated) do
-
     IO.inspect(conn)
 
     conn

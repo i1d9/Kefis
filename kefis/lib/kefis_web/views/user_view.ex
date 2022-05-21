@@ -5,25 +5,30 @@ defmodule KefisWeb.UserView do
     cond do
       role == "super" ->
         "Admin"
+
       role == "supplier_admin" ->
-          "Supplier"
+        "Supplier"
+
       role == "supplier_user" ->
-          "Supplier"
+        "Supplier"
+
       role == "retailer_admin" ->
         "Retailer"
+
       role == "retailer_user" ->
         "Retailer"
+
       role == "warehouse_admin" ->
-          "Warehouse Head"
+        "Warehouse Head"
+
       role == "warehouse_user" ->
-          "Warehouse Worker"
+        "Warehouse Worker"
+
       role == "driver" ->
         "Driver"
+
       true ->
-          "Role not set"
+        "Role not set"
     end
-
   end
-
-
 end

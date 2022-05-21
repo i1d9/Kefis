@@ -4,7 +4,6 @@ defmodule Kefis.Products do
   alias Kefis.Repo
   import Ecto.Query, only: [from: 2]
 
-
   def list_products do
     Repo.all(Product)
   end
@@ -15,8 +14,6 @@ defmodule Kefis.Products do
   end
 
   def list_partner_products(supplier) do
-
-
     query = from po in Product, where: po.partner_id == ^supplier.id
     Repo.all(query)
   end
@@ -27,9 +24,6 @@ defmodule Kefis.Products do
     |> Product.changeset(details)
     |> Repo.insert()
   end
-
-
-
 
   def update(product, attrs) do
     product
@@ -47,9 +41,9 @@ defmodule Kefis.Products do
   end
 
   def get_by(params) do
-    Enum.find Repo.all(Products), fn map ->
-        Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
-    end
+    Enum.find(Repo.all(Products), fn map ->
+      Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
+    end)
   end
 
   def delete(id) do
@@ -60,5 +54,4 @@ defmodule Kefis.Products do
   def change_product(%Product{} = inventory, attrs \\ %{}) do
     Product.changeset(inventory, attrs)
   end
-
 end

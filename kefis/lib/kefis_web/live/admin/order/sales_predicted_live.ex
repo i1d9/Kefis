@@ -4,12 +4,9 @@ defmodule KefisWeb.Admin.Order.SalesPredicted do
   alias Kefis.Orders
   alias Kefis.ModelPredictor, as: ML
 
-
-
   alias Contex.{BarChart, Plot, Dataset}
 
   def update(assigns, socket) do
-
     {:ok,
      socket
      |> assign(assigns)
@@ -29,7 +26,6 @@ defmodule KefisWeb.Admin.Order.SalesPredicted do
   end
 
   defp assign_total_sales(socket) do
-
     orders = Orders.total_orders()
 
     IO.inspect(ML.predict([[20, 30, 40]]))
@@ -38,7 +34,6 @@ defmodule KefisWeb.Admin.Order.SalesPredicted do
     |> assign(:total_sales, [
       {"Total Orders", Orders.total_orders()},
       {"Predicted", 2.5714285714285716}
-
     ])
   end
 
@@ -52,9 +47,7 @@ defmodule KefisWeb.Admin.Order.SalesPredicted do
     )
   end
 
-  defp assign_dataset(
-         %{assigns: %{total_sales: total_sales}} = socket
-       ) do
+  defp assign_dataset(%{assigns: %{total_sales: total_sales}} = socket) do
     socket
     |> assign(:dataset, Contex.Dataset.new(total_sales))
   end

@@ -1,17 +1,15 @@
 defmodule KefisWeb.Warehouse.ShowDetailLive do
   use KefisWeb, :live_view
 
-
-  def mount(_params,_session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
-  def handle_params(%{"id" => id, "type"=> type}=_params, _, socket) do
+  def handle_params(%{"id" => id, "type" => type} = _params, _, socket) do
     {:noreply,
-    socket
-    |> assign(:id, id)
-    |> assign(:type, type)
-    }
+     socket
+     |> assign(:id, id)
+     |> assign(:type, type)}
   end
 
   def render(assigns) do

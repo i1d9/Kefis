@@ -17,7 +17,6 @@ defmodule Kefis.Drivers do
   end
 
   def create_driver_user(driver_details, user_details) do
-
     user_changeset = User.admin_changeset(%User{}, user_details)
     driver_changeset = Driver.changeset(%Driver{}, driver_details)
 
@@ -29,26 +28,29 @@ defmodule Kefis.Drivers do
     |> Repo.insert()
   end
 
-
   def admin_load_driver do
     Repo.all(Driver) |> Repo.preload([:user])
   end
 
   def get(id) do
-    Repo.get Driver, id
+    Repo.get(Driver, id)
   end
-
 
   def driver_collection(driver) do
-    query = from c in Collection, preload: [order_detail: [:partner, :product]], where: c.driver_id == ^driver.id
-    Repo.all query
-  end
+    query =
+      from c in Collection,
+        preload: [order_detail: [:partner, :product]],
+        where: c.driver_id == ^driver.id
 
+    Repo.all(query)
+  end
 
   def driver_deliveries(driver) do
-    query = from d in Dispatch, preload: [:warehouse, order: [:partner]], where: d.driver_id == ^driver.id
-    Repo.all query
+    query =
+      from d in Dispatch,
+        preload: [:warehouse, order: [:partner]],
+        where: d.driver_id == ^driver.id
+
+    Repo.all(query)
   end
-
-
 end

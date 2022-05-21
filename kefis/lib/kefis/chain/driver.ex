@@ -17,6 +17,4 @@ defmodule Kefis.Chain.Driver do
     |> cast(attrs, [:vehicle, :trips])
     |> validate_required([:vehicle, :trips])
   end
-
-
 end

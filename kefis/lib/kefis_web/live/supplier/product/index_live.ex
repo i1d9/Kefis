@@ -7,22 +7,16 @@ defmodule KefisWeb.Supplier.Product.IndexLive do
   alias Kefis.Chain.Product
 
   def mount(_params, %{"user" => user}, socket) do
-
-
-
     {:ok,
      socket
-     |> assign(:user, user)
-    }
+     |> assign(:user, user)}
   end
-
 
   def render(assigns) do
     ~H"""
     <%= render_me(assigns, @live_action) %>
     """
   end
-
 
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
@@ -48,14 +42,12 @@ defmodule KefisWeb.Supplier.Product.IndexLive do
     |> assign(:product, Chain.get_product!(id))
   end
 
-
   def render_me(assigns, :list_product) do
     ~H"""
     <%= live_component @socket, KefisWeb.Supplier.ShellDashboard, user: @user, id: "sdjkds", component: KefisWeb.Supplier.Product.ListComponent, component_details: %{id: "order_list_component", supplier: @user.partner, live_action: assigns.live_action} %>
 
     """
   end
-
 
   def render_me(assigns, :new_product) do
     ~H"""
@@ -71,7 +63,6 @@ defmodule KefisWeb.Supplier.Product.IndexLive do
 
     """
   end
-
 
   def render_me(assigns, :edit_product) do
     ~H"""

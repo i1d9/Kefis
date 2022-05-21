@@ -178,9 +178,9 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
 
                               </li>
                               <li class="nav-item">
-                              <a href="" target="_blank"
-                                  class="nav-link d-flex justify-content-between">
-                                  <span>
+
+                              <%= link to: Routes.index_path(@socket, :partner_map), class: "nav-link d-flex justify-content-between" do%>
+                              <span>
                                       <span class="sidebar-icon">
 
 
@@ -191,7 +191,8 @@ defmodule KefisWeb.Admin.ShellDashboardLive do
                                   <span>
                                       <span class="badge badge-sm bg-success ms-1 text-gray-800"></span>
                                   </span>
-                              </a>
+                              <% end %>
+
                           </li>
         <li class="nav-item ">
           <a href="#" class="nav-link">

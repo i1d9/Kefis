@@ -8,15 +8,15 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
 
   def update(%{details: detailis}, socket) do
     IO.inspect(detailis)
+
     {:ok,
-    socket
-    |> assign(detailis)
-    |> init_item()
-    }
+     socket
+     |> assign(detailis)
+     |> init_item()}
   end
 
   def init_item(socket) do
-    partner = Repo.preload socket.assigns.supplier, :products
+    partner = Repo.preload(socket.assigns.supplier, :products)
 
     IO.inspect(partner.products)
 
@@ -40,7 +40,6 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
     |> assign(:page_entries, page_entries)
   end
 
-
   def handle_event("product_search", %{"search" => %{"product_name" => product}} = _value, socket) do
     products = Products.search_product(product)
     page_entries = 10
@@ -48,19 +47,20 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
     products_for_page = paginated_products |> Enum.at(0)
     total_entries = products |> Enum.count()
     total_pages = paginated_products |> Enum.count()
+
     {:noreply,
-    socket
-    |> assign(:products, products)
-    |> assign(:total_pages, total_pages)
-    |> assign(:total_entries, total_entries)
-    |> assign(:page_number, 0)
-    |> assign(:page_size, 0)
-    |> assign(:current_page, 0)
-    |> assign(:paginated_products, paginated_products)
-    |> assign(:products_for_page, products_for_page)
-    |> assign(:page_entries, page_entries)
-     }
+     socket
+     |> assign(:products, products)
+     |> assign(:total_pages, total_pages)
+     |> assign(:total_entries, total_entries)
+     |> assign(:page_number, 0)
+     |> assign(:page_size, 0)
+     |> assign(:current_page, 0)
+     |> assign(:paginated_products, paginated_products)
+     |> assign(:products_for_page, products_for_page)
+     |> assign(:page_entries, page_entries)}
   end
+
   def render(assigns) do
     ~H"""
     <div class="table-settings mb-4">
@@ -198,7 +198,6 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
     """
   end
 
-
   def handle_event(
         "change_page",
         %{"index" => index} = _params,
@@ -250,9 +249,8 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
     case Products.delete(String.to_integer(id)) do
       {:ok, _product} ->
         {:noreply,
-        socket
-        |> init_item()
-      }
+         socket
+         |> init_item()}
 
       {:error, _error} ->
         {:noreply, socket}
@@ -262,5 +260,4 @@ defmodule KefisWeb.Supplier.Product.ListComponent do
   def handle_event("edit_product", _value, socket) do
     {:noreply, socket}
   end
-
 end

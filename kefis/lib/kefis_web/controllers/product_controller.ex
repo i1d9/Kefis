@@ -6,11 +6,10 @@ defmodule KefisWeb.ProductController do
   alias Kefis.Repo
   alias Kefis.Users.User
 
-
   plug KefisWeb.Authorize, resource: Kefis.Chain.Product
 
   def index(conn, _params) do
-    #IO.inspect(conn)
+    # IO.inspect(conn)
     products = Chain.list_products()
     render(conn, "index.html", products: products)
   end
@@ -21,8 +20,6 @@ defmodule KefisWeb.ProductController do
   end
 
   def create(conn, %{"product" => product_params}) do
-
-
     case Chain.create_product(product_params) do
       {:ok, product} ->
         conn

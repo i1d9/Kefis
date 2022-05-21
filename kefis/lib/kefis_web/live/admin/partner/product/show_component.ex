@@ -3,9 +3,8 @@ defmodule KefisWeb.Admin.Partner.Product.ShowComponent do
 
   def update(assigns, socket) do
     {:ok,
-    socket
-    |> assign(assigns)
-    }
+     socket
+     |> assign(assigns)}
   end
 
   def render(assigns) do

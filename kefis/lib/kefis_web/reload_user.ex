@@ -6,8 +6,6 @@ defmodule KefisWeb.ReloadUser do
   alias Kefis.Repo
   alias Kefis.Users.User
 
-
-
   @spec init(any()) :: any()
   def init(opts), do: opts
 
@@ -23,7 +21,6 @@ defmodule KefisWeb.ReloadUser do
       user ->
         reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :account])
         Pow.Plug.assign_current_user(conn, reloaded_user, config)
-
     end
   end
 end

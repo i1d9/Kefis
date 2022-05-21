@@ -1,22 +1,15 @@
 defmodule KefisWeb.Warehouse.OutgoingLive do
   use KefisWeb, :live_component
 
-
   alias Kefis.Warehouses
 
   def update(%{details: details} = _assigns, socket) do
-
     {:ok,
-    socket
-    |> init_items(details.warehouse)
-    }
+     socket
+     |> init_items(details.warehouse)}
   end
 
-
-
-
   defp init_items(socket, warehouse) do
-
     items = Warehouses.outgoing_orders(warehouse)
     IO.inspect(items)
 
@@ -37,7 +30,6 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
     |> assign(:items_for_page, items_for_page)
     |> assign(:page_entries, page_entries)
   end
-
 
   def render(assigns) do
     ~H"""
@@ -62,5 +54,4 @@ defmodule KefisWeb.Warehouse.OutgoingLive do
     </div>
     """
   end
-
 end

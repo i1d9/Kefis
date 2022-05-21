@@ -6,15 +6,12 @@ defmodule KefisWeb.Supplier.Product.NewLive do
 
   def mount(_params, _session, socket) do
     changeset = Product.changeset(%Product{}, %{})
+
     {:ok,
-    socket
-    |> assign(:changeset, changeset)
-    |> assign(:uploaded_files, [])
-    }
+     socket
+     |> assign(:changeset, changeset)
+     |> assign(:uploaded_files, [])}
   end
-
-
-
 
   def handle_event("save", %{"product" => product_params}, _socket) do
     IO.inspect(product_params)
@@ -50,6 +47,4 @@ defmodule KefisWeb.Supplier.Product.NewLive do
       {:noreply, socket}
     end
   end
-
-
 end

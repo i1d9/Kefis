@@ -21,8 +21,6 @@ defmodule KefisWeb.Retailer.Transaction.ListComponent do
     total_entries = items |> Enum.count()
     total_pages = paginated_items |> Enum.count()
 
-
-
     socket
     |> assign(:items, items)
     |> assign(:filter_type, 0)
@@ -179,14 +177,8 @@ defmodule KefisWeb.Retailer.Transaction.ListComponent do
   end
 
   def handle_event("type_filter", _value, socket) do
-
-
-
-
-
-
-
-    items = case rem(socket.assigns.filter_type, 3) do
+    items =
+      case rem(socket.assigns.filter_type, 3) do
         0 ->
           socket.assigns.initial_items
 
@@ -195,15 +187,13 @@ defmodule KefisWeb.Retailer.Transaction.ListComponent do
 
         2 ->
           Enum.filter(socket.assigns.initial_items, fn item -> item.type == "withdraw" end)
-    end
+      end
 
     page_entries = 10
     paginated_items = items |> Enum.chunk_every(page_entries)
     items_for_page = paginated_items |> Enum.at(0)
     total_entries = items |> Enum.count()
     total_pages = paginated_items |> Enum.count()
-
-
 
     {:noreply,
      socket

@@ -3,8 +3,20 @@ defmodule KefisWeb.ProductControllerTest do
 
   import Kefis.ChainFixtures
 
-  @create_attrs %{category: "some category", image: "some image", name: "some name", price: 42, sku: "some sku"}
-  @update_attrs %{category: "some updated category", image: "some updated image", name: "some updated name", price: 43, sku: "some updated sku"}
+  @create_attrs %{
+    category: "some category",
+    image: "some image",
+    name: "some name",
+    price: 42,
+    sku: "some sku"
+  }
+  @update_attrs %{
+    category: "some updated category",
+    image: "some updated image",
+    name: "some updated name",
+    price: 43,
+    sku: "some updated sku"
+  }
   @invalid_attrs %{category: nil, image: nil, name: nil, price: nil, sku: nil}
 
   describe "index" do

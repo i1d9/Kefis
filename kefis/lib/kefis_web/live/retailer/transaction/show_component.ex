@@ -5,7 +5,6 @@ defmodule KefisWeb.Retailer.Transaction.ShowComponent do
     {:ok, socket}
   end
 
-
   def render(assigns) do
     ~H"""
     <div></div>

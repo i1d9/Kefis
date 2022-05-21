@@ -4,7 +4,6 @@ defmodule KefisWeb.Admin.Order.ShowLive do
   alias Kefis.Orders
 
   def update(%{details: %{live_action: live_action} = details} = _assigns, socket) do
-
     %{order_id: order_id, live_action: live_action, modal: modal} = details
 
     case live_action do

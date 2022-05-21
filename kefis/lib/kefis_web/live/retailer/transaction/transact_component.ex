@@ -74,8 +74,6 @@ defmodule KefisWeb.Retailer.Transaction.TransactComponent do
     end
   end
 
-
-
   def handle_event("save_withdraw", _value, socket) do
     IO.inspect(socket)
 

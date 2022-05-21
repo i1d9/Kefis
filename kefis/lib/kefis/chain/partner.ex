@@ -25,8 +25,8 @@ defmodule Kefis.Chain.Partner do
   @doc false
   def changeset(partner, attrs) do
     partner
-    |> cast(attrs, [:name, :location, :phone, :email,  :lng, :lat, :type])
-    |> validate_required([:name, :location, :phone, :email,  :lng, :lat, :type])
+    |> cast(attrs, [:name, :location, :phone, :email, :lng, :lat, :type])
+    |> validate_required([:name, :location, :phone, :email, :lng, :lat, :type])
     |> unique_constraint(:email)
     |> validate_length(:phone, min: 10, max: 20)
     |> validate_format(:email, ~r/@/)

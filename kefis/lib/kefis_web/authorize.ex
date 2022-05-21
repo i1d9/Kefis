@@ -1,5 +1,4 @@
 defmodule KefisWeb.Authorize do
-
   import Plug.Conn
   import Phoenix.Controller
   import Kefis.Authorization
@@ -16,7 +15,6 @@ defmodule KefisWeb.Authorize do
     check(action, role, resource)
     |> maybe_continue(conn)
   end
-
 
   defp maybe_continue(true, conn), do: conn
 
@@ -44,5 +42,4 @@ defmodule KefisWeb.Authorize do
   end
 
   defp check(_action, _role, _resource), do: false
-
 end

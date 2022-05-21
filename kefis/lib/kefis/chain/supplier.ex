@@ -16,7 +16,7 @@ defmodule Kefis.Chain.Supplier do
   @doc false
   def changeset(supplier, attrs) do
     supplier
-    |> cast(attrs, [:name, :location, :phone, :email,  :lng, :lat])
-    |> validate_required([:name, :location, :phone, :email,  :lng, :lat])
+    |> cast(attrs, [:name, :location, :phone, :email, :lng, :lat])
+    |> validate_required([:name, :location, :phone, :email, :lng, :lat])
   end
 end

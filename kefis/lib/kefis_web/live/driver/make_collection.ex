@@ -7,32 +7,37 @@ defmodule KefisWeb.Driver.MakeCollection do
     IO.inspect(id)
 
     collection = Collections.driver_get(id)
-    %{order_detail: %{partner: partner}}=collection
+    %{order_detail: %{partner: partner}} = collection
 
     IO.inspect(partner)
+
     {:ok,
      socket
      |> assign(:collection, collection)
      |> assign(:id, id)
      |> assign(:collection_lat, partner.lat)
-     |> assign(:collection_lng, partner.lng)
-    }
+     |> assign(:collection_lng, partner.lng)}
   end
 
-  def handle_event("change_collection_status", %{"collection_status"=> status}=_value, %{assigns: %{id: id, collection: collection}}= socket) do
+  def handle_event(
+        "change_collection_status",
+        %{"collection_status" => status} = _value,
+        %{assigns: %{id: id, collection: collection}} = socket
+      ) do
     IO.inspect(status)
     IO.inspect(id)
+
     case Collections.update(collection, %{status: status}) do
       {:ok, collection} ->
         IO.inspect(collection)
+
         {:noreply,
-        socket
-        |> assign(:collection, collection)
-        }
+         socket
+         |> assign(:collection, collection)}
+
       {:error, _} ->
         {:noreply, socket}
     end
-
   end
 
   def render(assigns) do

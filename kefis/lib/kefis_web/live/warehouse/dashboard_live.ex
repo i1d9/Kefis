@@ -1,12 +1,9 @@
 defmodule KefisWeb.Warehouse.DashboardLive do
-
   use KefisWeb, :live_component
-
 
   def update(assigns, socket) do
     {:ok, socket}
   end
-
 
   def render(assigns) do
     ~H"""
@@ -274,5 +271,4 @@ defmodule KefisWeb.Warehouse.DashboardLive do
     </div>
     """
   end
-
 end

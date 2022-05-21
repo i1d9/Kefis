@@ -1,6 +1,4 @@
 defmodule Kefis.Authorization do
-
-
   alias __MODULE__
 
   alias Kefis.Users.User
@@ -14,7 +12,6 @@ defmodule Kefis.Authorization do
   alias Kefis.Chain.Collection
   alias Kefis.Chain.Warehouse
 
-
   @doc """
   Create an Authorization struct
 
@@ -26,7 +23,6 @@ defmodule Kefis.Authorization do
   }
   """
   defstruct role: nil, create: %{}, read: %{}, update: %{}, delete: %{}
-
 
   def can("super" = role) do
     grant(role)
@@ -40,7 +36,6 @@ defmodule Kefis.Authorization do
     |> all(Product)
     |> all(User)
   end
-
 
   def can("supplier_admin" = role) do
     grant(role)
@@ -64,7 +59,6 @@ defmodule Kefis.Authorization do
     |> all(User)
   end
 
-
   def can("retailer_admin" = role) do
     grant(role)
     |> read(Account)
@@ -87,8 +81,6 @@ defmodule Kefis.Authorization do
     |> all(User)
   end
 
-
-
   def all(authorization, resource) do
     authorization
     |> create(resource)
@@ -106,7 +98,6 @@ defmodule Kefis.Authorization do
   def update(authorization, resource), do: put_action(authorization, :update, resource)
 
   def delete(authorization, resource), do: put_action(authorization, :delete, resource)
-
 
   def read?(authorization, resource) do
     Map.get(authorization.read, resource, false)
@@ -133,7 +124,7 @@ defmodule Kefis.Authorization do
       authorization
       |> Map.get(action)
       |> Map.put(resource, true)
+
     Map.put(authorization, action, updated_action)
   end
-
 end

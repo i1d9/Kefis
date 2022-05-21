@@ -32,6 +32,7 @@ defmodule KefisWeb.Warehouse.ProcessedLive do
 
   def handle_event("check_order", %{"order" => order} = _value, socket) do
     IO.inspect(order)
+
     {:noreply,
      socket
      |> push_redirect(

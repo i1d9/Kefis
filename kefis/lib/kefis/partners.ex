@@ -5,8 +5,8 @@ defmodule Kefis.Partners do
   alias Ecto.Changeset
 
   import Ecto.Query, only: [from: 2]
-  def create_partner_user(partner_details, user_details) do
 
+  def create_partner_user(partner_details, user_details) do
     user_changeset = User.admin_changeset(%User{}, add_role(partner_details, user_details))
     partner_changeset = Partner.changeset(%Partner{}, partner_details)
 
@@ -28,10 +28,10 @@ defmodule Kefis.Partners do
     end
   end
 
-
   def get!(id) do
     Repo.get!(Partner, id)
   end
+
   def partners_type(type) do
     query = from p in Partner, where: p.type == ^type
     Repo.all(query)
@@ -58,22 +58,23 @@ defmodule Kefis.Partners do
     Repo.get(Partner, id) |> Repo.preload(:products)
   end
 
-
   def api_create_partner(partner, user) do
-    IO.inspect(    Partner.changeset(%Partner{}, partner))
+    IO.inspect(Partner.changeset(%Partner{}, partner))
 
     Partner.changeset(%Partner{}, partner)
     |> Ecto.Changeset.put_assoc(:user, User.admin_changeset(%User{}, user))
     |> Repo.insert()
   end
 
-
   def api_delete_partner(%Partner{} = partner) do
     Repo.delete(partner)
   end
 
-
   def change_partner(%Partner{} = partner, attrs \\ %{}) do
     Partner.changeset(partner, attrs)
+  end
+
+  def list() do
+    Repo.all(Partner)
   end
 end

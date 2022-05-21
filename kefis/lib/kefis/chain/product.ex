@@ -21,7 +21,4 @@ defmodule Kefis.Chain.Product do
     |> cast(attrs, [:name, :price, :sku, :category, :image, :package])
     |> validate_required([:name, :price, :sku, :category, :image, :package])
   end
-
-
-
 end

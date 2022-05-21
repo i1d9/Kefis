@@ -71,7 +71,6 @@ defmodule KefisWeb.Router do
   scope "/admin", KefisWeb do
     pipe_through [:browser, :protected]
 
-
     live "/", Admin.IndexLive
 
     live "/warehouses", Admin.Warehouse.IndexLive, :list
@@ -93,7 +92,10 @@ defmodule KefisWeb.Router do
     live "/partners/:id/products/", Admin.Partner.Product.IndexLive, :partner_products
     live "/partners/:id/products/new", Admin.Partner.Product.IndexLive, :new_partner_product
     live "/partners/:id/products/:product", Admin.Partner.Product.IndexLive, :show_partner_product
-    live "/partners/:id/products/:product/edit", Admin.Partner.Product.IndexLive, :edit_partner_product
+
+    live "/partners/:id/products/:product/edit",
+         Admin.Partner.Product.IndexLive,
+         :edit_partner_product
 
     live "/partners/:id/transactions", Admin.Partner.IndexLive, :partner_transactions
 
@@ -101,8 +103,9 @@ defmodule KefisWeb.Router do
     live "/orders/:id", Admin.Order.IndexLive, :detail
     live "/orders/:id/info", Admin.Order.IndexLive, :info
 
-    live "/users", Admin.User.IndexLive
+    live "/map", Admin.Partner.IndexLive, :partner_map
 
+    live "/users", Admin.User.IndexLive
   end
 
   scope "/partners", KefisWeb do
@@ -145,7 +148,6 @@ defmodule KefisWeb.Router do
     live "/transactions/transact", Retailer.OrdersLive, :transact
     live "/transactions/:id", Retailer.OrdersLive, :show_my_transaction
 
-
     # get "/order/new", RetailerController, :order
     live "/order/info", Retailer.ConfirmOrderLive
   end
@@ -153,17 +155,16 @@ defmodule KefisWeb.Router do
   scope "/pos", KefisWeb do
     pipe_through [:browser, :protected, :retailer]
     # pipe_through [:browser]
-
   end
 
   scope "/s", KefisWeb do
     pipe_through [:browser, :protected, :supplier]
     # pipe_through [:browser]
 
-    #get "/", SupplierController, :index
-    #get "/products", SupplierController, :list_partner_products
+    # get "/", SupplierController, :index
+    # get "/products", SupplierController, :list_partner_products
 
-    #get "/new/product", SupplierController, :new_product
+    # get "/new/product", SupplierController, :new_product
 
     live "/", Supplier.IndexLive, :supplier_home
     live "/products", Supplier.Product.IndexLive, :list_product
@@ -175,12 +176,11 @@ defmodule KefisWeb.Router do
     live "/transactions", Supplier.IndexLive, :list_transactions
     live "/transactions/:id", Supplier.IndexLive, :show_transaction
 
-
     live "/orders", Supplier.IndexLive, :list_my_orders
     live "/orders/:id", Supplier.IndexLive, :show_my_orders
 
-    #get "/orders", SupplierController, :my_orders
-    #get "/orders/:id/", SupplierController, :show_order_details
+    # get "/orders", SupplierController, :my_orders
+    # get "/orders/:id/", SupplierController, :show_order_details
   end
 
   scope "/w", KefisWeb do

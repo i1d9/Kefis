@@ -1,5 +1,4 @@
 defmodule KefisWeb.ApiAuth do
-
   @moduledoc false
   use Pow.Plug.Base
 
@@ -8,7 +7,6 @@ defmodule KefisWeb.ApiAuth do
   alias PowPersistentSession.Store.PersistentSessionCache
   import Phoenix.Controller, only: [json: 2]
 
-
   @doc """
   Fetches the user from access token.
   """
@@ -16,8 +14,8 @@ defmodule KefisWeb.ApiAuth do
   @spec fetch(Conn.t(), Config.t()) :: {Conn.t(), map() | nil}
   def fetch(conn, config) do
     with {:ok, signed_token} <- fetch_access_token(conn),
-         {:ok, token}        <- verify_token(conn, signed_token, config),
-         {user, _metadata}   <- CredentialsCache.get(store_config(config), token) do
+         {:ok, token} <- verify_token(conn, signed_token, config),
+         {user, _metadata} <- CredentialsCache.get(store_config(config), token) do
       {conn, user}
     else
       _any -> {conn, nil}
@@ -34,8 +32,8 @@ defmodule KefisWeb.ApiAuth do
   @impl true
   @spec create(Conn.t(), map(), Config.t()) :: {Conn.t(), map()}
   def create(conn, user, config) do
-    store_config  = store_config(config)
-    access_token  = Pow.UUID.generate()
+    store_config = store_config(config)
+    access_token = Pow.UUID.generate()
     renewal_token = Pow.UUID.generate()
 
     conn =
@@ -47,7 +45,12 @@ defmodule KefisWeb.ApiAuth do
         # `:ttl`, `Keyword.put(store_config, :ttl, :timer.minutes(10))` can be
         # passed in as the first argument instead of `store_config`.
         CredentialsCache.put(store_config, access_token, {user, [renewal_token: renewal_token]})
-        PersistentSessionCache.put(store_config, renewal_token, {user, [access_token: access_token]})
+
+        PersistentSessionCache.put(
+          store_config,
+          renewal_token,
+          {user, [access_token: access_token]}
+        )
 
         conn
       end)
@@ -66,9 +69,8 @@ defmodule KefisWeb.ApiAuth do
     store_config = store_config(config)
 
     with {:ok, signed_token} <- fetch_access_token(conn),
-         {:ok, token}        <- verify_token(conn, signed_token, config),
-         {_user, metadata}   <- CredentialsCache.get(store_config, token) do
-
+         {:ok, token} <- verify_token(conn, signed_token, config),
+         {_user, metadata} <- CredentialsCache.get(store_config, token) do
       Conn.register_before_send(conn, fn conn ->
         PersistentSessionCache.delete(store_config, metadata[:renewal_token])
         CredentialsCache.delete(store_config, token)
@@ -94,9 +96,8 @@ defmodule KefisWeb.ApiAuth do
     store_config = store_config(config)
 
     with {:ok, signed_token} <- fetch_access_token(conn),
-         {:ok, token}        <- verify_token(conn, signed_token, config),
-         {user, metadata}    <- PersistentSessionCache.get(store_config, token) do
-
+         {:ok, token} <- verify_token(conn, signed_token, config),
+         {user, metadata} <- PersistentSessionCache.get(store_config, token) do
       {conn, user} = create(conn, user, config)
 
       conn =
@@ -122,7 +123,7 @@ defmodule KefisWeb.ApiAuth do
   defp fetch_access_token(conn) do
     case Conn.get_req_header(conn, "authorization") do
       [token | _rest] -> {:ok, token}
-      _any            -> :error
+      _any -> :error
     end
   end
 
@@ -135,10 +136,10 @@ defmodule KefisWeb.ApiAuth do
     [backend: backend, pow_config: config]
   end
 
-
   def api_admin(conn, _opts) do
     _config = Pow.Plug.fetch_config(conn)
     IO.inspect(conn)
+
     if conn.assigns.current_user.role == "admin" do
       conn
     else
@@ -168,7 +169,6 @@ defmodule KefisWeb.ApiAuth do
     else
       not_authorized(conn)
     end
-
   end
 
   def api_warehouse(conn, _opts) do
@@ -177,9 +177,7 @@ defmodule KefisWeb.ApiAuth do
     else
       not_authorized(conn)
     end
-
   end
-
 
   defp not_authorized(conn) do
     conn

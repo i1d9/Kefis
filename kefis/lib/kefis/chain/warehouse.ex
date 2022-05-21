@@ -12,7 +12,6 @@ defmodule Kefis.Chain.Warehouse do
 
     belongs_to :user, Kefis.Users.User
 
-
     timestamps()
   end
 

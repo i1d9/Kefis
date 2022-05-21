@@ -4,8 +4,7 @@ defmodule KefisWeb.Retailer.ShellDashboardLive do
   def update(%{component: component, component_details: component_details} = assigns, socket) do
     {:ok,
      socket
-     |> assign(assigns)
-    }
+     |> assign(assigns)}
   end
 
   def render(assigns) do

@@ -8,7 +8,15 @@ defmodule Kefis.ChainTest do
 
     import Kefis.ChainFixtures
 
-    @invalid_attrs %{contact_email: nil, contact_phone: nil, lat: nil, lng: nil, location: nil, name: nil, phone: nil}
+    @invalid_attrs %{
+      contact_email: nil,
+      contact_phone: nil,
+      lat: nil,
+      lng: nil,
+      location: nil,
+      name: nil,
+      phone: nil
+    }
 
     test "list_suppliers/0 returns all suppliers" do
       supplier = supplier_fixture()
@@ -21,7 +29,15 @@ defmodule Kefis.ChainTest do
     end
 
     test "create_supplier/1 with valid data creates a supplier" do
-      valid_attrs = %{contact_email: "some contact_email", contact_phone: "some contact_phone", lat: 120.5, lng: 120.5, location: "some location", name: "some name", phone: "some phone"}
+      valid_attrs = %{
+        contact_email: "some contact_email",
+        contact_phone: "some contact_phone",
+        lat: 120.5,
+        lng: 120.5,
+        location: "some location",
+        name: "some name",
+        phone: "some phone"
+      }
 
       assert {:ok, %Supplier{} = supplier} = Chain.create_supplier(valid_attrs)
       assert supplier.contact_email == "some contact_email"
@@ -39,7 +55,16 @@ defmodule Kefis.ChainTest do
 
     test "update_supplier/2 with valid data updates the supplier" do
       supplier = supplier_fixture()
-      update_attrs = %{contact_email: "some updated contact_email", contact_phone: "some updated contact_phone", lat: 456.7, lng: 456.7, location: "some updated location", name: "some updated name", phone: "some updated phone"}
+
+      update_attrs = %{
+        contact_email: "some updated contact_email",
+        contact_phone: "some updated contact_phone",
+        lat: 456.7,
+        lng: 456.7,
+        location: "some updated location",
+        name: "some updated name",
+        phone: "some updated phone"
+      }
 
       assert {:ok, %Supplier{} = supplier} = Chain.update_supplier(supplier, update_attrs)
       assert supplier.contact_email == "some updated contact_email"
@@ -74,7 +99,16 @@ defmodule Kefis.ChainTest do
 
     import Kefis.ChainFixtures
 
-    @invalid_attrs %{contact_email: nil, contact_phone: nil, lat: nil, lng: nil, location: nil, name: nil, phone: nil, type: nil}
+    @invalid_attrs %{
+      contact_email: nil,
+      contact_phone: nil,
+      lat: nil,
+      lng: nil,
+      location: nil,
+      name: nil,
+      phone: nil,
+      type: nil
+    }
 
     test "list_partners/0 returns all partners" do
       partner = partner_fixture()
@@ -87,7 +121,16 @@ defmodule Kefis.ChainTest do
     end
 
     test "create_partner/1 with valid data creates a partner" do
-      valid_attrs = %{contact_email: "some contact_email", contact_phone: "some contact_phone", lat: 120.5, lng: 120.5, location: "some location", name: "some name", phone: "some phone", type: "some type"}
+      valid_attrs = %{
+        contact_email: "some contact_email",
+        contact_phone: "some contact_phone",
+        lat: 120.5,
+        lng: 120.5,
+        location: "some location",
+        name: "some name",
+        phone: "some phone",
+        type: "some type"
+      }
 
       assert {:ok, %Partner{} = partner} = Chain.create_partner(valid_attrs)
       assert partner.contact_email == "some contact_email"
@@ -106,7 +149,17 @@ defmodule Kefis.ChainTest do
 
     test "update_partner/2 with valid data updates the partner" do
       partner = partner_fixture()
-      update_attrs = %{contact_email: "some updated contact_email", contact_phone: "some updated contact_phone", lat: 456.7, lng: 456.7, location: "some updated location", name: "some updated name", phone: "some updated phone", type: "some updated type"}
+
+      update_attrs = %{
+        contact_email: "some updated contact_email",
+        contact_phone: "some updated contact_phone",
+        lat: 456.7,
+        lng: 456.7,
+        location: "some updated location",
+        name: "some updated name",
+        phone: "some updated phone",
+        type: "some updated type"
+      }
 
       assert {:ok, %Partner{} = partner} = Chain.update_partner(partner, update_attrs)
       assert partner.contact_email == "some updated contact_email"
@@ -155,7 +208,13 @@ defmodule Kefis.ChainTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{category: "some category", image: "some image", name: "some name", price: 42, sku: "some sku"}
+      valid_attrs = %{
+        category: "some category",
+        image: "some image",
+        name: "some name",
+        price: 42,
+        sku: "some sku"
+      }
 
       assert {:ok, %Product{} = product} = Chain.create_product(valid_attrs)
       assert product.category == "some category"
@@ -171,7 +230,14 @@ defmodule Kefis.ChainTest do
 
     test "update_product/2 with valid data updates the product" do
       product = product_fixture()
-      update_attrs = %{category: "some updated category", image: "some updated image", name: "some updated name", price: 43, sku: "some updated sku"}
+
+      update_attrs = %{
+        category: "some updated category",
+        image: "some updated image",
+        name: "some updated name",
+        price: 43,
+        sku: "some updated sku"
+      }
 
       assert {:ok, %Product{} = product} = Chain.update_product(product, update_attrs)
       assert product.category == "some updated category"

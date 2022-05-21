@@ -82,13 +82,16 @@ defmodule KefisWeb.Supplier.MyOrdersLive do
     {:noreply, socket}
   end
 
-  def handle_event("filter_status", %{"status" => status}, %{assigns: %{user: current_user}}=socket) do
+  def handle_event(
+        "filter_status",
+        %{"status" => status},
+        %{assigns: %{user: current_user}} = socket
+      ) do
     IO.inspect(status)
     IO.inspect(current_user)
 
     {:noreply,
-    socket
-    |> init_items(current_user, status)
-    }
+     socket
+     |> init_items(current_user, status)}
   end
 end

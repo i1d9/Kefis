@@ -11,7 +11,6 @@ defmodule KefisWeb.Driver.TripsLive do
      socket
      |> assign(:user, user)
      |> init_items(user.driver, "collection")}
-
   end
 
   defp init_items(socket, driver, type) do
@@ -55,13 +54,9 @@ defmodule KefisWeb.Driver.TripsLive do
     end
 
     {:noreply,
-    socket
-    |> assign(:type, type)
-    }
+     socket
+     |> assign(:type, type)}
   end
-
-
-
 
   def handle_event(
         "change_page",

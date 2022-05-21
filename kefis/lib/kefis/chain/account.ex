@@ -20,6 +20,4 @@ defmodule Kefis.Chain.Account do
     |> validate_required([:balance, :status])
     |> validate_inclusion(:status, @statuses)
   end
-
-
 end

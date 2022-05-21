@@ -73,7 +73,6 @@ defmodule Kefis.MixProject do
         "sass default --no-source-map --style=compressed",
         "phx.digest"
       ]
-
     ]
   end
 end

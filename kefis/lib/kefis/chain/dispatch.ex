@@ -3,7 +3,6 @@ defmodule Kefis.Chain.Dispatch do
   import Ecto.Changeset
 
   schema "dispatches" do
-
     belongs_to :warehouse, Kefis.Chain.Warehouse
     belongs_to :driver, Kefis.Chain.Driver
     belongs_to :order, Kefis.Chain.Order

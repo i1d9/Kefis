@@ -1,5 +1,4 @@
 defmodule Kefis.Warehouses do
-
   alias Kefis.Chain.Warehouse
   alias Kefis.Chain.Collection
   alias Kefis.Repo
@@ -16,11 +15,9 @@ defmodule Kefis.Warehouses do
     |> Repo.insert()
   end
 
-
   def delete(%Warehouse{} = warehouse) do
     Repo.delete(warehouse)
   end
-
 
   def update(%Warehouse{} = warehouse, details) do
     warehouse
@@ -29,23 +26,26 @@ defmodule Kefis.Warehouses do
   end
 
   def show(id) do
-    Repo.get Warehouse, id
+    Repo.get(Warehouse, id)
   end
-
 
   def incoming_orders(warehouse) do
     query =
-      from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [driver: [:user]], where: c.status == ^"picked"
-    Repo.all(query)
+      from c in Collection,
+        where: c.warehouse_id == ^warehouse.id,
+        preload: [driver: [:user]],
+        where: c.status == ^"picked"
 
+    Repo.all(query)
   end
 
   def outgoing_orders(warehouse) do
     query =
-      from c in Collection, where: c.warehouse_id == ^warehouse.id, preload: [driver: [:user]], where: c.status == ^"processed"
+      from c in Collection,
+        where: c.warehouse_id == ^warehouse.id,
+        preload: [driver: [:user]],
+        where: c.status == ^"processed"
+
     Repo.all(query)
   end
-
-
-
 end

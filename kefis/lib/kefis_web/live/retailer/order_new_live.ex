@@ -292,20 +292,18 @@ defmodule KefisWeb.Retailer.OrderNewLive do
   end
 
   @impl true
-  def handle_event("change_page", %{"index" => index} =  _params, %{assigns: %{paginated_items: paginated_items }} = socket) do
-
-
+  def handle_event(
+        "change_page",
+        %{"index" => index} = _params,
+        %{assigns: %{paginated_items: paginated_items}} = socket
+      ) do
     items_for_page = paginated_items |> Enum.at(String.to_integer(index))
     page_entries = items_for_page |> Enum.count()
 
     {:noreply,
-    socket
-    |> assign(:page_number, String.to_integer(index))
-    |> assign(:items_for_page, items_for_page)
-    |> assign(:page_entries, page_entries)
-
-
-    }
+     socket
+     |> assign(:page_number, String.to_integer(index))
+     |> assign(:items_for_page, items_for_page)
+     |> assign(:page_entries, page_entries)}
   end
-
 end

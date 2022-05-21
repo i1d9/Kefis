@@ -1,7 +1,6 @@
 defmodule KefisWeb.Driver.MakeDispatch do
   use KefisWeb, :live_component
 
-
   def update(assigns, socket) do
     {:ok, socket}
   end

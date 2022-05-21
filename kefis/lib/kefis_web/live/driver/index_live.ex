@@ -2,7 +2,7 @@ defmodule KefisWeb.Driver.IndexLive do
   use KefisWeb, :live_component
 
   def update(_assigns, socket) do
-    {:ok ,socket}
+    {:ok, socket}
   end
 
   def render(assigns) do

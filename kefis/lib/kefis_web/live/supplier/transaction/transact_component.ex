@@ -58,16 +58,11 @@ defmodule KefisWeb.Supplier.Transaction.TransactComponent do
     """
   end
 
-
-
-
-
   def handle_event("save_withdraw", _value, socket) do
     IO.inspect(socket)
 
     case Accounts.withdraw(socket.assigns.account, socket.assigns.input_amount) do
       {:ok, transaction} ->
-        
         {:noreply,
          socket
          |> redirect(to: Routes.index_path(socket, :list_transactions))}

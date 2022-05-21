@@ -125,8 +125,6 @@ suppliers = [
   }
 ]
 
-
-
 for supplier_details <- suppliers do
   names = String.split(supplier_details.name, " ")
 
@@ -243,8 +241,6 @@ retailers = [
     name: "Malian Limited"
   }
 ]
-
-
 
 for retailer_details <- retailers do
   names = String.split(retailer_details.name, " ")

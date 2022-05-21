@@ -1,20 +1,23 @@
 defmodule KefisWeb.Driver.DashboardNav do
-
   use KefisWeb, :live_component
 
-
   @impl true
-  def update(%{title: title, component: component, description: description, component_info: component_info} = _assigns, socket) do
+  def update(
+        %{
+          title: title,
+          component: component,
+          description: description,
+          component_info: component_info
+        } = _assigns,
+        socket
+      ) do
     {:ok,
-    socket
-    |> assign(:title, title)
-    |> assign(:description, description)
-    |> assign(:component, component)
-    |> assign(:component_info, component_info)
-
-    }
+     socket
+     |> assign(:title, title)
+     |> assign(:description, description)
+     |> assign(:component, component)
+     |> assign(:component_info, component_info)}
   end
-
 
   @impl true
   def render(assigns) do
@@ -63,7 +66,6 @@ defmodule KefisWeb.Driver.DashboardNav do
     </div>
     """
   end
-
 
   defp side_navbar(assigns) do
     ~H"""
@@ -174,7 +176,6 @@ defmodule KefisWeb.Driver.DashboardNav do
 
     """
   end
-
 
   defp top_nav(assigns) do
     ~H"""

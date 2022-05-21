@@ -6,7 +6,6 @@ defmodule KefisWeb.SessionController do
 
   alias KefisWeb.ApiAuth
 
-
   def new(conn, _params) do
     changeset = Pow.Plug.change_user(conn)
 
@@ -18,9 +17,8 @@ defmodule KefisWeb.SessionController do
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-
-        config        = Pow.Plug.fetch_config(conn)
-        user          = Pow.Plug.current_user(conn, config)
+        config = Pow.Plug.fetch_config(conn)
+        user = Pow.Plug.current_user(conn, config)
         reloaded_user = Repo.get!(User, user.id) |> Repo.preload([:driver, :partner, :warehouse])
         Pow.Plug.assign_current_user(conn, reloaded_user, config)
 
@@ -47,21 +45,26 @@ defmodule KefisWeb.SessionController do
     |> redirect(to: Routes.page_path(conn, :index))
   end
 
-
-
   ### API ###
   def api_create(conn, %{"user" => user_params}) do
     IO.inspect(user_params)
+
     conn
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        config        = Pow.Plug.fetch_config(conn)
-        user          = Pow.Plug.current_user(conn, config)
+        config = Pow.Plug.fetch_config(conn)
+        user = Pow.Plug.current_user(conn, config)
 
-
-
-        json(conn, %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token, first_name: user.first_name, email: user.email, second_name: user.second_name, role: user.role, phone: user.phone})
+        json(conn, %{
+          access_token: conn.private.api_access_token,
+          renewal_token: conn.private.api_renewal_token,
+          first_name: user.first_name,
+          email: user.email,
+          second_name: user.second_name,
+          role: user.role,
+          phone: user.phone
+        })
 
       {:error, conn} ->
         conn
@@ -82,7 +85,12 @@ defmodule KefisWeb.SessionController do
         |> json(%{error: %{status: 401, message: "Invalid token"}})
 
       {conn, _user} ->
-        json(conn, %{data: %{access_token: conn.private.api_access_token, renewal_token: conn.private.api_renewal_token}})
+        json(conn, %{
+          data: %{
+            access_token: conn.private.api_access_token,
+            renewal_token: conn.private.api_renewal_token
+          }
+        })
     end
   end
 
@@ -91,5 +99,4 @@ defmodule KefisWeb.SessionController do
     |> Pow.Plug.delete()
     |> json(%{data: %{}})
   end
-
 end

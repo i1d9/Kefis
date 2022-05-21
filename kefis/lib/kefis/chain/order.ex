@@ -18,5 +18,4 @@ defmodule Kefis.Chain.Order do
     |> cast(attrs, [:value, :status, :date])
     |> validate_required([:value, :status, :date])
   end
-
 end

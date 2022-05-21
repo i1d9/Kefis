@@ -109,7 +109,6 @@ defmodule KefisWeb.Admin.Order.DetailComponent do
           }
         } = socket
       ) do
-
     IO.inspect(socket)
 
     collection_info = %{
@@ -137,7 +136,6 @@ defmodule KefisWeb.Admin.Order.DetailComponent do
   end
 
   def render_with_status(assigns) do
-
     case assigns.detail.status do
       "confirmed" ->
         ~H"""

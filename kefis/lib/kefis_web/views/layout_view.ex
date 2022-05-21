@@ -17,38 +17,39 @@ defmodule KefisWeb.LayoutView do
         });
 
           </script>"
+
       2 ->
         "2"
+
       _ ->
         "sdkj"
     end
-
   end
-
 
   def flasher(flash) do
     case flash do
-      %{"info" => info } ->
-        raw "<script>
+      %{"info" => info} ->
+        raw("<script>
          document.addEventListener('readystatechange', event => {
            if (event.target.readyState === 'complete') {
 
           window.display_modal({icon: 'success', title: 'Success', message: '#{info}'});
            }
          });
-         </script>"
+         </script>")
 
-      %{"error" => error } ->
-          raw "<script>
+      %{"error" => error} ->
+        raw("<script>
           console.log('error');
          document.addEventListener('readystatechange', event => {
            if(event.target.readyState === 'complete') {
           window.display_modal({icon: 'error', title: 'Error', message: '#{error}'});
            }
          });
-         </script>"
+         </script>")
+
       _ ->
-         ""
+        ""
     end
   end
 end

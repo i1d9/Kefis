@@ -25,6 +25,4 @@ defmodule KefisWeb.Warehouse.OrdersLive do
          })
      )}
   end
-
-
 end
